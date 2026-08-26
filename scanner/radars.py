@@ -1,0 +1,89 @@
+"""Pump radari + yeni listeleme radari + opsiyonel haber vetosu."""
+import os
+import time
+import requests
+from . import config as C
+from . import data
+from .indicators import analyze
+
+
+# ---------------- PUMP RADARI ----------------
+def pump_candidates(tickers):
+    df = tickers
+    m = (df["priceChangePercent"] >= C.PUMP_MIN_24H) & \
+        (df["priceChangePercent"] <= C.PUMP_MAX_24H) & \
+        (df["quoteVolume"] >= C.MIN_QUOTE_VOLUME_24H / 4)  # pump'ta hacim hizla buyur, esik dusuk
+    return df[m].sort_values("quoteVolume", ascending=False).head(20)
+
+
+def check_pump(sym, now_ts, last_alerts):
+    last = last_alerts.get(sym, 0)
+    if now_ts - last < C.PUMP_ALERT_COOLDOWN_H * 3600:
+        return None
+    k1 = data.klines(sym, "1h", 60)
+    if k1 is None or len(k1) < 30:
+        return None
+    a = analyze(k1, piv_lookback=40)
+    if not a["vol_ratio"] or a["vol_ratio"] < C.PUMP_VOL_MULT:
+        return None
+    closed = a["closed"]
+    chg3h = (closed["close"].iloc[-1] / closed["close"].iloc[-4] - 1) * 100 if len(closed) > 4 else 0
+    if chg3h < 4:
+        return None
+    oi_chg = data.oi_change_pct(sym, period="1h", limit=6)
+    if oi_chg is None or oi_chg < C.PUMP_OI_MIN_CHANGE:
+        return None
+    swing_lo = float(closed["low"].iloc[-6:].min())
+    return {
+        "price": a["price"], "vol_ratio": a["vol_ratio"], "chg3h": chg3h,
+        "oi_chg": oi_chg, "suggested_stop": swing_lo - (a["atr"] or 0) * 0.8,
+        "rsi1h": a["rsi"],
+    }
+
+
+# ---------------- YENI LISTELEME RADARI ----------------
+def detect_new_listings(current_symbols, known):
+    return [s for s in current_symbols if s not in known]
+
+
+# ---------------- HABER VETOSU (opsiyonel) ----------------
+def base_coin(sym):
+    b = sym.replace("USDT", "")
+    for pre in ("1000000", "1000"):
+        if b.startswith(pre):
+            b = b[len(pre):]
+    return b
+
+
+def news_check(sym):
+    """CRYPTOPANIC_TOKEN secret'i varsa haber riski dondurur.
+    Donus: None (veri yok) | {"veto": bool, "note": str}
+    """
+    token = os.environ.get("CRYPTOPANIC_TOKEN", "").strip()
+    if not token:
+        return None
+    try:
+        r = requests.get(
+            "https://cryptopanic.com/api/v1/posts/",
+            params={"auth_token": token, "currencies": base_coin(sym),
+                    "filter": "important", "public": "true"},
+            timeout=12)
+        if r.status_code != 200:
+            return None
+        posts = r.json().get("results", [])[:10]
+        cutoff = time.time() - C.NEWS_LOOKBACK_H * 3600
+        recent = []
+        for p in posts:
+            try:
+                ts = time.mktime(time.strptime(p["published_at"][:19], "%Y-%m-%dT%H:%M:%S"))
+            except Exception:
+                ts = time.time()
+            if ts >= cutoff:
+                recent.append(p.get("title", ""))
+        veto = any(any(k in t.lower() for k in C.NEWS_VETO_KEYWORDS) for t in recent)
+        note = f"{len(recent)} onemli haber (12s)" if recent else "haber temiz"
+        if veto:
+            note = "VETO: kritik haber (delist/hack vb.) — " + recent[0][:80]
+        return {"veto": veto, "note": note}
+    except requests.RequestException:
+        return None
