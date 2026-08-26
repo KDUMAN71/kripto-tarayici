@@ -19,8 +19,9 @@ def load():
             st = json.load(f)
     else:
         st = {"known_symbols": {}, "signals": {}, "pump_alerts": {}, "log": [],
-              "trades": [], "fail_count": 0, "last_ok_run": 0}
+              "trades": [], "scan_log": [], "fail_count": 0, "last_ok_run": 0}
     st.setdefault("trades", [])
+    st.setdefault("scan_log", [])
     return st
 
 
@@ -28,12 +29,24 @@ def save(st):
     os.makedirs(os.path.dirname(C.STATE_PATH), exist_ok=True)
     st["log"] = st.get("log", [])[-C.LOG_KEEP:]
     st["trades"] = st.get("trades", [])[-C.TRADE_HISTORY_KEEP:]
+    st["scan_log"] = st.get("scan_log", [])[-C.SCAN_LOG_KEEP:]
     with open(C.STATE_PATH, "w") as f:
         json.dump(st, f, indent=1)
 
 
 def log_event(st, sym, event, detail):
     st.setdefault("log", []).append({"t": now(), "sym": sym, "event": event, "detail": detail})
+
+
+def log_scan(st, **stats):
+    """Her kosunun heartbeat'i: tarama gercekten dondu mu, huni nerede daraldi.
+
+    Sinyal olaylarini bogmamak icin `log` yerine ayri `scan_log` alaninda tutulur
+    (15dk'da bir kosu, LOG_KEEP=800 icinde sinyal gecmisini sokup atardi).
+    """
+    rec = {"t": now()}
+    rec.update(stats)
+    st.setdefault("scan_log", []).append(rec)
 
 
 def cleanup_terminal(st):

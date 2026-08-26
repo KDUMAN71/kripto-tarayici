@@ -107,6 +107,7 @@ def run():
         st["fail_count"] = st.get("fail_count", 0) + 1
         if st["fail_count"] == 1 or st["fail_count"] % 12 == 0:
             tg.send("🚨 <b>VERİ KAYNAĞI SORUNU</b>\nBinance Futures verisine ulaşılamıyor; analiz üretilmedi.")
+        ST.log_scan(st, ok=False, reason="binance_unreachable", fails=st["fail_count"])
         ST.save(st); return
     if st.get("fail_count", 0) >= 1:
         tg.send(f"✅ Binance veri kaynağı geri geldi (önceki hata: {st['fail_count']}).")
@@ -216,8 +217,11 @@ def run():
                 f"Teknik giriş sinyali değildir; manipülasyon riski yüksek.")
         sent += 1
 
-    ST.save(st)
     active_count = len([1 for v in st["signals"].values() if v["status"] in ("EARLY", "WATCH", "ACTIVE")])
+    ST.log_scan(st, ok=True, symbols=len(symbols), liquid=len(liquid),
+                candidates=len(candidates), new_signals=new_sent, pumps=sent,
+                open=active_count, secs=round(time.time() - t0))
+    ST.save(st)
     print(f"V2 tamamlandi: {time.time()-t0:.0f}s | likit {len(liquid)} | aday {len(candidates)} | takip {active_count}")
 
 
