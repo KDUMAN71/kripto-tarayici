@@ -1,4 +1,4 @@
-name: crypto-scan-v2
+name: crypto-scan-v3
 on:
   schedule:
     - cron: '7,22,37,52 * * * *'
@@ -8,7 +8,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: crypto-scan-v2
+  group: crypto-scan-v3
   cancel-in-progress: false
 
 jobs:
@@ -23,7 +23,7 @@ jobs:
           cache: 'pip'
       - name: Install deps
         run: pip install -r requirements.txt
-      - name: Run V2 scanner
+      - name: Run V3 scanner
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}

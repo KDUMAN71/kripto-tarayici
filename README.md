@@ -1,8 +1,8 @@
-# Kripto Tarayıcı V2 — Binance Futures + Telegram
+# Kripto Tarayıcı V3 — Binance Futures + Telegram
 
 Binance USDT-M perpetual piyasasını **15 dakikada bir** tarayan karar-destek radarı. Emir vermez; Binance hesabına bağlanmaz. Ama amaç, giriş olduktan sonra haber vermek değil, **giriş oluşmadan önce hazırlanman için yeterince erken uyarmaktır.**
 
-## V2 mimarisi
+## V3 mimarisi
 
 **4 saat = ana yön → 1 saat = setup/yapı → 15 dakika = giriş zamanlaması ve hacim teyidi**
 
@@ -16,7 +16,7 @@ Binance USDT-M perpetual piyasasını **15 dakikada bir** tarayan karar-destek r
 
 **İdeal giriş kaçtıysa mesaj GELMEZ.** Sistem `MISSED_SILENT` olarak kayda geçirir ve yeni yapı bekler.
 
-## V2'de eklenenler
+## V3 çekirdeği
 
 - **15 dakikalık entry motoru:** 1 saatlik mum kapanışını bekleyip geç kalmak yerine, 4s/1s bağlamı içinde 15d taze breakout ve hacim teyidi kullanılır.
 - **Erken uyarı:** tetiğe %3 kala plan + Binance alarm seviyesi + SL + TP1/2/3 önceden gelir.
@@ -57,7 +57,7 @@ Dosyaları bir GitHub reposuna yükle. `.github/workflows/scan.yml` yolu korunma
 - `CRYPTOPANIC_TOKEN` (opsiyonel)
 
 ### 4) Test
-Actions → `crypto-scan-v2` → **Run workflow**.
+Actions → `crypto-scan-v3` → **Run workflow**.
 
 Yerelde Telegram göndermeden:
 ```bash
@@ -68,7 +68,7 @@ TELEGRAM_DRY_RUN=1 python -m scanner.main
 Workflow cron'u `*/15` olsa da GitHub Actions kesin gerçek-zaman garantisi vermez; yoğunlukta gecikebilir. Eğer bu radar ciddi futures giriş zamanlaması için kullanılacaksa en sağlam kurulum Avrupa lokasyonlu küçük bir VPS'tir:
 
 ```cron
-*/15 * * * * cd /opt/kripto-tarayici-v2 && /usr/bin/python3 -m scanner.main
+*/15 * * * * cd /opt/kripto-tarayici-v3 && /usr/bin/python3 -m scanner.main
 ```
 
 İstersen 5 dakikalık VPS cron'u da teknik olarak mümkündür; Binance API rate limitlerine göre ayrıca test edilmelidir.
@@ -89,4 +89,13 @@ state/state.json       kalıcı durum (otomatik oluşur)
 ```
 
 ## Risk notu
-Bu yazılım sinyal doğruluğunu garanti etmez. Özellikle yüksek kaldıraç, küçük fiyat hareketini büyük PnL ve likidasyon riskine dönüştürür. V2'nin amacı daha erken ve daha seçici teknik kurulum üretmek; **ilk aşamada paper tracking ile en az 50–100 sinyal istatistiği görmek** mantıklıdır.
+Bu yazılım sinyal doğruluğunu garanti etmez. Özellikle yüksek kaldıraç, küçük fiyat hareketini büyük PnL ve likidasyon riskine dönüştürür. V3'ün amacı daha erken ve daha seçici teknik kurulum üretmek; **ilk aşamada paper tracking ile en az 50–100 sinyal istatistiği görmek** mantıklıdır.
+
+
+## V3 QA notları
+- 1G bağlam gerçek EMA200 için 240 günlük mumla hesaplanır.
+- Taker buy/sell baskısı en son kapalı mumları içerir.
+- Simetrik üçgende short confluence alt kırılım tetik seviyesini kullanır.
+- Top-trader pozisyon ve global hesap long/short oranları türev puanına/crowding kontrolüne dahildir.
+- Paper SL/TP takibi yalnızca tarama anındaki fiyata değil, aktivasyondan beri görülen 15d high/low seviyelerine bakar. Hard SL dokunuşu kapanış beklemez.
+- Haber API'si veri vermezse mesaj "haber teyidi yok" der; veri yokken "haber temiz" iddiası üretmez.

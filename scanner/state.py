@@ -19,7 +19,7 @@ def load():
             st = json.load(f)
     else:
         st = {"known_symbols": {}, "signals": {}, "pump_alerts": {}, "log": [],
-              "trades": [], "scan_log": [], "fail_count": 0, "last_ok_run": 0}
+              "trades": [], "fail_count": 0, "last_ok_run": 0}
     st.setdefault("trades", [])
     st.setdefault("scan_log", [])
     return st
@@ -29,7 +29,8 @@ def save(st):
     os.makedirs(os.path.dirname(C.STATE_PATH), exist_ok=True)
     st["log"] = st.get("log", [])[-C.LOG_KEEP:]
     st["trades"] = st.get("trades", [])[-C.TRADE_HISTORY_KEEP:]
-    st["scan_log"] = st.get("scan_log", [])[-C.SCAN_LOG_KEEP:]
+    sl = st.get("scan_log", [])
+    st["scan_log"] = ([sl] if isinstance(sl, dict) else sl)[-C.SCAN_LOG_KEEP:]
     with open(C.STATE_PATH, "w") as f:
         json.dump(st, f, indent=1)
 
@@ -38,15 +39,20 @@ def log_event(st, sym, event, detail):
     st.setdefault("log", []).append({"t": now(), "sym": sym, "event": event, "detail": detail})
 
 
-def log_scan(st, **stats):
-    """Her kosunun heartbeat'i: tarama gercekten dondu mu, huni nerede daraldi.
+def append_scan(st, rec):
+    """Kosu heartbeat'ini listeye ekler.
 
-    Sinyal olaylarini bogmamak icin `log` yerine ayri `scan_log` alaninda tutulur
-    (15dk'da bir kosu, LOG_KEEP=800 icinde sinyal gecmisini sokup atardi).
+    Onceki surum tek bir sozluk yazip her kosuda uzerine yaziyordu; boylece
+    kosular arasi boslugu olcmek mumkun olmuyordu. Eski tek kayit varsa
+    kaybedilmeden listeye tasinir.
     """
-    rec = {"t": now()}
-    rec.update(stats)
-    st.setdefault("scan_log", []).append(rec)
+    cur = st.get("scan_log")
+    if isinstance(cur, dict):
+        cur = [cur]
+    elif not isinstance(cur, list):
+        cur = []
+    cur.append(rec)
+    st["scan_log"] = cur
 
 
 def cleanup_terminal(st):
@@ -97,9 +103,10 @@ def _record_trade(st, sym, s, outcome, exit_price):
         "symbol": sym, "side": s["side"], "activated_at": s.get("activated_at"),
         "closed_at": now(), "entry": entry, "sl": s.get("sl"),
         "tp1": s.get("tp1"), "tp2": s.get("tp2"), "tp3": s.get("tp3"),
+        "setup_type": s.get("setup_type", "v2"), "score": s.get("score"),
         "outcome": outcome, "exit": exit_price, "pnl_r": pnl_r,
-        "tp1_done": bool(s.get("TP1_done")), "tp2_done": bool(s.get("TP2_done")),
-        "tp3_done": bool(s.get("TP3_done")),
+        "tp1_hit": bool(s.get("tp1_hit")), "tp2_hit": bool(s.get("tp2_hit")),
+        "tp3_hit": bool(s.get("tp3_hit")),
         "mfe_pct": s.get("mfe_pct", 0), "mae_pct": s.get("mae_pct", 0),
     })
 
@@ -133,25 +140,53 @@ def update_pretrade(st, sym, a15, a1h, tg):
 
 
 def update_active(st, sym, a15, tg):
-    """ACTIVE sinyalde 15d kapanis ile SL, canli fiyatla TP takibi."""
+    """ACTIVE sinyali hard-SL mantigiyla izler.
+
+    15 dakikalik taramalar arasinda fiyat seviyeye dokunup geri donebilir. Bu nedenle
+    yalnizca son fiyata/kapanisa degil, aktivasyondan beri gorulen 15d mumlarin
+    high/low degerlerine bakilir. Ayni mum hem SL hem TP'ye dokunmussa yol sirasi
+    bilinmedigi icin muhafazakar olarak SL once kabul edilir.
+    """
     s = st["signals"][sym]
     price = a15["price"]
-    last15 = float(a15["closed"]["close"].iloc[-1])
     is_long = s["side"] == "LONG"
-    _track_excursions(s, price)
 
-    if (is_long and last15 <= s["sl"]) or (not is_long and last15 >= s["sl"]):
+    df = a15.get("df")
+    if df is not None and len(df):
+        # Aktivasyon anindan onceki tek mumu da dahil et; aktivasyon mumundaki fitili kacirmayiz.
+        try:
+            import pandas as pd
+            since = pd.to_datetime(s.get("activated_at", now()), unit="s", utc=True) - pd.Timedelta(minutes=15)
+            seen = df[df["openTime"] >= since]
+            if seen.empty:
+                seen = df.iloc[-4:]
+        except Exception:
+            seen = df.iloc[-4:]
+    else:
+        seen = a15["closed"].iloc[-4:]
+
+    hi = max(float(seen["high"].max()), price)
+    lo = min(float(seen["low"].min()), price)
+    _track_excursions(s, hi if is_long else lo)
+    # adverse excursion da ayri ekstremle guncellensin
+    e = s.get("entry_ref")
+    if e:
+        adv = ((e - lo) / e * 100) if is_long else ((hi - e) / e * 100)
+        s["mae_pct"] = max(s.get("mae_pct", 0), adv)
+
+    stop_hit = lo <= s["sl"] if is_long else hi >= s["sl"]
+    if stop_hit:
         s["status"], s["last_update"] = "STOPPED", now()
-        log_event(st, sym, "STOPPED", f"SL {s['sl']:.6g}")
+        log_event(st, sym, "STOPPED", f"hard SL touched {s['sl']:.6g}")
         _record_trade(st, sym, s, "STOPPED", s["sl"])
         tg.send(f"🔴 <b>STOP — {sym} {s['side']}</b>\n"
-                f"15d kapanış {fmtp(last15)}, SL {fmtp(s['sl'])} ötesinde. Kurulum sona erdi.")
+                f"15d mum aralığında hard SL {fmtp(s['sl'])} görüldü. Kurulum sona erdi.")
         return
 
-    for lvl, tag in (("tp3", "TP3"), ("tp2", "TP2"), ("tp1", "TP1")):
-        hit = price >= s[lvl] if is_long else price <= s[lvl]
-        if hit and not s.get(f"{tag}_done"):
-            s[f"{tag}_done"] = True
+    for lvl, tag in (("tp1", "TP1"), ("tp2", "TP2"), ("tp3", "TP3")):
+        hit = hi >= s[lvl] if is_long else lo <= s[lvl]
+        if hit and not s.get(f"{lvl}_hit"):
+            s[f"{lvl}_hit"] = True
             s["last_update"] = now()
             if tag == "TP3":
                 s["status"] = "TP3_HIT"
@@ -161,8 +196,9 @@ def update_active(st, sym, a15, tg):
             if tag == "TP1" and C.MOVE_SL_TO_BE_AFTER_TP1:
                 tail = "\nPlan: kalan pozisyon için SL giriş/breakeven bölgesine taşınabilir."
             tg.send(f"🎯 <b>{tag} GÖRÜLDÜ — {sym} {s['side']}</b>\n"
-                    f"Fiyat {fmtp(price)} → {tag} {fmtp(s[lvl])}.{tail}")
-            break
+                    f"15d mum aralığında {tag} {fmtp(s[lvl])} görüldü.{tail}")
+            if tag == "TP3":
+                break
 
 
 def fmtp(x):

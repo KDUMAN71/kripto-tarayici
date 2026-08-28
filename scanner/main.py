@@ -1,6 +1,6 @@
-"""Kripto Tarayici V2 ana akisi — 15 dakikada bir.
+"""Kripto Tarayici V3 ana akisi — 15 dakikada bir.
 
-V2 yenilikleri:
+V3 cekirdegi:
 - 4s yon / 1s setup / 15d entry
 - ERKEN UYARI -> YAKIN TAKIP -> AKTIF
 - 1s / 4s / 24s OI pencereleri
@@ -9,9 +9,12 @@ V2 yenilikleri:
 - paper-performance (MFE/MAE/R) kaydi
 """
 import time
+REGIME = {}
 from . import config as C
 from . import data, radars, state as ST
-from .engine import evaluate
+from .engine_v3 import evaluate_v3
+from .confluence import (btc_regime, taker_pressure, long_short_ratios,
+                          basis_pct, spread_pct)
 from .indicators import analyze
 from .state import fmtp
 from .telegram import Telegram
@@ -32,6 +35,37 @@ def fmt_oi(oi):
     return f"1s {f('1h')} | 4s {f('4h')} | 24s {f('24h')}"
 
 
+
+def fmt_taker(v):
+    try:
+        return f"%{float(v) * 100:.0f} alıcı"
+    except (TypeError, ValueError):
+        return "-"
+
+
+def fmt_ls(r):
+    r = r or {}
+    def f(k):
+        try:
+            return f"{float(r.get(k)):.2f}"
+        except (TypeError, ValueError):
+            return "-"
+    return f"{f('top_pos')}/{f('global_acc')}"
+
+
+def fmt_basis(v):
+    try:
+        return f"%{float(v):+.3f}"
+    except (TypeError, ValueError):
+        return "-"
+
+
+def fmt_spread(v):
+    try:
+        return f"%{float(v):.3f}"
+    except (TypeError, ValueError):
+        return "-"
+
 def pretrade_msg(sym, sig, news_note):
     is_early = sig["status"] == "EARLY"
     icon = "🔵" if is_early else "🟡"
@@ -44,9 +78,13 @@ def pretrade_msg(sym, sig, news_note):
             f"Teyit gelirse planlı giriş: {fmtp(sig['entry_lo'])} – {fmtp(sig['entry_hi'])}\n"
             f"SL: {fmtp(sig['sl'])} | TP1: {fmtp(sig['tp1'])} | TP2: {fmtp(sig['tp2'])} | TP3: {fmtp(sig['tp3'])}\n"
             f"R:R TP2 ~1:{sig['rr2']:.1f} | TP3 ~1:{sig['rr3']:.1f}\n"
-            f"4s: {sig['trend4h']} | 1s: {sig['trend1h']} | RSI 15d/1s: {sig['rsi15']:.0f}/{sig['rsi1h']:.0f}\n"
+            f"Formasyon: {sig.get('setup_note','-')}\n"
+            f"Skor: {sig.get('score','-')}/{sig.get('score_max','-')} ({', '.join(sig.get('score_parts',[]))})\n"
+            f"4s: {sig['trend4h']} | 1s: {sig['trend1h']} | 1G: {sig.get('trend1d') or '-'} | RSI 15d/1s: {sig['rsi15']:.0f}/{sig['rsi1h']:.0f}\n"
             f"Hacim 15d/1s: {sig['vol15_ratio']:.1f}x/{sig['vol1h_ratio']:.1f}x | "
             f"Funding: {fmt_funding(sig['funding'])} | OI: {fmt_oi(sig.get('oi'))}\n"
+            f"Taker: {fmt_taker(sig.get('taker'))} | L/S top/global: {fmt_ls(sig.get('ls_ratios'))} | Basis: {fmt_basis(sig.get('basis_pct'))}\n"
+            f"BTC: {sig.get('regime_note','-')}\n"
             f"Haber: {news_note}\n"
             f"<i>Bu aşama giriş emri değildir; Binance alarmını kurup teyidi bekle.</i>")
 
@@ -59,9 +97,13 @@ def active_msg(sym, sig, news_note):
             f"SL: {fmtp(sig['sl'])} (fiyat riski ≈ %{sig['risk_pct']:.1f})\n"
             f"TP1: {fmtp(sig['tp1'])} | TP2: {fmtp(sig['tp2'])} | TP3: {fmtp(sig['tp3'])}\n"
             f"R:R TP2 ~1:{sig['rr2']:.1f} | TP3 ~1:{sig['rr3']:.1f}\n"
+            f"Formasyon: {sig.get('setup_note','-')}\n"
+            f"Skor: {sig.get('score','-')}/{sig.get('score_max','-')} ({', '.join(sig.get('score_parts',[]))})\n"
             f"15d kırılım hacmi: {sig['vol15_ratio']:.1f}x | 1s hacim: {sig['vol1h_ratio']:.1f}x\n"
-            f"4s: {sig['trend4h']} | 1s: {sig['trend1h']} | RSI 15d/1s: {sig['rsi15']:.0f}/{sig['rsi1h']:.0f}\n"
-            f"Funding: {fmt_funding(sig['funding'])} ({sig['funding_bias']}) | OI: {fmt_oi(sig.get('oi'))}\n"
+            f"4s: {sig['trend4h']} | 1s: {sig['trend1h']} | 1G: {sig.get('trend1d') or '-'} | RSI 15d/1s: {sig['rsi15']:.0f}/{sig['rsi1h']:.0f}\n"
+            f"Funding: {fmt_funding(sig['funding'])} ({sig['funding_bias']}) | Taker: {fmt_taker(sig.get('taker'))} | OI: {fmt_oi(sig.get('oi'))}\n"
+            f"L/S top/global: {fmt_ls(sig.get('ls_ratios'))} | Basis: {fmt_basis(sig.get('basis_pct'))} | Spread: {fmt_spread(sig.get('spread_pct'))}\n"
+            f"BTC: {sig.get('regime_note','-')}\n"
             f"Haber: {news_note}\n"
             f"Planlı yönetim: TP1 %{C.TP1_CLOSE_PCT}, TP2 %{C.TP2_CLOSE_PCT}, TP3 %{C.TP3_CLOSE_PCT}; "
             f"TP1 sonrası kalan için SL girişe taşınabilir.\n"
@@ -85,8 +127,28 @@ def _market_data(sym, need_4h=True, min_tscore=None):
     return analyze(k15), analyze(k1), a4
 
 
-def _attach_context(sym, sig):
-    """Funding + OI yalnizca sinyal uretilince cekilir (API tasarrufu)."""
+CTX_BUDGET = {"n": 0}
+
+def _build_ctx(sym, a1h):
+    """Baglam: yalnizca aday uretilince cekilir (lazy). ~8 API cagrisi."""
+    CTX_BUDGET["n"] += 1
+    fr = data.funding(sym) or {}
+    a1d = None
+    k1d = data.klines(sym, "1d", 240)
+    if k1d is not None and len(k1d) >= 40:
+        a1d = analyze(k1d, piv_lookback=100)
+    return {
+        "funding_rate": fr.get("lastFundingRate"),
+        "basis_pct": basis_pct(fr),
+        "oi": data.oi_changes(sym) or {},
+        "taker": taker_pressure(a1h["closed"]),
+        "ls_ratios": long_short_ratios(sym),
+        "spread_pct": spread_pct(sym),
+        "a1d": a1d,
+    }
+
+
+def _legacy_attach(sym, sig):
     fr = data.funding(sym)
     frate = fr.get("lastFundingRate") if fr else None
     sig["funding"] = frate
@@ -97,6 +159,7 @@ def _attach_context(sym, sig):
 
 
 def run():
+    CTX_BUDGET["n"] = 0
     tg = Telegram()
     st = ST.load()
     t0 = time.time()
@@ -107,7 +170,8 @@ def run():
         st["fail_count"] = st.get("fail_count", 0) + 1
         if st["fail_count"] == 1 or st["fail_count"] % 12 == 0:
             tg.send("🚨 <b>VERİ KAYNAĞI SORUNU</b>\nBinance Futures verisine ulaşılamıyor; analiz üretilmedi.")
-        ST.log_scan(st, ok=False, reason="binance_unreachable", fails=st["fail_count"])
+        ST.append_scan(st, {"ts": ST.now(), "ok": False, "reason": "veri kaynağı",
+                            "duration_s": round(time.time() - t0)})
         ST.save(st); return
     if st.get("fail_count", 0) >= 1:
         tg.send(f"✅ Binance veri kaynağı geri geldi (önceki hata: {st['fail_count']}).")
@@ -120,13 +184,18 @@ def run():
         if not first_run:
             tg.send(f"🆕 <b>YENİ LİSTELEME — {s}</b>\nİlk {C.YOUNG_COIN_DAYS} gün teknik sinyal yok; yapı otursun.")
     if first_run:
-        tg.send(f"🚀 Kripto Tarayıcı V2 aktif. {len(symbols)} perpetual kayıtlı; 15 dakikalık tarama başladı.")
+        tg.send(f"🚀 Kripto Tarayıcı V3 aktif. {len(symbols)} perpetual kayıtlı; 15 dakikalık tarama başladı.")
 
     tdf = tickers[tickers["symbol"].isin(symbols)].copy()
     tdf = tdf[tdf["quoteVolume"] >= C.MIN_QUOTE_VOLUME_24H].sort_values("quoteVolume", ascending=False)
     young_cut = ST.now() - C.YOUNG_COIN_DAYS * 86400
     liquid = [s for s in tdf["symbol"] if st["known_symbols"].get(s, 0) <= young_cut or first_run]
     chg = dict(zip(tdf["symbol"], tdf["priceChangePercent"]))
+
+    # BTC rejim filtresi (tur basina 1 kez)
+    global REGIME
+    REGIME = btc_regime()
+    print("REJIM:", REGIME.get("note"))
 
     # Mevcut sinyaller
     ST.cleanup_terminal(st)
@@ -137,9 +206,9 @@ def run():
         a15, a1, a4 = md
         sig = st["signals"][sym]
         if sig["status"] in ("EARLY", "WATCH"):
-            res = evaluate(sym, a15, a1, a4, None, None)
-            if res:
-                _attach_context(sym, res)
+            res = evaluate_v3(sym, a15, a1, a4, REGIME, _build_ctx)
+            if isinstance(res, tuple):
+                ST.log_event(st, sym, "VETO", res[1]); res = None
             if res and res["status"] == "ACTIVE" and res["side"] == sig["side"]:
                 news = radars.news_check(sym); nn = news["note"] if news else "haber modülü kapalı"
                 if news and news["veto"]:
@@ -177,7 +246,7 @@ def run():
 
     new_sent = 0
     for sym in candidates:
-        if new_sent >= 8:
+        if new_sent >= 8 or CTX_BUDGET["n"] >= 18:
             break
         if sym in st["signals"] and st["signals"][sym]["status"] in ("EARLY", "WATCH", "ACTIVE"):
             continue
@@ -186,9 +255,10 @@ def run():
         md = _market_data(sym, need_4h=True, min_tscore=1)
         if not md: continue
         a15, a1, a4 = md
-        sig = evaluate(sym, a15, a1, a4, None, None)
+        sig = evaluate_v3(sym, a15, a1, a4, REGIME, _build_ctx)
+        if isinstance(sig, tuple):
+            ST.log_event(st, sym, "VETO", sig[1]); continue
         if not sig: continue
-        _attach_context(sym, sig)
         news = radars.news_check(sym); nn = news["note"] if news else "haber modülü kapalı"
         if news and news["veto"]:
             ST.log_event(st, sym, "NEWS_VETO", news["note"]); continue
@@ -218,11 +288,12 @@ def run():
         sent += 1
 
     active_count = len([1 for v in st["signals"].values() if v["status"] in ("EARLY", "WATCH", "ACTIVE")])
-    ST.log_scan(st, ok=True, symbols=len(symbols), liquid=len(liquid),
-                candidates=len(candidates), new_signals=new_sent, pumps=sent,
-                open=active_count, secs=round(time.time() - t0))
+    ST.append_scan(st, {"ts": ST.now(), "ok": True, "symbols": len(symbols),
+                        "liquid": len(liquid), "candidates": len(candidates),
+                        "open_signals": active_count,
+                        "duration_s": round(time.time() - t0)})
     ST.save(st)
-    print(f"V2 tamamlandi: {time.time()-t0:.0f}s | likit {len(liquid)} | aday {len(candidates)} | takip {active_count}")
+    print(f"V3 tamamlandi: {time.time()-t0:.0f}s | likit {len(liquid)} | aday {len(candidates)} | takip {active_count}")
 
 
 if __name__ == "__main__":

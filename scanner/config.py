@@ -64,5 +64,10 @@ NEWS_LOOKBACK_H = 12
 KLINE_LIMITS = {"15m": 240, "1h": 240, "4h": 220}
 STATE_PATH = "state/state.json"
 LOG_KEEP = 800
-SCAN_LOG_KEEP = 96                  # ~24 saatlik kosu heartbeat'i (15dk x 96)
 TRADE_HISTORY_KEEP = 300
+SCAN_LOG_KEEP = 96                  # ~24 saatlik kosu heartbeat'i
+
+# ---- V3: confluence vetolari ----
+FUNDING_VETO = 0.0012               # %0.12/8s ustu ayni-yon funding: kalabalik veto
+SPREAD_VETO_PCT = 0.15              # bid-ask spread bu ustundeyse likidite vetosu
+FRESH_BREAK_BARS_1H = 2             # 1s tetik tazeligi (V3 formasyon yolu)

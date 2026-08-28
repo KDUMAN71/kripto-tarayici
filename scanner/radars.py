@@ -61,7 +61,7 @@ def news_check(sym):
     """
     token = os.environ.get("CRYPTOPANIC_TOKEN", "").strip()
     if not token:
-        return None
+        return {"veto": False, "note": "haber teyidi yok (haber modülü kapalı)"}
     try:
         r = requests.get(
             "https://cryptopanic.com/api/v1/posts/",
@@ -69,7 +69,7 @@ def news_check(sym):
                     "filter": "important", "public": "true"},
             timeout=12)
         if r.status_code != 200:
-            return None
+            return {"veto": False, "note": f"haber teyidi yok (API HTTP {r.status_code})"}
         posts = r.json().get("results", [])[:10]
         cutoff = time.time() - C.NEWS_LOOKBACK_H * 3600
         recent = []
@@ -81,9 +81,9 @@ def news_check(sym):
             if ts >= cutoff:
                 recent.append(p.get("title", ""))
         veto = any(any(k in t.lower() for k in C.NEWS_VETO_KEYWORDS) for t in recent)
-        note = f"{len(recent)} onemli haber (12s)" if recent else "haber temiz"
+        note = f"{len(recent)} önemli haber teyit edildi (12s)" if recent else "teyit edilmiş kritik haber yok"
         if veto:
             note = "VETO: kritik haber (delist/hack vb.) — " + recent[0][:80]
         return {"veto": veto, "note": note}
     except requests.RequestException:
-        return None
+        return {"veto": False, "note": "haber teyidi yok (API erişimi başarısız)"}

@@ -30,12 +30,12 @@ def weighted_r(t):
     f1, f2, f3 = C.TP1_CLOSE_PCT / 100, C.TP2_CLOSE_PCT / 100, C.TP3_CLOSE_PCT / 100
     tp1_r, tp2_r, tp3_r = r_of(t.get("tp1")), r_of(t.get("tp2")), r_of(t.get("tp3"))
 
-    if t.get("tp3_done"):
+    if t.get("tp3_hit"):
         return f1 * tp1_r + f2 * tp2_r + f3 * tp3_r
-    if t.get("tp2_done"):
+    if t.get("tp2_hit"):
         # kalan %40, BE'ye tasinmis stop varsayimiyla 0R
         return f1 * tp1_r + f2 * tp2_r + f3 * 0.0
-    if t.get("tp1_done"):
+    if t.get("tp1_hit"):
         # TP1 alindi, kalan %75 BE'den cikti varsayimi
         return f1 * tp1_r
     # hicbir TP yok -> tam stop
@@ -73,6 +73,15 @@ def run():
     for t, r in rs[-15:]:
         print(f"  {t['symbol']:<12} {t['side']:<5} {t['outcome']:<9} "
               f"R={r:+.2f}  MFE %{t.get('mfe_pct',0):.1f}  MAE %{t.get('mae_pct',0):.1f}")
+    print()
+    by = {}
+    for t, r in rs:
+        by.setdefault(t.get("setup_type", "v2"), []).append(r)
+    print("Formasyon bazinda (n<50 = yalnizca yon gosterici):")
+    for k, v in sorted(by.items(), key=lambda x: -len(x[1])):
+        wr = sum(1 for x in v if x > 0) / len(v) * 100
+        print(f"  {k:<18} n={len(v):<4} win %{wr:.0f}  exp {sum(v)/len(v):+.2f}R"
+              + ("  [az veri]" if len(v) < 50 else ""))
     print()
     if total < 30:
         print(f"NOT: {total} islem istatistiksel olarak azdir; 50-100 islem "

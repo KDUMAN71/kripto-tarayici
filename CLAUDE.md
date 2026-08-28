@@ -72,3 +72,32 @@ tarayıcısıdır. Görevin: bunu kullanıcının GitHub hesabında uçtan uca c
 - Kullanıcı adına işlem/emir sistemi kurma — bu proje yalnızca analiz + bildirim.
 - Secret değerlerini dosyaya, log'a veya commit'e yazma.
 - `scanner/` içindeki sinyal kurallarını kullanıcıya sormadan değiştirme.
+
+## V3-QA DAĞITIM GÖREVİ (mevcut canlı repo: KDUMAN71/kripto-tarayici)
+
+### ADIM 0 — TEŞHİS (önce bu; tarayıcı ~33 saattir koşmuyor)
+1. `gh run list -R KDUMAN71/kripto-tarayici --limit 15` — 26 Ağustos 22:42 TR
+   sonrasında run var mı?
+   - Hiç run yoksa: `gh workflow list -R KDUMAN71/kripto-tarayici` ile workflow
+     "disabled" mı bak; öyleyse `gh workflow enable scan.yml -R ...` ile aç.
+   - Run var ama kırmızıysa: `gh run view <id> --log-failed` ile hatayı oku ve
+     kullanıcıya raporla (muhtemel: veri kaynağı/commit adımı).
+2. Sonucu kullanıcıya kısaca bildir (neden durmuştu).
+
+### ADIM 1 — V3-QA KODUNU YAYINLA
+1. `gh repo clone KDUMAN71/kripto-tarayici /tmp/kt`
+2. Bu klasörden kopyala: `cp -r scanner /tmp/kt/ && cp README.md CLAUDE.md /tmp/kt/ && cp .github/workflows/scan.yml /tmp/kt/.github/workflows/scan.yml`
+   (`state/` DOKUNMA — canlı sinyal geçmişi korunmalı.)
+3. Commit + push: "V3-QA: formasyon motoru + confluence + intrabar SL takibi + scan_log"
+
+### ADIM 2 — DOĞRULAMA
+1. `gh workflow run scan.yml -R KDUMAN71/kripto-tarayici` (workflow adı artık
+   crypto-scan-v3; dosya adıyla tetiklemek her durumda çalışır)
+2. Log'da şu üçü görülmeli: "REJIM:" satırı, "V3 tamamlandi", state commit adımı.
+3. state.json'da yeni `scan_log` alanı dolmalı (ts/ok/symbols/duration_s).
+4. Sinyal koşulları oluşursa Telegram mesajında Formasyon + Skor satırları olmalı.
+5. Cron dakikaları 7/22/37/52'ye kaydırıldı (GitHub :00/:15/:30/:45'te yoğun;
+   tam çeyrek dakikalar en çok geciken/atlanan slotlardır). Bu 1. kademe çözümdür;
+   1-2 gün gözlemlenecek. Hâlâ boşluk olursa 2. kademe: cron-job.org + PAT ile
+   workflow_dispatch tetikleme (kullanıcı kararı).
+
