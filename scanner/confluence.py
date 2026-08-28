@@ -1,4 +1,4 @@
-"""V3: Turev istihbarati + BTC rejim filtresi + agirlikli confluence skoru."""
+"""V3.2: Turev istihbarati + BTC rejim filtresi + confluence skoru."""
 import numpy as np
 from . import data
 from . import config as C
@@ -15,6 +15,18 @@ def taker_pressure(df, bars=6):
     if tb is None or not vol:
         return None
     return float(tb / vol)
+
+
+def trigger_hold_count(side, trigger, a15, limit=3):
+    """Son kapali 15d mumlarin tetigin dogru tarafinda ardisik kapanis sayisi."""
+    closes = a15["closed"]["close"].iloc[-limit:]
+    count = 0
+    for close in reversed(closes.tolist()):
+        held = close > trigger if side == "long" else close < trigger
+        if not held:
+            break
+        count += 1
+    return count
 
 
 def long_short_ratios(symbol):
@@ -146,14 +158,15 @@ def confluence(side, pattern, a15, a1, a4, a1d, deriv, regime):
         if any(abs(trig - l) <= 0.8 * atr4 for l in lvls):
             score += W["sr_confluence"]; parts.append(f"S/R+{W['sr_confluence']}")
 
-    # 15m tetik: taze kirilim + hacim
+    # 15m tetik: SON kapali mum dogru tarafta kalmali. Onceki uc mumdan
+    # herhangi birinin gecmis olmasi failed reclaim'e yanlis puan veriyordu.
     trig15 = False
     if trig and a15["atr"]:
-        c15 = a15["closed"].iloc[-3:]
-        if is_long:
-            trig15 = (c15["close"] > trig).any() and a15["vol_ratio"] and a15["vol_ratio"] >= C.BREAKOUT_VOL_MULT_15M
-        else:
-            trig15 = (c15["close"] < trig).any() and a15["vol_ratio"] and a15["vol_ratio"] >= C.BREAKOUT_VOL_MULT_15M
+        needed = (C.RETEST_MIN_HOLD_CLOSES if pattern and
+                  pattern.get("type") in ("liquidity_sweep", "breakout_retest")
+                  else C.ACTIVE_MIN_HOLD_CLOSES)
+        trig15 = (trigger_hold_count(side, trig, a15) >= needed and
+                  a15["vol_ratio"] and a15["vol_ratio"] >= C.BREAKOUT_VOL_MULT_15M)
     if trig15:
         score += W["trigger_15m"]; parts.append(f"15d tetik+{W['trigger_15m']}")
 
@@ -168,7 +181,7 @@ def confluence(side, pattern, a15, a1, a4, a1d, deriv, regime):
     oi1h = (deriv.get("oi") or {}).get("1h")
     if oi1h is not None and oi1h > 0.5:
         d_pts += 1
-    tp = deriv.get("taker")
+    tp = deriv.get("taker_1h", deriv.get("taker"))
     if tp is not None and ((is_long and tp > 0.54) or ((not is_long) and tp < 0.46)):
         d_pts += 1
     ratios = deriv.get("ls_ratios") or {}
