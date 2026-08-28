@@ -1,6 +1,8 @@
 name: crypto-scan-v3
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '7 * * * *'   # YEDEK: cron-job.org duserse saatlik devam (asil tempo dis tetik)
 
 permissions:
   contents: write

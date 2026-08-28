@@ -77,13 +77,13 @@ def _funding_bias(side, funding_rate):
         fr = float(funding_rate)
     except (TypeError, ValueError):
         return "neutral"
-    if abs(fr) < C.CROWDED_FUNDING_ABS:
-        return "neutral"
-    if side == "long" and fr > 0:
-        return "crowded"
-    if side == "short" and fr < 0:
-        return "crowded"
-    return "supportive"
+    if abs(fr) < 0.0003:
+        return "nötr"
+    if fr >= 0.0009:
+        return "aşırı pozitif — alıcı kalabalık"
+    if fr <= -0.0009:
+        return "aşırı negatif — satıcı baskın"
+    return "pozitif — alıcılar ödüyor" if fr > 0 else "negatif — satıcılar ödüyor"
 
 
 def evaluate(sym, a15, a1h, a4h, funding_rate, oi):

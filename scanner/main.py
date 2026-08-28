@@ -67,28 +67,58 @@ def fmt_spread(v):
     except (TypeError, ValueError):
         return "-"
 
+
+def build_warnings(sig):
+    """Sinyalin kendi verisindeki kirmizi bayraklar — yargiya cevrilmis (maks 4)."""
+    w, side = [], sig.get("side")
+    is_long = side == "LONG"
+    oi24 = (sig.get("oi") or {}).get("24h")
+    if oi24 is not None and oi24 <= -8:
+        w.append(f"OI 24s %{oi24:.0f} boşalıyor")
+    try:
+        fr = float(sig.get("funding"))
+        if fr <= -0.0006: w.append("funding aşırı negatif (satıcı baskın)")
+        elif fr >= 0.0006: w.append("funding aşırı pozitif (alıcı kalabalık)")
+    except (TypeError, ValueError):
+        pass
+    tk = sig.get("taker_1h") or sig.get("taker")
+    if tk is not None:
+        if is_long and tk < 0.47: w.append(f"taker satıcı ağırlıklı (%{tk*100:.0f})")
+        if (not is_long) and tk > 0.53: w.append(f"taker alıcı ağırlıklı (%{tk*100:.0f})")
+    v1 = sig.get("vol1h_ratio")
+    if v1 == v1 and v1 is not None and v1 < 0.8:
+        w.append(f"1s hacim zayıf ({v1:.1f}x)")
+    r15 = sig.get("rsi15")
+    if r15 is not None:
+        if is_long and r15 < 30: w.append("15d aşırı satım — bıçak riski")
+        if (not is_long) and r15 > 70: w.append("15d aşırı alım — squeeze riski")
+    c24 = sig.get("change_24h")
+    if c24 is not None:
+        if is_long and c24 <= -10: w.append(f"24s %{c24:.0f} düşüşte long")
+        if (not is_long) and c24 >= 10: w.append(f"24s %+{c24:.0f} yükselişte short")
+    if any("düzeltme" in s for s in sig.get("score_parts", [])):
+        w.append("4s düzeltme fazında")
+    sp = sig.get("spread_pct")
+    if sp is not None and sp > 0.08:
+        w.append(f"spread geniş (%{sp:.2f})")
+    return w[:4]
+
+
 def pretrade_msg(sym, sig, news_note):
     is_early = sig["status"] == "EARLY"
     icon = "🔵" if is_early else "🟡"
-    title = "ERKEN UYARI — EMİR HAZIRLIĞI" if is_early else "YAKIN TAKİP"
+    title = "ERKEN UYARI" if is_early else "YAKIN TAKİP"
     direction = "ÜZERİ" if sig["side"] == "LONG" else "ALTI"
-    return (f"{icon} <b>{title} — {sym} {sig['side']}</b>\n"
-            f"Referans fiyat: {fmtp(sig['price'])} | Tetiğe uzaklık: %{sig['dist_pct']:.2f}\n"
-            f"Kritik tetik: {fmtp(sig['trigger'])} {direction}\n"
-            f"🔔 Binance fiyat alarmı: {fmtp(sig['alarm'])}\n"
-            f"Teyit gelirse planlı giriş: {fmtp(sig['entry_lo'])} – {fmtp(sig['entry_hi'])}\n"
-            f"SL: {fmtp(sig['sl'])} | TP1: {fmtp(sig['tp1'])} | TP2: {fmtp(sig['tp2'])} | TP3: {fmtp(sig['tp3'])}\n"
-            f"R:R (ref {fmtp(sig.get('rr_ref') or sig['trigger'])}): "
-            f"TP1 1:{(sig.get('rr1') or 0):.1f} | TP2 1:{sig['rr2']:.1f} | TP3 1:{sig['rr3']:.1f}\n"
-            f"Formasyon: {sig.get('setup_note','-')}\n"
-            f"Skor: {sig.get('score','-')}/{sig.get('score_max','-')} ({', '.join(sig.get('score_parts',[]))})\n"
-            f"4s: {sig['trend4h']} | 1s: {sig['trend1h']} | 1G: {sig.get('trend1d') or '-'} | RSI 15d/1s: {sig['rsi15']:.0f}/{sig['rsi1h']:.0f}\n"
-            f"Hacim 15d/1s: {sig['vol15_ratio']:.1f}x/{sig['vol1h_ratio']:.1f}x | "
-            f"Funding: {fmt_funding(sig['funding'])} | OI: {fmt_oi(sig.get('oi'))}\n"
-            f"Taker: {fmt_taker(sig.get('taker'))} | L/S top/global: {fmt_ls(sig.get('ls_ratios'))} | Basis: {fmt_basis(sig.get('basis_pct'))}\n"
-            f"BTC: {sig.get('regime_note','-')}\n"
-            f"Haber: {news_note}\n"
-            f"<i>Bu aşama giriş emri değildir; Binance alarmını kurup teyidi bekle.</i>")
+    setup = sig.get("setup_type", "yapisal").replace("_", "-")
+    warns = build_warnings(sig)
+    warn_line = ("⚠️ " + " · ".join(warns) + "\n") if warns else ""
+    return (f"{icon} <b>{title} — {sym} {sig['side']}</b> · {setup} · Skor {sig.get('score','-')}/{sig.get('score_max','-')}\n"
+            f"Tetik: {fmtp(sig['trigger'])} {direction} (uzaklık %{sig['dist_pct']:.2f}) · 🔔 Alarm: {fmtp(sig['alarm'])}\n"
+            f"Plan: Giriş {fmtp(sig['entry_lo'])}–{fmtp(sig['entry_hi'])} | SL {fmtp(sig['sl'])} (risk %{sig['risk_pct']:.1f})\n"
+            f"TP {fmtp(sig['tp1'])} / {fmtp(sig['tp2'])} / {fmtp(sig['tp3'])} · "
+            f"R:R {(sig.get('rr1') or 0):.1f}/{sig['rr2']:.1f}/{sig['rr3']:.1f}\n"
+            f"{warn_line}"
+            f"<i>Giriş emri değil; 15d hacimli teyit şart. Detay kayıtta.</i>")
 
 
 def active_msg(sym, sig, news_note):
@@ -100,7 +130,8 @@ def active_msg(sym, sig, news_note):
             f"TP1: {fmtp(sig['tp1'])} | TP2: {fmtp(sig['tp2'])} | TP3: {fmtp(sig['tp3'])}\n"
             f"R:R: TP2 1:{sig['rr2']:.1f}\n"
             f"Neden: 15d/1s {direction}, {setup}, hacim/taker teyidi\n"
-            f"İptal: {fmtp(sig['sl'])} {cancel_side} 15d kapanış")
+            + (("⚠️ " + " · ".join(build_warnings(sig)) + "\n") if build_warnings(sig) else "")
+            + f"İptal: {fmtp(sig['sl'])} {cancel_side} 15d kapanış")
 
 
 def _market_data(sym, need_4h=True, min_tscore=None):
