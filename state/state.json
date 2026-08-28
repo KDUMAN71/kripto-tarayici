@@ -560,7 +560,7 @@
    "last_update": 1787858204
   },
   "DOGEUSDT": {
-   "status": "ACTIVE",
+   "status": "STOPPED",
    "side": "LONG",
    "price": 0.0869,
    "trigger": 0.08708,
@@ -590,7 +590,7 @@
     "24h": -3.9325591842784724
    },
    "created": 1787858223,
-   "last_update": 1787907781,
+   "last_update": 1787915794,
    "setup_type": "liquidity_sweep",
    "setup_note": "dip s\u00fcp\u00fcrme: 0.08708 alti fitil, geri kapanis (tahmini likidite bolgesi)",
    "score": 11,
@@ -616,8 +616,8 @@
    "trend1d": "yukselis",
    "activated_at": 1787907781,
    "entry_ref": 0.08699000000000001,
-   "mfe_pct": 0.29888492930219845,
-   "mae_pct": 0.26439820669043335
+   "mfe_pct": 0.3908495229336626,
+   "mae_pct": 1.6553626853661463
   },
   "ADAUSDT": {
    "status": "WATCH",
@@ -905,9 +905,130 @@
    "trend1d": "guclu dusus",
    "created": 1787907834,
    "last_update": 1787907834
+  },
+  "BICOUSDT": {
+   "status": "ACTIVE",
+   "side": "LONG",
+   "price": 0.02389,
+   "trigger": 0.02446,
+   "alarm": 0.02437439,
+   "dist_pct": 0.0,
+   "invalidation": 0.0233881489051682,
+   "sl": 0.0233881489051682,
+   "entry_lo": 0.02389,
+   "entry_hi": 0.02446,
+   "tp1": 0.02575,
+   "tp2": 0.02683,
+   "tp3": 0.02793,
+   "rr1": 3.7062786534786403,
+   "rr2": 5.858311420014631,
+   "rr3": 8.050196645190175,
+   "rr_ref": 0.02389,
+   "risk_pct": 4.382056806344239,
+   "rsi15": 26.44971667447591,
+   "rsi1h": 41.562895514646996,
+   "trend1h": "kararsiz",
+   "trend4h": "yukselis",
+   "vol15_ratio": 2.227691674394356,
+   "vol1h_ratio": 0.4570223165714242,
+   "setup_type": "liquidity_sweep",
+   "setup_note": "dip s\u00fcp\u00fcrme: 0.02446 alti fitil, geri kapanis (tahmini likidite bolgesi)",
+   "score": 11,
+   "score_max": 13,
+   "score_parts": [
+    "4s yap\u0131+2",
+    "liquidity_sweep+2",
+    "S/R+2",
+    "15d tetik+2",
+    "hacim+1",
+    "BTC+1",
+    "1G+1"
+   ],
+   "structure_1h": "HH-HL",
+   "regime_note": "BTC 4s: guclu yukselis, 1s yapi: HH-HL",
+   "funding": "-0.00109060",
+   "funding_bias": "supportive",
+   "oi": {
+    "1h": -0.9211527352504636,
+    "4h": -4.295330813751553,
+    "24h": -14.051153888880682
+   },
+   "taker": 0.49318177157712617,
+   "ls_ratios": {
+    "top_pos": 1.4354,
+    "global_acc": 0.8202
+   },
+   "basis_pct": -0.2358024902646394,
+   "spread_pct": 0.041841004184098717,
+   "trend1d": "yukselis",
+   "created": 1787915828,
+   "last_update": 1787915828,
+   "entry_ref": 0.024175000000000002,
+   "activated_at": 1787915828,
+   "mfe_pct": 0,
+   "mae_pct": 0
+  },
+  "ASTERUSDT": {
+   "status": "EARLY",
+   "side": "LONG",
+   "price": 0.7044,
+   "trigger": 0.7181,
+   "alarm": 0.71558665,
+   "dist_pct": 1.9449176604202065,
+   "invalidation": 0.687673615717003,
+   "sl": 0.687673615717003,
+   "entry_lo": 0.7166638,
+   "entry_hi": 0.7209724,
+   "tp1": 0.78,
+   "tp2": 0.78,
+   "tp3": 0.8093791528489908,
+   "rr2": 2.034418530452579,
+   "rr3": 3.0,
+   "risk_pct": 4.237067857261793,
+   "rsi15": 59.516658528909105,
+   "rsi1h": 51.07734686842459,
+   "trend1h": "kararsiz",
+   "trend4h": "guclu yukselis",
+   "vol15_ratio": 0.4956216505354097,
+   "vol1h_ratio": 1.1477255986407098,
+   "funding": "0.00005000",
+   "funding_bias": "neutral",
+   "oi": {
+    "1h": 0.11044199784485231,
+    "4h": -0.7509678025051014,
+    "24h": -0.12834913752965735
+   },
+   "rr1": 2.034418530452579,
+   "rr_ref": 0.7181,
+   "setup_type": "structural",
+   "setup_note": "yapisal kirilim/retest",
+   "score": 9,
+   "score_max": 13,
+   "score_parts": [
+    "4s yap\u0131+2",
+    "structural+2",
+    "S/R+2",
+    "BTC+1",
+    "1G+1",
+    "RSI+1"
+   ],
+   "structure_1h": "LH-LL",
+   "regime_note": "BTC 4s: guclu yukselis, 1s yapi: HH-HL",
+   "taker": 0.4273736367274789,
+   "ls_ratios": {
+    "top_pos": 2.4805,
+    "global_acc": 1.9189
+   },
+   "basis_pct": -0.07282171838060979,
+   "spread_pct": 0.01419043564637278,
+   "trend1d": "yukselis",
+   "created": 1787915845,
+   "last_update": 1787915845
   }
  },
- "pump_alerts": {},
+ "pump_alerts": {
+  "LIGHTUSDT": 1787915854
+ },
  "log": [
   {
    "t": 1787782970,
@@ -986,11 +1107,57 @@
    "sym": "FILUSDT",
    "event": "WATCH",
    "detail": "SHORT @ 0.6982"
+  },
+  {
+   "t": 1787915794,
+   "sym": "DOGEUSDT",
+   "event": "STOPPED",
+   "detail": "hard SL touched 0.0862846"
+  },
+  {
+   "t": 1787915828,
+   "sym": "BICOUSDT",
+   "event": "ACTIVE",
+   "detail": "LONG @ 0.02389"
+  },
+  {
+   "t": 1787915845,
+   "sym": "ASTERUSDT",
+   "event": "EARLY",
+   "detail": "LONG @ 0.7044"
+  },
+  {
+   "t": 1787915854,
+   "sym": "LIGHTUSDT",
+   "event": "PUMP_ALERT",
+   "detail": "vol 5.4x, 3h %12.2"
   }
  ],
- "trades": [],
+ "trades": [
+  {
+   "symbol": "DOGEUSDT",
+   "side": "LONG",
+   "activated_at": 1787907781,
+   "closed_at": 1787915794,
+   "entry": 0.08699000000000001,
+   "sl": 0.0862846123835265,
+   "tp1": 0.08819,
+   "tp2": 0.08872,
+   "tp3": 0.08972,
+   "setup_type": "liquidity_sweep",
+   "score": 11,
+   "outcome": "STOPPED",
+   "exit": 0.0862846123835265,
+   "pnl_r": -1.0,
+   "tp1_hit": false,
+   "tp2_hit": false,
+   "tp3_hit": false,
+   "mfe_pct": 0.3908495229336626,
+   "mae_pct": 1.6553626853661463
+  }
+ ],
  "fail_count": 0,
- "last_ok_run": 1787909661,
+ "last_ok_run": 1787915792,
  "scan_log": [
   {
    "t": 1787774776,
@@ -1064,6 +1231,15 @@
    "candidates": 65,
    "open_signals": 8,
    "duration_s": 66
+  },
+  {
+   "ts": 1787915855,
+   "ok": true,
+   "symbols": 524,
+   "liquid": 79,
+   "candidates": 62,
+   "open_signals": 9,
+   "duration_s": 64
   }
  ]
 }
