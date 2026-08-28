@@ -620,7 +620,7 @@
    "mae_pct": 1.6553626853661463
   },
   "ADAUSDT": {
-   "status": "WATCH",
+   "status": "CANCELLED",
    "side": "LONG",
    "price": 0.2148,
    "trigger": 0.2168,
@@ -650,7 +650,7 @@
     "24h": 0.7813022426577559
    },
    "created": 1787858232,
-   "last_update": 1787858232
+   "last_update": 1787922048
   },
   "NEARUSDT": {
    "status": "WATCH",
@@ -1269,6 +1269,12 @@
    "sym": "BICOUSDT",
    "event": "STOPPED",
    "detail": "hard SL touched 0.0233881"
+  },
+  {
+   "t": 1787922048,
+   "sym": "ADAUSDT",
+   "event": "CANCELLED",
+   "detail": "1h close 0.2081 invalidation beyond"
   }
  ],
  "trades": [
@@ -1316,7 +1322,7 @@
   }
  ],
  "fail_count": 0,
- "last_ok_run": 1787921134,
+ "last_ok_run": 1787922046,
  "scan_log": [
   {
    "t": 1787774776,
@@ -1453,6 +1459,15 @@
    "candidates": 64,
    "open_signals": 10,
    "duration_s": 78
+  },
+  {
+   "ts": 1787922124,
+   "ok": true,
+   "symbols": 524,
+   "liquid": 78,
+   "candidates": 64,
+   "open_signals": 9,
+   "duration_s": 80
   }
  ]
 }
