@@ -121,7 +121,16 @@ def confluence(side, pattern, a15, a1, a4, a1d, deriv, regime):
 
     # --- PUANLAR ---
     if (is_long and a4["tscore"] >= 1) or ((not is_long) and a4["tscore"] <= -1):
-        score += W["structure_4h"]; parts.append(f"4s yapı+{W['structure_4h']}")
+        pts, lbl = W["structure_4h"], f"4s yapı+{W['structure_4h']}"
+        try:
+            e20 = float(a4["closed"]["ema20"].iloc[-1])
+            pullback = (is_long and a4["price"] < e20) or \
+                       ((not is_long) and a4["price"] > e20)
+            if pullback:
+                pts, lbl = 1, "4s yapı+1 (ana trend uyumlu, düzeltme fazı)"
+        except Exception:
+            pass
+        score += pts; parts.append(lbl)
     if pattern:
         score += W["setup_1h"]; parts.append(f"{pattern['type']}+{W['setup_1h']}")
 

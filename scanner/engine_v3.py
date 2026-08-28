@@ -14,6 +14,15 @@ from .patterns import scan_patterns, DETECTORS_TR
 from .confluence import confluence, SCORE_MAX, SCORE_ACTIVE_MIN, SCORE_WATCH_MIN
 
 
+def _rr_set(ref, sl, tp1, tp2, tp3):
+    """Tum R:R degerlerini AYNI referans fiyattan hesapla (tutarlilik)."""
+    risk = abs(ref - sl)
+    if not risk:
+        return None
+    f = lambda tp: (abs(tp - ref) / risk) if tp else None
+    return f(tp1), f(tp2), f(tp3)
+
+
 def _pattern_levels(side, pattern, a15, a1h, a4h):
     """Formasyonun kendi invalid seviyesinden SL; yapisal pivotlardan TP."""
     atr1 = a1h["atr"]
@@ -135,6 +144,11 @@ def evaluate_v3(sym, a15, a1h, a4h, regime, ctx_fn):
             return ("__veto__", veto)
         if score < need:
             return None
+        ref = v2["price"] if v2["status"] == "ACTIVE" else v2["trigger"]
+        rrs = _rr_set(ref, v2["sl"], v2.get("tp1"), v2.get("tp2"), v2.get("tp3"))
+        if rrs:
+            v2["rr1"], v2["rr2"], v2["rr3"] = rrs
+            v2["rr_ref"] = ref
         v2.update({"setup_type": "structural", "setup_note": "yapisal kirilim/retest",
                    "score": score, "score_max": SCORE_MAX, "score_parts": parts,
                    "structure_1h": struct1, "regime_note": regime.get("note", "")})
@@ -177,7 +191,7 @@ def evaluate_v3(sym, a15, a1h, a4h, regime, ctx_fn):
         "invalidation": plan["sl"], "sl": plan["sl"],
         "entry_lo": e_lo, "entry_hi": e_hi,
         "tp1": plan["tp1"], "tp2": plan["tp2"], "tp3": plan["tp3"],
-        "rr2": best.get("rr2_live", plan["rr2"]), "rr3": plan["rr3"],
+        "rr1": None, "rr2": None, "rr3": None, "rr_ref": None,
         "risk_pct": plan["risk_pct"],
         "rsi15": a15["rsi"], "rsi1h": a1h["rsi"],
         "trend1h": a1h["tlabel"], "trend4h": a4h["tlabel"],
@@ -187,6 +201,12 @@ def evaluate_v3(sym, a15, a1h, a4h, regime, ctx_fn):
         "score": score, "score_max": SCORE_MAX, "score_parts": parts,
         "structure_1h": struct1, "regime_note": regime.get("note", ""),
     }
+    ref = price if best["stage"] == "ACTIVE" else trigger
+    rrs = _rr_set(ref, plan["sl"], plan["tp1"], plan["tp2"], plan["tp3"])
+    if not rrs or (rrs[1] is not None and rrs[1] < C.MIN_RR_TP2 and best["stage"] == "ACTIVE"):
+        return None
+    sig["rr1"], sig["rr2"], sig["rr3"] = rrs
+    sig["rr_ref"] = ref
     _merge_ctx(sig, side, ctx)
     return sig
 
