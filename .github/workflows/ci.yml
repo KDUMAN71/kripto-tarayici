@@ -3,6 +3,7 @@ name: v3.2-qa
 on:
   push:
     branches: [main]
+    # Bot'un state commit'leri skip-ci isareti tasir, CI'i tetiklemez.
   pull_request:
   workflow_dispatch:
 
