@@ -26,4 +26,4 @@ jobs:
       - name: Compile
         run: python -m compileall scanner tests
       - name: Test
-        run: pytest -q
+        run: python -m pytest -q
