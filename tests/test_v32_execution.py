@@ -154,7 +154,7 @@ def test_v31_state_migration_preserves_history_and_cancels_open_plans():
     migrated = migrate_engine(state)
 
     assert migrated == 1
-    assert state["engine_version"] == "3.2"
+    assert state["engine_version"] == "3.2.2"
     assert state["signals"]["OPENUSDT"]["status"] == "CANCELLED"
     assert state["signals"]["DONEUSDT"]["status"] == "STOPPED"
     assert state["log"][:1] == old_log

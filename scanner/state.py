@@ -27,7 +27,7 @@ def load():
 
 
 def migrate_engine(st):
-    """V3.1 acik planlarini sessizce kapat; tum tarihsel kayitlari koru."""
+    """Eski motorun acik planlarini sessizce kapat; tarihsel kayitlari koru."""
     if st.get("engine_version") == C.ENGINE_VERSION:
         return 0
     migrated = 0
@@ -203,21 +203,32 @@ def update_active(st, sym, a15, tg):
                 f"15d mum aralığında hard SL {fmtp(s['sl'])} görüldü. Kurulum sona erdi.")
         return
 
-    for lvl, tag in (("tp1", "TP1"), ("tp2", "TP2"), ("tp3", "TP3")):
+    targets = [(lvl, tag) for lvl, tag in
+               (("tp1", "TP1"), ("tp2", "TP2"), ("tp3", "TP3"))
+               if s.get(lvl) is not None]
+    if not targets:
+        return
+    final_lvl = s.get("final_tp")
+    if final_lvl not in {lvl for lvl, _ in targets}:
+        final_lvl = targets[-1][0]
+
+    for lvl, tag in targets:
         hit = hi >= s[lvl] if is_long else lo <= s[lvl]
         if hit and not s.get(f"{lvl}_hit"):
             s[f"{lvl}_hit"] = True
             s["last_update"] = now()
-            if tag == "TP3":
-                s["status"] = "TP3_HIT"
-                _record_trade(st, sym, s, "TP3_HIT", s[lvl])
+            is_final = lvl == final_lvl
+            if is_final:
+                outcome = f"{tag}_HIT"
+                s["status"] = "TP3_HIT" if lvl == "tp3" else "CLOSED"
+                _record_trade(st, sym, s, outcome, s[lvl])
             log_event(st, sym, f"{tag}_HIT", f"{s[lvl]:.6g}")
             tail = ""
             if tag == "TP1" and C.MOVE_SL_TO_BE_AFTER_TP1:
                 tail = "\nPlan: kalan pozisyon için SL giriş/breakeven bölgesine taşınabilir."
             tg.send(f"🎯 <b>{tag} GÖRÜLDÜ — {sym} {s['side']}</b>\n"
                     f"15d mum aralığında {tag} {fmtp(s[lvl])} görüldü.{tail}")
-            if tag == "TP3":
+            if is_final:
                 break
 
 

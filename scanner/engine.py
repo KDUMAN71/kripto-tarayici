@@ -24,20 +24,26 @@ def _risk_pct(entry, sl):
 
 
 def _targets(side, entry, risk, piv_15m, piv_1h, piv_4h):
-    """Yapisal pivotlardan TP1/2/3 sec; TP2 mutlaka minimum R:R'i saglamali."""
+    """Yapisal pivotlardan tekil ve yon boyunca ilerleyen TP zinciri sec."""
     pivots = piv_15m + piv_1h + piv_4h
     if side == "long":
         cands = sorted({p for p in pivots if p > entry * 1.001})
         need = lambda mult: entry + mult * risk
-        pick = lambda mult: next((p for p in cands if p >= need(mult)), None)
+        progressive = lambda value, previous: previous is None or value > previous
+        meets = lambda value, mult: value >= need(mult)
     else:
         cands = sorted({p for p in pivots if p < entry * 0.999}, reverse=True)
         need = lambda mult: entry - mult * risk
-        pick = lambda mult: next((p for p in cands if p <= need(mult)), None)
+        progressive = lambda value, previous: previous is None or value < previous
+        meets = lambda value, mult: value <= need(mult)
+
+    def pick(mult, previous=None):
+        return next((p for p in cands
+                     if meets(p, mult) and progressive(p, previous)), None)
 
     tp1 = pick(1.0) or need(1.2)
-    tp2 = pick(C.MIN_RR_TP2)
-    tp3 = pick(C.TARGET_RR_TP3) or need(C.TARGET_RR_TP3)
+    tp2 = pick(C.MIN_RR_TP2, tp1)
+    tp3 = pick(C.TARGET_RR_TP3, tp2) if tp2 is not None else None
     return tp1, tp2, tp3
 
 
@@ -54,7 +60,7 @@ def _planned_levels(side, trigger, a15, a1h, a4h):
     entry = trigger
     risk = abs(entry - sl)
     rp = _risk_pct(entry, sl)
-    if not (C.MIN_RISK_PCT <= rp <= C.MAX_RISK_PCT):
+    if not (C.MIN_RISK_PCT <= rp <= C.ACTIVE_MAX_LIVE_RISK_PCT):
         return None
     tp1, tp2, tp3 = _targets(
         side, entry, risk,
@@ -65,10 +71,11 @@ def _planned_levels(side, trigger, a15, a1h, a4h):
     if tp2 is None:
         return None
     rr2 = abs(tp2 - entry) / risk
-    rr3 = abs(tp3 - entry) / risk
+    rr3 = abs(tp3 - entry) / risk if tp3 is not None else None
     if rr2 < C.MIN_RR_TP2:
         return None
     return {"entry": entry, "sl": sl, "tp1": tp1, "tp2": tp2, "tp3": tp3,
+            "final_tp": "tp3" if tp3 is not None else "tp2",
             "risk_pct": rp, "rr2": rr2, "rr3": rr3}
 
 
@@ -80,10 +87,10 @@ def _funding_bias(side, funding_rate):
     if abs(fr) < 0.0003:
         return "nötr"
     if fr >= 0.0009:
-        return "aşırı pozitif — alıcı kalabalık"
+        return "aşırı pozitif — long tarafı kalabalık"
     if fr <= -0.0009:
-        return "aşırı negatif — satıcı baskın"
-    return "pozitif — alıcılar ödüyor" if fr > 0 else "negatif — satıcılar ödüyor"
+        return "aşırı negatif — short tarafı kalabalık"
+    return "pozitif — long tarafı ödüyor" if fr > 0 else "negatif — short tarafı ödüyor"
 
 
 def evaluate(sym, a15, a1h, a4h, funding_rate, oi):
@@ -162,16 +169,21 @@ def evaluate(sym, a15, a1h, a4h, funding_rate, oi):
                     continue
                 # Entry can be breakout seviyesi ile canli fiyat arasinda; SL/TP trigger bazli plandan
                 risk_live = abs(price - plan["sl"])
+                risk_pct_live = _risk_pct(price, plan["sl"])
                 rr2_live = abs(plan["tp2"] - price) / risk_live if risk_live else 0
-                if rr2_live < C.MIN_RR_TP2:
+                if (not (C.MIN_RISK_PCT <= risk_pct_live <= C.ACTIVE_MAX_LIVE_RISK_PCT)
+                        or rr2_live < C.MIN_RR_TP2):
                     continue
                 return {
                     "status": "ACTIVE", "side": _fmt_side(side), "price": price,
                     "level": broke, "trigger": broke,
                     "entry_lo": min(price, broke), "entry_hi": max(price, broke),
                     "sl": plan["sl"], "tp1": plan["tp1"], "tp2": plan["tp2"], "tp3": plan["tp3"],
-                    "rr2": rr2_live, "rr3": abs(plan["tp3"] - price) / risk_live,
-                    "risk_pct": _risk_pct(price, plan["sl"]),
+                    "final_tp": plan["final_tp"],
+                    "rr2": rr2_live,
+                    "rr3": (abs(plan["tp3"] - price) / risk_live
+                            if plan["tp3"] is not None else None),
+                    "risk_pct": risk_pct_live,
                     "rsi15": a15["rsi"], "rsi1h": r,
                     "trend1h": a1h["tlabel"], "trend4h": a4h["tlabel"],
                     "vol15_ratio": a15["vol_ratio"], "vol1h_ratio": a1h["vol_ratio"],
@@ -198,6 +210,7 @@ def evaluate(sym, a15, a1h, a4h, funding_rate, oi):
                     "entry_lo": trigger * (0.998 if side == "long" else 1.000),
                     "entry_hi": trigger * (1.004 if side == "long" else 1.002),
                     "tp1": plan["tp1"], "tp2": plan["tp2"], "tp3": plan["tp3"],
+                    "final_tp": plan["final_tp"],
                     "rr2": plan["rr2"], "rr3": plan["rr3"], "risk_pct": plan["risk_pct"],
                     "rsi15": a15["rsi"], "rsi1h": r,
                     "trend1h": a1h["tlabel"], "trend4h": a4h["tlabel"],
