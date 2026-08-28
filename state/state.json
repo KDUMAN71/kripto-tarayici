@@ -944,7 +944,7 @@
    "migration_reason": "engine 3.1 -> 3.2"
   },
   "FILUSDT": {
-   "status": "EARLY",
+   "status": "MISSED",
    "side": "SHORT",
    "price": 0.6994,
    "trigger": 0.6872,
@@ -1003,7 +1003,7 @@
    "spread_pct": 0.014293882218408945,
    "trend1d": "guclu dusus",
    "created": 1787925708,
-   "last_update": 1787925708
+   "last_update": 1787940052
   },
   "BICOUSDT": {
    "status": "STOPPED",
@@ -1855,6 +1855,12 @@
    "sym": "AAVEUSDT",
    "event": "VETO",
    "detail": "15d failed reclaim/hold (0/2 kapanis)"
+  },
+  {
+   "t": 1787940052,
+   "sym": "FILUSDT",
+   "event": "MISSED_SILENT",
+   "detail": "trigger 0.6872, price 0.6785"
   }
  ],
  "trades": [
@@ -1902,7 +1908,7 @@
   }
  ],
  "fail_count": 0,
- "last_ok_run": 1787939136,
+ "last_ok_run": 1787940047,
  "scan_log": [
   {
    "t": 1787774776,
@@ -2228,6 +2234,15 @@
    "candidates": 75,
    "open_signals": 3,
    "duration_s": 90
+  },
+  {
+   "ts": 1787940114,
+   "ok": true,
+   "symbols": 524,
+   "liquid": 88,
+   "candidates": 75,
+   "open_signals": 2,
+   "duration_s": 69
   }
  ],
  "engine_version": "3.2"
