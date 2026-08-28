@@ -1,4 +1,4 @@
-"""V3.2 motoru — confluence skoru + bagimsiz ACTIVE execution veto katmani.
+"""V3.2.2 motoru — confluence skoru + bagimsiz ACTIVE execution veto katmani.
 
 Akis:
   1. 1s kapali mumlarda 8 detektor calisir
@@ -41,10 +41,9 @@ def _pattern_levels(side, pattern, a15, a1h, a4h):
     sl = inv - 0.15 * atr1 if side == "long" else inv + 0.15 * atr1
     entry = trigger
     rp = _risk_pct(entry, sl)
-    if not (C.MIN_RISK_PCT <= rp <= C.MAX_RISK_PCT):
-        # formasyon invalid'i cok genis/dar -> V2 swing yontemine dus
-        plan = _planned_levels(side, trigger, a15, a1h, a4h)
-        return plan, trigger
+    if not (C.MIN_RISK_PCT <= rp <= C.ACTIVE_MAX_LIVE_RISK_PCT):
+        # Formasyonlu planda stop gercek invalidation'dan koparilamaz.
+        return None, trigger
     risk = abs(entry - sl)
     tp1, tp2, tp3 = _targets(
         side, entry, risk,
@@ -57,7 +56,19 @@ def _pattern_levels(side, pattern, a15, a1h, a4h):
     if rr2 < C.MIN_RR_TP2:
         return None, trigger
     return {"entry": entry, "sl": sl, "tp1": tp1, "tp2": tp2, "tp3": tp3,
-            "risk_pct": rp, "rr2": rr2, "rr3": abs(tp3 - entry) / risk}, trigger
+            "final_tp": "tp3" if tp3 is not None else "tp2",
+            "risk_pct": rp, "rr2": rr2,
+            "rr3": abs(tp3 - entry) / risk if tp3 is not None else None}, trigger
+
+
+def _pretrade_feasible(plan):
+    """Mevcut planin ACTIVE kapilarina yapisal olarak ulasabilmesini denetle."""
+    if not plan or plan.get("tp2") is None:
+        return False
+    risk_pct = plan.get("risk_pct")
+    rr2 = plan.get("rr2")
+    return (risk_pct is not None and C.MIN_RISK_PCT <= risk_pct <= C.ACTIVE_MAX_LIVE_RISK_PCT
+            and rr2 is not None and rr2 >= C.MIN_RR_TP2)
 
 
 def _fresh_1h(side, trigger, a1h, pattern_type):
@@ -167,8 +178,9 @@ def _execution_veto(side, pattern, plan, a15, a1h, a4h, ctx):
 
     risk = abs(price - float(plan["sl"]))
     risk_pct = risk / price * 100 if price else float("inf")
-    if risk_pct > C.ACTIVE_MAX_LIVE_RISK_PCT:
-        return f"canli stop riski %{risk_pct:.2f} > %{C.ACTIVE_MAX_LIVE_RISK_PCT:.1f}", 0, []
+    if not (C.MIN_RISK_PCT <= risk_pct <= C.ACTIVE_MAX_LIVE_RISK_PCT):
+        return (f"canli stop riski %{risk_pct:.2f}; izin verilen "
+                f"%{C.MIN_RISK_PCT:.2f}-%{C.ACTIVE_MAX_LIVE_RISK_PCT:.1f}"), 0, []
     obstacle_r, obstacle = _first_obstacle_r(side, price, risk, a15, a1h, a4h)
     if obstacle_r is not None and obstacle_r < C.ACTIVE_MIN_OBSTACLE_R:
         return f"ilk yapisal engel {obstacle_r:.2f}R (<{C.ACTIVE_MIN_OBSTACLE_R:.1f}R)", 0, []
@@ -206,7 +218,7 @@ def _candidate_from_pattern(pattern, a15, a1h, a4h):
         return None
 
     plan, trigger = _pattern_levels(side, pattern, a15, a1h, a4h)
-    if not plan:
+    if not _pretrade_feasible(plan):
         return None
     price = a15["price"]
 
@@ -250,6 +262,8 @@ def evaluate_v3(sym, a15, a1h, a4h, regime, ctx_fn):
         # formasyon yok -> V2 yapisal yol (dusuk oncelik, "structural" etiketi)
         v2 = evaluate_v2(sym, a15, a1h, a4h, None, None)
         if not v2:
+            return None
+        if v2["status"] in ("EARLY", "WATCH") and not _pretrade_feasible(v2):
             return None
         fake_pat = {"type": "structural", "trigger": v2["trigger"],
                     "invalid": v2["sl"], "quality": 0.5,
@@ -354,6 +368,7 @@ def evaluate_v3(sym, a15, a1h, a4h, regime, ctx_fn):
         "invalidation": plan["sl"], "sl": plan["sl"],
         "entry_lo": e_lo, "entry_hi": e_hi,
         "tp1": plan["tp1"], "tp2": plan["tp2"], "tp3": plan["tp3"],
+        "final_tp": plan.get("final_tp", "tp3" if plan.get("tp3") is not None else "tp2"),
         "rr1": None, "rr2": None, "rr3": None, "rr_ref": None,
         "risk_pct": (abs(price - plan["sl"]) / price * 100
                      if best["stage"] == "ACTIVE" else plan["risk_pct"]),
@@ -370,7 +385,7 @@ def evaluate_v3(sym, a15, a1h, a4h, regime, ctx_fn):
     }
     ref = price if best["stage"] == "ACTIVE" else trigger
     rrs = _rr_set(ref, plan["sl"], plan["tp1"], plan["tp2"], plan["tp3"])
-    if not rrs or (rrs[1] is not None and rrs[1] < C.MIN_RR_TP2 and best["stage"] == "ACTIVE"):
+    if not rrs or rrs[1] is None or rrs[1] < C.MIN_RR_TP2:
         return None
     sig["rr1"], sig["rr2"], sig["rr3"] = rrs
     sig["rr_ref"] = ref

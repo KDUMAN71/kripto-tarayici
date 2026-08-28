@@ -1,6 +1,6 @@
 """Kripto Tarayici merkezi ayarlari."""
 
-ENGINE_VERSION = "3.2"
+ENGINE_VERSION = "3.2.2"
 
 # ---- Evren / likidite ----
 MIN_QUOTE_VOLUME_24H = 20_000_000
