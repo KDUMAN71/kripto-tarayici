@@ -273,33 +273,60 @@ def detect_sweep(piv, sub, atr, price):
     return None
 
 
-# ---------- 8. Breakout-retest (V2 mantiginin formalize hali) ----------
+# ---------- 8. Breakout-retest (recent pivot break -> retest -> hold) ----------
 def detect_breakout_retest(piv, sub, atr, price, hi24, lo24):
-    last6 = sub.iloc[-6:]
-    last_close = float(sub["close"].iloc[-1])
-    hs = [p[1] for p in piv if p[2] == "H"]
-    ls = [p[1] for p in piv if p[2] == "L"]
-    # yukari kirilan onemli seviye + retest bandinda tutunma
-    if hs and hi24:
-        lvl_c = [v for v in hs if v <= price and v >= hi24 * 0.985]
-        if lvl_c:
-            lvl = max(lvl_c)
-            touched = (last6["low"] <= lvl + 0.35 * atr).any()
-            held = last_close > lvl - 0.1 * atr
-            if touched and held and price - lvl <= 1.2 * atr:
-                return {"type": "breakout_retest", "dir": "long", "trigger": lvl,
-                        "invalid": lvl - 0.8 * atr, "quality": 0.7,
-                        "state": "triggered", "note": f"kirilan {lvl:.6g} retest edildi, tutunuyor"}
-    if ls and lo24:
-        lvl_c = [v for v in ls if v >= price and v <= lo24 * 1.015]
-        if lvl_c:
-            lvl = min(lvl_c)
-            touched = (last6["high"] >= lvl - 0.35 * atr).any()
-            held = last_close < lvl + 0.1 * atr
-            if touched and held and lvl - price <= 1.2 * atr:
-                return {"type": "breakout_retest", "dir": "short", "trigger": lvl,
-                        "invalid": lvl + 0.8 * atr, "quality": 0.7,
-                        "state": "triggered", "note": f"kirilan {lvl:.6g} retest edildi, tutunamiyor"}
+    if len(sub) < 10:
+        return None
+
+    n = len(sub)
+    candidates = []
+    # 24s ekstremiyle sinirlamak ara destek/direnc kirilimlarini kaciriyordu.
+    # Son pivotlardan, pivottan SONRA gerceklesen break -> retest -> iki kapanis
+    # dizisini ara. Pivotun indeksini korumak look-ahead eslesmesini engeller.
+    for p_idx, lvl, kind in piv[-12:]:
+        side = "long" if kind == "H" else "short"
+        if side == "long" and not (lvl <= price and price - lvl <= 1.5 * atr):
+            continue
+        if side == "short" and not (lvl >= price and lvl - price <= 1.5 * atr):
+            continue
+
+        break_idx = None
+        start = max(p_idx + 1, n - 12, 1)
+        for i in range(start, n - 2):
+            prev = float(sub["close"].iloc[i - 1])
+            close = float(sub["close"].iloc[i])
+            if side == "long" and prev <= lvl + 0.05 * atr and close > lvl + 0.10 * atr:
+                break_idx = i
+            elif side == "short" and prev >= lvl - 0.05 * atr and close < lvl - 0.10 * atr:
+                break_idx = i
+        if break_idx is None:
+            continue
+
+        after = sub.iloc[break_idx + 1:]
+        if len(after) < 2:
+            continue
+        if side == "long":
+            touched = (after["low"] <= lvl + 0.35 * atr).any()
+            held = (sub["close"].iloc[-2:] > lvl).all()
+        else:
+            touched = (after["high"] >= lvl - 0.35 * atr).any()
+            held = (sub["close"].iloc[-2:] < lvl).all()
+        if not (touched and held):
+            continue
+
+        recency = break_idx / max(n, 1)
+        distance = abs(price - lvl) / max(atr, 1e-12)
+        candidates.append((recency - 0.05 * distance, side, lvl))
+
+    if candidates:
+        _, side, lvl = max(candidates, key=lambda x: x[0])
+        if side == "long":
+            return {"type": "breakout_retest", "dir": "long", "trigger": lvl,
+                    "invalid": lvl - 0.8 * atr, "quality": 0.78,
+                    "state": "triggered", "note": f"recent pivot {lvl:.6g} kirildi, retest sonrasi 2 kapanis tuttu"}
+        return {"type": "breakout_retest", "dir": "short", "trigger": lvl,
+                "invalid": lvl + 0.8 * atr, "quality": 0.78,
+                "state": "triggered", "note": f"recent pivot {lvl:.6g} kirildi, retest sonrasi 2 kapanis asagida tuttu"}
     return None
 
 

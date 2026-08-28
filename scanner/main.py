@@ -1,4 +1,4 @@
-"""Kripto Tarayici V3 ana akisi — 15 dakikada bir.
+"""Kripto Tarayici V3.2 ana akisi — 15 dakikada bir.
 
 V3 cekirdegi:
 - 4s yon / 1s setup / 15d entry
@@ -10,6 +10,7 @@ V3 cekirdegi:
 """
 import time
 REGIME = {}
+CHANGE_24H = {}
 from . import config as C
 from . import data, radars, state as ST
 from .engine_v3 import evaluate_v3
@@ -91,27 +92,15 @@ def pretrade_msg(sym, sig, news_note):
 
 
 def active_msg(sym, sig, news_note):
-    extra = " (taze ekstrem kırılımı)" if sig.get("fresh_extreme_break") else ""
-    return (f"🟢 <b>İŞLEM BÖLGESİ AKTİF — {sym} {sig['side']}</b>{extra}\n"
-            f"Referans fiyat: {fmtp(sig['price'])}\n"
-            f"Giriş: {fmtp(sig['entry_lo'])} – {fmtp(sig['entry_hi'])}\n"
-            f"SL: {fmtp(sig['sl'])} (fiyat riski ≈ %{sig['risk_pct']:.1f})\n"
-            f"Marj etkisi (stop yenirse): ~%{sig['risk_pct']*10:.0f} @10x | "
-            f"~%{sig['risk_pct']*20:.0f} @20x | ~%{sig['risk_pct']*30:.0f} @30x\n"
+    direction = "bullish" if sig["side"] == "LONG" else "bearish"
+    setup = sig.get("setup_type", "yapisal").replace("_", "-")
+    cancel_side = "altı" if sig["side"] == "LONG" else "üzeri"
+    return (f"🟢 <b>İŞLEM BÖLGESİ AKTİF — {sym} {sig['side']}</b>\n"
+            f"Giriş: {fmtp(sig['entry_lo'])}–{fmtp(sig['entry_hi'])} | SL: {fmtp(sig['sl'])}\n"
             f"TP1: {fmtp(sig['tp1'])} | TP2: {fmtp(sig['tp2'])} | TP3: {fmtp(sig['tp3'])}\n"
-            f"R:R (ref {fmtp(sig.get('rr_ref') or sig['trigger'])}): "
-            f"TP1 1:{(sig.get('rr1') or 0):.1f} | TP2 1:{sig['rr2']:.1f} | TP3 1:{sig['rr3']:.1f}\n"
-            f"Formasyon: {sig.get('setup_note','-')}\n"
-            f"Skor: {sig.get('score','-')}/{sig.get('score_max','-')} ({', '.join(sig.get('score_parts',[]))})\n"
-            f"15d kırılım hacmi: {sig['vol15_ratio']:.1f}x | 1s hacim: {sig['vol1h_ratio']:.1f}x\n"
-            f"4s: {sig['trend4h']} | 1s: {sig['trend1h']} | 1G: {sig.get('trend1d') or '-'} | RSI 15d/1s: {sig['rsi15']:.0f}/{sig['rsi1h']:.0f}\n"
-            f"Funding: {fmt_funding(sig['funding'])} ({sig['funding_bias']}) | Taker: {fmt_taker(sig.get('taker'))} | OI: {fmt_oi(sig.get('oi'))}\n"
-            f"L/S top/global: {fmt_ls(sig.get('ls_ratios'))} | Basis: {fmt_basis(sig.get('basis_pct'))} | Spread: {fmt_spread(sig.get('spread_pct'))}\n"
-            f"BTC: {sig.get('regime_note','-')}\n"
-            f"Haber: {news_note}\n"
-            f"Planlı yönetim: TP1 %{C.TP1_CLOSE_PCT}, TP2 %{C.TP2_CLOSE_PCT}, TP3 %{C.TP3_CLOSE_PCT}; "
-            f"TP1 sonrası kalan için SL girişe taşınabilir.\n"
-            f"⚠️ Kaldıraç likidasyon riskini büyütür; SL olmadan işlem yok.")
+            f"R:R: TP2 1:{sig['rr2']:.1f}\n"
+            f"Neden: 15d/1s {direction}, {setup}, hacim/taker teyidi\n"
+            f"İptal: {fmtp(sig['sl'])} {cancel_side} 15d kapanış")
 
 
 def _market_data(sym, need_4h=True, min_tscore=None):
@@ -133,7 +122,7 @@ def _market_data(sym, need_4h=True, min_tscore=None):
 
 CTX_BUDGET = {"n": 0}
 
-def _build_ctx(sym, a1h):
+def _build_ctx(sym, a15, a1h):
     """Baglam: yalnizca aday uretilince cekilir (lazy). ~8 API cagrisi."""
     CTX_BUDGET["n"] += 1
     fr = data.funding(sym) or {}
@@ -145,7 +134,9 @@ def _build_ctx(sym, a1h):
         "funding_rate": fr.get("lastFundingRate"),
         "basis_pct": basis_pct(fr),
         "oi": data.oi_changes(sym) or {},
-        "taker": taker_pressure(a1h["closed"]),
+        "taker_15m": taker_pressure(a15["closed"], bars=4),
+        "taker_1h": taker_pressure(a1h["closed"], bars=6),
+        "change_24h": CHANGE_24H.get(sym),
         "ls_ratios": long_short_ratios(sym),
         "spread_pct": spread_pct(sym),
         "a1d": a1d,
@@ -188,7 +179,7 @@ def run():
         if not first_run:
             tg.send(f"🆕 <b>YENİ LİSTELEME — {s}</b>\nİlk {C.YOUNG_COIN_DAYS} gün teknik sinyal yok; yapı otursun.")
     if first_run:
-        tg.send(f"🚀 Kripto Tarayıcı V3 aktif. {len(symbols)} perpetual kayıtlı; 15 dakikalık tarama başladı.")
+        tg.send(f"🚀 Kripto Tarayıcı V3.2 aktif. {len(symbols)} perpetual kayıtlı; 15 dakikalık tarama başladı.")
 
     tdf = tickers[tickers["symbol"].isin(symbols)].copy()
     tdf = tdf[tdf["quoteVolume"] >= C.MIN_QUOTE_VOLUME_24H].sort_values("quoteVolume", ascending=False)
@@ -197,8 +188,9 @@ def run():
     chg = dict(zip(tdf["symbol"], tdf["priceChangePercent"]))
 
     # BTC rejim filtresi (tur basina 1 kez)
-    global REGIME
+    global REGIME, CHANGE_24H
     REGIME = btc_regime()
+    CHANGE_24H = chg
     print("REJIM:", REGIME.get("note"))
 
     # Mevcut sinyaller
@@ -297,7 +289,7 @@ def run():
                         "open_signals": active_count,
                         "duration_s": round(time.time() - t0)})
     ST.save(st)
-    print(f"V3 tamamlandi: {time.time()-t0:.0f}s | likit {len(liquid)} | aday {len(candidates)} | takip {active_count}")
+    print(f"V3.2 tamamlandi: {time.time()-t0:.0f}s | likit {len(liquid)} | aday {len(candidates)} | takip {active_count}")
 
 
 if __name__ == "__main__":

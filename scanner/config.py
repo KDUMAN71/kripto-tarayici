@@ -1,4 +1,6 @@
-"""Kripto Tarayici V2 merkezi ayarlari."""
+"""Kripto Tarayici merkezi ayarlari."""
+
+ENGINE_VERSION = "3.2"
 
 # ---- Evren / likidite ----
 MIN_QUOTE_VOLUME_24H = 20_000_000
@@ -71,3 +73,19 @@ SCAN_LOG_KEEP = 96                  # ~24 saatlik kosu heartbeat'i
 FUNDING_VETO = 0.0012               # %0.12/8s ustu ayni-yon funding: kalabalik veto
 SPREAD_VETO_PCT = 0.15              # bid-ask spread bu ustundeyse likidite vetosu
 FRESH_BREAK_BARS_1H = 2             # 1s tetik tazeligi (V3 formasyon yolu)
+
+# ---- V3.2: ACTIVE execution kalitesi ----
+ACTIVE_MIN_VOL_RATIO_1H = 0.70
+ACTIVE_MAX_LIVE_RISK_PCT = 3.0
+ACTIVE_MIN_OBSTACLE_R = 0.8
+ACTIVE_MIN_HOLD_CLOSES = 1
+RETEST_MIN_HOLD_CLOSES = 2
+REVERSAL_TAKER_LONG_15M = 0.51
+REVERSAL_TAKER_SHORT_15M = 0.49
+PANIC_TAKER_LONG_15M = 0.53
+PANIC_TAKER_SHORT_15M = 0.47
+HARD_MOVE_24H_PCT = 8.0
+REVERSAL_HARD_MOVE_MIN_VOL_1H = 1.20
+OI_COLLAPSE_4H_PCT = -3.0
+OI_COLLAPSE_24H_PCT = -8.0
+ACTIVE_CONFLICT_SCORE_GAP = 1

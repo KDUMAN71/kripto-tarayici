@@ -59,6 +59,7 @@ def analyze(df: pd.DataFrame, piv_lookback: int = 90):
     """Tek zaman dilimi ozeti. Teyit mantigi icin SON KAPALI mum kullanilir."""
     d = df.copy()
     d["ema20"] = ema(d["close"], 20)
+    d["ma7"] = d["close"].rolling(7).mean()
     d["ema50"] = ema(d["close"], 50)
     d["ema200"] = ema(d["close"], min(200, max(50, len(d) - 2)))
     d["rsi"] = rsi(d["close"])
@@ -81,7 +82,8 @@ def analyze(df: pd.DataFrame, piv_lookback: int = 90):
     return {
         "df": d, "closed": closed, "price": live_price,
         "ema20": float(last_closed["ema20"]), "ema50": float(last_closed["ema50"]),
-        "ema200": float(last_closed["ema200"]), "rsi": float(last_closed["rsi"]),
+        "ema200": float(last_closed["ema200"]), "ma7": float(last_closed["ma7"]),
+        "rsi": float(last_closed["rsi"]),
         "atr": a, "vol_ratio": vol_ratio, "stretch": stretch,
         "tscore": ts, "tlabel": tlabel,
         "pivot_highs": ph, "pivot_lows": pl,

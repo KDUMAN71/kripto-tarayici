@@ -1,8 +1,8 @@
-# Kripto Tarayıcı V3 — Binance Futures + Telegram
+# Kripto Tarayıcı V3.2 — Binance Futures + Telegram
 
 Binance USDT-M perpetual piyasasını **15 dakikada bir** tarayan karar-destek radarı. Emir vermez; Binance hesabına bağlanmaz. Ama amaç, giriş olduktan sonra haber vermek değil, **giriş oluşmadan önce hazırlanman için yeterince erken uyarmaktır.**
 
-## V3 mimarisi
+## V3.2 mimarisi
 
 **4 saat = ana yön → 1 saat = setup/yapı → 15 dakika = giriş zamanlaması ve hacim teyidi**
 
@@ -10,15 +10,18 @@ Binance USDT-M perpetual piyasasını **15 dakikada bir** tarayan karar-destek r
 |---|---|---|
 | 🔵 | **ERKEN UYARI — EMİR HAZIRLIĞI** | Tetiğe ≤%3. Binance fiyat alarmını kur; giriş/SL/TP planını hazırla. |
 | 🟡 | **YAKIN TAKİP** | Tetiğe ≤%1,2. Binance ekranını yakından izle. |
-| 🟢 | **İŞLEM BÖLGESİ AKTİF** | 15d taze kırılım + hacim teyidi + 1s/4s uyumu var. Giriş, SL, TP1/2/3 ve R:R verilir. |
+| 🟢 | **İŞLEM BÖLGESİ AKTİF** | Son kapalı 15d mum, canlı fiyat, EMA20/MA7, hacim, taker, OI, stop riski ve ilk engel execution kapılarını geçti. |
 | 🛑 | **İPTAL** | Daha önce bildirilen kurulum bozuldu. |
 | 🔴 / 🎯 | **STOP / TP** | Aktif paper-planın hedef/stop takibi. |
 
 **İdeal giriş kaçtıysa mesaj GELMEZ.** Sistem `MISSED_SILENT` olarak kayda geçirir ve yeni yapı bekler.
 
-## V3 çekirdeği
+## V3.2 çekirdeği
 
 - **15 dakikalık entry motoru:** 1 saatlik mum kapanışını bekleyip geç kalmak yerine, 4s/1s bağlamı içinde 15d taze breakout ve hacim teyidi kullanılır.
+- **Execution veto katmanı:** ACTIVE için son kapalı 15d mum ve canlı fiyat tetik tarafını korumalı; EMA20/MA7 yönü, EMA20 eğimi ve minimum 1s hacim uyumlu olmalıdır.
+- **Reversal disiplini:** 4s trendine ters, teyitli reversal setup'ları otomatik elenmez; 15d taker teyidi ve sert 24s hareketlerde daha sıkı hacim/taker koşulları aranır.
+- **Recent pivot retest:** yalnızca 24s ekstremi değil, ara destek/dirençlerde `break → retest → iki kapanış hold` dizisi aranır.
 - **Erken uyarı:** tetiğe %3 kala plan + Binance alarm seviyesi + SL + TP1/2/3 önceden gelir.
 - **Çoklu OI:** yaklaşık **1s / 4s / 24s** açık pozisyon değişimi birlikte gösterilir.
 - **Funding crowding:** aşırı pozitif funding long, aşırı negatif funding short için `crowded` etiketi üretir.
@@ -30,10 +33,12 @@ Binance USDT-M perpetual piyasasını **15 dakikada bir** tarayan karar-destek r
 ## Temel kalite filtreleri
 
 - Minimum 24s hacim: **20M USDT**
-- 4s trend yönü zorunlu
+- Continuation setup'larında 4s trend yönü zorunlu; teyitli reversal setup'ları ayrı execution kapılarından geçer
 - 1s setup ana yönün tersine güçlü olmamalı
 - 15d kırılım hacmi ≥ **1.30x** 20-mum ortalaması
-- 1s son kapalı mum hacmi ≥ **1.05x** ortalama
+- ACTIVE için 1s son kapalı mum hacmi ≥ **0.70x** ortalama
+- Reversal LONG/SHORT için 15d taker sırasıyla ≥ **0.51** / ≤ **0.49**
+- Canlı fiyattan stop riski ≤ **%3** ve ilk yapısal engel ≥ **0.8R**
 - TP2 için minimum **1:2 R:R**
 - ATR stretch ve 72s ekstrem-kovalama filtresi
 - Breakout sonrası fiyat tetikten >%1,25 uzaklaştıysa sinyal sessizce reddedilir
@@ -64,8 +69,10 @@ Yerelde Telegram göndermeden:
 TELEGRAM_DRY_RUN=1 python -m scanner.main
 ```
 
-## GitHub Actions zamanlama gerçeği
-Workflow cron'u `*/15` olsa da GitHub Actions kesin gerçek-zaman garantisi vermez; yoğunlukta gecikebilir. Eğer bu radar ciddi futures giriş zamanlaması için kullanılacaksa en sağlam kurulum Avrupa lokasyonlu küçük bir VPS'tir:
+## Zamanlama
+Tarama, cron-job.org tarafından GitHub Actions `workflow_dispatch` uç noktasına yaklaşık 15 dakikada bir gönderilir. Workflow `concurrency` kilidi aynı anda iki taramanın state commit yarışına girmesini engeller. GitHub'ın dahili `schedule` tetikleyicisi, dış tetikleyicinin düzenli ve başarılı koşuları doğrulandıktan sonra çift taramayı önlemek için kaldırılmıştır.
+
+Alternatif olarak Avrupa lokasyonlu bir VPS kullanılabilir:
 
 ```cron
 */15 * * * * cd /opt/kripto-tarayici-v3 && /usr/bin/python3 -m scanner.main
@@ -89,10 +96,10 @@ state/state.json       kalıcı durum (otomatik oluşur)
 ```
 
 ## Risk notu
-Bu yazılım sinyal doğruluğunu garanti etmez. Özellikle yüksek kaldıraç, küçük fiyat hareketini büyük PnL ve likidasyon riskine dönüştürür. V3'ün amacı daha erken ve daha seçici teknik kurulum üretmek; **ilk aşamada paper tracking ile en az 50–100 sinyal istatistiği görmek** mantıklıdır.
+Bu yazılım sinyal doğruluğunu garanti etmez. Özellikle yüksek kaldıraç, küçük fiyat hareketini büyük PnL ve likidasyon riskine dönüştürür. V3.2'nin amacı daha erken ve daha seçici teknik kurulum üretmek; **ilk aşamada paper tracking ile en az 50–100 sinyal istatistiği görmek** mantıklıdır.
 
 
-## V3 QA notları
+## V3.2 QA notları
 - 1G bağlam gerçek EMA200 için 240 günlük mumla hesaplanır.
 - Taker buy/sell baskısı en son kapalı mumları içerir.
 - Simetrik üçgende short confluence alt kırılım tetik seviyesini kullanır.

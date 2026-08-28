@@ -22,7 +22,27 @@ def load():
               "trades": [], "fail_count": 0, "last_ok_run": 0}
     st.setdefault("trades", [])
     st.setdefault("scan_log", [])
+    migrate_engine(st)
     return st
+
+
+def migrate_engine(st):
+    """V3.1 acik planlarini sessizce kapat; tum tarihsel kayitlari koru."""
+    if st.get("engine_version") == C.ENGINE_VERSION:
+        return 0
+    migrated = 0
+    ts = now()
+    previous = st.get("engine_version", "3.1")
+    for signal in st.get("signals", {}).values():
+        if signal.get("status") in ("EARLY", "WATCH", "ACTIVE"):
+            signal["status"] = "CANCELLED"
+            signal["last_update"] = ts
+            signal["migration_reason"] = f"engine {previous} -> {C.ENGINE_VERSION}"
+            migrated += 1
+    st["engine_version"] = C.ENGINE_VERSION
+    log_event(st, "SYSTEM", "ENGINE_MIGRATION",
+              f"{migrated} acik plan sessizce CANCELLED; tarihsel log/trades korundu")
+    return migrated
 
 
 def save(st):
