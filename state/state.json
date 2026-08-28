@@ -969,44 +969,37 @@
    "mae_pct": 2.8748707342295803
   },
   "ASTERUSDT": {
-   "status": "EARLY",
+   "status": "WATCH",
    "side": "LONG",
-   "price": 0.7044,
-   "trigger": 0.7181,
-   "alarm": 0.71558665,
-   "dist_pct": 1.9449176604202065,
-   "invalidation": 0.687673615717003,
-   "sl": 0.687673615717003,
-   "entry_lo": 0.7166638,
-   "entry_hi": 0.7209724,
-   "tp1": 0.78,
-   "tp2": 0.78,
-   "tp3": 0.8093791528489908,
-   "rr2": 2.034418530452579,
-   "rr3": 3.0,
-   "risk_pct": 4.237067857261793,
-   "rsi15": 59.516658528909105,
+   "price": 0.7011,
+   "trigger": 0.701,
+   "alarm": 0.6985465,
+   "dist_pct": 0.0,
+   "invalidation": 0.6868089344932896,
+   "sl": 0.6868089344932896,
+   "entry_lo": 0.6995979999999999,
+   "entry_hi": 0.703804,
+   "tp1": 0.7181,
+   "tp2": 0.73,
+   "tp3": 0.78,
+   "rr1": 1.204983515290952,
+   "rr2": 2.0435392949378732,
+   "rr3": 5.566882906899723,
+   "rr_ref": 0.701,
+   "risk_pct": 2.0244030680043283,
+   "rsi15": 50.6045265989898,
    "rsi1h": 51.07734686842459,
-   "trend1h": "kararsiz",
+   "trend1h": "dusus",
    "trend4h": "guclu yukselis",
-   "vol15_ratio": 0.4956216505354097,
+   "vol15_ratio": 0.9193213622339467,
    "vol1h_ratio": 1.1477255986407098,
-   "funding": "0.00005000",
-   "funding_bias": "neutral",
-   "oi": {
-    "1h": 0.11044199784485231,
-    "4h": -0.7509678025051014,
-    "24h": -0.12834913752965735
-   },
-   "rr1": 2.034418530452579,
-   "rr_ref": 0.7181,
-   "setup_type": "structural",
-   "setup_note": "yapisal kirilim/retest",
+   "setup_type": "liquidity_sweep",
+   "setup_note": "dip s\u00fcp\u00fcrme: 0.701 alti fitil, geri kapanis (tahmini likidite bolgesi)",
    "score": 9,
    "score_max": 13,
    "score_parts": [
     "4s yap\u0131+2",
-    "structural+2",
+    "liquidity_sweep+2",
     "S/R+2",
     "BTC+1",
     "1G+1",
@@ -1014,16 +1007,23 @@
    ],
    "structure_1h": "LH-LL",
    "regime_note": "BTC 4s: guclu yukselis, 1s yapi: HH-HL",
+   "funding": "0.00005000",
+   "funding_bias": "neutral",
+   "oi": {
+    "1h": 0.050694552468611646,
+    "4h": -0.6571001264502975,
+    "24h": -0.12834913752965735
+   },
    "taker": 0.4273736367274789,
    "ls_ratios": {
     "top_pos": 2.4805,
     "global_acc": 1.9189
    },
-   "basis_pct": -0.07282171838060979,
-   "spread_pct": 0.01419043564637278,
+   "basis_pct": -0.052984320806576,
+   "spread_pct": 0.014267370523610927,
    "trend1d": "yukselis",
    "created": 1787915845,
-   "last_update": 1787915845
+   "last_update": 1787917553
   },
   "BNBUSDT": {
    "status": "WATCH",
@@ -1081,6 +1081,63 @@
    "trend1d": "yukselis",
    "created": 1787916677,
    "last_update": 1787916677
+  },
+  "ETHUSDT": {
+   "status": "WATCH",
+   "side": "LONG",
+   "price": 2505.27,
+   "trigger": 2504.24,
+   "alarm": 2495.47516,
+   "dist_pct": 0.0,
+   "invalidation": 2486.3079985674076,
+   "sl": 2486.3079985674076,
+   "entry_lo": 2499.23152,
+   "entry_hi": 2514.2569599999997,
+   "tp1": 2533.0,
+   "tp2": 2549.4,
+   "tp3": 2566.4,
+   "rr1": 1.603836588353583,
+   "rr2": 2.5184026540350404,
+   "rr3": 3.4664284538267895,
+   "rr_ref": 2504.24,
+   "risk_pct": 0.7160656100290782,
+   "rsi15": 59.332452348995474,
+   "rsi1h": 53.668002852214244,
+   "trend1h": "guclu yukselis",
+   "trend4h": "guclu yukselis",
+   "vol15_ratio": 0.8209123470611385,
+   "vol1h_ratio": 1.1326936127816418,
+   "setup_type": "breakout_retest",
+   "setup_note": "kirilan 2504.24 retest edildi, tutunuyor",
+   "score": 9,
+   "score_max": 13,
+   "score_parts": [
+    "4s yap\u0131+2",
+    "breakout_retest+2",
+    "S/R+2",
+    "BTC+1",
+    "1G+1",
+    "RSI+1"
+   ],
+   "structure_1h": "LH-LL",
+   "regime_note": "BTC 4s: guclu yukselis, 1s yapi: HH-HL",
+   "funding": "0.00006277",
+   "funding_bias": "neutral",
+   "oi": {
+    "1h": -0.45363760425346616,
+    "4h": -0.25934442052778994,
+    "24h": -0.07113434104674964
+   },
+   "taker": 0.4845675270030514,
+   "ls_ratios": {
+    "top_pos": 1.8164,
+    "global_acc": 2.3478
+   },
+   "basis_pct": -0.012316701995599233,
+   "spread_pct": 0.00039915857373529716,
+   "trend1d": "yukselis",
+   "created": 1787917571,
+   "last_update": 1787917571
   }
  },
  "pump_alerts": {
@@ -1194,6 +1251,18 @@
    "sym": "BNBUSDT",
    "event": "WATCH",
    "detail": "LONG @ 706.7"
+  },
+  {
+   "t": 1787917553,
+   "sym": "ASTERUSDT",
+   "event": "WATCH",
+   "detail": "LONG @ 0.7011"
+  },
+  {
+   "t": 1787917571,
+   "sym": "ETHUSDT",
+   "event": "WATCH",
+   "detail": "LONG @ 2505.27"
   }
  ],
  "trades": [
@@ -1220,7 +1289,7 @@
   }
  ],
  "fail_count": 0,
- "last_ok_run": 1787916639,
+ "last_ok_run": 1787917535,
  "scan_log": [
   {
    "t": 1787774776,
@@ -1312,6 +1381,15 @@
    "candidates": 63,
    "open_signals": 10,
    "duration_s": 88
+  },
+  {
+   "ts": 1787917630,
+   "ok": true,
+   "symbols": 524,
+   "liquid": 78,
+   "candidates": 62,
+   "open_signals": 11,
+   "duration_s": 97
   }
  ]
 }
