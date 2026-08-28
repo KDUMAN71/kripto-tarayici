@@ -966,7 +966,7 @@
    "entry_ref": 0.024175000000000002,
    "activated_at": 1787915828,
    "mfe_pct": 0,
-   "mae_pct": 0
+   "mae_pct": 2.8748707342295803
   },
   "ASTERUSDT": {
    "status": "EARLY",
@@ -1024,6 +1024,63 @@
    "trend1d": "yukselis",
    "created": 1787915845,
    "last_update": 1787915845
+  },
+  "BNBUSDT": {
+   "status": "WATCH",
+   "side": "LONG",
+   "price": 706.7,
+   "trigger": 706.47,
+   "alarm": 703.9973550000001,
+   "dist_pct": 0.0,
+   "invalidation": 701.372304080933,
+   "sl": 701.372304080933,
+   "entry_lo": 705.05706,
+   "entry_hi": 709.29588,
+   "tp1": 711.73,
+   "tp2": 719.14,
+   "tp3": 727.15,
+   "rr1": 1.0318387137070801,
+   "rr2": 2.4854365974655295,
+   "rr3": 4.056734714726693,
+   "rr_ref": 706.47,
+   "risk_pct": 0.7215728791126395,
+   "rsi15": 44.3423047469112,
+   "rsi1h": 46.88805932709796,
+   "trend1h": "kararsiz",
+   "trend4h": "guclu yukselis",
+   "vol15_ratio": 0.4857453337086568,
+   "vol1h_ratio": 0.9651616657059139,
+   "setup_type": "liquidity_sweep",
+   "setup_note": "dip s\u00fcp\u00fcrme: 706.47 alti fitil, geri kapanis (tahmini likidite bolgesi)",
+   "score": 9,
+   "score_max": 13,
+   "score_parts": [
+    "4s yap\u0131+2",
+    "liquidity_sweep+2",
+    "S/R+2",
+    "BTC+1",
+    "1G+1",
+    "RSI+1"
+   ],
+   "structure_1h": "LH-LL",
+   "regime_note": "BTC 4s: guclu yukselis, 1s yapi: HH-HL",
+   "funding": "0.00001705",
+   "funding_bias": "neutral",
+   "oi": {
+    "1h": 0.20288034737857985,
+    "4h": -0.9893409413012968,
+    "24h": 0.30457430869168556
+   },
+   "taker": 0.46489538951591486,
+   "ls_ratios": {
+    "top_pos": 1.6839,
+    "global_acc": 2.4106
+   },
+   "basis_pct": 0.05413913759926643,
+   "spread_pct": 0.0014150676402480036,
+   "trend1d": "yukselis",
+   "created": 1787916677,
+   "last_update": 1787916677
   }
  },
  "pump_alerts": {
@@ -1131,6 +1188,12 @@
    "sym": "LIGHTUSDT",
    "event": "PUMP_ALERT",
    "detail": "vol 5.4x, 3h %12.2"
+  },
+  {
+   "t": 1787916677,
+   "sym": "BNBUSDT",
+   "event": "WATCH",
+   "detail": "LONG @ 706.7"
   }
  ],
  "trades": [
@@ -1157,7 +1220,7 @@
   }
  ],
  "fail_count": 0,
- "last_ok_run": 1787915792,
+ "last_ok_run": 1787916639,
  "scan_log": [
   {
    "t": 1787774776,
@@ -1240,6 +1303,15 @@
    "candidates": 62,
    "open_signals": 9,
    "duration_s": 64
+  },
+  {
+   "ts": 1787916725,
+   "ok": true,
+   "symbols": 524,
+   "liquid": 78,
+   "candidates": 63,
+   "open_signals": 10,
+   "duration_s": 88
   }
  ]
 }
