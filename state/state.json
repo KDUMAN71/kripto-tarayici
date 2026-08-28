@@ -1304,7 +1304,7 @@
    "last_update": 1787923135
   },
   "DOTUSDT": {
-   "status": "WATCH",
+   "status": "CANCELLED",
    "side": "LONG",
    "price": 0.8754,
    "trigger": 0.8771,
@@ -1364,7 +1364,7 @@
    "spread_pct": 0.011425959780620314,
    "trend1d": "kararsiz",
    "created": 1787929314,
-   "last_update": 1787929314
+   "last_update": 1787932862
   }
  },
  "pump_alerts": {
@@ -1676,6 +1676,36 @@
    "sym": "VIRTUALUSDT",
    "event": "VETO",
    "detail": "15d failed reclaim/hold (0/2 kapanis)"
+  },
+  {
+   "t": 1787932862,
+   "sym": "DOTUSDT",
+   "event": "CANCELLED",
+   "detail": "1h close 0.8557 invalidation beyond"
+  },
+  {
+   "t": 1787932873,
+   "sym": "BTCUSDT",
+   "event": "VETO",
+   "detail": "15d failed reclaim/hold (0/2 kapanis)"
+  },
+  {
+   "t": 1787932887,
+   "sym": "MOVRUSDT",
+   "event": "VETO",
+   "detail": "15d EMA20/MA7 yonu veya EMA20 egimi uyumsuz"
+  },
+  {
+   "t": 1787932900,
+   "sym": "AAVEUSDT",
+   "event": "VETO",
+   "detail": "15d failed reclaim/hold (0/2 kapanis)"
+  },
+  {
+   "t": 1787932907,
+   "sym": "PENGUUSDT",
+   "event": "VETO",
+   "detail": "canli fiyat reclaim/breakdown seviyesini kaybetti"
   }
  ],
  "trades": [
@@ -1723,7 +1753,7 @@
   }
  ],
  "fail_count": 0,
- "last_ok_run": 1787931930,
+ "last_ok_run": 1787932849,
  "scan_log": [
   {
    "t": 1787774776,
@@ -1977,6 +2007,15 @@
    "candidates": 75,
    "open_signals": 4,
    "duration_s": 108
+  },
+  {
+   "ts": 1787932929,
+   "ok": true,
+   "symbols": 524,
+   "liquid": 85,
+   "candidates": 71,
+   "open_signals": 3,
+   "duration_s": 80
   }
  ],
  "engine_version": "3.2"
