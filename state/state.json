@@ -721,7 +721,7 @@
    "migration_reason": "engine 3.1 -> 3.2"
   },
   "AVAXUSDT": {
-   "status": "EARLY",
+   "status": "CANCELLED",
    "side": "LONG",
    "price": 7.438,
    "trigger": 7.579,
@@ -782,7 +782,8 @@
    "spread_pct": 0.013448090371171784,
    "trend1d": "yukselis",
    "created": 1787929288,
-   "last_update": 1787929288
+   "last_update": 1787941177,
+   "migration_reason": "engine 3.2 -> 3.2.2"
   },
   "BCHUSDT": {
    "status": "CANCELLED",
@@ -1367,7 +1368,7 @@
    "last_update": 1787932862
   },
   "ZECUSDT": {
-   "status": "WATCH",
+   "status": "CANCELLED",
    "side": "LONG",
    "price": 794.95,
    "trigger": 795.9,
@@ -1428,7 +1429,8 @@
    "spread_pct": 0.0012587641453752493,
    "trend1d": "guclu yukselis",
    "created": 1787936478,
-   "last_update": 1787936478
+   "last_update": 1787941177,
+   "migration_reason": "engine 3.2 -> 3.2.2"
   }
  },
  "pump_alerts": {
@@ -1861,6 +1863,12 @@
    "sym": "FILUSDT",
    "event": "MISSED_SILENT",
    "detail": "trigger 0.6872, price 0.6785"
+  },
+  {
+   "t": 1787941177,
+   "sym": "SYSTEM",
+   "event": "ENGINE_MIGRATION",
+   "detail": "2 acik plan sessizce CANCELLED; tarihsel log/trades korundu"
   }
  ],
  "trades": [
@@ -1908,7 +1916,7 @@
   }
  ],
  "fail_count": 0,
- "last_ok_run": 1787940934,
+ "last_ok_run": 1787941178,
  "scan_log": [
   {
    "t": 1787774776,
@@ -2252,7 +2260,16 @@
    "candidates": 75,
    "open_signals": 2,
    "duration_s": 63
+  },
+  {
+   "ts": 1787941244,
+   "ok": true,
+   "symbols": 524,
+   "liquid": 85,
+   "candidates": 75,
+   "open_signals": 0,
+   "duration_s": 67
   }
  ],
- "engine_version": "3.2"
+ "engine_version": "3.2.2"
 }
