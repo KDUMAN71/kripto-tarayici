@@ -907,7 +907,7 @@
    "last_update": 1787907834
   },
   "BICOUSDT": {
-   "status": "ACTIVE",
+   "status": "STOPPED",
    "side": "LONG",
    "price": 0.02389,
    "trigger": 0.02446,
@@ -962,11 +962,11 @@
    "spread_pct": 0.041841004184098717,
    "trend1d": "yukselis",
    "created": 1787915828,
-   "last_update": 1787915828,
+   "last_update": 1787921146,
    "entry_ref": 0.024175000000000002,
    "activated_at": 1787915828,
    "mfe_pct": 0,
-   "mae_pct": 2.8748707342295803
+   "mae_pct": 3.9089968976215155
   },
   "ASTERUSDT": {
    "status": "WATCH",
@@ -1263,6 +1263,12 @@
    "sym": "ETHUSDT",
    "event": "WATCH",
    "detail": "LONG @ 2505.27"
+  },
+  {
+   "t": 1787921146,
+   "sym": "BICOUSDT",
+   "event": "STOPPED",
+   "detail": "hard SL touched 0.0233881"
   }
  ],
  "trades": [
@@ -1286,10 +1292,31 @@
    "tp3_hit": false,
    "mfe_pct": 0.3908495229336626,
    "mae_pct": 1.6553626853661463
+  },
+  {
+   "symbol": "BICOUSDT",
+   "side": "LONG",
+   "activated_at": 1787915828,
+   "closed_at": 1787921146,
+   "entry": 0.024175000000000002,
+   "sl": 0.0233881489051682,
+   "tp1": 0.02575,
+   "tp2": 0.02683,
+   "tp3": 0.02793,
+   "setup_type": "liquidity_sweep",
+   "score": 11,
+   "outcome": "STOPPED",
+   "exit": 0.0233881489051682,
+   "pnl_r": -1.0,
+   "tp1_hit": false,
+   "tp2_hit": false,
+   "tp3_hit": false,
+   "mfe_pct": 0,
+   "mae_pct": 3.9089968976215155
   }
  ],
  "fail_count": 0,
- "last_ok_run": 1787920237,
+ "last_ok_run": 1787921134,
  "scan_log": [
   {
    "t": 1787774776,
@@ -1417,6 +1444,15 @@
    "candidates": 64,
    "open_signals": 11,
    "duration_s": 80
+  },
+  {
+   "ts": 1787921210,
+   "ok": true,
+   "symbols": 524,
+   "liquid": 78,
+   "candidates": 64,
+   "open_signals": 10,
+   "duration_s": 78
   }
  ]
 }
