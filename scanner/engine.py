@@ -24,7 +24,11 @@ def _risk_pct(entry, sl):
 
 
 def _targets(side, entry, risk, piv_15m, piv_1h, piv_4h):
-    """Yapisal pivotlardan tekil ve yon boyunca ilerleyen TP zinciri sec."""
+    """Yapisal pivotlardan tekil ve yon boyunca ilerleyen TP zinciri sec.
+
+    V3.3: TP1 sentetik uretilmez. Ilk gercek yapisal hedef en az MIN_RR_TP1
+    uzakta degilse islem geometrisi riske degmez ve plan reddedilir.
+    """
     pivots = piv_15m + piv_1h + piv_4h
     if side == "long":
         cands = sorted({p for p in pivots if p > entry * 1.001})
@@ -41,7 +45,9 @@ def _targets(side, entry, risk, piv_15m, piv_1h, piv_4h):
         return next((p for p in cands
                      if meets(p, mult) and progressive(p, previous)), None)
 
-    tp1 = pick(1.0) or need(1.2)
+    tp1 = pick(C.MIN_RR_TP1)
+    if tp1 is None:
+        return None, None, None
     tp2 = pick(C.MIN_RR_TP2, tp1)
     tp3 = pick(C.TARGET_RR_TP3, tp2) if tp2 is not None else None
     return tp1, tp2, tp3
@@ -68,15 +74,16 @@ def _planned_levels(side, trigger, a15, a1h, a4h):
         a1h["pivot_highs" if side == "long" else "pivot_lows"],
         a4h["pivot_highs" if side == "long" else "pivot_lows"],
     )
-    if tp2 is None:
+    if tp1 is None or tp2 is None:
         return None
+    rr1 = abs(tp1 - entry) / risk
     rr2 = abs(tp2 - entry) / risk
     rr3 = abs(tp3 - entry) / risk if tp3 is not None else None
-    if rr2 < C.MIN_RR_TP2:
+    if rr1 < C.MIN_RR_TP1 or rr2 < C.MIN_RR_TP2:
         return None
     return {"entry": entry, "sl": sl, "tp1": tp1, "tp2": tp2, "tp3": tp3,
             "final_tp": "tp3" if tp3 is not None else "tp2",
-            "risk_pct": rp, "rr2": rr2, "rr3": rr3}
+            "risk_pct": rp, "rr1": rr1, "rr2": rr2, "rr3": rr3}
 
 
 def _funding_bias(side, funding_rate):
@@ -101,26 +108,22 @@ def evaluate(sym, a15, a1h, a4h, funding_rate, oi):
         return None
 
     for side in ("long", "short"):
-        # 1) 4s ana trend
         if side == "long" and a4h["tscore"] < 1:
             continue
         if side == "short" and a4h["tscore"] > -1:
             continue
 
-        # 2) 1s setup tamamen ters olmasin
         if side == "long" and a1h["tscore"] < C.MIN_1H_TREND_SCORE_LONG:
             continue
         if side == "short" and a1h["tscore"] > C.MAX_1H_TREND_SCORE_SHORT:
             continue
 
-        # 3) 1s RSI
         r = a1h["rsi"]
         if side == "long" and not (C.RSI_LONG_MIN <= r <= C.RSI_LONG_MAX):
             continue
         if side == "short" and not (C.RSI_SHORT_MIN <= r <= C.RSI_SHORT_MAX):
             continue
 
-        # 4) dikey harekete atlama yok
         if a1h["stretch"] is not None and a1h["stretch"] > C.ATR_STRETCH_MAX:
             continue
 
@@ -136,7 +139,6 @@ def evaluate(sym, a15, a1h, a4h, funding_rate, oi):
             behind = [p for p in a1h["pivot_lows"] if p >= price and lo24 and p <= lo24 * 1.015]
             broke = min(behind) if behind else None
 
-        # 5) 72s ekstremin dibinde/tepesinde kovalamama
         lo72, hi72 = a1h["low72"], a1h["high72"]
         fresh_extreme_break = False
         if side == "short" and lo72:
@@ -150,7 +152,6 @@ def evaluate(sym, a15, a1h, a4h, funding_rate, oi):
             if near_top and not fresh_extreme_break:
                 continue
 
-        # ---- ACTIVE: 15d taze breakout + hacim + 1s momentum destegi ----
         if broke:
             c15 = a15["closed"]
             recent = c15.iloc[-C.FRESH_BREAK_BARS_15M:]
@@ -167,22 +168,20 @@ def evaluate(sym, a15, a1h, a4h, funding_rate, oi):
                 plan = _planned_levels(side, broke, a15, a1h, a4h)
                 if not plan:
                     continue
-                # Entry can be breakout seviyesi ile canli fiyat arasinda; SL/TP trigger bazli plandan
                 risk_live = abs(price - plan["sl"])
                 risk_pct_live = _risk_pct(price, plan["sl"])
+                rr1_live = abs(plan["tp1"] - price) / risk_live if risk_live else 0
                 rr2_live = abs(plan["tp2"] - price) / risk_live if risk_live else 0
                 if (not (C.MIN_RISK_PCT <= risk_pct_live <= C.ACTIVE_MAX_LIVE_RISK_PCT)
-                        or rr2_live < C.MIN_RR_TP2):
+                        or rr1_live < C.MIN_RR_TP1 or rr2_live < C.MIN_RR_TP2):
                     continue
                 return {
                     "status": "ACTIVE", "side": _fmt_side(side), "price": price,
                     "level": broke, "trigger": broke,
                     "entry_lo": min(price, broke), "entry_hi": max(price, broke),
                     "sl": plan["sl"], "tp1": plan["tp1"], "tp2": plan["tp2"], "tp3": plan["tp3"],
-                    "final_tp": plan["final_tp"],
-                    "rr2": rr2_live,
-                    "rr3": (abs(plan["tp3"] - price) / risk_live
-                            if plan["tp3"] is not None else None),
+                    "final_tp": plan["final_tp"], "rr1": rr1_live, "rr2": rr2_live,
+                    "rr3": (abs(plan["tp3"] - price) / risk_live if plan["tp3"] is not None else None),
                     "risk_pct": risk_pct_live,
                     "rsi15": a15["rsi"], "rsi1h": r,
                     "trend1h": a1h["tlabel"], "trend4h": a4h["tlabel"],
@@ -191,7 +190,6 @@ def evaluate(sym, a15, a1h, a4h, funding_rate, oi):
                     "oi": oi or {}, "fresh_extreme_break": fresh_extreme_break,
                 }
 
-        # ---- EARLY / WATCH: breakout'tan once plan hazirla ----
         if trigger:
             dist = abs(trigger - price) / price * 100
             if dist <= C.EARLY_PROXIMITY_PCT:
@@ -199,10 +197,7 @@ def evaluate(sym, a15, a1h, a4h, funding_rate, oi):
                 if not plan:
                     continue
                 status = "WATCH" if dist <= C.WATCH_PROXIMITY_PCT else "EARLY"
-                if side == "long":
-                    alarm = trigger * (1 - C.EARLY_ALERT_PRICE_BUFFER_PCT / 100)
-                else:
-                    alarm = trigger * (1 + C.EARLY_ALERT_PRICE_BUFFER_PCT / 100)
+                alarm = trigger * (1 - C.EARLY_ALERT_PRICE_BUFFER_PCT / 100) if side == "long" else trigger * (1 + C.EARLY_ALERT_PRICE_BUFFER_PCT / 100)
                 return {
                     "status": status, "side": _fmt_side(side), "price": price,
                     "trigger": trigger, "alarm": alarm, "dist_pct": dist,
@@ -210,7 +205,7 @@ def evaluate(sym, a15, a1h, a4h, funding_rate, oi):
                     "entry_lo": trigger * (0.998 if side == "long" else 1.000),
                     "entry_hi": trigger * (1.004 if side == "long" else 1.002),
                     "tp1": plan["tp1"], "tp2": plan["tp2"], "tp3": plan["tp3"],
-                    "final_tp": plan["final_tp"],
+                    "final_tp": plan["final_tp"], "rr1": plan["rr1"],
                     "rr2": plan["rr2"], "rr3": plan["rr3"], "risk_pct": plan["risk_pct"],
                     "rsi15": a15["rsi"], "rsi1h": r,
                     "trend1h": a1h["tlabel"], "trend4h": a4h["tlabel"],
