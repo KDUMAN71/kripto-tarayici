@@ -589,7 +589,7 @@
    "last_update": 1787990470
   },
   "AAVEUSDT": {
-   "status": "WATCH",
+   "status": "MISSED",
    "side": "LONG",
    "price": 121.94,
    "trigger": 122.5,
@@ -649,7 +649,7 @@
    "spread_pct": 0.008193363375669904,
    "trend1d": "yukselis",
    "created": 1788002189,
-   "last_update": 1788002189
+   "last_update": 1788014739
   },
   "AVAXUSDT": {
    "status": "CANCELLED",
@@ -1933,6 +1933,12 @@
    "sym": "ONDOUSDT",
    "event": "EARLY",
    "detail": "SHORT @ 0.3528"
+  },
+  {
+   "t": 1788014739,
+   "sym": "AAVEUSDT",
+   "event": "MISSED_SILENT",
+   "detail": "trigger 122.5, price 124.32"
   }
  ],
  "trades": [
@@ -1980,17 +1986,8 @@
   }
  ],
  "fail_count": 0,
- "last_ok_run": 1788013840,
+ "last_ok_run": 1788014733,
  "scan_log": [
-  {
-   "ts": 1787931151,
-   "ok": true,
-   "symbols": 524,
-   "liquid": 83,
-   "candidates": 75,
-   "open_signals": 4,
-   "duration_s": 109
-  },
   {
    "ts": 1787932038,
    "ok": true,
@@ -2845,6 +2842,15 @@
    "candidates": 64,
    "open_signals": 9,
    "duration_s": 79
+  },
+  {
+   "ts": 1788014808,
+   "ok": true,
+   "symbols": 524,
+   "liquid": 82,
+   "candidates": 65,
+   "open_signals": 8,
+   "duration_s": 77
   }
  ],
  "engine_version": "3.2.2"
