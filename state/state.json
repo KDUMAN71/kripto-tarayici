@@ -1353,7 +1353,8 @@
   "4USDT": 1787999515,
   "NILUSDT": 1788015738,
   "DASHUSDT": 1788016603,
-  "GIGGLEUSDT": 1788016604
+  "GIGGLEUSDT": 1788016604,
+  "ZKPUSDT": 1788017529
  },
  "log": [
   {
@@ -1985,6 +1986,18 @@
    "sym": "GIGGLEUSDT",
    "event": "PUMP_ALERT",
    "detail": "vol 6.8x, 3h %12.6"
+  },
+  {
+   "t": 1788017478,
+   "sym": "ENAUSDT",
+   "event": "VETO",
+   "detail": "15d failed reclaim/hold (0/2 kapanis)"
+  },
+  {
+   "t": 1788017529,
+   "sym": "ZKPUSDT",
+   "event": "PUMP_ALERT",
+   "detail": "vol 11.1x, 3h %6.8"
   }
  ],
  "trades": [
@@ -2032,17 +2045,8 @@
   }
  ],
  "fail_count": 0,
- "last_ok_run": 1788016532,
+ "last_ok_run": 1788017441,
  "scan_log": [
-  {
-   "ts": 1787933806,
-   "ok": true,
-   "symbols": 524,
-   "liquid": 86,
-   "candidates": 72,
-   "open_signals": 2,
-   "duration_s": 73
-  },
   {
    "ts": 1787934725,
    "ok": true,
@@ -2897,6 +2901,15 @@
    "candidates": 68,
    "open_signals": 7,
    "duration_s": 75
+  },
+  {
+   "ts": 1788017529,
+   "ok": true,
+   "symbols": 524,
+   "liquid": 85,
+   "candidates": 68,
+   "open_signals": 7,
+   "duration_s": 90
   }
  ],
  "engine_version": "3.2.2"
