@@ -1344,6 +1344,70 @@
    "trend1d": "yukselis",
    "created": 1788022909,
    "last_update": 1788022909
+  },
+  "SOLUSDT": {
+   "status": "WATCH",
+   "side": "LONG",
+   "price": 104.79,
+   "trigger": 105.0,
+   "alarm": 104.63250000000001,
+   "dist_pct": 0.20040080160320045,
+   "invalidation": 102.43242357673347,
+   "sl": 102.43242357673347,
+   "entry_lo": 104.79,
+   "entry_hi": 105.42,
+   "tp1": 107.77,
+   "tp2": 110.6,
+   "tp3": null,
+   "final_tp": "tp2",
+   "rr1": 1.0788383842830034,
+   "rr2": 2.181045109019791,
+   "rr3": null,
+   "rr_ref": 105.0,
+   "risk_pct": 2.445310879301457,
+   "rsi15": 57.80387326949004,
+   "rsi1h": 55.1137647095482,
+   "trend1h": "guclu yukselis",
+   "trend4h": "guclu yukselis",
+   "vol15_ratio": 0.33759141828351563,
+   "vol1h_ratio": 1.063725466207688,
+   "setup_type": "range",
+   "setup_note": "range tavani test ediliyor (105)",
+   "score": 9,
+   "score_max": 13,
+   "score_parts": [
+    "4s yap\u0131+2",
+    "range+2",
+    "S/R+2",
+    "BTC+1",
+    "1G+1",
+    "RSI+1"
+   ],
+   "execution_quality": 0,
+   "execution_checks": [],
+   "engine_version": "3.2.2",
+   "structure_1h": "HH-HL",
+   "regime_note": "BTC 4s: yukselis, 1s yapi: HH-HL, taze tepe s\u00fcp\u00fcrme",
+   "funding": "-0.00009447",
+   "funding_bias": "n\u00f6tr",
+   "oi": {
+    "1h": -0.6519264207255547,
+    "4h": -0.7635210780109166,
+    "24h": -1.4471613551561433
+   },
+   "taker_15m": 0.4081088183760161,
+   "taker_1h": 0.5085963858686395,
+   "taker": 0.5085963858686395,
+   "change_24h": 0.201,
+   "ls_ratios": {
+    "top_pos": 2.0911,
+    "global_acc": 1.9507
+   },
+   "basis_pct": -0.07238046333839825,
+   "spread_pct": 0.009543806069865542,
+   "trend1d": "yukselis",
+   "created": 1788026468,
+   "last_update": 1788026468
   }
  },
  "pump_alerts": {
@@ -2138,6 +2202,18 @@
    "sym": "COTIUSDT",
    "event": "VETO",
    "detail": "funding asiri kalabalik (-0.180%/8s)"
+  },
+  {
+   "t": 1788026468,
+   "sym": "SOLUSDT",
+   "event": "WATCH",
+   "detail": "LONG @ 104.79"
+  },
+  {
+   "t": 1788026506,
+   "sym": "TURBOUSDT",
+   "event": "VETO",
+   "detail": "15d EMA20/MA7 yonu veya EMA20 egimi uyumsuz"
   }
  ],
  "trades": [
@@ -2185,17 +2261,8 @@
   }
  ],
  "fail_count": 0,
- "last_ok_run": 1788025531,
+ "last_ok_run": 1788026444,
  "scan_log": [
-  {
-   "ts": 1787942802,
-   "ok": true,
-   "symbols": 524,
-   "liquid": 85,
-   "candidates": 75,
-   "open_signals": 0,
-   "duration_s": 71
-  },
   {
    "ts": 1787943717,
    "ok": true,
@@ -3050,6 +3117,15 @@
    "candidates": 65,
    "open_signals": 8,
    "duration_s": 82
+  },
+  {
+   "ts": 1788026513,
+   "ok": true,
+   "symbols": 524,
+   "liquid": 74,
+   "candidates": 61,
+   "open_signals": 9,
+   "duration_s": 70
   }
  ],
  "engine_version": "3.2.2"
