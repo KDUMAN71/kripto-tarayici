@@ -255,7 +255,7 @@ def run():
         if new_sent >= 8 or CTX_BUDGET["n"] >= 18: break
         if sym in st["signals"] and st["signals"][sym]["status"] in ("EARLY", "WATCH", "ACTIVE"): continue
         if abs(chg.get(sym, 0)) > C.MAX_ABS_24H_CHANGE_TECH: continue
-        md = _market_data(sym, need_4h=True, min_tscore=1)
+        md = _market_data(sym, need_4h=True, min_tscore=C.PREFILTER_MIN_TSCORE)
         if not md: continue
         a15, a1, a4 = md; sig = evaluate_v3(sym, a15, a1, a4, REGIME, _build_ctx)
         if isinstance(sig, tuple): ST.log_event(st, sym, "VETO", sig[1]); continue

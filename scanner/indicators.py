@@ -85,8 +85,17 @@ def fibonacci_context(df: pd.DataFrame, lookback: int = 120):
     if len(df) < 20:
         return {"direction": None, "levels": {}, "swing_low": None, "swing_high": None}
     sub = df.iloc[-lookback:]
+    # Son TEYITLI swing bacagi: pivot bazli anchor (pencere ekstremi eski bir
+    # spike olabilir ve sahte confluence uretir). Pivot yoksa ekstreme dus.
+    psub, hs, ls = _pivot_points(df, order=3, lookback=lookback)
     hi_idx = sub["high"].idxmax(); lo_idx = sub["low"].idxmin()
     hi = float(sub.loc[hi_idx, "high"]); lo = float(sub.loc[lo_idx, "low"])
+    if hs and ls:
+        h_i, l_i = hs[-1], ls[-1]
+        ph = float(psub["high"].iloc[h_i]); pl = float(psub["low"].iloc[l_i])
+        if ph > pl and (ph - pl) / max(pl, 1e-12) >= 0.01:
+            hi, lo = ph, pl
+            lo_idx, hi_idx = (0, 1) if l_i < h_i else (1, 0)  # yalniz sira bilgisi
     span = hi - lo
     if span <= 0:
         return {"direction": None, "levels": {}, "swing_low": lo, "swing_high": hi}

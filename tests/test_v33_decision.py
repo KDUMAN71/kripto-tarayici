@@ -87,3 +87,70 @@ def test_message_calls_advantage_model_not_win_probability():
     assert "model avantajı LONG %64 / SHORT %36" in msg
     assert "kazanma" not in msg.lower()
     assert "PRIORITY" in msg
+
+
+def _a(price=None, ph=(), pl=(), **kw):
+    d = {"pivot_highs": list(ph), "pivot_lows": list(pl), "atr": (price or 1) * 0.008}
+    if price is not None:
+        d["price"] = price
+    d.update(kw); return d
+
+
+def test_dot_zone_sides_and_untested_short_blocked():
+    from scanner.decision import htf_zones, location_gate
+    price = 0.8372
+    a4h = _a(ph=(0.8612, 0.8618, 0.8406, 0.84506), pl=(0.829, 0.8289), price=price,
+             ema50=0.8612, ema100=0.8459, ema200=0.8289,
+             fib={"levels": {"0.618": 0.84058}})
+    z = htf_zones(price, a4h)
+    assert z["support"] and z["support"]["level"] <= price
+    assert z["resistance"] and z["resistance"]["level"] >= price
+    # fiyat HTF destek bolgesindeyken teyitsiz SHORT WATCH cikamaz
+    veto = location_gate("short", "WATCH", 0.836, price, z, hold_count=0)
+    assert veto is not None
+
+
+def test_zone_side_invariant_never_inverts():
+    from scanner.decision import htf_zones
+    for price in (0.5, 1.0, 87.3, 0.0042):
+        lv = [price * m for m in (0.90, 0.955, 0.985, 1.015, 1.05, 1.10)]
+        a4h = _a(ph=lv[3:], pl=lv[:3], price=price)
+        z = htf_zones(price, a4h)
+        if z["support"]:
+            assert z["support"]["level"] <= price
+        if z["resistance"]:
+            assert z["resistance"]["level"] >= price
+
+
+def test_flip_plan_triggers_on_correct_side():
+    from scanner.decision import decision_summary, build_flip_plan
+    price = 0.8372
+    a15 = _a(price=price, pl=(0.80, 0.81), ph=(0.86, 0.88), rsi=44)
+    a1h = _a(price=price, pl=(0.8289,), ph=(0.8442, 0.852), rsi=41, vol_ratio=0.9)
+    a4h = _a(ph=(0.8612, 0.8618, 0.8406, 0.84506), pl=(0.829, 0.8289), price=price,
+             ema50=0.8612, ema100=0.8459, ema200=0.8289, tscore=-1,
+             fib={"levels": {"0.618": 0.84058}})
+    dec = decision_summary(a15, a1h, a4h, None, {"trend": 1}, {"taker_15m": 0.456, "oi": {"1h": 0.57}})
+    fp = build_flip_plan("short", price, a15, a1h, a4h, dec)
+    if fp:  # alternatif LONG tetigi fiyatin ALTINDA olamaz
+        assert fp["side"] == "LONG" and fp["trigger"] >= price
+
+
+def test_prefilter_admits_neutral_htf():
+    from scanner import config as C
+    assert C.PREFILTER_MIN_TSCORE in (None, 0)
+
+
+def test_fib_prefers_recent_swing_over_stale_spike():
+    import pandas as pd
+    from scanner.indicators import fibonacci_context
+    n = 120
+    close = [100.0] * n
+    high = [101.0] * n; low = [99.0] * n
+    high[5] = 160.0                      # bayat spike
+    for i, px in enumerate(range(0, 30)):  # yakin bacak: 90 -> 120
+        low[n - 35 + i] = 90 + px; high[n - 35 + i] = 92 + px
+    df = pd.DataFrame({"open": close, "high": high, "low": low, "close": close,
+                       "volume": [1] * n})
+    fib = fibonacci_context(df)
+    assert fib["swing_high"] is None or fib["swing_high"] < 150
