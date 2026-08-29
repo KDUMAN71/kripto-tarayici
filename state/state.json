@@ -1220,7 +1220,7 @@
    "last_update": 1787991378
   },
   "XLMUSDT": {
-   "status": "EARLY",
+   "status": "CANCELLED",
    "side": "SHORT",
    "price": 0.17787,
    "trigger": 0.17515,
@@ -1279,49 +1279,50 @@
    "spread_pct": 0.005622399640172047,
    "trend1d": "kararsiz",
    "created": 1788012099,
-   "last_update": 1788012099
+   "last_update": 1788015667
   },
   "ONDOUSDT": {
    "status": "EARLY",
    "side": "SHORT",
-   "price": 0.3528,
+   "price": 0.354,
    "trigger": 0.347,
    "alarm": 0.3482145,
-   "dist_pct": 1.6439909297052233,
-   "invalidation": 0.3545584882860485,
-   "sl": 0.3545584882860485,
+   "dist_pct": 1.9774011299435048,
+   "invalidation": 0.35648323911661345,
+   "sl": 0.35648323911661345,
    "entry_lo": 0.347,
    "entry_hi": 0.347694,
    "tp1": 0.3274,
    "tp2": 0.3218,
-   "tp3": 0.3214,
+   "tp3": 0.3,
    "final_tp": "tp3",
-   "rr2": 3.334000007185847,
-   "rr3": 3.386920642220537,
-   "risk_pct": 2.178238699149438,
-   "rsi15": 66.52506166021544,
-   "rsi1h": 40.557498511021045,
+   "rr2": 2.6573198977818335,
+   "rr3": 4.9561125077677035,
+   "risk_pct": 2.7329219356234797,
+   "rsi15": 75.2438712214622,
+   "rsi1h": 50.8636486241466,
    "trend1h": "dusus",
    "trend4h": "guclu dusus",
-   "vol15_ratio": 1.2409783172098967,
-   "vol1h_ratio": 0.5760675914403002,
-   "funding": "0.00000172",
+   "vol15_ratio": 1.7418380970728642,
+   "vol1h_ratio": 1.6021317183750317,
+   "funding": "0.00002126",
    "funding_bias": "n\u00f6tr",
    "oi": {
-    "1h": 0.3423916539053491,
-    "4h": 0.7428907029714512,
+    "1h": 0.16423331400808866,
+    "4h": 0.9419065067257808,
     "24h": 5.345642325152227
    },
-   "rr1": 2.5931111167000966,
+   "rr1": 2.066804364941421,
    "rr_ref": 0.347,
    "setup_type": "structural",
    "setup_note": "yapisal kirilim/retest",
-   "score": 7,
+   "score": 8,
    "score_max": 13,
    "score_parts": [
     "4s yap\u0131+2",
     "structural+2",
     "S/R+2",
+    "hacim+1",
     "RSI+1"
    ],
    "execution_quality": 0,
@@ -1329,19 +1330,19 @@
    "engine_version": "3.2.2",
    "structure_1h": "LH-LL",
    "regime_note": "BTC 4s: yukselis, 1s yapi: karisik",
-   "taker_15m": 0.5084080647207326,
-   "taker_1h": 0.49929040300123023,
-   "taker": 0.49929040300123023,
-   "change_24h": -3.556,
+   "taker_15m": 0.4406090688696025,
+   "taker_1h": 0.49414718497730953,
+   "taker": 0.49414718497730953,
+   "change_24h": -4.473,
    "ls_ratios": {
     "top_pos": 2.1745,
-    "global_acc": 1.3332
+    "global_acc": 1.3386
    },
-   "basis_pct": -0.06083315215581949,
-   "spread_pct": 0.02835270768358066,
+   "basis_pct": -0.09334498910976433,
+   "spread_pct": 0.028264556246463818,
    "trend1d": "kararsiz",
-   "created": 1788013895,
-   "last_update": 1788013895
+   "created": 1788015711,
+   "last_update": 1788015711
   }
  },
  "pump_alerts": {
@@ -1349,7 +1350,8 @@
   "DEXEUSDT": 1787936548,
   "DOSUSDT": 1787968918,
   "COTIUSDT": 1787998611,
-  "4USDT": 1787999515
+  "4USDT": 1787999515,
+  "NILUSDT": 1788015738
  },
  "log": [
   {
@@ -1939,6 +1941,30 @@
    "sym": "AAVEUSDT",
    "event": "MISSED_SILENT",
    "detail": "trigger 122.5, price 124.32"
+  },
+  {
+   "t": 1788015667,
+   "sym": "XLMUSDT",
+   "event": "CANCELLED",
+   "detail": "1h close 0.1799 invalidation beyond"
+  },
+  {
+   "t": 1788015671,
+   "sym": "ONDOUSDT",
+   "event": "CANCELLED",
+   "detail": "1h close 0.3551 invalidation beyond"
+  },
+  {
+   "t": 1788015711,
+   "sym": "ONDOUSDT",
+   "event": "EARLY",
+   "detail": "SHORT @ 0.354"
+  },
+  {
+   "t": 1788015738,
+   "sym": "NILUSDT",
+   "event": "PUMP_ALERT",
+   "detail": "vol 5.5x, 3h %6.5"
   }
  ],
  "trades": [
@@ -1986,17 +2012,8 @@
   }
  ],
  "fail_count": 0,
- "last_ok_run": 1788014733,
+ "last_ok_run": 1788015650,
  "scan_log": [
-  {
-   "ts": 1787932038,
-   "ok": true,
-   "symbols": 524,
-   "liquid": 84,
-   "candidates": 75,
-   "open_signals": 4,
-   "duration_s": 108
-  },
   {
    "ts": 1787932929,
    "ok": true,
@@ -2851,6 +2868,15 @@
    "candidates": 65,
    "open_signals": 8,
    "duration_s": 77
+  },
+  {
+   "ts": 1788015740,
+   "ok": true,
+   "symbols": 524,
+   "liquid": 83,
+   "candidates": 68,
+   "open_signals": 7,
+   "duration_s": 92
   }
  ],
  "engine_version": "3.2.2"
