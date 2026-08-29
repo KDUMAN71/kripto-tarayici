@@ -1281,6 +1281,69 @@
    "trend1d": "kararsiz",
    "created": 1788015711,
    "last_update": 1788015711
+  },
+  "LTCUSDT": {
+   "status": "WATCH",
+   "side": "SHORT",
+   "price": 48.88,
+   "trigger": 48.775,
+   "alarm": 48.9457125,
+   "dist_pct": 0.21481178396072828,
+   "invalidation": 49.47954316662552,
+   "sl": 49.47954316662552,
+   "entry_lo": 48.775,
+   "entry_hi": 48.87255,
+   "tp1": 47.93,
+   "tp2": 44.11,
+   "tp3": 43.8,
+   "final_tp": "tp3",
+   "rr1": 1.199358733471522,
+   "rr2": 6.6213118244315465,
+   "rr3": 7.061313253279091,
+   "rr_ref": 48.775,
+   "risk_pct": 1.4444759951317678,
+   "rsi15": 43.52208640480331,
+   "rsi1h": 44.58445582111195,
+   "trend1h": "guclu dusus",
+   "trend4h": "dusus",
+   "vol15_ratio": 1.385604204028294,
+   "vol1h_ratio": 0.9861205850486581,
+   "setup_type": "range",
+   "setup_note": "range tabani test ediliyor (48.775)",
+   "score": 8,
+   "score_max": 13,
+   "score_parts": [
+    "4s yap\u0131+2",
+    "range+2",
+    "S/R+2",
+    "BTC s\u00fcp\u00fcrme uyumu+1",
+    "RSI+1"
+   ],
+   "execution_quality": 0,
+   "execution_checks": [],
+   "engine_version": "3.2.2",
+   "structure_1h": "LH-LL",
+   "regime_note": "BTC 4s: yukselis, 1s yapi: karisik, taze tepe s\u00fcp\u00fcrme",
+   "funding": "0.00001307",
+   "funding_bias": "n\u00f6tr",
+   "oi": {
+    "1h": -0.22823963242681283,
+    "4h": -0.11701814345188694,
+    "24h": -1.2756446589842412
+   },
+   "taker_15m": 0.433651840963361,
+   "taker_1h": 0.4927877886853267,
+   "taker": 0.4927877886853267,
+   "change_24h": 0.061,
+   "ls_ratios": {
+    "top_pos": 2.9784,
+    "global_acc": 2.127
+   },
+   "basis_pct": -0.02285521700456203,
+   "spread_pct": 0.02045826513911213,
+   "trend1d": "yukselis",
+   "created": 1788022909,
+   "last_update": 1788022909
   }
  },
  "pump_alerts": {
@@ -1292,7 +1355,8 @@
   "NILUSDT": 1788015738,
   "DASHUSDT": 1788016603,
   "GIGGLEUSDT": 1788016604,
-  "ZKPUSDT": 1788017529
+  "ZKPUSDT": 1788017529,
+  "PROMUSDT": 1788022922
  },
  "log": [
   {
@@ -1966,6 +2030,36 @@
    "sym": "ICPUSDT",
    "event": "VETO",
    "detail": "15d EMA20/MA7 yonu veya EMA20 egimi uyumsuz"
+  },
+  {
+   "t": 1788022872,
+   "sym": "SOLUSDT",
+   "event": "VETO",
+   "detail": "15d EMA20/MA7 yonu veya EMA20 egimi uyumsuz"
+  },
+  {
+   "t": 1788022877,
+   "sym": "XRPUSDT",
+   "event": "VETO",
+   "detail": "15d EMA20/MA7 yonu veya EMA20 egimi uyumsuz"
+  },
+  {
+   "t": 1788022900,
+   "sym": "COTIUSDT",
+   "event": "VETO",
+   "detail": "funding asiri kalabalik (-0.122%/8s)"
+  },
+  {
+   "t": 1788022909,
+   "sym": "LTCUSDT",
+   "event": "WATCH",
+   "detail": "SHORT @ 48.88"
+  },
+  {
+   "t": 1788022922,
+   "sym": "PROMUSDT",
+   "event": "PUMP_ALERT",
+   "detail": "vol 10.2x, 3h %29.4"
   }
  ],
  "trades": [
@@ -2013,17 +2107,8 @@
   }
  ],
  "fail_count": 0,
- "last_ok_run": 1788021938,
+ "last_ok_run": 1788022852,
  "scan_log": [
-  {
-   "ts": 1787939224,
-   "ok": true,
-   "symbols": 524,
-   "liquid": 88,
-   "candidates": 75,
-   "open_signals": 3,
-   "duration_s": 90
-  },
   {
    "ts": 1787940114,
    "ok": true,
@@ -2878,6 +2963,15 @@
    "candidates": 65,
    "open_signals": 7,
    "duration_s": 77
+  },
+  {
+   "ts": 1788022923,
+   "ok": true,
+   "symbols": 524,
+   "liquid": 75,
+   "candidates": 65,
+   "open_signals": 8,
+   "duration_s": 73
   }
  ],
  "engine_version": "3.2.2"
