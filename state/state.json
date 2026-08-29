@@ -1618,7 +1618,8 @@
  "pump_alerts": {
   "LIGHTUSDT": 1787915854,
   "DEXEUSDT": 1787936548,
-  "DOSUSDT": 1787968918
+  "DOSUSDT": 1787968918,
+  "COTIUSDT": 1787998611
  },
  "log": [
   {
@@ -2142,6 +2143,18 @@
    "sym": "LITUSDT",
    "event": "VETO",
    "detail": "1s hacim yetersiz (0.3424763979570277x)"
+  },
+  {
+   "t": 1787998583,
+   "sym": "LITUSDT",
+   "event": "VETO",
+   "detail": "15d failed reclaim/hold (0/2 kapanis)"
+  },
+  {
+   "t": 1787998611,
+   "sym": "COTIUSDT",
+   "event": "PUMP_ALERT",
+   "detail": "vol 9.1x, 3h %14.3"
   }
  ],
  "trades": [
@@ -2189,17 +2202,8 @@
   }
  ],
  "fail_count": 0,
- "last_ok_run": 1787997645,
+ "last_ok_run": 1787998530,
  "scan_log": [
-  {
-   "ts": 1787909726,
-   "ok": true,
-   "symbols": 524,
-   "liquid": 82,
-   "candidates": 65,
-   "open_signals": 8,
-   "duration_s": 66
-  },
   {
    "ts": 1787915855,
    "ok": true,
@@ -3054,6 +3058,15 @@
    "candidates": 65,
    "open_signals": 4,
    "duration_s": 72
+  },
+  {
+   "ts": 1787998611,
+   "ok": true,
+   "symbols": 524,
+   "liquid": 81,
+   "candidates": 64,
+   "open_signals": 4,
+   "duration_s": 82
   }
  ],
  "engine_version": "3.2.2"
