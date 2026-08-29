@@ -49,8 +49,11 @@ def htf_zones(price, a4h, a1d=None):
     tol = min(C.HTF_ZONE_ATR_MULT * atr4, price * C.HTF_ZONE_MAX_PCT / 100)
     clusters = _cluster_levels(values, tol)
     strong = [c for c in clusters if c["evidence"] >= C.HTF_CLUSTER_MIN_TOUCHES]
-    support = [c for c in strong if c["level"] <= price * (1 + C.HTF_LOCATION_PROX_PCT / 100)]
-    resistance = [c for c in strong if c["level"] >= price * (1 - C.HTF_LOCATION_PROX_PCT / 100)]
+    # YAN SINIFLANDIRMASI MUTLAKTIR: destek yalniz fiyatin altindaki/uzerine oturdugu
+    # cluster'lardan, direnc yalniz ustundekilerden secilir. Proximity yalnizca
+    # mesafe olcumlerinde kullanilir; bir seviyenin yonunu ASLA degistiremez.
+    support = [c for c in strong if c["level"] <= price]
+    resistance = [c for c in strong if c["level"] >= price]
     sup = max(support, key=lambda c: c["level"], default=None)
     res = min(resistance, key=lambda c: c["level"], default=None)
     return {"support": sup, "resistance": res, "clusters": strong, "tolerance": tol}
