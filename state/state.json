@@ -1218,6 +1218,68 @@
    "trend1d": "yukselis",
    "created": 1787991378,
    "last_update": 1787991378
+  },
+  "XLMUSDT": {
+   "status": "EARLY",
+   "side": "SHORT",
+   "price": 0.17787,
+   "trigger": 0.17515,
+   "alarm": 0.17576302500000002,
+   "dist_pct": 1.529206724011919,
+   "invalidation": 0.17927626414878975,
+   "sl": 0.17927626414878975,
+   "entry_lo": 0.17515,
+   "entry_hi": 0.1755003,
+   "tp1": 0.15651,
+   "tp2": 0.15572,
+   "tp3": 0.15552,
+   "final_tp": "tp3",
+   "rr2": 4.708859951609958,
+   "rr3": 4.757329945965183,
+   "risk_pct": 2.355845931367256,
+   "rsi15": 58.53036642345491,
+   "rsi1h": 42.19403928362429,
+   "trend1h": "guclu dusus",
+   "trend4h": "dusus",
+   "vol15_ratio": 1.396298461867456,
+   "vol1h_ratio": 0.7246824680368652,
+   "funding": "0.00007871",
+   "funding_bias": "n\u00f6tr",
+   "oi": {
+    "1h": 0.21669824171680047,
+    "4h": 0.391331551528052,
+    "24h": 2.902020462240198
+   },
+   "rr1": 4.517403473906823,
+   "rr_ref": 0.17515,
+   "setup_type": "structural",
+   "setup_note": "yapisal kirilim/retest",
+   "score": 7,
+   "score_max": 13,
+   "score_parts": [
+    "4s yap\u0131+2",
+    "structural+2",
+    "S/R+2",
+    "RSI+1"
+   ],
+   "execution_quality": 0,
+   "execution_checks": [],
+   "engine_version": "3.2.2",
+   "structure_1h": "karisik",
+   "regime_note": "BTC 4s: yukselis, 1s yapi: karisik",
+   "taker_15m": 0.42181391010116226,
+   "taker_1h": 0.4594597408078215,
+   "taker": 0.4594597408078215,
+   "change_24h": -2.926,
+   "ls_ratios": {
+    "top_pos": 1.522,
+    "global_acc": 0.9554
+   },
+   "basis_pct": -0.0527354291335046,
+   "spread_pct": 0.005622399640172047,
+   "trend1d": "kararsiz",
+   "created": 1788012099,
+   "last_update": 1788012099
   }
  },
  "pump_alerts": {
@@ -1797,6 +1859,12 @@
    "sym": "ASTERUSDT",
    "event": "WATCH",
    "detail": "LONG @ 0.6993"
+  },
+  {
+   "t": 1788012099,
+   "sym": "XLMUSDT",
+   "event": "EARLY",
+   "detail": "SHORT @ 0.17787"
   }
  ],
  "trades": [
@@ -1844,17 +1912,8 @@
   }
  ],
  "fail_count": 0,
- "last_ok_run": 1788011132,
+ "last_ok_run": 1788012047,
  "scan_log": [
-  {
-   "ts": 1787928393,
-   "ok": true,
-   "symbols": 524,
-   "liquid": 83,
-   "candidates": 65,
-   "open_signals": 2,
-   "duration_s": 59
-  },
   {
    "ts": 1787929334,
    "ok": true,
@@ -2709,6 +2768,15 @@
    "candidates": 67,
    "open_signals": 7,
    "duration_s": 67
+  },
+  {
+   "ts": 1788012108,
+   "ok": true,
+   "symbols": 524,
+   "liquid": 80,
+   "candidates": 65,
+   "open_signals": 8,
+   "duration_s": 62
   }
  ],
  "engine_version": "3.2.2"
