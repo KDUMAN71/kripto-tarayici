@@ -1,5 +1,6 @@
 import pandas as pd
 
+from scanner import config as C
 from scanner.confluence import confluence
 from scanner.engine_v3 import _execution_veto, _trend_flags
 from scanner.main import active_msg
@@ -80,7 +81,7 @@ def test_confirmed_breakdown_retest_short_can_pass_in_bullish_4h_context():
 
     allowed, reversal = _trend_flags("short", pattern["type"], a4h)
     veto, quality, checks = _execution_veto(
-        "short", pattern, {"sl": 101.0}, a15, a1h, a4h,
+        "short", pattern, {"sl": 101.0, "tp1": 96.0}, a15, a1h, a4h,
         _ctx(taker_15m=0.46, change_24h=4.0))
 
     assert allowed and reversal
@@ -127,7 +128,8 @@ def test_active_telegram_message_is_decision_only():
     sig = {
         "side": "SHORT", "entry_lo": 0.0246, "entry_hi": 0.0248,
         "sl": 0.0254, "tp1": 0.0240, "tp2": 0.0234, "tp3": 0.0228,
-        "rr2": 2.1, "setup_type": "breakout_retest",
+        "rr1": 1.5, "rr2": 2.1, "rr3": 3.0,
+        "setup_type": "breakout_retest",
         "funding": 0.001, "oi": {"24h": -9}, "score_parts": ["debug"],
     }
 
@@ -154,7 +156,7 @@ def test_v31_state_migration_preserves_history_and_cancels_open_plans():
     migrated = migrate_engine(state)
 
     assert migrated == 1
-    assert state["engine_version"] == "3.2.2"
+    assert state["engine_version"] == C.ENGINE_VERSION
     assert state["signals"]["OPENUSDT"]["status"] == "CANCELLED"
     assert state["signals"]["DONEUSDT"]["status"] == "STOPPED"
     assert state["log"][:1] == old_log
