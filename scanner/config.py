@@ -27,17 +27,15 @@ ACTIVE_MAX_RUN_PCT = 1.25
 ATR_STRETCH_MAX = 2.3
 EXTREME_PROX_PCT = 1.5
 MIN_RISK_PCT, MAX_RISK_PCT = 0.35, 5.0
-MIN_RR_TP1 = 1.50                 # ilk gercek hedef riske degmeli; hard gate
+MIN_RR_TP1 = 1.50
 MIN_RR_TP2 = 2.0
 TARGET_RR_TP3 = 3.0
 SL_ATR_BUFFER = 0.35
 FRESH_BREAK_BARS_15M = 2
 
-# 4s yon + 1s setup + 15d entry uyumu
 MIN_1H_TREND_SCORE_LONG = 0
 MAX_1H_TREND_SCORE_SHORT = 0
 
-# ---- OI / funding ----
 OI_WINDOWS = {
     "1h": ("5m", 13),
     "4h": ("15m", 17),
@@ -45,40 +43,34 @@ OI_WINDOWS = {
 }
 CROWDED_FUNDING_ABS = 0.0010
 
-# ---- Pozisyon yonetimi metni ----
 TP1_CLOSE_PCT = 25
 TP2_CLOSE_PCT = 35
 TP3_CLOSE_PCT = 40
 MOVE_SL_TO_BE_AFTER_TP1 = True
 
-# ---- Pump radari ----
 PUMP_MIN_24H, PUMP_MAX_24H = 8.0, 45.0
 PUMP_VOL_MULT = 5.0
 PUMP_OI_MIN_CHANGE = 8.0
 PUMP_ALERT_COOLDOWN_H = 24
 PUMP_MAX_PER_RUN = 6
 
-# ---- Haber (opsiyonel) ----
 NEWS_VETO_KEYWORDS = ["delist", "delisting", "hack", "exploit", "lawsuit",
                       "sec sues", "halt", "suspend", "rug"]
 NEWS_LOOKBACK_H = 12
 
-# ---- Veri / durum ----
 KLINE_LIMITS = {"15m": 240, "1h": 240, "4h": 220}
 STATE_PATH = "state/state.json"
 LOG_KEEP = 800
 TRADE_HISTORY_KEEP = 300
 SCAN_LOG_KEEP = 96
 
-# ---- V3: confluence vetolari ----
 FUNDING_VETO = 0.0012
 SPREAD_VETO_PCT = 0.15
 FRESH_BREAK_BARS_1H = 2
 
-# ---- V3.2: ACTIVE execution kalitesi ----
 ACTIVE_MIN_VOL_RATIO_1H = 0.70
 ACTIVE_MAX_LIVE_RISK_PCT = 3.0
-ACTIVE_MIN_OBSTACLE_R = 1.50       # TP1/ilk engel de riske degmeli
+ACTIVE_MIN_OBSTACLE_R = 1.50
 ACTIVE_MIN_HOLD_CLOSES = 1
 RETEST_MIN_HOLD_CLOSES = 2
 REVERSAL_TAKER_LONG_15M = 0.51
@@ -91,11 +83,10 @@ OI_COLLAPSE_4H_PCT = -3.0
 OI_COLLAPSE_24H_PCT = -8.0
 ACTIVE_CONFLICT_SCORE_GAP = 1
 
-# ---- V3.3: location + iki yonlu karar motoru ----
-HTF_ZONE_ATR_MULT = 0.55           # 4s ATR ile S/R+MA+Fib cluster toleransi
-HTF_ZONE_MAX_PCT = 1.25            # cok genis cluster olusmasin
-HTF_LOCATION_PROX_PCT = 1.40       # guclu HTF bolgesine yakinlik
-HTF_CLUSTER_MIN_TOUCHES = 2         # farkli HTF kanitlariyla cluster
+HTF_ZONE_ATR_MULT = 0.55
+HTF_ZONE_MAX_PCT = 1.25
+HTF_LOCATION_PROX_PCT = 1.75
+HTF_CLUSTER_MIN_TOUCHES = 2
 FIB_RETRACE_LEVELS = (0.382, 0.50, 0.618, 0.786)
 PRIORITY_SETUPS = {
     "flag", "breakout_retest", "double_top", "double_bottom",
