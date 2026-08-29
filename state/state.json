@@ -1034,62 +1034,69 @@
    "mae_pct": 3.9089968976215155
   },
   "ASTERUSDT": {
-   "status": "CANCELLED",
+   "status": "WATCH",
    "side": "LONG",
-   "price": 0.7011,
-   "trigger": 0.701,
-   "alarm": 0.6985465,
-   "dist_pct": 0.0,
-   "invalidation": 0.6868089344932896,
-   "sl": 0.6868089344932896,
-   "entry_lo": 0.6995979999999999,
-   "entry_hi": 0.703804,
-   "tp1": 0.7181,
-   "tp2": 0.73,
-   "tp3": 0.78,
-   "rr1": 1.204983515290952,
-   "rr2": 2.0435392949378732,
-   "rr3": 5.566882906899723,
-   "rr_ref": 0.701,
-   "risk_pct": 2.0244030680043283,
-   "rsi15": 50.6045265989898,
-   "rsi1h": 51.07734686842459,
-   "trend1h": "dusus",
+   "price": 0.6993,
+   "trigger": 0.7037,
+   "alarm": 0.70123705,
+   "dist_pct": 0.6292006292006234,
+   "invalidation": 0.6839835629106106,
+   "sl": 0.6839835629106106,
+   "entry_lo": 0.7022926,
+   "entry_hi": 0.7065148,
+   "tp1": 0.73,
+   "tp2": 0.78,
+   "tp3": null,
+   "final_tp": "tp2",
+   "rr2": 3.8698675452402904,
+   "rr3": null,
+   "risk_pct": 2.801824227567062,
+   "rsi15": 50.67593185646657,
+   "rsi1h": 50.73315663181953,
+   "trend1h": "kararsiz",
    "trend4h": "guclu yukselis",
-   "vol15_ratio": 0.9193213622339467,
-   "vol1h_ratio": 1.1477255986407098,
-   "setup_type": "liquidity_sweep",
-   "setup_note": "dip s\u00fcp\u00fcrme: 0.701 alti fitil, geri kapanis (tahmini likidite bolgesi)",
-   "score": 9,
+   "vol15_ratio": 0.2943183055673012,
+   "vol1h_ratio": 0.5612524808960553,
+   "funding": "0.00005000",
+   "funding_bias": "n\u00f6tr",
+   "oi": {
+    "1h": 0.1708485148129814,
+    "4h": 1.3611407592163127,
+    "24h": 3.4467316374065833
+   },
+   "rr1": 1.3339124041916062,
+   "rr_ref": 0.7037,
+   "setup_type": "structural",
+   "setup_note": "yapisal kirilim/retest",
+   "score": 10,
    "score_max": 13,
    "score_parts": [
     "4s yap\u0131+2",
-    "liquidity_sweep+2",
+    "structural+2",
     "S/R+2",
+    "t\u00fcrev+1",
     "BTC+1",
     "1G+1",
     "RSI+1"
    ],
-   "structure_1h": "LH-LL",
-   "regime_note": "BTC 4s: guclu yukselis, 1s yapi: HH-HL",
-   "funding": "0.00005000",
-   "funding_bias": "neutral",
-   "oi": {
-    "1h": 0.050694552468611646,
-    "4h": -0.6571001264502975,
-    "24h": -0.12834913752965735
-   },
-   "taker": 0.4273736367274789,
+   "execution_quality": 0,
+   "execution_checks": [],
+   "engine_version": "3.2.2",
+   "structure_1h": "karisik",
+   "regime_note": "BTC 4s: yukselis, 1s yapi: karisik",
+   "taker_15m": 0.5427938926691244,
+   "taker_1h": 0.5663831252836131,
+   "taker": 0.5663831252836131,
+   "change_24h": 0.115,
    "ls_ratios": {
-    "top_pos": 2.4805,
-    "global_acc": 1.9189
+    "top_pos": 2.5367,
+    "global_acc": 1.9044
    },
-   "basis_pct": -0.052984320806576,
-   "spread_pct": 0.014267370523610927,
+   "basis_pct": 0.004340902718692044,
+   "spread_pct": 0.014304105278213273,
    "trend1d": "yukselis",
-   "created": 1787915845,
-   "last_update": 1787923076,
-   "migration_reason": "engine 3.1 -> 3.2"
+   "created": 1788006700,
+   "last_update": 1788006700
   },
   "BNBUSDT": {
    "status": "CANCELLED",
@@ -2155,6 +2162,12 @@
    "sym": "TURBOUSDT",
    "event": "VETO",
    "detail": "15d EMA20/MA7 yonu veya EMA20 egimi uyumsuz"
+  },
+  {
+   "t": 1788006700,
+   "sym": "ASTERUSDT",
+   "event": "WATCH",
+   "detail": "LONG @ 0.6993"
   }
  ],
  "trades": [
@@ -2202,17 +2215,8 @@
   }
  ],
  "fail_count": 0,
- "last_ok_run": 1788005731,
+ "last_ok_run": 1788006642,
  "scan_log": [
-  {
-   "ts": 1787923021,
-   "ok": true,
-   "symbols": 524,
-   "liquid": 79,
-   "candidates": 64,
-   "open_signals": 11,
-   "duration_s": 91
-  },
   {
    "ts": 1787923171,
    "ok": true,
@@ -3067,6 +3071,15 @@
    "candidates": 64,
    "open_signals": 6,
    "duration_s": 78
+  },
+  {
+   "ts": 1788006720,
+   "ok": true,
+   "symbols": 524,
+   "liquid": 83,
+   "candidates": 65,
+   "open_signals": 7,
+   "duration_s": 79
   }
  ],
  "engine_version": "3.2.2"
