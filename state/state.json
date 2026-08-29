@@ -587,37 +587,66 @@
    "mae_pct": 1.6553626853661463
   },
   "ADAUSDT": {
-   "status": "CANCELLED",
-   "side": "LONG",
-   "price": 0.2148,
-   "trigger": 0.2168,
-   "alarm": 0.21604120000000002,
-   "dist_pct": 0.9310986964618259,
-   "invalidation": 0.20857498846992795,
-   "sl": 0.20857498846992795,
-   "entry_lo": 0.2163664,
-   "entry_hi": 0.2176672,
-   "tp1": 0.2276,
-   "tp2": 0.2343,
-   "tp3": 0.2588,
-   "rr2": 2.1276565918499966,
-   "rr3": 5.106375820439985,
-   "risk_pct": 3.7938245064907963,
-   "rsi15": 52.36055555632341,
-   "rsi1h": 56.18294331642296,
-   "trend1h": "guclu yukselis",
-   "trend4h": "guclu yukselis",
-   "vol15_ratio": 0.8642948354301766,
-   "vol1h_ratio": 0.98954614586494,
-   "funding": "0.00001518",
-   "funding_bias": "neutral",
+   "status": "WATCH",
+   "side": "SHORT",
+   "price": 0.1999,
+   "trigger": 0.1996,
+   "alarm": 0.20029860000000002,
+   "dist_pct": 0.15007503751875673,
+   "invalidation": 0.20444720923327467,
+   "sl": 0.20444720923327467,
+   "entry_lo": 0.1996,
+   "entry_hi": 0.1999992,
+   "tp1": 0.1779,
+   "tp2": 0.172,
+   "tp3": 0.1711,
+   "final_tp": "tp3",
+   "rr1": 4.4768028272920155,
+   "rr2": 5.693998066048834,
+   "rr3": 5.879671916028684,
+   "rr_ref": 0.1996,
+   "risk_pct": 2.428461539716768,
+   "rsi15": 39.241619160231956,
+   "rsi1h": 33.92055620596177,
+   "trend1h": "guclu dusus",
+   "trend4h": "dusus",
+   "vol15_ratio": 0.7130449045271373,
+   "vol1h_ratio": 0.28465744109855307,
+   "setup_type": "flag",
+   "setup_note": "bayrak/flama (direk 4.0 ATR)",
+   "score": 7,
+   "score_max": 13,
+   "score_parts": [
+    "4s yap\u0131+2",
+    "flag+2",
+    "S/R+2",
+    "RSI+1"
+   ],
+   "execution_quality": 0,
+   "execution_checks": [],
+   "engine_version": "3.2.2",
+   "structure_1h": "LH-LL",
+   "regime_note": "BTC 4s: yukselis, 1s yapi: LH-LL",
+   "funding": "0.00007148",
+   "funding_bias": "n\u00f6tr",
    "oi": {
-    "1h": -0.30683278733322134,
-    "4h": -1.260827750384367,
-    "24h": 0.7813022426577559
+    "1h": 0.14829874885857763,
+    "4h": 0.8403855649436397,
+    "24h": -2.971671396022562
    },
-   "created": 1787858232,
-   "last_update": 1787922048
+   "taker_15m": 0.4657493571898885,
+   "taker_1h": 0.4886968454663761,
+   "taker": 0.4886968454663761,
+   "change_24h": -4.491,
+   "ls_ratios": {
+    "top_pos": 1.8642,
+    "global_acc": 1.8313
+   },
+   "basis_pct": -0.021686141515273274,
+   "spread_pct": 0.050050050050044544,
+   "trend1d": "yukselis",
+   "created": 1787990470,
+   "last_update": 1787990470
   },
   "NEARUSDT": {
    "status": "CANCELLED",
@@ -1965,6 +1994,12 @@
    "sym": "SUIUSDT",
    "event": "WATCH",
    "detail": "SHORT @ 0.7371"
+  },
+  {
+   "t": 1787990470,
+   "sym": "ADAUSDT",
+   "event": "WATCH",
+   "detail": "SHORT @ 0.1999"
   }
  ],
  "trades": [
@@ -2012,7 +2047,7 @@
   }
  ],
  "fail_count": 0,
- "last_ok_run": 1787989529,
+ "last_ok_run": 1787990447,
  "scan_log": [
   {
    "t": 1787774776,
@@ -2860,6 +2895,15 @@
    "candidates": 63,
    "open_signals": 1,
    "duration_s": 64
+  },
+  {
+   "ts": 1787990506,
+   "ok": true,
+   "symbols": 524,
+   "liquid": 80,
+   "candidates": 62,
+   "open_signals": 2,
+   "duration_s": 59
   }
  ],
  "engine_version": "3.2.2"
