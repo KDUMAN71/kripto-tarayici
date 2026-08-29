@@ -87,6 +87,7 @@ HTF_ZONE_ATR_MULT = 0.55
 HTF_ZONE_MAX_PCT = 1.25
 HTF_LOCATION_PROX_PCT = 1.75
 HTF_CLUSTER_MIN_TOUCHES = 2
+PREFILTER_MIN_TSCORE = None    # V3.3: notr 4H (tscore 0) motora ULASMALI; engine _trend_flags karar verir
 FIB_RETRACE_LEVELS = (0.382, 0.50, 0.618, 0.786)
 PRIORITY_SETUPS = {
     "flag", "breakout_retest", "double_top", "double_bottom",
