@@ -1526,7 +1526,7 @@
    "last_update": 1788072392
   },
   "XRPUSDT": {
-   "status": "WATCH",
+   "status": "MISSED",
    "side": "LONG",
    "price": 1.4043,
    "trigger": 1.40245,
@@ -1614,7 +1614,7 @@
     "condition": "breakdown+hold+retest failure"
    },
    "created": 1788097554,
-   "last_update": 1788097554
+   "last_update": 1788114648
   },
   "DOGEUSDT": {
    "status": "WATCH",
@@ -5826,6 +5826,24 @@
    "sym": "ONDOUSDT",
    "event": "VETO",
    "detail": "guclu HTF direnc bolgesinde (0.363719); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1788114648,
+   "sym": "XRPUSDT",
+   "event": "MISSED_SILENT",
+   "detail": "trigger 1.40245, price 1.4298"
+  },
+  {
+   "t": 1788114677,
+   "sym": "SUIUSDT",
+   "event": "VETO",
+   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
+  },
+  {
+   "t": 1788114729,
+   "sym": "XLMUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (0.179623); kirilim/hold olmadan SHORT yok"
   }
  ],
  "trades": [
@@ -5873,17 +5891,8 @@
   }
  ],
  "fail_count": 0,
- "last_ok_run": 1788113734,
+ "last_ok_run": 1788114643,
  "scan_log": [
-  {
-   "ts": 1788031941,
-   "ok": true,
-   "symbols": 524,
-   "liquid": 71,
-   "candidates": 62,
-   "open_signals": 1,
-   "duration_s": 103
-  },
   {
    "ts": 1788032815,
    "ok": true,
@@ -6738,6 +6747,15 @@
    "candidates": 64,
    "open_signals": 5,
    "duration_s": 74
+  },
+  {
+   "ts": 1788114736,
+   "ok": true,
+   "symbols": 525,
+   "liquid": 70,
+   "candidates": 64,
+   "open_signals": 4,
+   "duration_s": 94
   }
  ],
  "engine_version": "3.3"
