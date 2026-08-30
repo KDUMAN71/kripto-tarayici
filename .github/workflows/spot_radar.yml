@@ -1,0 +1,47 @@
+name: spot-radar
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 6,18 * * *"   # 09:00 & 21:00 TRT — futures workflow'undan tamamen bagimsiz
+permissions:
+  contents: write
+
+concurrency:
+  group: spot-radar
+  cancel-in-progress: false
+jobs:
+  radar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.11"}
+      - name: spot-state branch worktree
+        run: |
+          git fetch origin spot-state || true
+          if git show-ref --verify --quiet refs/remotes/origin/spot-state; then
+            git worktree add .state origin/spot-state
+            cd .state && git checkout -B spot-state origin/spot-state && cd ..
+          else
+            git worktree add --detach .state
+            cd .state && git checkout --orphan spot-state && git rm -rf --quiet . || true
+            mkdir -p state_spot && echo '{}' > state_spot/spot_state.json
+            git add -A && git -c user.name=spot-radar -c user.email=bot@local commit -m "spot-state bootstrap"
+            git push origin spot-state && cd ..
+          fi
+      - name: run radar
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          SPOT_STATE_DIR: .state/state_spot
+        run: python -m spot.main
+      - name: push state
+        run: |
+          cd .state
+          git config user.name spot-radar && git config user.email bot@local
+          git add -A && git commit -m "spot state update" || exit 0
+          for i in 1 2 3; do
+            git push origin spot-state && break
+            git pull --rebase origin spot-state
+          done
