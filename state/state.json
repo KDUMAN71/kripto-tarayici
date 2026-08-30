@@ -1332,7 +1332,7 @@
    "last_update": 1788080455
   },
   "LINKUSDT": {
-   "status": "WATCH",
+   "status": "MISSED",
    "side": "LONG",
    "price": 11.431,
    "trigger": 11.48,
@@ -1420,7 +1420,7 @@
     "condition": "breakdown+hold+retest failure"
    },
    "created": 1788072387,
-   "last_update": 1788072387
+   "last_update": 1788106535
   },
   "TAOUSDT": {
    "status": "WATCH",
@@ -1694,6 +1694,97 @@
    },
    "created": 1788099363,
    "last_update": 1788099363
+  },
+  "NEARUSDT": {
+   "status": "WATCH",
+   "side": "LONG",
+   "price": 1.888,
+   "trigger": 1.8969999999999998,
+   "alarm": 1.8903604999999999,
+   "dist_pct": 0.47669491525423185,
+   "invalidation": 1.8525954429913782,
+   "sl": 1.8525954429913782,
+   "entry_lo": 1.8932059999999997,
+   "entry_hi": 1.9045879999999997,
+   "tp1": 1.969,
+   "tp2": 2.075,
+   "tp3": 2.148,
+   "final_tp": "tp3",
+   "rr1": 1.6214552030328961,
+   "rr2": 4.008597585275764,
+   "rr3": 5.652572999461888,
+   "rr_ref": 1.8969999999999998,
+   "risk_pct": 2.3407779129478947,
+   "rsi15": 55.751991884916364,
+   "rsi1h": 54.00527624857501,
+   "trend1h": "yukselis",
+   "trend4h": "guclu yukselis",
+   "vol15_ratio": 1.7908571227798957,
+   "vol1h_ratio": 0.917737580378161,
+   "setup_type": "range",
+   "setup_note": "range tavani test ediliyor (1.897)",
+   "score": 8,
+   "score_max": 13,
+   "score_parts": [
+    "4s yap\u0131+2",
+    "range+2",
+    "hacim+1",
+    "BTC+1",
+    "1G+1",
+    "RSI divergence",
+    "RSI+1"
+   ],
+   "execution_quality": 0,
+   "execution_checks": [],
+   "engine_version": "3.3",
+   "structure_1h": "karisik",
+   "regime_note": "BTC 4s: guclu yukselis, 1s yapi: LH-LL",
+   "funding": "0.00001087",
+   "funding_bias": "n\u00f6tr",
+   "oi": {
+    "1h": 0.3257021363455722,
+    "4h": 0.8109985097496757,
+    "24h": 0.6176145098364281
+   },
+   "taker_15m": 0.5228672263260422,
+   "taker_1h": 0.49845358165514597,
+   "taker": 0.49845358165514597,
+   "change_24h": 2.499,
+   "ls_ratios": {
+    "top_pos": 2.1659,
+    "global_acc": 1.5189
+   },
+   "basis_pct": -0.06566342261532132,
+   "spread_pct": 0.05299417064122362,
+   "trend1d": "guclu yukselis",
+   "decision_bias": "LONG",
+   "decision_strength": "guclu",
+   "long_advantage": 95,
+   "short_advantage": 5,
+   "htf_support": 1.857750880670005,
+   "htf_resistance": 1.9261370000000002,
+   "priority_setup": false,
+   "rsi_divergence": "bullish",
+   "fib_4h": {
+    "0.382": 1.850962,
+    "0.5": 1.8735,
+    "0.618": 1.8960380000000001,
+    "0.786": 1.928126,
+    "1.272": 1.726048,
+    "1.618": 1.659962
+   },
+   "liquidation_map": null,
+   "flip_plan": {
+    "side": "SHORT",
+    "trigger": 1.857750880670005,
+    "entry": 1.854035378908665,
+    "sl": 1.8732418513826548,
+    "tp1": 1.805,
+    "rr1": 2.5530653260285496,
+    "condition": "breakdown+hold+retest failure"
+   },
+   "created": 1788106582,
+   "last_update": 1788106582
   }
  },
  "pump_alerts": {
@@ -5548,6 +5639,36 @@
    "sym": "DOTUSDT",
    "event": "VETO",
    "detail": "guclu HTF direnc bolgesinde (0.851844); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1788106535,
+   "sym": "LINKUSDT",
+   "event": "MISSED_SILENT",
+   "detail": "trigger 11.48, price 11.629"
+  },
+  {
+   "t": 1788106558,
+   "sym": "HYPEUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (83.3149); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1788106571,
+   "sym": "SUIUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (0.742246); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1788106582,
+   "sym": "NEARUSDT",
+   "event": "WATCH",
+   "detail": "LONG @ 1.888"
+  },
+  {
+   "t": 1788106615,
+   "sym": "ASTERUSDT",
+   "event": "VETO",
+   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
   }
  ],
  "trades": [
@@ -5595,17 +5716,8 @@
   }
  ],
  "fail_count": 0,
- "last_ok_run": 1788105650,
+ "last_ok_run": 1788106533,
  "scan_log": [
-  {
-   "ts": 1788023801,
-   "ok": true,
-   "symbols": 524,
-   "liquid": 75,
-   "candidates": 65,
-   "open_signals": 8,
-   "duration_s": 67
-  },
   {
    "ts": 1788024719,
    "ok": true,
@@ -6460,6 +6572,15 @@
    "candidates": 61,
    "open_signals": 4,
    "duration_s": 85
+  },
+  {
+   "ts": 1788106622,
+   "ok": true,
+   "symbols": 525,
+   "liquid": 69,
+   "candidates": 61,
+   "open_signals": 4,
+   "duration_s": 90
   }
  ],
  "engine_version": "3.3"
