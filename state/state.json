@@ -795,7 +795,7 @@
    "last_update": 1788095736
   },
   "WLDUSDT": {
-   "status": "ACTIVE",
+   "status": "STOPPED",
    "side": "LONG",
    "price": 0.3859,
    "trigger": 0.38215,
@@ -892,11 +892,11 @@
     "condition": "breakdown+hold+retest failure"
    },
    "created": 1788111972,
-   "last_update": 1788111972,
+   "last_update": 1788124536,
    "entry_ref": 0.384025,
    "activated_at": 1788111972,
    "mfe_pct": 1.3475685176746266,
-   "mae_pct": 1.8813879304732717
+   "mae_pct": 3.0531866414946904
   },
   "LINKUSDT": {
    "status": "MISSED",
@@ -5579,6 +5579,48 @@
    "sym": "ZORAUSDT",
    "event": "PUMP_ALERT",
    "detail": "vol 5.8x, 3h %14.5"
+  },
+  {
+   "t": 1788124536,
+   "sym": "WLDUSDT",
+   "event": "STOPPED",
+   "detail": "hard SL touched 0.375597"
+  },
+  {
+   "t": 1788124555,
+   "sym": "XRPUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (1.38302); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1788124571,
+   "sym": "SUIUSDT",
+   "event": "VETO",
+   "detail": "canli stop riski %3.48; izin verilen %0.35-%3.0"
+  },
+  {
+   "t": 1788124605,
+   "sym": "LTCUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (48.9236); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1788124611,
+   "sym": "ONDOUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (0.357156); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1788124622,
+   "sym": "FETUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (0.154538); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1788124627,
+   "sym": "DOTUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (0.852274); kirilim/hold olmadan LONG yok"
   }
  ],
  "trades": [
@@ -5623,20 +5665,32 @@
    "tp3_hit": false,
    "mfe_pct": 0,
    "mae_pct": 3.9089968976215155
+  },
+  {
+   "symbol": "WLDUSDT",
+   "side": "LONG",
+   "activated_at": 1788111972,
+   "closed_at": 1788124536,
+   "entry": 0.384025,
+   "sl": 0.3755970304547212,
+   "tp1": 0.4025,
+   "tp2": 0.4124,
+   "tp3": 0.4162,
+   "setup_type": "range",
+   "score": 11,
+   "outcome": "STOPPED",
+   "exit": 0.3755970304547212,
+   "pnl_r": -1.0,
+   "tp1_hit": false,
+   "tp2_hit": false,
+   "tp3_hit": false,
+   "mfe_pct": 1.3475685176746266,
+   "mae_pct": 3.0531866414946904
   }
  ],
  "fail_count": 0,
- "last_ok_run": 1788123647,
+ "last_ok_run": 1788124534,
  "scan_log": [
-  {
-   "ts": 1788041822,
-   "ok": true,
-   "symbols": 524,
-   "liquid": 70,
-   "candidates": 60,
-   "open_signals": 1,
-   "duration_s": 91
-  },
   {
    "ts": 1788042726,
    "ok": true,
@@ -6491,6 +6545,15 @@
    "candidates": 63,
    "open_signals": 4,
    "duration_s": 93
+  },
+  {
+   "ts": 1788124638,
+   "ok": true,
+   "symbols": 525,
+   "liquid": 71,
+   "candidates": 63,
+   "open_signals": 3,
+   "duration_s": 105
   }
  ],
  "engine_version": "3.3"
