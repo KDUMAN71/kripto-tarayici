@@ -1171,7 +1171,7 @@
    "last_update": 1788114648
   },
   "DOGEUSDT": {
-   "status": "WATCH",
+   "status": "CANCELLED",
    "side": "LONG",
    "price": 0.08564,
    "trigger": 0.085565,
@@ -1260,7 +1260,7 @@
     "condition": "breakdown+hold+retest failure"
    },
    "created": 1788099363,
-   "last_update": 1788099363
+   "last_update": 1788130851
   },
   "NEARUSDT": {
    "status": "WATCH",
@@ -5801,6 +5801,24 @@
    "sym": "LTCUSDT",
    "event": "VETO",
    "detail": "guclu HTF destek bolgesinde (47.9649); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1788130850,
+   "sym": "TAOUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (237.242); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1788130851,
+   "sym": "DOGEUSDT",
+   "event": "CANCELLED",
+   "detail": "1h close 0.08364 invalidation beyond"
+  },
+  {
+   "t": 1788130885,
+   "sym": "LITUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (3.5946); kirilim/hold olmadan LONG yok"
   }
  ],
  "trades": [
@@ -5869,17 +5887,8 @@
   }
  ],
  "fail_count": 0,
- "last_ok_run": 1788129929,
+ "last_ok_run": 1788130846,
  "scan_log": [
-  {
-   "ts": 1788049020,
-   "ok": true,
-   "symbols": 524,
-   "liquid": 67,
-   "candidates": 61,
-   "open_signals": 1,
-   "duration_s": 90
-  },
   {
    "ts": 1788049949,
    "ok": true,
@@ -6734,6 +6743,15 @@
    "candidates": 67,
    "open_signals": 3,
    "duration_s": 89
+  },
+  {
+   "ts": 1788130917,
+   "ok": true,
+   "symbols": 525,
+   "liquid": 74,
+   "candidates": 64,
+   "open_signals": 2,
+   "duration_s": 73
   }
  ],
  "engine_version": "3.3"
