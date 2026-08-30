@@ -1727,6 +1727,98 @@
    },
    "created": 1788097554,
    "last_update": 1788097554
+  },
+  "DOGEUSDT": {
+   "status": "WATCH",
+   "side": "LONG",
+   "price": 0.08564,
+   "trigger": 0.085565,
+   "alarm": 0.08526552250000001,
+   "dist_pct": 0.08757589911255458,
+   "invalidation": 0.08445474901168896,
+   "sl": 0.08445474901168896,
+   "entry_lo": 0.08539387,
+   "entry_hi": 0.08590726,
+   "tp1": 0.08781,
+   "tp2": 0.08799,
+   "tp3": 0.08994,
+   "final_tp": "tp3",
+   "rr1": 2.022065302022554,
+   "rr2": 2.184190805080042,
+   "rr3": 3.940550421536167,
+   "rr_ref": 0.085565,
+   "risk_pct": 1.297552724023885,
+   "rsi15": 66.7518194532189,
+   "rsi1h": 60.945725175114895,
+   "trend1h": "kararsiz",
+   "trend4h": "yukselis",
+   "vol15_ratio": 1.4134444428149553,
+   "vol1h_ratio": 1.6534312373564792,
+   "setup_type": "range",
+   "setup_note": "range tavani test ediliyor (0.085565)",
+   "score": 11,
+   "score_max": 13,
+   "score_parts": [
+    "4s yap\u0131+1 (ana trend uyumlu, d\u00fczeltme faz\u0131)",
+    "range+2",
+    "yonlu S/R+2",
+    "15d tetik+2",
+    "hacim+1",
+    "BTC+1",
+    "1G+1",
+    "RSI+1"
+   ],
+   "execution_quality": 0,
+   "execution_checks": [],
+   "engine_version": "3.3",
+   "structure_1h": "LH-LL",
+   "regime_note": "BTC 4s: guclu yukselis, 1s yapi: LH-LL",
+   "funding": "0.00006049",
+   "funding_bias": "n\u00f6tr",
+   "oi": {
+    "1h": 0.3645373076969486,
+    "4h": 1.19835343500791,
+    "24h": 0.9117809683097416
+   },
+   "taker_15m": 0.5667166588430785,
+   "taker_1h": 0.5382758722827338,
+   "taker": 0.5382758722827338,
+   "change_24h": 0.718,
+   "ls_ratios": {
+    "top_pos": 3.3011,
+    "global_acc": 2.5562
+   },
+   "basis_pct": -0.037585120961070216,
+   "spread_pct": 0.0116781501810068,
+   "trend1d": "yukselis",
+   "decision_bias": "LONG",
+   "decision_strength": "guclu",
+   "long_advantage": 95,
+   "short_advantage": 5,
+   "htf_support": 0.0855807731006124,
+   "htf_resistance": 0.08832999999999999,
+   "priority_setup": false,
+   "rsi_divergence": null,
+   "fib_4h": {
+    "0.382": 0.0850679,
+    "0.5": 0.084885,
+    "0.618": 0.0847021,
+    "0.786": 0.08444170000000001,
+    "1.272": 0.0860816,
+    "1.618": 0.0866179
+   },
+   "liquidation_map": null,
+   "flip_plan": {
+    "side": "SHORT",
+    "trigger": 0.0855807731006124,
+    "entry": 0.08540961155441118,
+    "sl": 0.08595544503827125,
+    "tp1": 0.08454,
+    "rr1": 1.5931810343722075,
+    "condition": "breakdown+hold+retest failure"
+   },
+   "created": 1788099363,
+   "last_update": 1788099363
   }
  },
  "pump_alerts": {
@@ -5358,6 +5450,30 @@
    "sym": "XLMUSDT",
    "event": "VETO",
    "detail": "guclu HTF direnc bolgesinde (0.182582); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1788099338,
+   "sym": "LINKUSDT",
+   "event": "VETO",
+   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
+  },
+  {
+   "t": 1788099346,
+   "sym": "XRPUSDT",
+   "event": "VETO",
+   "detail": "ilk yapisal engel 0.65R (<1.5R)"
+  },
+  {
+   "t": 1788099363,
+   "sym": "DOGEUSDT",
+   "event": "WATCH",
+   "detail": "LONG @ 0.08564"
+  },
+  {
+   "t": 1788099410,
+   "sym": "XLMUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (0.182582); kirilim/hold olmadan LONG yok"
   }
  ],
  "trades": [
@@ -5405,17 +5521,8 @@
   }
  ],
  "fail_count": 0,
- "last_ok_run": 1788098445,
+ "last_ok_run": 1788099333,
  "scan_log": [
-  {
-   "ts": 1788016605,
-   "ok": true,
-   "symbols": 524,
-   "liquid": 83,
-   "candidates": 68,
-   "open_signals": 7,
-   "duration_s": 75
-  },
   {
    "ts": 1788017529,
    "ok": true,
@@ -6270,6 +6377,15 @@
    "candidates": 66,
    "open_signals": 3,
    "duration_s": 95
+  },
+  {
+   "ts": 1788099420,
+   "ok": true,
+   "symbols": 525,
+   "liquid": 68,
+   "candidates": 66,
+   "open_signals": 4,
+   "duration_s": 89
   }
  ],
  "engine_version": "3.3"
