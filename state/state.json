@@ -1098,7 +1098,7 @@
    "migration_reason": "engine 3.2.2 -> 3.3"
   },
   "LTCUSDT": {
-   "status": "WATCH",
+   "status": "CANCELLED",
    "side": "SHORT",
    "price": 48.91,
    "trigger": 48.58476190476192,
@@ -1183,7 +1183,7 @@
     "condition": "breakout+hold+retest"
    },
    "created": 1788076925,
-   "last_update": 1788076925
+   "last_update": 1788080452
   },
   "SOLUSDT": {
    "status": "WATCH",
@@ -1365,7 +1365,7 @@
    "last_update": 1788029194
   },
   "WLDUSDT": {
-   "status": "WATCH",
+   "status": "CANCELLED",
    "side": "LONG",
    "price": 0.3801,
    "trigger": 0.38115,
@@ -1453,7 +1453,7 @@
     "condition": "breakdown+hold+retest failure"
    },
    "created": 1788049894,
-   "last_update": 1788049894
+   "last_update": 1788080455
   },
   "LINKUSDT": {
    "status": "WATCH",
@@ -4580,6 +4580,54 @@
    "sym": "NEARUSDT",
    "event": "VETO",
    "detail": "guclu HTF destek bolgesinde (1.86075); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1788080452,
+   "sym": "LTCUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (48.9146); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1788080452,
+   "sym": "LTCUSDT",
+   "event": "CANCELLED",
+   "detail": "1h close 48.98 invalidation beyond"
+  },
+  {
+   "t": 1788080455,
+   "sym": "WLDUSDT",
+   "event": "CANCELLED",
+   "detail": "1h close 0.3706 invalidation beyond"
+  },
+  {
+   "t": 1788080469,
+   "sym": "ZECUSDT",
+   "event": "VETO",
+   "detail": "15d failed reclaim/hold (1/2 kapanis)"
+  },
+  {
+   "t": 1788080484,
+   "sym": "BNBUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (702.462); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1788080496,
+   "sym": "NEARUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (1.86075); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1788080514,
+   "sym": "AVAXUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (7.3785); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1788080525,
+   "sym": "LTCUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (48.9146); kirilim/hold olmadan SHORT yok"
   }
  ],
  "trades": [
@@ -4627,17 +4675,8 @@
   }
  ],
  "fail_count": 0,
- "last_ok_run": 1788079533,
+ "last_ok_run": 1788080447,
  "scan_log": [
-  {
-   "ts": 1787997716,
-   "ok": true,
-   "symbols": 524,
-   "liquid": 80,
-   "candidates": 65,
-   "open_signals": 4,
-   "duration_s": 72
-  },
   {
    "ts": 1787998611,
    "ok": true,
@@ -5492,6 +5531,15 @@
    "candidates": 62,
    "open_signals": 6,
    "duration_s": 68
+  },
+  {
+   "ts": 1788080535,
+   "ok": true,
+   "symbols": 524,
+   "liquid": 69,
+   "candidates": 62,
+   "open_signals": 4,
+   "duration_s": 90
   }
  ],
  "engine_version": "3.3"
