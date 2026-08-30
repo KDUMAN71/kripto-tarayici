@@ -9,9 +9,16 @@ STATE = os.path.join(STATE_DIR, "spot_state.json")
 
 def _load():
     try:
-        return json.load(open(STATE))
+        st = json.load(open(STATE))
     except Exception:
-        return {"snapshots": {}, "reports": [], "outcomes": {}, "health": {}}
+        st = {}
+    # Bootstrap state'i bos sozluk ({}) olarak yazilabiliyor; eksik anahtarlari
+    # tamamla ki st["health"] / st["snapshots"] KeyError vermesin.
+    st.setdefault("snapshots", {})
+    st.setdefault("reports", [])
+    st.setdefault("outcomes", {})
+    st.setdefault("health", {})
+    return st
 
 def _save(st):
     os.makedirs(STATE_DIR, exist_ok=True)
