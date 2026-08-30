@@ -1277,7 +1277,7 @@
    "last_update": 1788076866
   },
   "BCHUSDT": {
-   "status": "WATCH",
+   "status": "MISSED",
    "side": "LONG",
    "price": 246.76,
    "trigger": 247.82,
@@ -1363,7 +1363,7 @@
     "condition": "breakdown+hold+retest failure"
    },
    "created": 1788029194,
-   "last_update": 1788029194
+   "last_update": 1788095736
   },
   "WLDUSDT": {
    "status": "CANCELLED",
@@ -5171,6 +5171,36 @@
    "sym": "DOTUSDT",
    "event": "VETO",
    "detail": "guclu HTF destek bolgesinde (0.851879); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1788095736,
+   "sym": "BCHUSDT",
+   "event": "MISSED_SILENT",
+   "detail": "trigger 247.82, price 251.79"
+  },
+  {
+   "t": 1788095748,
+   "sym": "ETHUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (2462); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1788095753,
+   "sym": "XRPUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (1.4026); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1788095767,
+   "sym": "BNBUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (702.462); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1788095813,
+   "sym": "DOTUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (0.851879); kirilim/hold olmadan SHORT yok"
   }
  ],
  "trades": [
@@ -5218,17 +5248,8 @@
   }
  ],
  "fail_count": 0,
- "last_ok_run": 1788094848,
+ "last_ok_run": 1788095732,
  "scan_log": [
-  {
-   "ts": 1788013030,
-   "ok": true,
-   "symbols": 524,
-   "liquid": 80,
-   "candidates": 63,
-   "open_signals": 8,
-   "duration_s": 81
-  },
   {
    "ts": 1788013917,
    "ok": true,
@@ -6083,6 +6104,15 @@
    "candidates": 64,
    "open_signals": 4,
    "duration_s": 84
+  },
+  {
+   "ts": 1788095816,
+   "ok": true,
+   "symbols": 525,
+   "liquid": 66,
+   "candidates": 64,
+   "open_signals": 3,
+   "duration_s": 85
   }
  ],
  "engine_version": "3.3"
