@@ -1,7 +1,7 @@
 import time
 from ..http import get_json
 from .. import config as C
-CHAIN_ID = {"eth": "1", "bsc": "56", "base": "8453", "arbitrum": "42161", "polygon": "137"}
+CHAIN_ID = {"eth": "1", "bsc": "56", "base": "8453", "arbitrum": "42161", "polygon": "137", "robinhood": "4663"}
 def security(network, contract):
     """dict | None (None = DOGRULANAMADI; guven URETILMEZ)."""
     if not contract: return None

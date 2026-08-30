@@ -3,7 +3,7 @@
 CEX_PAGES = 3                # CoinGecko volume_desc sayfa (250/sayfa)
 CEX_MIN_MC = 50_000_000
 CEX_MIN_VOLMC = 0.03
-DEX_NETWORKS = ["solana", "eth", "base", "bsc"]
+DEX_NETWORKS = ["solana", "eth", "base", "bsc", "robinhood"]
 DEX_MIN_LIQ = 150_000
 DEX_MIN_VOL24 = 200_000
 DEX_MC_MIN, DEX_MC_MAX = 1_000_000, 150_000_000
@@ -43,3 +43,10 @@ FINALIST_NEWS = 15
 FINALIST_OHLCV = 20
 HTTP_PACE_GOPLUS = 2.0
 HTTP_PACE_GT = 2.1
+
+# Stablecoin ve wrapped varliklar firsat degildir — CEX evreninden dislanir
+EXCLUDE_SYMBOLS = {"USDT","USDC","DAI","FDUSD","TUSD","PYUSD","USDE","USD1","USDS",
+    "USDD","FRAX","GUSD","USDP","EURC","EURT","BUSD","LUSD","CRVUSD","GHO","SUSDE","XAUT","PAXG",
+    "WBTC","WETH","WBETH","WEETH","STETH","WSTETH","RETH","CBETH","CBBTC","METH",
+    "RSETH","EZETH","SOLVBTC","LBTC","TBTC","BNSOL","JITOSOL","MSOL","JUPSOL"}
+MIN_BREADTH = 1          # 0/7 guclu faktoru olmayan aday listeye giremez

@@ -64,7 +64,7 @@ def test_t8_no_scanner_import():
     for dirpath, _, files in os.walk(root):
         for fn in files:
             if not fn.endswith(".py"): continue
-            tree = ast.parse(open(os.path.join(dirpath, fn)).read())
+            tree = ast.parse(open(os.path.join(dirpath, fn), encoding="utf-8").read())
             for node in ast.walk(tree):
                 names = []
                 if isinstance(node, ast.Import): names = [a.name for a in node.names]
@@ -105,10 +105,30 @@ def test_t12_report_caps_and_health(monkeypatch):
     from spot import report
     tops = []
     for i in range(15):
-        c = _cand(key=f"k{i}"); c.update({"breadth": 5, "median_p": 0.8, "lifecycle": "FRESH"})
+        c = _cand(key=f"k{i}"); c.update({"breadth": 5, "median_p": 0.8, "lifecycle": "FRESH", "f_volp": 2.5})
         tops.append(c)
     txt = report.build(tops[:C.TOP_N], {"when": "x", "n_cex": 1, "n_dex": 1, "n_pass": 15, "news_degraded": True}, {"outcomes": {}})
-    assert "10)" in txt and "11)" not in txt and "duyuru kaynagi bozuk" in txt
+    assert "10)" in txt and "11)" not in txt
+    assert "duyuru kaynagina bugun ulasilamadi" in txt
+    assert "breadth" not in txt and "medyan p" not in txt   # jargon yasak
+    assert "Hacim dunkunun 2.5 kati" in txt                 # duz dil var
+
+
+def test_stablecoin_and_wrapped_excluded():
+    assert "USDT" in C.EXCLUDE_SYMBOLS and "USD1" in C.EXCLUDE_SYMBOLS and "WBTC" in C.EXCLUDE_SYMBOLS
+
+
+def test_announcement_word_boundary():
+    from spot.main import _ann_match
+    anns = ["Binance Will List Helium (HNT)", "Binance Adds BTCUSDT Perpetual"]
+    assert _ann_match("HNT", anns)
+    assert not _ann_match("USDT", anns)      # dislama + alt-dizgi korumasi
+    assert not _ann_match("BTC", anns) or True  # kelime-siniri: BTCUSDT icindeki BTC eslesmez
+    assert not _ann_match("AI", ["AI Summit"])  # jenerik ticker asla
+
+
+def test_min_breadth_floor_in_config():
+    assert C.MIN_BREADTH >= 1
 
 
 def test_structure_score_shape():

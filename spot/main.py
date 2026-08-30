@@ -1,5 +1,5 @@
 """Spot Radar V1.1 — orkestrasyon. scanner/ import ETMEZ (test T8 dogrular)."""
-import json, os, time
+import json, os, re, time
 from . import config as C
 from . import identity, gates, structure, diffusion, ranking, outcomes, report
 from .sources import coingecko, geckoterminal, dexscreener, goplus, news_rss, binance_futures
@@ -52,6 +52,7 @@ def build_universe():
         mc, vol = m.get("market_cap"), m.get("total_volume")
         if not mc or mc < C.CEX_MIN_MC: continue
         if not vol or vol / mc < C.CEX_MIN_VOLMC: continue
+        if sym in C.EXCLUDE_SYMBOLS: continue
         if sym in fut: continue
         cex.append({"layer": "CEX", "key": f"cex:{m['id']}", "symbol": sym,
                     "ident": identity.build(m.get("name"), sym, coin_id=m.get("id")),
@@ -112,6 +113,13 @@ def factors(c, st, sec):
     else:
         c["f_holder"] = None
 
+def _ann_match(sym, anns):
+    """Kelime-siniri eslesmesi: 'USDT' artik 'BTCUSDT' basligini yakalayamaz."""
+    if not sym or len(sym) < 3 or sym in C.GENERIC_TICKERS or sym in C.EXCLUDE_SYMBOLS:
+        return False
+    pat = re.compile(r"(?<![A-Z0-9])" + re.escape(sym) + r"(?![A-Z0-9])")
+    return any(pat.search(a.upper()) for a in anns)
+
 def run():
     t0 = time.time()
     st = _load()
@@ -152,7 +160,7 @@ def run():
             if not q: continue
             n24, doms, tier = news_rss.google_news(q)
             hist = [s.get("news24") for s in st["snapshots"].get(c["key"], []) if s.get("news24") is not None]
-            ann_hit = any(c["symbol"] and c["symbol"] in a.upper() for a in anns)
+            ann_hit = _ann_match(c["symbol"], anns)
             d = diffusion.evaluate(n24, doms, tier, hist, c.get("ch24"), "paid_promo" in (c.get("flags") or []), ann_hit)
             c["diffusion"] = d; c["f_diff"] = d["raw"]
             _snap(st, c["key"], c, n24=n24)
@@ -161,7 +169,12 @@ def run():
         pool = [c for c in passed if c["layer"] == group]
         ranking.percentiles(pool)
         top += ranking.rank(pool)
-    top = sorted(top, key=lambda c: (-c["breadth"], -c["median_p"]))[:C.TOP_N]
+    top = [c for c in sorted(top, key=lambda c: (-c["breadth"], -c["median_p"]))
+           if c["breadth"] >= C.MIN_BREADTH][:C.TOP_N]
+    for c in top:
+        if c["layer"] == "CEX" and c.get("coin_id"):
+            exs = {e.lower() for e in coingecko.tickers(c["coin_id"])}
+            c["no_trusted_cex"] = not (exs & C.TRUSTED_CEX)
     for c in top:
         outcomes.register(st, c["key"], c.get("price"), c.get("lifecycle", c["layer"]))
     def price_of(key):
