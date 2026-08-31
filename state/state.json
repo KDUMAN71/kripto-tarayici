@@ -527,96 +527,6 @@
   "\u725b\u6765USDT": 1788089441
  },
  "signals": {
-  "SOLUSDT": {
-   "status": "MISSED",
-   "side": "LONG",
-   "price": 104.74,
-   "trigger": 105.72,
-   "alarm": 105.34998,
-   "dist_pct": 0.9356501814015696,
-   "invalidation": 104.37714279494787,
-   "sl": 104.37714279494787,
-   "entry_lo": 105.50856,
-   "entry_hi": 106.14288,
-   "tp1": 107.77,
-   "tp2": 110.6,
-   "tp3": null,
-   "final_tp": "tp2",
-   "rr1": 1.526595673975939,
-   "rr2": 3.6340423848793098,
-   "rr3": null,
-   "risk_pct": 1.2702016695536575,
-   "rsi15": 41.76278702439075,
-   "rsi1h": 48.99120673400409,
-   "trend1h": "yukselis",
-   "trend4h": "guclu yukselis",
-   "vol15_ratio": 1.494049578646125,
-   "vol1h_ratio": 0.7083016356652012,
-   "funding": "-0.00000139",
-   "funding_bias": "n\u00f6tr",
-   "oi": {
-    "1h": 0.6067842141555431,
-    "4h": 0.23203543670232632,
-    "24h": -2.0642900771738075
-   },
-   "rr_ref": 105.72,
-   "setup_type": "structural",
-   "setup_note": "yapisal kirilim/retest",
-   "score": 8,
-   "score_max": 13,
-   "score_parts": [
-    "4s yap\u0131+2",
-    "yonlu S/R+2",
-    "t\u00fcrev+1",
-    "BTC+1",
-    "1G+1",
-    "RSI+1"
-   ],
-   "execution_quality": 0,
-   "execution_checks": [],
-   "engine_version": "3.3",
-   "structure_1h": "HH-HL",
-   "regime_note": "BTC 4s: yukselis, 1s yapi: HH-HL",
-   "taker_15m": 0.4463760416836724,
-   "taker_1h": 0.4939176509893519,
-   "taker": 0.4939176509893519,
-   "change_24h": 1.032,
-   "ls_ratios": {
-    "top_pos": 2.145,
-    "global_acc": 1.9223
-   },
-   "basis_pct": -0.0512365736781069,
-   "spread_pct": 0.009548362455830139,
-   "trend1d": "yukselis",
-   "decision_bias": "LONG",
-   "decision_strength": "guclu",
-   "long_advantage": 95,
-   "short_advantage": 5,
-   "htf_support": 103.13490666666667,
-   "htf_resistance": null,
-   "priority_setup": false,
-   "rsi_divergence": null,
-   "fib_4h": {
-    "0.382": 104.42952,
-    "0.5": 104.0,
-    "0.618": 103.57048,
-    "0.786": 102.95896,
-    "1.272": 106.81007999999999,
-    "1.618": 108.06951999999998
-   },
-   "liquidation_map": null,
-   "flip_plan": {
-    "side": "SHORT",
-    "trigger": 103.13490666666667,
-    "entry": 102.92863685333333,
-    "sl": 103.64429456392865,
-    "tp1": 95.21,
-    "rr1": 10.785375101894106,
-    "condition": "breakdown+hold+retest failure"
-   },
-   "created": 1788076866,
-   "last_update": 1788097536
-  },
   "BCHUSDT": {
    "status": "CANCELLED",
    "side": "SHORT",
@@ -1624,12 +1534,6 @@
   "0GUSDT": 1788174133
  },
  "log": [
-  {
-   "t": 1788031918,
-   "sym": "AVAXUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (7.39525); kirilim/hold olmadan LONG yok"
-  },
   {
    "t": 1788031922,
    "sym": "ONDOUSDT",
@@ -6423,6 +6327,12 @@
    "sym": "NEARUSDT",
    "event": "VETO",
    "detail": "guclu HTF direnc bolgesinde (1.84159); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1788184856,
+   "sym": "DOGEUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (0.0810813); kirilim/hold olmadan SHORT yok"
   }
  ],
  "trades": [
@@ -6491,17 +6401,8 @@
   }
  ],
  "fail_count": 0,
- "last_ok_run": 1788183935,
+ "last_ok_run": 1788184851,
  "scan_log": [
-  {
-   "ts": 1788103014,
-   "ok": true,
-   "symbols": 525,
-   "liquid": 70,
-   "candidates": 65,
-   "open_signals": 4,
-   "duration_s": 76
-  },
   {
    "ts": 1788103939,
    "ok": true,
@@ -7356,6 +7257,15 @@
    "candidates": 66,
    "open_signals": 4,
    "duration_s": 102
+  },
+  {
+   "ts": 1788184922,
+   "ok": true,
+   "symbols": 525,
+   "liquid": 91,
+   "candidates": 65,
+   "open_signals": 4,
+   "duration_s": 72
   }
  ],
  "engine_version": "3.3"
