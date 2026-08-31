@@ -990,7 +990,7 @@
    "last_update": 1788106535
   },
   "TAOUSDT": {
-   "status": "WATCH",
+   "status": "CANCELLED",
    "side": "LONG",
    "price": 237.41,
    "trigger": 238.45999999999998,
@@ -1077,7 +1077,7 @@
     "condition": "breakdown+hold+retest failure"
    },
    "created": 1788072392,
-   "last_update": 1788072392
+   "last_update": 1788134447
   },
   "XRPUSDT": {
    "status": "MISSED",
@@ -1263,7 +1263,7 @@
    "last_update": 1788130851
   },
   "NEARUSDT": {
-   "status": "WATCH",
+   "status": "CANCELLED",
    "side": "LONG",
    "price": 1.888,
    "trigger": 1.8969999999999998,
@@ -1351,7 +1351,7 @@
     "condition": "breakdown+hold+retest failure"
    },
    "created": 1788106582,
-   "last_update": 1788106582
+   "last_update": 1788134448
   }
  },
  "pump_alerts": {
@@ -5831,6 +5831,30 @@
    "sym": "LITUSDT",
    "event": "VETO",
    "detail": "guclu HTF direnc bolgesinde (3.5946); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1788134447,
+   "sym": "TAOUSDT",
+   "event": "CANCELLED",
+   "detail": "1h close 227.38 invalidation beyond"
+  },
+  {
+   "t": 1788134448,
+   "sym": "NEARUSDT",
+   "event": "CANCELLED",
+   "detail": "1h close 1.817 invalidation beyond"
+  },
+  {
+   "t": 1788134484,
+   "sym": "LITUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (3.51797); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1788134508,
+   "sym": "PAXGUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (4459.36); kirilim/hold olmadan LONG yok"
   }
  ],
  "trades": [
@@ -5899,17 +5923,8 @@
   }
  ],
  "fail_count": 0,
- "last_ok_run": 1788133532,
+ "last_ok_run": 1788134445,
  "scan_log": [
-  {
-   "ts": 1788052619,
-   "ok": true,
-   "symbols": 524,
-   "liquid": 67,
-   "candidates": 61,
-   "open_signals": 2,
-   "duration_s": 85
-  },
   {
    "ts": 1788053507,
    "ok": true,
@@ -6764,6 +6779,15 @@
    "candidates": 63,
    "open_signals": 2,
    "duration_s": 94
+  },
+  {
+   "ts": 1788134523,
+   "ok": true,
+   "symbols": 525,
+   "liquid": 77,
+   "candidates": 73,
+   "open_signals": 0,
+   "duration_s": 79
   }
  ],
  "engine_version": "3.3"
