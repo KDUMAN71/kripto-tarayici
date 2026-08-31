@@ -1422,7 +1422,7 @@
    "last_update": 1788152511
   },
   "XLMUSDT": {
-   "status": "WATCH",
+   "status": "CANCELLED",
    "side": "SHORT",
    "price": 0.17468,
    "trigger": 0.17361,
@@ -1509,10 +1509,10 @@
     "condition": "breakout+hold+retest"
    },
    "created": 1788152524,
-   "last_update": 1788152524
+   "last_update": 1788174059
   },
   "SUIUSDT": {
-   "status": "EARLY",
+   "status": "CANCELLED",
    "side": "SHORT",
    "price": 0.7214,
    "trigger": 0.706,
@@ -1599,7 +1599,7 @@
     "condition": "breakout+hold+retest"
    },
    "created": 1788154296,
-   "last_update": 1788154296
+   "last_update": 1788174060
   }
  },
  "pump_alerts": {
@@ -1620,57 +1620,10 @@
   "AUCTIONUSDT": 1788090410,
   "TNSRUSDT": 1788100316,
   "ZORAUSDT": 1788123738,
-  "FLOCKUSDT": 1788163331
+  "FLOCKUSDT": 1788163331,
+  "0GUSDT": 1788174133
  },
  "log": [
-  {
-   "t": 1788022877,
-   "sym": "XRPUSDT",
-   "event": "VETO",
-   "detail": "15d EMA20/MA7 yonu veya EMA20 egimi uyumsuz"
-  },
-  {
-   "t": 1788022900,
-   "sym": "COTIUSDT",
-   "event": "VETO",
-   "detail": "funding asiri kalabalik (-0.122%/8s)"
-  },
-  {
-   "t": 1788022909,
-   "sym": "LTCUSDT",
-   "event": "WATCH",
-   "detail": "SHORT @ 48.88"
-  },
-  {
-   "t": 1788022922,
-   "sym": "PROMUSDT",
-   "event": "PUMP_ALERT",
-   "detail": "vol 10.2x, 3h %29.4"
-  },
-  {
-   "t": 1788023755,
-   "sym": "SOLUSDT",
-   "event": "VETO",
-   "detail": "15d EMA20/MA7 yonu veya EMA20 egimi uyumsuz"
-  },
-  {
-   "t": 1788023760,
-   "sym": "XRPUSDT",
-   "event": "VETO",
-   "detail": "ilk yapisal engel 0.23R (<0.8R)"
-  },
-  {
-   "t": 1788023783,
-   "sym": "COTIUSDT",
-   "event": "VETO",
-   "detail": "funding asiri kalabalik (-0.153%/8s)"
-  },
-  {
-   "t": 1788024662,
-   "sym": "SOLUSDT",
-   "event": "VETO",
-   "detail": "15d EMA20/MA7 yonu veya EMA20 egimi uyumsuz"
-  },
   {
    "t": 1788024669,
    "sym": "XRPUSDT",
@@ -6422,6 +6375,54 @@
    "sym": "ASTERUSDT",
    "event": "VETO",
    "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
+  },
+  {
+   "t": 1788174056,
+   "sym": "DOGEUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (0.0824207); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1788174059,
+   "sym": "XLMUSDT",
+   "event": "CANCELLED",
+   "detail": "1h close 0.17726 invalidation beyond"
+  },
+  {
+   "t": 1788174060,
+   "sym": "SUIUSDT",
+   "event": "CANCELLED",
+   "detail": "1h close 0.7278 invalidation beyond"
+  },
+  {
+   "t": 1788174074,
+   "sym": "XRPUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (1.35704); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1788174086,
+   "sym": "SUIUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (0.727902); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1788174105,
+   "sym": "LTCUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (49.1948); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1788174115,
+   "sym": "TRXUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (0.338213); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1788174133,
+   "sym": "0GUSDT",
+   "event": "PUMP_ALERT",
+   "detail": "vol 5.4x, 3h %23.1"
   }
  ],
  "trades": [
@@ -6490,17 +6491,8 @@
   }
  ],
  "fail_count": 0,
- "last_ok_run": 1788173134,
+ "last_ok_run": 1788174051,
  "scan_log": [
-  {
-   "ts": 1788092218,
-   "ok": true,
-   "symbols": 525,
-   "liquid": 67,
-   "candidates": 61,
-   "open_signals": 4,
-   "duration_s": 84
-  },
   {
    "ts": 1788093140,
    "ok": true,
@@ -7355,6 +7347,15 @@
    "candidates": 65,
    "open_signals": 6,
    "duration_s": 83
+  },
+  {
+   "ts": 1788174134,
+   "ok": true,
+   "symbols": 525,
+   "liquid": 86,
+   "candidates": 69,
+   "open_signals": 4,
+   "duration_s": 84
   }
  ],
  "engine_version": "3.3"
