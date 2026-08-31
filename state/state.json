@@ -706,7 +706,7 @@
    "last_update": 1788097536
   },
   "BCHUSDT": {
-   "status": "WATCH",
+   "status": "CANCELLED",
    "side": "SHORT",
    "price": 243.97,
    "trigger": 241.35,
@@ -791,7 +791,7 @@
     "condition": "breakout+hold+retest"
    },
    "created": 1788148899,
-   "last_update": 1788148899
+   "last_update": 1788156050
   },
   "WLDUSDT": {
    "status": "EARLY",
@@ -1710,42 +1710,6 @@
   "ZORAUSDT": 1788123738
  },
  "log": [
-  {
-   "t": 1787922945,
-   "sym": "1000SHIBUSDT",
-   "event": "ACTIVATED",
-   "detail": "LONG @ 0.005294"
-  },
-  {
-   "t": 1787923000,
-   "sym": "XPLUSDT",
-   "event": "WATCH",
-   "detail": "SHORT @ 0.08496"
-  },
-  {
-   "t": 1787923004,
-   "sym": "BCHUSDT",
-   "event": "ACTIVE",
-   "detail": "LONG @ 262.87"
-  },
-  {
-   "t": 1787923076,
-   "sym": "SYSTEM",
-   "event": "ENGINE_MIGRATION",
-   "detail": "11 acik plan sessizce CANCELLED; tarihsel log/trades korundu"
-  },
-  {
-   "t": 1787923135,
-   "sym": "XPLUSDT",
-   "event": "WATCH",
-   "detail": "SHORT @ 0.08499"
-  },
-  {
-   "t": 1787923157,
-   "sym": "ASTERUSDT",
-   "event": "VETO",
-   "detail": "15d failed reclaim/hold (0/2 kapanis)"
-  },
   {
    "t": 1787923930,
    "sym": "ASTERUSDT",
@@ -6509,6 +6473,42 @@
    "sym": "LTCUSDT",
    "event": "VETO",
    "detail": "guclu HTF destek bolgesinde (47.9772); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1788156050,
+   "sym": "BCHUSDT",
+   "event": "CANCELLED",
+   "detail": "1h close 246.79 invalidation beyond"
+  },
+  {
+   "t": 1788156054,
+   "sym": "DOGEUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (0.0824255); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1788156082,
+   "sym": "BNBUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (677.969); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1788156105,
+   "sym": "LTCUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (47.9772); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1788156112,
+   "sym": "FILUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (0.667433); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1788156117,
+   "sym": "ASTERUSDT",
+   "event": "VETO",
+   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
   }
  ],
  "trades": [
@@ -6577,17 +6577,8 @@
   }
  ],
  "fail_count": 0,
- "last_ok_run": 1788155136,
+ "last_ok_run": 1788156048,
  "scan_log": [
-  {
-   "ts": 1788074214,
-   "ok": true,
-   "symbols": 524,
-   "liquid": 70,
-   "candidates": 60,
-   "open_signals": 4,
-   "duration_s": 80
-  },
   {
    "ts": 1788075123,
    "ok": true,
@@ -7442,6 +7433,15 @@
    "candidates": 62,
    "open_signals": 7,
    "duration_s": 95
+  },
+  {
+   "ts": 1788156126,
+   "ok": true,
+   "symbols": 525,
+   "liquid": 81,
+   "candidates": 61,
+   "open_signals": 6,
+   "duration_s": 78
   }
  ],
  "engine_version": "3.3"
