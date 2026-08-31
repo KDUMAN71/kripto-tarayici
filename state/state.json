@@ -616,7 +616,7 @@
    "last_update": 1788156050
   },
   "WLDUSDT": {
-   "status": "EARLY",
+   "status": "CANCELLED",
    "side": "SHORT",
    "price": 0.3619,
    "trigger": 0.3559,
@@ -701,7 +701,7 @@
     "condition": "breakout+hold+retest"
    },
    "created": 1788153398,
-   "last_update": 1788153398
+   "last_update": 1788213652
   },
   "TAOUSDT": {
    "status": "CANCELLED",
@@ -1354,36 +1354,6 @@
   "DOGSUSDT": 1788196627
  },
  "log": [
-  {
-   "t": 1788041811,
-   "sym": "ASTERUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (0.701379); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1788042672,
-   "sym": "SUIUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (0.731949); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1788042679,
-   "sym": "UNIUSDT",
-   "event": "VETO",
-   "detail": "15d failed reclaim/hold (1/2 kapanis)"
-  },
-  {
-   "t": 1788042703,
-   "sym": "ONDOUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (0.348603); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1788042707,
-   "sym": "LTCUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (48.8033); kirilim/hold olmadan SHORT yok"
-  },
   {
    "t": 1788042719,
    "sym": "ASTERUSDT",
@@ -6153,6 +6123,36 @@
    "sym": "ASTERUSDT",
    "event": "VETO",
    "detail": "guclu HTF direnc bolgesinde (0.708858); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1788213652,
+   "sym": "WLDUSDT",
+   "event": "CANCELLED",
+   "detail": "1h close 0.3661 invalidation beyond"
+  },
+  {
+   "t": 1788213692,
+   "sym": "LINKUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (11.4858); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1788213723,
+   "sym": "GRAMUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (1.3999); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1788213731,
+   "sym": "ASTERUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (0.708858); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1788213742,
+   "sym": "OPUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (0.0897314); kirilim/hold olmadan SHORT yok"
   }
  ],
  "trades": [
@@ -6221,17 +6221,8 @@
   }
  ],
  "fail_count": 0,
- "last_ok_run": 1788213202,
+ "last_ok_run": 1788213650,
  "scan_log": [
-  {
-   "ts": 1788130018,
-   "ok": true,
-   "symbols": 525,
-   "liquid": 74,
-   "candidates": 67,
-   "open_signals": 3,
-   "duration_s": 89
-  },
   {
    "ts": 1788130917,
    "ok": true,
@@ -7086,6 +7077,15 @@
    "candidates": 61,
    "open_signals": 2,
    "duration_s": 73
+  },
+  {
+   "ts": 1788213744,
+   "ok": true,
+   "symbols": 525,
+   "liquid": 89,
+   "candidates": 63,
+   "open_signals": 1,
+   "duration_s": 95
   }
  ],
  "engine_version": "3.3"
