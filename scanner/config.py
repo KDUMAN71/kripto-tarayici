@@ -3,12 +3,12 @@
 ENGINE_VERSION = "3.3"
 
 # ---- Evren / likidite ----
-MIN_QUOTE_VOLUME_24H = 20_000_000
+MIN_QUOTE_VOLUME_24H = 8_000_000   # V3.4: ATOM gibi orta hacimli majorler evrene girsin
 MAX_ABS_24H_CHANGE_TECH = 25.0
 YOUNG_COIN_DAYS = 5
-CORE_SCAN_CAP = 60
-MOMENTUM_SCAN_POOL = 120
-DEEP_SCAN_CAP = 75
+CORE_SCAN_CAP = 130
+MOMENTUM_SCAN_POOL = 200
+DEEP_SCAN_CAP = 150
 MOMENTUM_PRE_VOL_MULT = 1.8
 MOMENTUM_PRE_3H_PCT = 3.0
 
@@ -56,6 +56,25 @@ PUMP_VOL_MULT = 5.0
 PUMP_OI_MIN_CHANGE = 8.0
 PUMP_ALERT_COOLDOWN_H = 24
 PUMP_MAX_PER_RUN = 6
+
+# ---- Erken pump izi (V3.4) ----
+# Mevcut pump radari "kostu mu?" diye sorar ve dogasi geregi gec kalir.
+# Bu katman tersini sorar: para giriyor ama fiyat henuz tepki vermemis mi?
+EARLY_PUMP_MAX_24H = 12.0          # bundan cok kosmus coin artik "erken" degil
+EARLY_PUMP_MIN_QUOTE_VOL = 5_000_000
+EARLY_PUMP_POOL = 40               # API butcesi: kac aday yoklanir
+# Esikler tahminle degil olcumle konuldu (01.09.2026, 40+25 sembollu ornek):
+#   hareket edenler (24s>=%12): 1s OI medyan +1.44%, ust ceyrek +2.42%, maks +5.64%
+#   sakinler (|24s|<=%5)      : 1s OI medyan +0.01%, ust ceyrek +0.27%, maks +0.80%
+# 1.0 esigi ikisini temiz ayirir. Taker gercekte %43-54 bandinda seyrediyor,
+# guclu ayirt edici degil; hafif teyit olarak kullanilir.
+EARLY_PUMP_OI_MIN_1H = 1.0         # ~1 saatte OI artisi (5d cozunurluk)
+EARLY_PUMP_MAX_PRICE_RUN_1H = 3.0  # ayni pencerede fiyat bu kadardan az kosmus olmali
+EARLY_PUMP_VOL_MULT_15M = 1.5      # son kapali 15d hacim / ortalama
+EARLY_PUMP_TAKER_MIN = 0.52        # hafif alici baskisi (bkz. olcum notu)
+EARLY_PUMP_RSI_MAX = 70.0          # giris hala mumkun olsun
+EARLY_PUMP_COOLDOWN_H = 12
+EARLY_PUMP_MAX_PER_RUN = 4
 
 NEWS_VETO_KEYWORDS = ["delist", "delisting", "hack", "exploit", "lawsuit",
                       "sec sues", "halt", "suspend", "rug"]

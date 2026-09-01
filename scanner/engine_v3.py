@@ -283,6 +283,18 @@ def evaluate_v3(sym, a15, a1h, a4h, regime, ctx_fn):
     for p in patterns:
         c = _candidate_from_pattern(p, a15, a1h, a4h)
         if c: cands.append(c)
+    # V3.4: 4S formasyonlari da taranir. Once yalnizca 1S taraniyordu; 4S sadece
+    # trend skoru icin kullanildigindan 4 saatlik ucgen/kama/cift dip yapilari
+    # motora hic ulasmiyordu.
+    if a4h.get("closed") is not None and a4h.get("atr"):
+        p4, _struct4 = scan_patterns(a4h["closed"], a4h["atr"], a4h["price"],
+                                     a1h["high24"], a1h["low24"])
+        for p in p4:
+            p = dict(p)
+            p["tf"] = "4h"
+            p["note"] = ("4S formasyonu: " + (p.get("note") or "")).strip()
+            c = _candidate_from_pattern(p, a15, a1h, a4h)
+            if c: cands.append(c)
 
     if not cands:
         v2 = evaluate_v2(sym, a15, a1h, a4h, None, None)

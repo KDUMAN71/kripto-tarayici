@@ -268,6 +268,26 @@ def run():
         st["signals"][sym] = sig; ST.log_event(st, sym, sig["status"], f"{sig['side']} @ {sig['price']:.6g}")
         tg.send(active_msg(sym, sig, nn) if sig["status"] == "ACTIVE" else pretrade_msg(sym, sig, nn)); new_sent += 1
 
+    # Erken pump izi: fiyat henuz tepki vermeden para girisini yakalar.
+    ecands = radars.early_pump_candidates(tdf); esent = 0
+    for _, row in ecands.iterrows():
+        if esent >= C.EARLY_PUMP_MAX_PER_RUN: break
+        sym = row["symbol"]
+        if sym in st["signals"] and st["signals"][sym]["status"] in ("EARLY", "WATCH", "ACTIVE"):
+            continue
+        ep = radars.check_early_pump(sym, ST.now(), st.get("early_pump_alerts", {}))
+        if not ep: continue
+        st.setdefault("early_pump_alerts", {})[sym] = ST.now()
+        ST.log_event(st, sym, "EARLY_PUMP", f"OI %{ep['oi_chg']:+.1f}, 15d hacim {ep['vol_ratio']:.1f}x")
+        rsi_txt = f"{ep['rsi1h']:.0f}" if ep["rsi1h"] is not None else "-"
+        tg.send(f"🟠 <b>ERKEN PUMP İZİ — {sym}</b>\n"
+                f"Fiyat: {fmtp(ep['price'])} | son 1s fiyat: %{ep['run1h']:+.2f} (henüz sakin)\n"
+                f"OI (~1s): %{ep['oi_chg']:+.1f} ← pozisyon birikiyor\n"
+                f"15d hacim: {ep['vol_ratio']:.1f}x | Taker alım: %{ep['taker']*100:.0f} | RSI(1s): {rsi_txt}\n"
+                f"Para giriyor ama fiyat henüz koşmadı; hareket başlarsa giriş hâlâ mümkün.\n"
+                f"<i>Teknik giriş sinyali değildir; 15d kapanış teyidi bekleyin.</i>")
+        esent += 1
+
     pcands = radars.pump_candidates(tdf); sent = 0
     for _, row in pcands.iterrows():
         if sent >= C.PUMP_MAX_PER_RUN: break
