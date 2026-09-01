@@ -31,6 +31,9 @@ MIN_RR_TP1 = 1.50
 MIN_RR_TP2 = 2.0
 TARGET_RR_TP3 = 3.0
 SL_ATR_BUFFER = 0.35
+# V3.4 kirilim duzeltmeleri
+STRUCT_SL_BARS_15M = 12      # kirilim oncesi son salinim penceresi (~3 saat)
+TP_MIN_SEPARATION_R = 0.5    # TP2, TP1'den en az bu kadar R uzakta olmali
 FRESH_BREAK_BARS_15M = 2
 
 MIN_1H_TREND_SCORE_LONG = 0

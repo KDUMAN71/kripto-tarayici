@@ -23,7 +23,7 @@ def _risk_pct(entry, sl):
     return abs(entry - sl) / entry * 100
 
 
-def _targets(side, entry, risk, piv_15m, piv_1h, piv_4h):
+def _targets(side, entry, risk, piv_15m, piv_1h, piv_4h, min_sep_r=0.0):
     """Yapisal pivotlardan tekil ve yon boyunca ilerleyen TP zinciri sec.
 
     V3.3: TP1 sentetik uretilmez. Ilk gercek yapisal hedef en az MIN_RR_TP1
@@ -48,8 +48,14 @@ def _targets(side, entry, risk, piv_15m, piv_1h, piv_4h):
     tp1 = pick(C.MIN_RR_TP1)
     if tp1 is None:
         return None, None, None
-    tp2 = pick(C.MIN_RR_TP2, tp1)
-    tp3 = pick(C.TARGET_RR_TP3, tp2) if tp2 is not None else None
+    # min_sep_r: TP2/TP3 bir onceki hedefe yapismasin. Pivotlar sik oldugunda
+    # TP1 ve TP2 ayni bolgeye dusup R:R esigini anlamsiz kiliyordu.
+    rr1 = abs(tp1 - entry) / risk
+    tp2 = pick(max(C.MIN_RR_TP2, rr1 + min_sep_r), tp1)
+    if tp2 is None:
+        return tp1, None, None
+    rr2 = abs(tp2 - entry) / risk
+    tp3 = pick(max(C.TARGET_RR_TP3, rr2 + min_sep_r), tp2)
     return tp1, tp2, tp3
 
 

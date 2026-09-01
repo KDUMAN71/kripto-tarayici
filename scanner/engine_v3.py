@@ -32,6 +32,24 @@ def _rr_set(ref, sl, tp1, tp2, tp3):
     return f(tp1), f(tp2), f(tp3)
 
 
+def _structural_sl(side, trigger, a15, a1h):
+    """Kirilim sonrasi yapisal stop: son salinim ucu + kucuk ATR tamponu.
+
+    Formasyonun kendi `invalid` seviyesi cok uzakta kalabilir (ornegin 39 barlik
+    bir cift dipte fiyatin %8 altinda). Trader kirilimdan sonra stopu formasyonun
+    dibine degil, kirilim oncesi son salinima koyar. Bu fonksiyon onu uretir.
+    """
+    sub = a15["closed"].tail(C.STRUCT_SL_BARS_15M)
+    if sub.empty:
+        return None
+    buf = 0.15 * (a15["atr"] or a1h["atr"] or 0)
+    if side == "long":
+        sl = float(sub["low"].min()) - buf
+        return sl if sl < trigger else None
+    sl = float(sub["high"].max()) + buf
+    return sl if sl > trigger else None
+
+
 def _pattern_levels(side, pattern, a15, a1h, a4h):
     atr1 = a1h["atr"]
     trigger = pattern["trigger"]
@@ -42,13 +60,22 @@ def _pattern_levels(side, pattern, a15, a1h, a4h):
     entry = trigger
     rp = _risk_pct(entry, sl)
     if not (C.MIN_RISK_PCT <= rp <= C.ACTIVE_MAX_LIVE_RISK_PCT):
-        return None, trigger
+        # Formasyonun gecersizlik ucu risk bandina sigmiyor. Kirilim
+        # gerceklestiyse yapisal stopu dene; o da sigmazsa eskisi gibi reddet.
+        alt = _structural_sl(side, trigger, a15, a1h) if pattern.get("state") == "triggered" else None
+        if alt is None:
+            return None, trigger
+        rp_alt = _risk_pct(entry, alt)
+        if not (C.MIN_RISK_PCT <= rp_alt <= C.ACTIVE_MAX_LIVE_RISK_PCT):
+            return None, trigger
+        sl, rp = alt, rp_alt
     risk = abs(entry - sl)
     tp1, tp2, tp3 = _targets(
         side, entry, risk,
         a15["pivot_highs" if side == "long" else "pivot_lows"],
         a1h["pivot_highs" if side == "long" else "pivot_lows"],
-        a4h["pivot_highs" if side == "long" else "pivot_lows"])
+        a4h["pivot_highs" if side == "long" else "pivot_lows"],
+        min_sep_r=C.TP_MIN_SEPARATION_R)
     if tp1 is None or tp2 is None:
         return None, trigger
     rr1 = abs(tp1 - entry) / risk
@@ -209,7 +236,16 @@ def _candidate_from_pattern(pattern, a15, a1h, a4h):
     if pattern["state"] == "triggered":
         if not _fresh_1h(side, trigger, a1h, pattern["type"]): return None
         run = ((price - trigger) / trigger * 100 if side == "long" else (trigger - price) / trigger * 100)
-        if run > C.ACTIVE_MAX_RUN_PCT: return None
+        if run > C.ACTIVE_MAX_RUN_PCT:
+            # Kirilim oldu ama fiyat kacti: adayi silme, tetigi retest seviyesi
+            # kabul edip on-islem takibine al.
+            dist = abs(trigger - price) / price * 100
+            if dist > C.EARLY_PROXIMITY_PCT: return None
+            pat_r = dict(pattern)
+            pat_r["note"] = ((pattern.get("note") or "") + " | kirilim yapildi, retest bekleniyor").strip(" |")
+            return {"stage": "WATCH" if dist <= C.WATCH_PROXIMITY_PCT else "EARLY",
+                    "side": side, "pattern": pat_r, "trigger": trigger,
+                    "plan": plan, "dist": dist, "retest": True}
         risk_live = abs(price - plan["sl"])
         rr1_live = abs(plan["tp1"] - price) / risk_live if risk_live else 0
         rr2_live = abs(plan["tp2"] - price) / risk_live if risk_live else 0
