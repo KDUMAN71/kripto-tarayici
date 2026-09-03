@@ -1,12 +1,10 @@
-"""V2 durum yonetimi ve paper-performance kaydi.
-
-Akis: EARLY -> WATCH -> ACTIVE -> STOP/TP
-Ideal giris kacarsa MISSED olur ama KULLANICIYA MESAJ GONDERILMEZ.
-"""
+"""Durum yonetimi ve paper-performance kaydi."""
 import json
 import os
 import time
 from . import config as C
+
+OPEN_STATUSES = ("EARLY", "WATCH", "ACTIVE")
 
 
 def now():
@@ -27,14 +25,13 @@ def load():
 
 
 def migrate_engine(st):
-    """Eski motorun acik planlarini sessizce kapat; tarihsel kayitlari koru."""
     if st.get("engine_version") == C.ENGINE_VERSION:
         return 0
     migrated = 0
     ts = now()
     previous = st.get("engine_version", "3.1")
     for signal in st.get("signals", {}).values():
-        if signal.get("status") in ("EARLY", "WATCH", "ACTIVE"):
+        if signal.get("status") in OPEN_STATUSES:
             signal["status"] = "CANCELLED"
             signal["last_update"] = ts
             signal["migration_reason"] = f"engine {previous} -> {C.ENGINE_VERSION}"
@@ -45,6 +42,76 @@ def migrate_engine(st):
     return migrated
 
 
+def prune_known_symbols(st, current_symbols):
+    """Delist edilmis perpetual sembollerini state'ten kontrollu temizle.
+
+    exchangeInfo gecici/eksik gelirse toplu silme yapmamak icin iki emniyet var:
+    minimum evren ve onceki known evrene gore makul oran.
+    """
+    cur = set(current_symbols or [])
+    known = st.setdefault("known_symbols", {})
+    if len(cur) < C.KNOWN_SYMBOLS_PRUNE_MIN_UNIVERSE:
+        return 0
+    prev = len(known)
+    if prev and len(cur) < prev * C.KNOWN_SYMBOLS_PRUNE_MIN_RATIO:
+        return 0
+    stale = [s for s in known if s not in cur]
+    for s in stale:
+        del known[s]
+    if stale:
+        log_event(st, "SYSTEM", "KNOWN_SYMBOLS_PRUNED", f"{len(stale)} stale perpetual silindi")
+    return len(stale)
+
+
+def _compact_signal(sym, s):
+    keys = ("status", "side", "price", "trigger", "sl", "tp1", "tp2", "tp3",
+            "rr1", "rr2", "rr3", "risk_pct", "score", "score_max", "setup_type",
+            "priority_setup", "decision_bias", "decision_strength", "htf_support",
+            "htf_resistance", "created", "activated_at", "last_update")
+    out = {"symbol": sym}
+    for k in keys:
+        if k in s:
+            out[k] = s.get(k)
+    return out
+
+
+def _trade_stats(trades):
+    vals = [t for t in trades if t.get("pnl_r") is not None]
+    wins = [t for t in vals if t["pnl_r"] > 0]
+    losses = [t for t in vals if t["pnl_r"] <= 0]
+    avg_r = sum(t["pnl_r"] for t in vals) / len(vals) if vals else None
+    return {
+        "count": len(trades), "scored_count": len(vals), "wins": len(wins),
+        "losses": len(losses),
+        "win_rate": (len(wins) / len(vals) if vals else None),
+        "avg_r": avg_r,
+    }
+
+
+def build_summary(st):
+    ts = now()
+    logs = [x for x in st.get("log", []) if x.get("t", 0) >= ts - 86400]
+    trades = st.get("trades", [])
+    open_signals = [_compact_signal(sym, s) for sym, s in st.get("signals", {}).items()
+                    if s.get("status") in OPEN_STATUSES]
+    scans = st.get("scan_log", [])
+    if isinstance(scans, dict):
+        scans = [scans]
+    return {
+        "generated_at": ts,
+        "engine_version": st.get("engine_version", C.ENGINE_VERSION),
+        "last_ok_run": st.get("last_ok_run", 0),
+        "fail_count": st.get("fail_count", 0),
+        "known_symbols_count": len(st.get("known_symbols", {})),
+        "open_signal_count": len(open_signals),
+        "open_signals": open_signals,
+        "scan_log": scans[-C.SCAN_LOG_KEEP:],
+        "log_last_24h": logs[-C.SUMMARY_LOG_MAX:],
+        "trades_stats": _trade_stats(trades),
+        "recent_trades": trades[-C.SUMMARY_RECENT_TRADES:],
+    }
+
+
 def save(st):
     os.makedirs(os.path.dirname(C.STATE_PATH), exist_ok=True)
     st["log"] = st.get("log", [])[-C.LOG_KEEP:]
@@ -53,6 +120,8 @@ def save(st):
     st["scan_log"] = ([sl] if isinstance(sl, dict) else sl)[-C.SCAN_LOG_KEEP:]
     with open(C.STATE_PATH, "w") as f:
         json.dump(st, f, indent=1)
+    with open(C.SUMMARY_PATH, "w") as f:
+        json.dump(build_summary(st), f, indent=1)
 
 
 def log_event(st, sym, event, detail):
@@ -60,12 +129,6 @@ def log_event(st, sym, event, detail):
 
 
 def append_scan(st, rec):
-    """Kosu heartbeat'ini listeye ekler.
-
-    Onceki surum tek bir sozluk yazip her kosuda uzerine yaziyordu; boylece
-    kosular arasi boslugu olcmek mumkun olmuyordu. Eski tek kayit varsa
-    kaybedilmeden listeye tasinir.
-    """
     cur = st.get("scan_log")
     if isinstance(cur, dict):
         cur = [cur]
@@ -132,7 +195,6 @@ def _record_trade(st, sym, s, outcome, exit_price):
 
 
 def update_pretrade(st, sym, a15, a1h, tg):
-    """EARLY/WATCH yasam dongusu. Kacmis ve suresi dolmus planlarda sessizlik."""
     s = st["signals"][sym]
     price = a15["price"]
     c1 = a1h["closed"]
@@ -143,9 +205,6 @@ def update_pretrade(st, sym, a15, a1h, tg):
     if (is_long and last1 < inval) or (not is_long and last1 > inval):
         s["status"], s["last_update"] = "CANCELLED", now()
         log_event(st, sym, "CANCELLED", f"1h close {last1:.6g} invalidation beyond")
-        tg.send(f"🛑 <b>İPTAL — {sym} {s['side']}</b>\n"
-                f"Daha önce bildirilen kurulum bozuldu. 1s kapanış: {fmtp(last1)} | "
-                f"geçersizlik: {fmtp(inval)}")
         return
 
     run = (price - trig) / trig * 100 if is_long else (trig - price) / trig * 100
@@ -160,20 +219,12 @@ def update_pretrade(st, sym, a15, a1h, tg):
 
 
 def update_active(st, sym, a15, tg):
-    """ACTIVE sinyali hard-SL mantigiyla izler.
-
-    15 dakikalik taramalar arasinda fiyat seviyeye dokunup geri donebilir. Bu nedenle
-    yalnizca son fiyata/kapanisa degil, aktivasyondan beri gorulen 15d mumlarin
-    high/low degerlerine bakilir. Ayni mum hem SL hem TP'ye dokunmussa yol sirasi
-    bilinmedigi icin muhafazakar olarak SL once kabul edilir.
-    """
     s = st["signals"][sym]
     price = a15["price"]
     is_long = s["side"] == "LONG"
 
     df = a15.get("df")
     if df is not None and len(df):
-        # Aktivasyon anindan onceki tek mumu da dahil et; aktivasyon mumundaki fitili kacirmayiz.
         try:
             import pandas as pd
             since = pd.to_datetime(s.get("activated_at", now()), unit="s", utc=True) - pd.Timedelta(minutes=15)
@@ -188,7 +239,6 @@ def update_active(st, sym, a15, tg):
     hi = max(float(seen["high"].max()), price)
     lo = min(float(seen["low"].min()), price)
     _track_excursions(s, hi if is_long else lo)
-    # adverse excursion da ayri ekstremle guncellensin
     e = s.get("entry_ref")
     if e:
         adv = ((e - lo) / e * 100) if is_long else ((hi - e) / e * 100)

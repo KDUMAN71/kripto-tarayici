@@ -82,9 +82,17 @@ NEWS_LOOKBACK_H = 12
 
 KLINE_LIMITS = {"15m": 240, "1h": 240, "4h": 220}
 STATE_PATH = "state/state.json"
+SUMMARY_PATH = "state/summary.json"
 LOG_KEEP = 800
 TRADE_HISTORY_KEEP = 300
 SCAN_LOG_KEEP = 96
+SUMMARY_LOG_MAX = 120
+SUMMARY_RECENT_TRADES = 30
+# known_symbols delist edilen kontratlari sonsuza kadar tutmasin. Ilk temizlikte
+# en az 300 aktif perpetual beklenir; sonraki kosularda evren bir anda %15'ten
+# fazla daralirsa partial exchangeInfo ihtimaline karsi prune atlanir.
+KNOWN_SYMBOLS_PRUNE_MIN_UNIVERSE = 300
+KNOWN_SYMBOLS_PRUNE_MIN_RATIO = 0.85
 
 FUNDING_VETO = 0.0012
 SPREAD_VETO_PCT = 0.15
