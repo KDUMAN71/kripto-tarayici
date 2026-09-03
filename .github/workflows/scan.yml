@@ -29,11 +29,13 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           CRYPTOPANIC_TOKEN: ${{ secrets.CRYPTOPANIC_TOKEN }}
         run: python -m scanner.main
+      - name: Build compact state summary
+        run: python -m tools.state_health
       - name: Commit state
         run: |
           git config user.name "scanner-bot"
           git config user.email "bot@users.noreply.github.com"
-          git add state/state.json
+          git add state/state.json state/summary.json
           if ! git diff --cached --quiet; then
             git commit -m "v3.3 state update [skip ci]"
             git pull --rebase origin "${GITHUB_REF_NAME}"
