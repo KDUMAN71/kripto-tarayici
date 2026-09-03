@@ -191,6 +191,12 @@ def _record_trade(st, sym, s, outcome, exit_price):
 
 
 def update_pretrade(st, sym, a15, a1h, tg):
+    """EARLY/WATCH yasam dongusu.
+
+    Breakout sonrasi "retest bekleniyor" planlari fiyatin tetikten gecici olarak
+    uzaklasmasi nedeniyle MISSED yapilmaz. Bu planlar yapisal invalidation,
+    WATCH_EXPIRY veya gercek bir ACTIVE/retest karari gelene kadar sessiz izlenir.
+    """
     s = st["signals"][sym]
     price = a15["price"]
     c1 = a1h["closed"]
@@ -203,8 +209,16 @@ def update_pretrade(st, sym, a15, a1h, tg):
         log_event(st, sym, "CANCELLED", f"1h close {last1:.6g} invalidation beyond")
         return
 
+    # V3.3 hotfix: motor breakout sonrasi fiyati uzakta gorurse bunu bilincli
+    # olarak EARLY/WATCH retest planina ceviriyor. Eski state kodu ise sonraki
+    # taramada ayni uzakligi "giris kacti" sayip plani olduruyordu.
+    setup_note = str(s.get("setup_note") or "").lower()
+    retest_wait = bool(s.get("retest_wait")) or "retest bekleniyor" in setup_note
+    if retest_wait:
+        s["retest_wait"] = True
+
     run = (price - trig) / trig * 100 if is_long else (trig - price) / trig * 100
-    if run > C.ACTIVE_MAX_RUN_PCT:
+    if run > C.ACTIVE_MAX_RUN_PCT and not retest_wait:
         s["status"], s["last_update"] = "MISSED", now()
         log_event(st, sym, "MISSED_SILENT", f"trigger {trig:.6g}, price {price:.6g}")
         return
