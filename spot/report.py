@@ -1,9 +1,19 @@
-"""Rapor: jargon yok — her madde 'neden listede' ve 'nelere dikkat' dilinde."""
+"""Rapor: jargon yok — her madde 'neden listede' + kimlik + nereden alinabilir."""
 import json, os, urllib.request
 from . import config as C
 from .outcomes import cohort_stats
 
 COHORT_TR = {"CEX": "Borsa", "FRESH": "Yeni DEX", "EMERGING": "Buyuyen DEX", "MATURE": "Yerlesik DEX"}
+VENUE_TR = {
+    "binance": "Binance", "okex": "OKX", "okx": "OKX", "bybit": "Bybit",
+    "bybit_spot": "Bybit", "gdax": "Coinbase", "coinbase": "Coinbase",
+    "kraken": "Kraken", "gate": "Gate", "mexc": "MEXC", "kucoin": "KuCoin",
+}
+NETWORK_TR = {
+    "solana": "Solana", "eth": "Ethereum", "ethereum": "Ethereum",
+    "base": "Base", "bsc": "BNB Chain", "arbitrum": "Arbitrum",
+    "arbitrum-one": "Arbitrum", "binance-smart-chain": "BNB Chain",
+}
 
 def _mc(mc):
     if not mc: return "?"
@@ -41,7 +51,7 @@ def _why(c):
         if st >= 0.7: out.append("Grafik saglam: dipler yukseliyor, kazanc korunuyor")
         elif st >= 0.45: out.append("Grafik toparlaniyor")
     fb = c.get("f_buy")
-    if fb is not None and fb >= 0.67: out.append("Alicilar satıcılardan baskin")
+    if fb is not None and fb >= 0.67: out.append("Alicilar saticilardan baskin")
     d = c.get("diffusion") or {}
     lab, br = d.get("label"), d.get("breadth", 0)
     if lab == "ilgi fiyatin onunde": out.append(f"HABER: {br} kaynakta konusuluyor ama fiyat henuz kosmadi - ERKEN ilgi")
@@ -57,7 +67,7 @@ def _risks(c):
         elif f == "paid_promo": out.append("ucretli tanitim tespit edildi")
         elif f == "vol_liq_divergence": out.append("hacim var ama likidite buyumuyor - cikis satisi olabilir")
         elif f == "security_unverified" and c["layer"] == "DEX": out.append("kontrat guvenligi dogrulanamadi")
-    if c.get("no_trusted_cex"): out.append("buyuk borsada yok - alip satmasi zor olabilir")
+    if c.get("no_trusted_cex"): out.append("buyuk borsada dogrulanmadi - alip satmasi zor olabilir")
     return out
 
 def _name(c):
@@ -65,8 +75,43 @@ def _name(c):
     sym = c.get("symbol") or "?"
     return f"{sym} ({nm})" if nm and nm.upper() != sym else sym
 
+def _network(n):
+    if not n: return "?"
+    return NETWORK_TR.get(str(n).lower(), str(n))
+
+def _venue(v):
+    if not v: return "?"
+    return VENUE_TR.get(str(v).lower(), str(v))
+
+def _identity_lines(c):
+    """Ayni isimli sahte token riskini azaltmak icin makine kimligini acik goster."""
+    lines = []
+    if c.get("layer") == "DEX":
+        chain = _network(c.get("network") or (c.get("ident") or {}).get("chain"))
+        contract = c.get("token") or (c.get("ident") or {}).get("contract")
+        dex = _venue(c.get("dex_id"))
+        lines.append(f"   AG/KONTRAT: {chain} | {contract or 'DOGRULANAMADI'}")
+        lines.append(f"   NEREDEN: {dex} DEX" + (f" | Pair: {c['pair_address']}" if c.get("pair_address") else ""))
+        return lines
+
+    venue = _venue(c.get("buy_venue"))
+    pair = c.get("buy_pair")
+    lines.append(f"   NEREDEN: {venue}" + (f" | {pair}" if pair else ""))
+    plats = c.get("platforms") or {}
+    if len(plats) == 1:
+        chain, contract = next(iter(plats.items()))
+        lines.append(f"   AG/KONTRAT: {_network(chain)} | {contract}")
+    elif len(plats) > 1:
+        items = list(plats.items())[:3]
+        joined = " ; ".join(f"{_network(ch)}: {addr}" for ch, addr in items)
+        lines.append(f"   KONTRATLAR: {joined}" + (" ; ..." if len(plats) > 3 else ""))
+    else:
+        lines.append("   AG/KONTRAT: CoinGecko kontrat bildirmiyor (native coin olabilir)")
+    return lines
+
 def _fmt(i, c):
     lines = [f"{i}) {_name(c)}  {_dots(c)}", f"   {_kind(c)} - {_mc(c.get('mc'))}"]
+    lines += _identity_lines(c)
     why = _why(c)
     for w in why[:4]: lines.append(f"   + {w}")
     if not why: lines.append("   + esikleri gecti ama one cikan yonu zayif")
@@ -89,8 +134,7 @@ def build(top, meta, state):
     if weak:
         body.append("=== IZLEMEDE (daha zayif) ===")
         for j, c in enumerate(weak, len(strong) + 1):
-            rk = _risks(c)
-            body.append(f"{j}) {_name(c)} - {_kind(c)} - {_mc(c.get('mc'))}" + (f"  ! {rk[0]}" if rk else ""))
+            body.append(_fmt(j, c)); body.append("")
     cs = cohort_stats(state)
     body.append("")
     body.append("=== KARNE (sistemin gecmis secimleri nasil gitti?) ===")
@@ -104,8 +148,8 @@ def build(top, meta, state):
     if not any_line:
         body.append("Henuz not yok - secimler 24 saatini doldurunca ilk notlar gelecek.")
     body.append("")
-    body.append("Bu bir IZLEME listesidir, al-sat sinyali degildir. 28 gunluk gozlem: "
-                "sistem once karnesiyle kendini kanitlayacak.")
+    body.append("DEX'te isim/ticker tek basina kimlik degildir: alirken AG + KONTRAT adresini birebir kontrol edin.")
+    body.append("Bu bir IZLEME listesidir, al-sat sinyali degildir. 28 gunluk gozlem: sistem once karnesiyle kendini kanitlayacak.")
     return "\n".join(body)
 
 def send(text):

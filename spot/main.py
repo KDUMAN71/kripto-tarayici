@@ -12,8 +12,6 @@ def _load():
         st = json.load(open(STATE))
     except Exception:
         st = {}
-    # Bootstrap state'i bos sozluk ({}) olarak yazilabiliyor; eksik anahtarlari
-    # tamamla ki st["health"] / st["snapshots"] KeyError vermesin.
     st.setdefault("snapshots", {})
     st.setdefault("reports", [])
     st.setdefault("outcomes", {})
@@ -90,6 +88,17 @@ def enrich_dex(c):
         c["vol_h6"] = vol.get("h6")
         if not c.get("age_h") and pair.get("pairCreatedAt"):
             c["age_h"] = (time.time() * 1000 - pair["pairCreatedAt"]) / 3.6e6
+        # DEX kimligi isim/ticker degil contract + chain'dir. Venue de secilen
+        # en likit pair'in gercek DEX kimliginden gelir.
+        c["dex_id"] = pair.get("dexId")
+        c["pair_address"] = pair.get("pairAddress") or c.get("pool")
+        c["trade_url"] = pair.get("url")
+        base = pair.get("baseToken") or {}
+        if base.get("address") and str(base["address"]).lower() == str(c["token"]).lower():
+            c["symbol"] = (base.get("symbol") or c["symbol"]).upper()
+            if base.get("name"):
+                c["ident"]["project_name"] = base["name"]
+            c["ident"]["ticker"] = c["symbol"]
 
 def factors(c, st, sec):
     prev = _prev(st, c["key"])
@@ -114,11 +123,44 @@ def factors(c, st, sec):
         c["f_holder"] = None
 
 def _ann_match(sym, anns):
-    """Kelime-siniri eslesmesi: 'USDT' artik 'BTCUSDT' basligini yakalayamaz."""
     if not sym or len(sym) < 3 or sym in C.GENERIC_TICKERS or sym in C.EXCLUDE_SYMBOLS:
         return False
     pat = re.compile(r"(?<![A-Z0-9])" + re.escape(sym) + r"(?![A-Z0-9])")
     return any(pat.search(a.upper()) for a in anns)
+
+def _venue_rank(t):
+    market = t.get("market") or ""
+    trusted = market in C.TRUSTED_CEX
+    green = t.get("trust_score") == "green"
+    vol = t.get("volume") or 0
+    quote_pref = 1 if t.get("target") in ("USDT", "USDC", "USD") else 0
+    return (1 if trusted else 0, 1 if green else 0, quote_pref, vol)
+
+def enrich_cex_identity(c):
+    """Top CEX adayi icin gercek alim venue + ag/kontrat bilgisini ekle."""
+    details = coingecko.ticker_details(c["coin_id"])
+    trusted = [t for t in details if t.get("market") in C.TRUSTED_CEX]
+    c["trusted_cex"] = sorted({t["market"] for t in trusted})
+    best = max(trusted or details, key=_venue_rank, default=None)
+    if best:
+        c["buy_venue"] = best.get("market")
+        c["buy_pair"] = f"{best.get('base')}/{best.get('target')}" if best.get("base") and best.get("target") else None
+        c["trade_url"] = best.get("trade_url")
+    c["no_trusted_cex"] = not bool(trusted)
+
+    plats = coingecko.platforms(c["coin_id"])
+    c["platforms"] = plats
+    if len(plats) == 1:
+        chain, contract = next(iter(plats.items()))
+        c["network"] = chain
+        c["token"] = contract
+        c["ident"]["chain"] = chain
+        c["ident"]["contract"] = contract
+    elif len(plats) > 1:
+        # Birden cok bridge/wrapped kontrat varsa tekini rastgele "dogru" diye
+        # secme. Rapor butun CoinGecko-eslesmelerini kisaca gosterecek.
+        c["network"] = None
+        c["token"] = None
 
 def run():
     t0 = time.time()
@@ -145,7 +187,6 @@ def run():
         c["flags"] = fl; c["gate_why"] = why
         _snap(st, c["key"], c)
         if ok: passed.append(c)
-    # finalist zenginlestirme: yapi + yayilim (butce sinirli)
     for group in ("DEX", "CEX"):
         pool = [c for c in passed if c["layer"] == group]
         ranking.percentiles(pool)
@@ -173,8 +214,7 @@ def run():
            if c["breadth"] >= C.MIN_BREADTH][:C.TOP_N]
     for c in top:
         if c["layer"] == "CEX" and c.get("coin_id"):
-            exs = {e.lower() for e in coingecko.tickers(c["coin_id"])}
-            c["no_trusted_cex"] = not (exs & C.TRUSTED_CEX)
+            enrich_cex_identity(c)
     for c in top:
         outcomes.register(st, c["key"], c.get("price"), c.get("lifecycle", c["layer"]))
     def price_of(key):
@@ -189,7 +229,9 @@ def run():
     report.send(txt)
     st["reports"].append({"ts": time.time(), "coins": [{"key": c["key"], "rank": i + 1,
                           "price": c.get("price"), "breadth": c["breadth"],
-                          "median_p": round(c["median_p"], 3), "flags": c.get("flags")}
+                          "median_p": round(c["median_p"], 3), "flags": c.get("flags"),
+                          "network": c.get("network"), "contract": c.get("token"),
+                          "venue": c.get("dex_id") or c.get("buy_venue")}
                          for i, c in enumerate(top)]})
     meta["duration_s"] = round(time.time() - t0)
     st["meta"] = meta
