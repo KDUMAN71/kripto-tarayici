@@ -99,7 +99,9 @@ ACTIVE_MIN_VOL_RATIO_1H = 0.70
 ACTIVE_MAX_LIVE_RISK_PCT = 3.0
 ACTIVE_MIN_OBSTACLE_R = 1.50
 ACTIVE_MIN_HOLD_CLOSES = 1
-RETEST_MIN_HOLD_CLOSES = 2
+# Kırılım girişinde ilk teyitli 15d kapanış yeterlidir. Daha güvenli retest
+# ayrı bir ikinci giriş olayı olarak izlenir ve tekrar Telegram uyarısı üretir.
+RETEST_MIN_HOLD_CLOSES = 1
 REVERSAL_TAKER_LONG_15M = 0.51
 REVERSAL_TAKER_SHORT_15M = 0.49
 PANIC_TAKER_LONG_15M = 0.53
