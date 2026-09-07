@@ -2359,7 +2359,8 @@
     "condition": "breakdown+hold+retest failure"
    },
    "created": 1788766337,
-   "last_update": 1788766337
+   "last_update": 1788766337,
+   "retest_wait": true
   },
   "ONDOUSDT": {
    "status": "EARLY",
@@ -3742,7 +3743,7 @@
    "retest_wait": true
   },
   "FILUSDT": {
-   "status": "EARLY",
+   "status": "EXPIRED",
    "side": "LONG",
    "price": 0.7867,
    "trigger": 0.7764,
@@ -3828,7 +3829,7 @@
     "condition": "breakdown+hold+retest failure"
    },
    "created": 1788636749,
-   "last_update": 1788636749,
+   "last_update": 1788767185,
    "retest_wait": true
   },
   "UAIUSDT": {
@@ -5812,54 +5813,6 @@
   "SOLVUSDT": 1788764560
  },
  "log": [
-  {
-   "t": 1788716740,
-   "sym": "SUIUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (0.797748); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1788716747,
-   "sym": "TRUMPUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (2.272); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1788716750,
-   "sym": "CRVUSDT",
-   "event": "EXPIRED_SILENT",
-   "detail": "pretrade expired"
-  },
-  {
-   "t": 1788716755,
-   "sym": "DOTUSDT",
-   "event": "EXPIRED_SILENT",
-   "detail": "pretrade expired"
-  },
-  {
-   "t": 1788716759,
-   "sym": "APTUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (0.6127); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1788716777,
-   "sym": "ONDOUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (0.379283); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1788716781,
-   "sym": "WLDUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (0.409933); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1788716787,
-   "sym": "SOLUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (105.745); kirilim/hold olmadan SHORT yok"
-  },
   {
    "t": 1788716794,
    "sym": "FETUSDT",
@@ -10611,6 +10564,54 @@
    "sym": "ZAMAUSDT",
    "event": "VETO",
    "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
+  },
+  {
+   "t": 1788767153,
+   "sym": "CRVUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (0.374277); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1788767156,
+   "sym": "XRPUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (1.37913); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1788767164,
+   "sym": "1000PEPEUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (0.00354178); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1788767169,
+   "sym": "HYPEUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (85.4635); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1788767185,
+   "sym": "FILUSDT",
+   "event": "EXPIRED_SILENT",
+   "detail": "pretrade expired"
+  },
+  {
+   "t": 1788767208,
+   "sym": "FARTCOINUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (0.170571); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1788767211,
+   "sym": "LDOUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (0.396646); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1788767216,
+   "sym": "PENGUUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (0.00847918); kirilim/hold olmadan SHORT yok"
   }
  ],
  "trades": [
@@ -10700,17 +10701,8 @@
   }
  ],
  "fail_count": 0,
- "last_ok_run": 1788766248,
+ "last_ok_run": 1788767136,
  "scan_log": [
-  {
-   "ts": 1788686257,
-   "ok": true,
-   "symbols": 528,
-   "liquid": 150,
-   "candidates": 133,
-   "open_signals": 38,
-   "duration_s": 124
-  },
   {
    "ts": 1788686655,
    "ok": true,
@@ -11565,6 +11557,15 @@
    "candidates": 130,
    "open_signals": 36,
    "duration_s": 127
+  },
+  {
+   "ts": 1788767236,
+   "ok": true,
+   "symbols": 528,
+   "liquid": 145,
+   "candidates": 131,
+   "open_signals": 35,
+   "duration_s": 101
   }
  ],
  "engine_version": "3.3",
