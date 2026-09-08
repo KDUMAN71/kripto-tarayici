@@ -54,12 +54,18 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           WATCHDOG_STALE_MINUTES: '45'
           WATCHDOG_REMINDER_MINUTES: '360'
+          WATCHDOG_ALIVE_INTERVAL_MINUTES: '1440'
           WATCHDOG_SUMMARY_PATH: state/summary.json
           WATCHDOG_STATE_PATH: .watchdog/state/watchdog_state.json
         run: python -m tools.heartbeat_watchdog
 
       - name: Persist watchdog state
+        if: always()
         run: |
+          if [ ! -f .watchdog/state/watchdog_state.json ]; then
+            echo 'watchdog state file missing; nothing to persist'
+            exit 0
+          fi
           cd .watchdog
           git config user.name heartbeat-watchdog
           git config user.email bot@local
