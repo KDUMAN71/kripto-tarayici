@@ -1,0 +1,77 @@
+name: scanner-heartbeat-watchdog
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '*/30 * * * *'  # yedek; asil tetik cron-job.org olabilir
+
+permissions:
+  contents: write
+
+concurrency:
+  group: scanner-heartbeat-watchdog
+  cancel-in-progress: false
+
+jobs:
+  heartbeat:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install deps
+        run: pip install -r requirements.txt
+
+      - name: Prepare watchdog state branch
+        run: |
+          git fetch origin watchdog-state || true
+          if git show-ref --verify --quiet refs/remotes/origin/watchdog-state; then
+            git worktree add .watchdog origin/watchdog-state
+            cd .watchdog && git checkout -B watchdog-state origin/watchdog-state && cd ..
+          else
+            git worktree add --detach .watchdog
+            cd .watchdog
+            git checkout --orphan watchdog-state
+            git rm -rf --quiet . || true
+            mkdir -p state
+            echo '{}' > state/watchdog_state.json
+            git add -A
+            git -c user.name=heartbeat-watchdog -c user.email=bot@local commit -m 'watchdog state bootstrap'
+            git push origin watchdog-state
+            cd ..
+          fi
+
+      - name: Run heartbeat watchdog
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          WATCHDOG_STALE_MINUTES: '45'
+          WATCHDOG_REMINDER_MINUTES: '360'
+          WATCHDOG_ALIVE_INTERVAL_MINUTES: '1440'
+          WATCHDOG_SUMMARY_PATH: state/summary.json
+          WATCHDOG_STATE_PATH: .watchdog/state/watchdog_state.json
+        run: python -m tools.heartbeat_watchdog
+
+      - name: Persist watchdog state
+        if: always()
+        run: |
+          if [ ! -f .watchdog/state/watchdog_state.json ]; then
+            echo 'watchdog state file missing; nothing to persist'
+            exit 0
+          fi
+          cd .watchdog
+          git config user.name heartbeat-watchdog
+          git config user.email bot@local
+          git add state/watchdog_state.json
+          git commit -m 'watchdog state update' || exit 0
+          for i in 1 2 3; do
+            git push origin watchdog-state && break
+            git pull --rebase origin watchdog-state
+          done
