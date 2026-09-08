@@ -2,14 +2,17 @@
 
 Reads the compact state summary from a fresh checkout and alerts Telegram when the
 scanner heartbeat is stale. Keeps its own tiny state file so repeated checks do
-not spam the user and sends a recovery message when scanning resumes.
+not spam the user, sends a recovery message when scanning resumes, and emits a
+low-frequency positive alive ping so watchdog silence itself is observable.
 """
 from __future__ import annotations
 
 import json
 import os
 import time
+from datetime import datetime
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 from scanner.telegram import Telegram
 
@@ -17,6 +20,8 @@ SUMMARY_PATH = Path(os.environ.get("WATCHDOG_SUMMARY_PATH", "state/summary.json"
 STATE_PATH = Path(os.environ.get("WATCHDOG_STATE_PATH", ".watchdog-state/watchdog_state.json"))
 STALE_MINUTES = int(os.environ.get("WATCHDOG_STALE_MINUTES", "45"))
 REMINDER_MINUTES = int(os.environ.get("WATCHDOG_REMINDER_MINUTES", "360"))
+ALIVE_INTERVAL_MINUTES = int(os.environ.get("WATCHDOG_ALIVE_INTERVAL_MINUTES", "1440"))
+TR_TZ = ZoneInfo("Europe/Istanbul")
 
 
 def _load(path: Path, default):
@@ -26,8 +31,14 @@ def _load(path: Path, default):
         return default
 
 
+def _fmt_epoch(ts: int) -> str:
+    if not ts:
+        return "bilinmiyor"
+    return datetime.fromtimestamp(ts, TR_TZ).strftime("%d.%m.%Y %H:%M TRT")
+
+
 def evaluate(summary: dict, state: dict, now: int, stale_minutes: int = 45,
-             reminder_minutes: int = 360) -> dict:
+             reminder_minutes: int = 360, alive_interval_minutes: int = 1440) -> dict:
     """Pure decision function used by tests and the live runner."""
     last_ok = int(summary.get("last_ok_run") or 0)
     generated = int(summary.get("generated_at") or 0)
@@ -38,6 +49,7 @@ def evaluate(summary: dict, state: dict, now: int, stale_minutes: int = 45,
     stale = last_ok <= 0 or age_s > stale_minutes * 60
     was_alerted = bool(state.get("alerted"))
     last_alert = int(state.get("last_alert_at") or 0)
+    last_alive = int(state.get("last_alive_at") or 0)
 
     action = "NONE"
     if stale:
@@ -46,6 +58,10 @@ def evaluate(summary: dict, state: dict, now: int, stale_minutes: int = 45,
             action = "ALERT"
     elif was_alerted:
         action = "RECOVERED"
+    elif alive_interval_minutes > 0 and (
+        last_alive <= 0 or now - last_alive >= alive_interval_minutes * 60
+    ):
+        action = "ALIVE"
 
     return {
         "action": action,
@@ -59,21 +75,32 @@ def evaluate(summary: dict, state: dict, now: int, stale_minutes: int = 45,
 
 
 def _message(decision: dict) -> str:
+    age = decision["age_minutes"]
+    age_text = "bilinmiyor" if age is None else f"{age:.1f} dk"
+    last_ok_text = _fmt_epoch(decision["last_ok_run"])
+    generated_text = _fmt_epoch(decision["generated_at"])
+
     if decision["action"] == "RECOVERED":
         return (
             "✅ <b>SCANNER HEARTBEAT RECOVERED</b>\n"
-            f"Son başarılı tarama: {decision['last_ok_run']}\n"
+            f"Son başarılı tarama: {last_ok_text} · {age_text} önce\n"
             f"Fail count: {decision['fail_count']} · Açık plan: {decision['open_signal_count']}"
         )
 
-    age = decision["age_minutes"]
-    age_text = "bilinmiyor" if age is None else f"{age:.1f} dk"
+    if decision["action"] == "ALIVE":
+        return (
+            "🟢 <b>SCANNER WATCHDOG ALIVE</b>\n"
+            f"Scanner sağlıklı · son başarılı tarama {last_ok_text} · {age_text} önce\n"
+            f"Fail count: {decision['fail_count']} · Açık plan: {decision['open_signal_count']}\n"
+            "Bu günlük pozitif ping watchdog'un kendisinin de çalıştığını doğrular."
+        )
+
     return (
         "⚠️ <b>SCANNER HEARTBEAT LOST</b>\n"
-        f"Son başarılı taramadan beri: {age_text}\n"
-        f"last_ok_run: {decision['last_ok_run']} · summary: {decision['generated_at']}\n"
+        f"Son başarılı tarama: {last_ok_text} · {age_text} önce\n"
+        f"Summary üretimi: {generated_text}\n"
         f"Fail count: {decision['fail_count']} · Açık plan: {decision['open_signal_count']}\n"
-        "Tarayıcı 45+ dakikadır yeni başarılı heartbeat üretmiyor."
+        f"Tarayıcı {STALE_MINUTES}+ dakikadır yeni başarılı heartbeat üretmiyor."
     )
 
 
@@ -81,11 +108,17 @@ def main() -> int:
     now = int(time.time())
     summary = _load(SUMMARY_PATH, {})
     wd_state = _load(STATE_PATH, {})
-    decision = evaluate(summary, wd_state, now, STALE_MINUTES, REMINDER_MINUTES)
+    decision = evaluate(
+        summary, wd_state, now, STALE_MINUTES, REMINDER_MINUTES, ALIVE_INTERVAL_MINUTES
+    )
 
     send_ok = True
-    if decision["action"] in ("ALERT", "RECOVERED"):
-        send_ok = Telegram().send(_message(decision))
+    if decision["action"] in ("ALERT", "RECOVERED", "ALIVE"):
+        try:
+            send_ok = bool(Telegram().send(_message(decision)))
+        except Exception as exc:  # Operational layer must never lose state persistence.
+            send_ok = False
+            print(f"watchdog telegram error: {type(exc).__name__}: {exc}")
 
     next_state = dict(wd_state)
     next_state.update({
@@ -100,6 +133,9 @@ def main() -> int:
     elif decision["action"] == "RECOVERED" and send_ok:
         next_state["alerted"] = False
         next_state["last_recovered_at"] = now
+        next_state["last_alive_at"] = now
+    elif decision["action"] == "ALIVE" and send_ok:
+        next_state["last_alive_at"] = now
 
     STATE_PATH.parent.mkdir(parents=True, exist_ok=True)
     STATE_PATH.write_text(json.dumps(next_state, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
