@@ -35,7 +35,7 @@ jobs:
         run: |
           git config user.name "scanner-bot"
           git config user.email "bot@users.noreply.github.com"
-          git add state/state.json state/summary.json
+          git add state/state.json state/summary.json state/runner_autopsy.json
           if ! git diff --cached --quiet; then
             git commit -m "v3.3 state update [skip ci]"
             git pull --rebase origin "${GITHUB_REF_NAME}"

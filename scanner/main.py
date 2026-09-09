@@ -13,6 +13,7 @@ CHANGE_24H = {}
 from . import config as C
 from . import data, radars, state as ST
 from .engine_v3 import evaluate_v3
+from . import autopsy as AU
 from .confluence import (btc_regime, taker_pressure, long_short_ratios,
                           basis_pct, spread_pct)
 from .indicators import analyze
@@ -190,7 +191,7 @@ def _legacy_attach(sym, sig):
 
 def run():
     CTX_BUDGET["n"] = 0
-    tg = Telegram(); st = ST.load(); t0 = time.time()
+    tg = Telegram(); st = ST.load(); t0 = time.time(); AU.load()
     symbols = data.exchange_perp_symbols(); tickers = data.ticker_24h()
     if symbols is None or tickers is None:
         st["fail_count"] = st.get("fail_count", 0) + 1
@@ -212,6 +213,7 @@ def run():
     young_cut = ST.now() - C.YOUNG_COIN_DAYS * 86400
     liquid = [s for s in tdf["symbol"] if st["known_symbols"].get(s, 0) <= young_cut or first_run]
     chg = dict(zip(tdf["symbol"], tdf["priceChangePercent"]))
+    AU.record_universe(tickers, symbols, liquid, tdf); AU.note_baseline(tickers)
     global REGIME, CHANGE_24H
     REGIME = btc_regime(); CHANGE_24H = chg
     print("REJIM:", REGIME.get("note"))
@@ -224,7 +226,7 @@ def run():
         a15, a1, a4 = md; sig = st["signals"][sym]
         if sig["status"] in ("EARLY", "WATCH"):
             res = evaluate_v3(sym, a15, a1, a4, REGIME, _build_ctx)
-            if isinstance(res, tuple): ST.log_event(st, sym, "VETO", res[1]); res = None
+            if isinstance(res, tuple): ST.log_event(st, sym, "VETO", res[1]); AU.record(sym, "veto", str(res[1])); res = None
             if res and res["status"] == "ACTIVE" and res["side"] == sig["side"]:
                 news = radars.news_check(sym); nn = news["note"] if news else "haber modülü kapalı"
                 if news and news["veto"]:
@@ -241,32 +243,48 @@ def run():
 
     core = list(liquid[:C.CORE_SCAN_CAP]); momentum = []
     for sym in liquid[:C.MOMENTUM_SCAN_POOL]:
-        if sym in core or abs(chg.get(sym, 0)) > C.MAX_ABS_24H_CHANGE_TECH: continue
+        if sym in core: continue
+        if abs(chg.get(sym, 0)) > C.MAX_ABS_24H_CHANGE_TECH:
+            AU.record(sym, "max_abs", "24s |degisim| > %25 — teknik evren disi",
+                      extra={"chg": round(chg.get(sym, 0), 1)}); continue
         k1 = data.klines(sym, "1h", 80)
         if k1 is None or len(k1) < 30: continue
         a1 = analyze(k1, piv_lookback=50); c = a1["closed"]
         chg3h = abs((c["close"].iloc[-1] / c["close"].iloc[-4] - 1) * 100) if len(c) > 4 else 0
         if (a1["vol_ratio"] == a1["vol_ratio"] and a1["vol_ratio"] >= C.MOMENTUM_PRE_VOL_MULT) or chg3h >= C.MOMENTUM_PRE_3H_PCT:
             momentum.append(sym)
-    candidates = (core + [s for s in momentum if s not in core])[:C.DEEP_SCAN_CAP]
+        else:
+            AU.record(sym, "momentum_pre", "1s hacim/3s ivme on esigi altinda")
+    _pool = core + [s for s in momentum if s not in core]
+    candidates = _pool[:C.DEEP_SCAN_CAP]
+    for sym in _pool[C.DEEP_SCAN_CAP:]:
+        AU.record(sym, "cap", "derin analiz kapasitesi disinda kaldi")
 
-    new_sent = 0
-    for sym in candidates:
-        if new_sent >= 8 or CTX_BUDGET["n"] >= 18: break
+    new_sent = 0; _budget_cut = None
+    for _ci, sym in enumerate(candidates):
+        if new_sent >= 8 or CTX_BUDGET["n"] >= 18:
+            _budget_cut = _ci; break
         if sym in st["signals"] and st["signals"][sym]["status"] in ("EARLY", "WATCH", "ACTIVE"): continue
-        if abs(chg.get(sym, 0)) > C.MAX_ABS_24H_CHANGE_TECH: continue
+        if abs(chg.get(sym, 0)) > C.MAX_ABS_24H_CHANGE_TECH:
+            AU.record(sym, "max_abs", "24s |degisim| > %25 — teknik evren disi",
+                      extra={"chg": round(chg.get(sym, 0), 1)}); continue
         md = _market_data(sym, need_4h=True, min_tscore=C.PREFILTER_MIN_TSCORE)
-        if not md: continue
+        if not md: AU.record(sym, "prefilter", "veri/tscore on esigi gecilemedi"); continue
         a15, a1, a4 = md; sig = evaluate_v3(sym, a15, a1, a4, REGIME, _build_ctx)
-        if isinstance(sig, tuple): ST.log_event(st, sym, "VETO", sig[1]); continue
-        if not sig: continue
+        if isinstance(sig, tuple): ST.log_event(st, sym, "VETO", sig[1]); AU.record(sym, "veto", str(sig[1])); continue
+        if not sig: AU.record(sym, "no_setup", "formasyon/skor uretmedi"); continue
         news = radars.news_check(sym); nn = news["note"] if news else "haber modülü kapalı"
-        if news and news["veto"]: ST.log_event(st, sym, "NEWS_VETO", news["note"]); continue
+        if news and news["veto"]: ST.log_event(st, sym, "NEWS_VETO", news["note"]); AU.record(sym, "news_veto", str(news["note"])); continue
         sig["created"] = ST.now(); sig["last_update"] = ST.now()
         if sig["status"] == "ACTIVE":
             sig["entry_ref"] = (sig["entry_lo"] + sig["entry_hi"]) / 2; sig["activated_at"] = ST.now(); sig["mfe_pct"] = 0; sig["mae_pct"] = 0
         st["signals"][sym] = sig; ST.log_event(st, sym, sig["status"], f"{sig['side']} @ {sig['price']:.6g}")
         tg.send(active_msg(sym, sig, nn) if sig["status"] == "ACTIVE" else pretrade_msg(sym, sig, nn)); new_sent += 1
+
+    if _budget_cut is not None:
+        for _s2 in candidates[_budget_cut:]:
+            if not (_s2 in st["signals"] and st["signals"][_s2]["status"] in ("EARLY", "WATCH", "ACTIVE")):
+                AU.record(_s2, "budget", "tarama butcesi doldu (yeni sinyal/ctx limiti)")
 
     # Erken pump izi: fiyat henuz tepki vermeden para girisini yakalar.
     ecands = radars.early_pump_candidates(tdf); esent = 0
@@ -298,6 +316,10 @@ def run():
         sent += 1
 
     active_count = len([1 for v in st["signals"].values() if v["status"] in ("EARLY", "WATCH", "ACTIVE")])
+    AU.observe_signals(st)
+    _aurep = AU.maybe_weekly_report(st, tickers, data)
+    if _aurep: tg.send(_aurep)
+    AU.save()
     ST.append_scan(st, {"ts": ST.now(), "ok": True, "symbols": len(symbols), "liquid": len(liquid), "candidates": len(candidates), "open_signals": active_count, "duration_s": round(time.time() - t0)})
     ST.save(st)
     print(f"V3.3 tamamlandi: {time.time()-t0:.0f}s | likit {len(liquid)} | aday {len(candidates)} | takip {active_count}")
