@@ -1343,7 +1343,8 @@
     "condition": "breakout+hold+retest"
    },
    "created": 1789021944,
-   "last_update": 1789021944
+   "last_update": 1789021944,
+   "retest_wait": true
   },
   "AVAXUSDT": {
    "status": "EXPIRED",
@@ -2694,7 +2695,8 @@
    "liquidation_map": null,
    "flip_plan": null,
    "created": 1789021915,
-   "last_update": 1789021915
+   "last_update": 1789021915,
+   "retest_wait": true
   },
   "SOLUSDT": {
    "status": "MISSED",
@@ -3238,7 +3240,7 @@
    "retest_wait": true
   },
   "FARTCOINUSDT": {
-   "status": "EARLY",
+   "status": "EXPIRED",
    "side": "SHORT",
    "price": 0.172,
    "trigger": 0.1743,
@@ -3323,7 +3325,7 @@
     "condition": "breakout+hold+retest"
    },
    "created": 1788892635,
-   "last_update": 1788892635,
+   "last_update": 1789022762,
    "retest_wait": true
   },
   "APTUSDT": {
@@ -5774,54 +5776,6 @@
   "ARXUSDT": 1789020188
  },
  "log": [
-  {
-   "t": 1788966088,
-   "sym": "UNIUSDT",
-   "event": "VETO",
-   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
-  },
-  {
-   "t": 1788966092,
-   "sym": "PENGUUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (0.008105); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1788966094,
-   "sym": "XMRUSDT",
-   "event": "CANCELLED",
-   "detail": "1h close 513.91 invalidation beyond"
-  },
-  {
-   "t": 1788966095,
-   "sym": "ZROUSDT",
-   "event": "EXPIRED_SILENT",
-   "detail": "pretrade expired"
-  },
-  {
-   "t": 1788966105,
-   "sym": "1000PEPEUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (0.00362246); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1788966109,
-   "sym": "ARBUSDT",
-   "event": "VETO",
-   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
-  },
-  {
-   "t": 1788966120,
-   "sym": "DASHUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (63.11); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1788966151,
-   "sym": "WLDUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (0.439125); kirilim/hold olmadan SHORT yok"
-  },
   {
    "t": 1788966161,
    "sym": "ETCUSDT",
@@ -10573,6 +10527,54 @@
    "sym": "ETCUSDT",
    "event": "VETO",
    "detail": "guclu HTF destek bolgesinde (7.87382); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1789022762,
+   "sym": "FARTCOINUSDT",
+   "event": "EXPIRED_SILENT",
+   "detail": "pretrade expired"
+  },
+  {
+   "t": 1789022766,
+   "sym": "APTUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (0.632446); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1789022774,
+   "sym": "INJUSDT",
+   "event": "VETO",
+   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
+  },
+  {
+   "t": 1789022788,
+   "sym": "FORMUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (0.2711); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1789022815,
+   "sym": "NEARUSDT",
+   "event": "VETO",
+   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
+  },
+  {
+   "t": 1789022848,
+   "sym": "BCHUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (251.284); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1789022862,
+   "sym": "1000SHIBUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (0.00515179); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1789022887,
+   "sym": "WLFIUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (0.0570268); kirilim/hold olmadan LONG yok"
   }
  ],
  "trades": [
@@ -10662,17 +10664,8 @@
   }
  ],
  "fail_count": 0,
- "last_ok_run": 1789021848,
+ "last_ok_run": 1789022737,
  "scan_log": [
-  {
-   "ts": 1788939198,
-   "ok": true,
-   "symbols": 528,
-   "liquid": 144,
-   "candidates": 131,
-   "open_signals": 29,
-   "duration_s": 148
-  },
   {
    "ts": 1788939770,
    "ok": true,
@@ -11527,6 +11520,15 @@
    "candidates": 133,
    "open_signals": 26,
    "duration_s": 125
+  },
+  {
+   "ts": 1789022897,
+   "ok": true,
+   "symbols": 528,
+   "liquid": 164,
+   "candidates": 133,
+   "open_signals": 25,
+   "duration_s": 161
   }
  ],
  "engine_version": "3.3",
