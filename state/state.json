@@ -5522,7 +5522,8 @@
     "condition": "breakout+hold+retest"
    },
    "created": 1789005788,
-   "last_update": 1789005788
+   "last_update": 1789005788,
+   "retest_wait": true
   }
  },
  "pump_alerts": {
@@ -5603,66 +5604,6 @@
   "VTHOUSDT": 1789002179
  },
  "log": [
-  {
-   "t": 1788949044,
-   "sym": "RAYSOLUSDT",
-   "event": "VETO",
-   "detail": "15d EMA20/MA7 yonu veya EMA20 egimi uyumsuz"
-  },
-  {
-   "t": 1788949051,
-   "sym": "UAIUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (0.6919); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1788949065,
-   "sym": "BCHUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (260.947); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1788949077,
-   "sym": "BIRBUSDT",
-   "event": "PUMP_ALERT",
-   "detail": "vol 12.2x, 3h %9.6"
-  },
-  {
-   "t": 1788949856,
-   "sym": "SUIUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (0.81371); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1788949859,
-   "sym": "PUMPUSDT",
-   "event": "VETO",
-   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
-  },
-  {
-   "t": 1788949873,
-   "sym": "UNIUSDT",
-   "event": "VETO",
-   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
-  },
-  {
-   "t": 1788949892,
-   "sym": "1000PEPEUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (0.00369571); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1788949898,
-   "sym": "APTUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (0.64854); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1788949923,
-   "sym": "BTCUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (78619.1); kirilim/hold olmadan SHORT yok"
-  },
   {
    "t": 1788949928,
    "sym": "HYPEUSDT",
@@ -10402,6 +10343,66 @@
    "sym": "CRVUSDT",
    "event": "EARLY",
    "detail": "SHORT @ 0.3453"
+  },
+  {
+   "t": 1789006559,
+   "sym": "APTUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (0.613132); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1789006590,
+   "sym": "BTCUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (77557.8); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1789006595,
+   "sym": "ZECUSDT",
+   "event": "VETO",
+   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
+  },
+  {
+   "t": 1789006613,
+   "sym": "ADAUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (0.209849); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1789006618,
+   "sym": "TAOUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (249.547); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1789006640,
+   "sym": "BCHUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (251.286); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1789006646,
+   "sym": "ETCUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (7.87329); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1789006680,
+   "sym": "MAGMAUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (0.24228); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1789006690,
+   "sym": "SEIUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (0.0460515); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1789006693,
+   "sym": "VVVUSDT",
+   "event": "EARLY_PUMP",
+   "detail": "OI %+2.8, 15d hacim 2.0x"
   }
  ],
  "trades": [
@@ -10491,17 +10492,8 @@
   }
  ],
  "fail_count": 0,
- "last_ok_run": 1789005655,
+ "last_ok_run": 1789006539,
  "scan_log": [
-  {
-   "ts": 1788922947,
-   "ok": true,
-   "symbols": 528,
-   "liquid": 144,
-   "candidates": 131,
-   "open_signals": 25,
-   "duration_s": 83
-  },
   {
    "ts": 1788923846,
    "ok": true,
@@ -11356,6 +11348,15 @@
    "candidates": 138,
    "open_signals": 21,
    "duration_s": 148
+  },
+  {
+   "ts": 1789006702,
+   "ok": true,
+   "symbols": 528,
+   "liquid": 161,
+   "candidates": 138,
+   "open_signals": 21,
+   "duration_s": 165
   }
  ],
  "engine_version": "3.3",
@@ -11398,6 +11399,7 @@
   "PONSUSDT": 1788830250,
   "TAOUSDT": 1788882429,
   "XRPUSDT": 1788883348,
-  "UAIUSDT": 1788964348
+  "UAIUSDT": 1788964348,
+  "VVVUSDT": 1789006693
  }
 }
