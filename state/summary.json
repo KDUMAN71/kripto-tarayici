@@ -1,10 +1,10 @@
 {
- "generated_at": 1789116469,
+ "generated_at": 1789117396,
  "engine_version": "3.3",
- "last_ok_run": 1789116344,
+ "last_ok_run": 1789117263,
  "fail_count": 0,
  "known_symbols_count": 528,
- "open_signal_count": 37,
+ "open_signal_count": 38,
  "open_signals": [
   {
    "symbol": "PUMPUSDT",
@@ -930,18 +930,34 @@
    "htf_resistance": 0.44082499999999997,
    "created": 1789103880,
    "last_update": 1789103880
+  },
+  {
+   "symbol": "MARSCOINUSDT",
+   "status": "EARLY",
+   "side": "SHORT",
+   "price": 0.12722,
+   "trigger": 0.1295,
+   "sl": 0.13321141174111353,
+   "tp1": 0.12308,
+   "tp2": 0.11862,
+   "tp3": 0.11606,
+   "rr1": 1.729799991976591,
+   "rr2": 2.9314990518232533,
+   "rr3": 3.621263534605197,
+   "risk_pct": 2.86595501244288,
+   "score": 9,
+   "score_max": 13,
+   "setup_type": "liquidity_sweep",
+   "priority_setup": true,
+   "decision_bias": "SHORT",
+   "decision_strength": "guclu",
+   "htf_support": 0.11731475,
+   "htf_resistance": 0.13184899137693243,
+   "created": 1789117355,
+   "last_update": 1789117355
   }
  ],
  "scan_log": [
-  {
-   "ts": 1789034592,
-   "ok": true,
-   "symbols": 528,
-   "liquid": 170,
-   "candidates": 136,
-   "open_signals": 29,
-   "duration_s": 136
-  },
   {
    "ts": 1789035460,
    "ok": true,
@@ -1796,93 +1812,18 @@
    "candidates": 131,
    "open_signals": 37,
    "duration_s": 125
+  },
+  {
+   "ts": 1789117396,
+   "ok": true,
+   "symbols": 528,
+   "liquid": 144,
+   "candidates": 130,
+   "open_signals": 38,
+   "duration_s": 135
   }
  ],
  "log_last_24h": [
-  {
-   "t": 1789108351,
-   "sym": "LINKUSDT",
-   "event": "VETO",
-   "detail": "BTC ters yonde sert rejim kirilimi (BTC 4s: dusus, 1s yapi: LH-LL, SERT asagi kirilim)"
-  },
-  {
-   "t": 1789108358,
-   "sym": "WLDUSDT",
-   "event": "VETO",
-   "detail": "BTC ters yonde sert rejim kirilimi (BTC 4s: dusus, 1s yapi: LH-LL, SERT asagi kirilim)"
-  },
-  {
-   "t": 1789108361,
-   "sym": "DOTUSDT",
-   "event": "VETO",
-   "detail": "BTC ters yonde sert rejim kirilimi (BTC 4s: dusus, 1s yapi: LH-LL, SERT asagi kirilim)"
-  },
-  {
-   "t": 1789108365,
-   "sym": "AVAXUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (7.5905); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1789109143,
-   "sym": "XPLUSDT",
-   "event": "VETO",
-   "detail": "iki yonlu karar motoru SHORT tarafini guclu buldu"
-  },
-  {
-   "t": 1789109149,
-   "sym": "FILUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (0.78888); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1789109152,
-   "sym": "NEARUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (2.50075); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1789109160,
-   "sym": "XMRUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (511.352); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1789109168,
-   "sym": "ZENUSDT",
-   "event": "VETO",
-   "detail": "BTC ters yonde sert rejim kirilimi (BTC 4s: dusus, 1s yapi: LH-LL, SERT asagi kirilim)"
-  },
-  {
-   "t": 1789109178,
-   "sym": "COTIUSDT",
-   "event": "VETO",
-   "detail": "BTC ters yonde sert rejim kirilimi (BTC 4s: dusus, 1s yapi: LH-LL, SERT asagi kirilim)"
-  },
-  {
-   "t": 1789109184,
-   "sym": "POLUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (0.0910424); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1789109188,
-   "sym": "ADAUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (0.210338); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1789109194,
-   "sym": "ONDOUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (0.347207); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1789109197,
-   "sym": "ARBUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (0.146072); kirilim/hold olmadan LONG yok"
-  },
   {
    "t": 1789109201,
    "sym": "DASHUSDT",
@@ -2518,6 +2459,90 @@
    "sym": "VETUSDT",
    "event": "VETO",
    "detail": "guclu HTF destek bolgesinde (0.0076071); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1789117272,
+   "sym": "XPLUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (0.0876034); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1789117287,
+   "sym": "ZECUSDT",
+   "event": "VETO",
+   "detail": "BTC ters yonde sert rejim kirilimi (BTC 4s: dusus, 1s yapi: LH-LL, SERT asagi kirilim)"
+  },
+  {
+   "t": 1789117310,
+   "sym": "ADAUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (0.2045); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1789117316,
+   "sym": "ARBUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (0.146072); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1789117324,
+   "sym": "SAHARAUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (0.00932516); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1789117328,
+   "sym": "BEATUSDT",
+   "event": "VETO",
+   "detail": "iki yonlu karar motoru SHORT tarafini guclu buldu"
+  },
+  {
+   "t": 1789117341,
+   "sym": "ETHUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (2493.72); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1789117347,
+   "sym": "BNBUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (705.523); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1789117355,
+   "sym": "MARSCOINUSDT",
+   "event": "EARLY",
+   "detail": "SHORT @ 0.12722"
+  },
+  {
+   "t": 1789117366,
+   "sym": "WLDUSDT",
+   "event": "VETO",
+   "detail": "BTC ters yonde sert rejim kirilimi (BTC 4s: dusus, 1s yapi: LH-LL, SERT asagi kirilim)"
+  },
+  {
+   "t": 1789117371,
+   "sym": "DOTUSDT",
+   "event": "VETO",
+   "detail": "BTC ters yonde sert rejim kirilimi (BTC 4s: dusus, 1s yapi: LH-LL, SERT asagi kirilim)"
+  },
+  {
+   "t": 1789117375,
+   "sym": "AVAXUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (7.49192); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1789117382,
+   "sym": "APTUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (0.614074); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1789117386,
+   "sym": "EGLDUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (4.67631); kirilim/hold olmadan SHORT yok"
   }
  ],
  "trades_stats": {
