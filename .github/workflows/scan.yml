@@ -17,6 +17,11 @@ jobs:
     timeout-minutes: 14
     steps:
       - uses: actions/checkout@v4
+        with:
+          # workflow_dispatch/schedule run'i kuyrukta beklerken main ilerlemis olabilir.
+          # Run basladigi anda event SHA'si yerine en guncel main'i al.
+          ref: main
+          fetch-depth: 1
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
@@ -36,8 +41,32 @@ jobs:
           git config user.name "scanner-bot"
           git config user.email "bot@users.noreply.github.com"
           git add state/state.json state/summary.json state/runner_autopsy.json
-          if ! git diff --cached --quiet; then
-            git commit -m "v3.3 state update [skip ci]"
-            git pull --rebase origin "${GITHUB_REF_NAME}"
-            git push origin "HEAD:${GITHUB_REF_NAME}"
+
+          if git diff --cached --quiet; then
+            exit 0
+          fi
+
+          git commit -m "v3.3 state update [skip ci]"
+
+          # Normalde scanner concurrency nedeniyle baska scan bu sirada main'e yazamaz.
+          # Yine de insan/otomasyon main'i tarama sirasinda ilerletirse once taze ref'i al.
+          git fetch origin main
+          if ! git rebase origin/main; then
+            git rebase --abort || true
+            echo "::warning::main tarama sirasinda degisti ve state rebase conflict olustu; bu run'in state push'u atlandi. Sonraki tarama guncel main'den devam edecek."
+            exit 0
+          fi
+
+          # Fetch ile push arasinda cok nadir yeni bir main commit'i gelirse bir kez daha dene.
+          if ! git push origin HEAD:main; then
+            git fetch origin main
+            if ! git rebase origin/main; then
+              git rebase --abort || true
+              echo "::warning::State push retry rebase conflict; bu run'in state push'u atlandi."
+              exit 0
+            fi
+            if ! git push origin HEAD:main; then
+              echo "::warning::State push ikinci denemede de yaristi; workflow hata vermeden state push'u atlandi."
+              exit 0
+            fi
           fi
