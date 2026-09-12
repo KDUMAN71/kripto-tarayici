@@ -1,4 +1,4 @@
-"""Spot Radar V1.1 — TUM esikler tek dosyada. scanner/ ile iliskisi YOKTUR."""
+"""Spot Radar V2 — normal growth radar + early/seed discovery thresholds."""
 # Evren
 CEX_PAGES = 3                # CoinGecko volume_desc sayfa (250/sayfa)
 CEX_MIN_MC = 50_000_000
@@ -9,6 +9,24 @@ DEX_MIN_VOL24 = 200_000
 DEX_MC_MIN, DEX_MC_MAX = 1_000_000, 150_000_000
 AGE_MIN_H = 24
 FRESH_MAX_D, EMERGING_MAX_D = 14, 90
+
+# V2 Early Discovery — normal $1M+ radarindan bagimsiz katman.
+# Amaç: $30K-$1M araliginda, guvenlik + organik talep + likidite ile birlikte
+# ivmelenen tokenlari once SEED WATCH, sonra EARLY OPPORTUNITY olarak yakalamak.
+EARLY_MC_MIN, EARLY_MC_MAX = 30_000, 1_000_000
+EARLY_MIN_LIQ = 15_000
+EARLY_MIN_VOL24 = 25_000
+EARLY_MIN_AGE_H = 6
+EARLY_MAX_AGE_D = 90
+EARLY_MIN_LIQ_MC = 0.08
+EARLY_SEED_SCORE = 4
+EARLY_OPPORTUNITY_SCORE = 6
+EARLY_TOP_N = 5
+EARLY_NEWS_FINALISTS = 8
+EARLY_CHASE_MULT = 4.0       # ilk gorulenden 4x sonrasi yeni 'erken firsat' degil
+EARLY_CH24_CHASE = 150.0
+EARLY_DISCOVERY_PAGES = 2    # GeckoTerminal new+trending ilk 2 sayfa
+
 # Kapilar
 LIQ_DROP_RATIO = 0.85
 TOP10_MAX_PCT = 45.0
