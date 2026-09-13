@@ -6167,7 +6167,8 @@
     "condition": "breakout+hold+retest"
    },
    "created": 1789297335,
-   "last_update": 1789297335
+   "last_update": 1789297335,
+   "retest_wait": true
   }
  },
  "pump_alerts": {
@@ -6271,66 +6272,6 @@
   "API3USDT": 1789294650
  },
  "log": [
-  {
-   "t": 1789242408,
-   "sym": "NEARUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (2.32744); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1789242420,
-   "sym": "WLDUSDT",
-   "event": "EARLY",
-   "detail": "SHORT @ 0.3995"
-  },
-  {
-   "t": 1789242428,
-   "sym": "LITUSDT",
-   "event": "EARLY",
-   "detail": "SHORT @ 4.2325"
-  },
-  {
-   "t": 1789242432,
-   "sym": "DASHUSDT",
-   "event": "EARLY",
-   "detail": "SHORT @ 54.94"
-  },
-  {
-   "t": 1789242435,
-   "sym": "INJUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (6.05203); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1789242444,
-   "sym": "ARPAUSDT",
-   "event": "PUMP_ALERT",
-   "detail": "vol 12.6x, 3h %14.8"
-  },
-  {
-   "t": 1789243267,
-   "sym": "AAVEUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (126.774); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1789243276,
-   "sym": "BCHUSDT",
-   "event": "CANCELLED",
-   "detail": "1h close 225.33 invalidation beyond"
-  },
-  {
-   "t": 1789243280,
-   "sym": "ADAUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (0.207226); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1789243293,
-   "sym": "ONGUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (0.0802876); kirilim/hold olmadan SHORT yok"
-  },
   {
    "t": 1789243310,
    "sym": "LINKUSDT",
@@ -11070,6 +11011,66 @@
    "sym": "1000SHIBUSDT",
    "event": "VETO",
    "detail": "guclu HTF destek bolgesinde (0.00515243); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1789298143,
+   "sym": "FILUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (0.813725); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1789298163,
+   "sym": "WLFIUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (0.0573369); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1789298178,
+   "sym": "VVVUSDT",
+   "event": "VETO",
+   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
+  },
+  {
+   "t": 1789298189,
+   "sym": "ARBUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (0.13784); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1789298193,
+   "sym": "RAYSOLUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (1.4694); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1789298197,
+   "sym": "BERAUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (0.191533); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1789298203,
+   "sym": "LABUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (0.0663546); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1789298220,
+   "sym": "TRUMPUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (1.9772); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1789298227,
+   "sym": "IOSTUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (0.0008122); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1789298231,
+   "sym": "DOTUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (0.985973); kirilim/hold olmadan SHORT yok"
   }
  ],
  "trades": [
@@ -11159,17 +11160,8 @@
   }
  ],
  "fail_count": 0,
- "last_ok_run": 1789297265,
+ "last_ok_run": 1789298138,
  "scan_log": [
-  {
-   "ts": 1789215469,
-   "ok": true,
-   "symbols": 528,
-   "liquid": 143,
-   "candidates": 130,
-   "open_signals": 39,
-   "duration_s": 130
-  },
   {
    "ts": 1789216395,
    "ok": true,
@@ -12024,6 +12016,15 @@
    "candidates": 127,
    "open_signals": 32,
    "duration_s": 122
+  },
+  {
+   "ts": 1789298240,
+   "ok": true,
+   "symbols": 528,
+   "liquid": 127,
+   "candidates": 127,
+   "open_signals": 32,
+   "duration_s": 103
   }
  ],
  "engine_version": "3.3",
