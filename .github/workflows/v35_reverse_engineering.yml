@@ -8,13 +8,21 @@ on:
         required: false
         default: '30'
       min_run_pct:
-        description: Minimum future max move for runner label
+        description: First threshold-cross percentage from trailing 24h low
         required: false
         default: '10'
-      top_events:
-        description: Max runner events to enrich at 15m
+      max_events:
+        description: Maximum runner episodes after daily balancing
         required: false
-        default: '250'
+        default: '240'
+      events_per_day:
+        description: Maximum runner episodes kept per UTC day
+        required: false
+        default: '8'
+      controls_per_runner:
+        description: Same-time matched non-runner controls per runner
+        required: false
+        default: '1'
       max_symbols:
         description: Optional symbol cap for smoke tests; blank = all
         required: false
@@ -33,22 +41,26 @@ jobs:
         with:
           python-version: '3.11'
           cache: pip
-      - run: pip install -r requirements.txt
-      - name: Build 30-day runner dataset
+      - run: pip install -r requirements.txt pytest
+      - name: Episode replay regression tests
+        run: python -m pytest -q tests/test_v35_episode_replay.py
+      - name: Build episode-first replay dataset
         shell: bash
         run: |
           EXTRA=()
           if [ -n "${{ inputs.max_symbols }}" ]; then
             EXTRA+=(--max-symbols "${{ inputs.max_symbols }}")
           fi
-          python -m research.build_runner_dataset \
+          python -m research.build_runner_dataset_v2 \
             --days "${{ inputs.days }}" \
             --min-run-pct "${{ inputs.min_run_pct }}" \
-            --top-events "${{ inputs.top_events }}" \
-            --output artifacts/v35_runner_dataset.json \
+            --max-events "${{ inputs.max_events }}" \
+            --events-per-day "${{ inputs.events_per_day }}" \
+            --controls-per-runner "${{ inputs.controls_per_runner }}" \
+            --output artifacts/v35_episode_replay_v2.json \
             "${EXTRA[@]}"
       - uses: actions/upload-artifact@v4
         with:
-          name: v35-runner-dataset
-          path: artifacts/v35_runner_dataset.json
+          name: v35-episode-replay-v2
+          path: artifacts/v35_episode_replay_v2.json
           retention-days: 14
