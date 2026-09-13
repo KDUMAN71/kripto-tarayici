@@ -1,8 +1,8 @@
 """V3.5 runner reverse-engineering primitives.
 
-The module deliberately separates LABELS (which may look into the future) from
-FEATURES (which must only use rows available at or before timestamp T). This is
-the core anti-lookahead rule for every replay experiment.
+LABELS may look into the future. FEATURES must only use rows available at or
+before timestamp T. Keeping those two concerns separate is the core anti-
+lookahead rule for every replay experiment.
 """
 from __future__ import annotations
 
@@ -33,12 +33,7 @@ def _pct(a: float, b: float) -> float:
 
 
 def label_forward_move(symbol: str, df: pd.DataFrame, idx: int, horizon_bars: int) -> RunnerLabel | None:
-    """Create a future-looking label for research only.
-
-    The label answers: starting at the close of row ``idx``, how far did price
-    run up and draw down over the next ``horizon_bars`` bars? It must never be
-    fed directly into the live signal model.
-    """
+    """Create a future-looking label for research only."""
     if idx < 0 or idx >= len(df) - 1:
         return None
     end = min(len(df), idx + 1 + horizon_bars)
@@ -49,7 +44,8 @@ def label_forward_move(symbol: str, df: pd.DataFrame, idx: int, horizon_bars: in
     final = float(future.iloc[-1]["close"])
     max_high = float(future["high"].max())
     min_low = float(future["low"].min())
-    ts = pd.Timestamp(df.iloc[idx]["openTime"])
+    ts_col = "closeTime" if "closeTime" in df.columns else "openTime"
+    ts = pd.Timestamp(df.iloc[idx][ts_col])
     return RunnerLabel(
         symbol=symbol,
         start_ts=ts,
@@ -62,11 +58,7 @@ def label_forward_move(symbol: str, df: pd.DataFrame, idx: int, horizon_bars: in
 
 def find_runner_labels(symbol: str, df: pd.DataFrame, *, horizon_bars: int = 96,
                        min_run_pct: float = 10.0, cooldown_bars: int = 24) -> list[RunnerLabel]:
-    """Find candidate runner starts using a future label, deduplicated by cooldown.
-
-    Default assumes 15m bars: 96 bars = 24h, cooldown 24 bars = 6h.
-    A label is positive when the future maximum reaches ``min_run_pct``.
-    """
+    """Legacy future-label helper retained for offline comparisons."""
     out: list[RunnerLabel] = []
     last_idx = -10**9
     for idx in range(len(df) - 1):
@@ -85,11 +77,21 @@ def _safe_ratio(a: float | None, b: float | None) -> float | None:
     return float(a) / float(b)
 
 
+def _sum_tail(series: pd.Series | None, bars: int) -> float | None:
+    if series is None or series.empty:
+        return None
+    vals = pd.to_numeric(series, errors="coerce").tail(bars)
+    if vals.dropna().empty:
+        return None
+    return float(vals.sum())
+
+
 def snapshot_features(df: pd.DataFrame, idx: int) -> dict:
     """Build a strictly past-only feature snapshot at row ``idx``.
 
-    Required columns: openTime/open/high/low/close/volume. Optional Binance
-    kline columns quoteVolume, trades, tbQuote are used when present.
+    ``ts`` is the candle CLOSE timestamp when closeTime is available. This is
+    deliberate: execution/replay alignment must never attach features from the
+    beginning of a candle to a label defined at its close.
     """
     if idx < 0 or idx >= len(df):
         raise IndexError(idx)
@@ -104,10 +106,10 @@ def snapshot_features(df: pd.DataFrame, idx: int) -> dict:
 
     vol = pd.to_numeric(hist["volume"], errors="coerce")
     qv = pd.to_numeric(hist["quoteVolume"], errors="coerce") if "quoteVolume" in hist else None
+    trades = pd.to_numeric(hist["trades"], errors="coerce") if "trades" in hist else None
     recent_vol = float(vol.iloc[-1]) if len(vol) else np.nan
     vol_med_20 = float(vol.tail(20).median()) if len(vol) >= 3 else np.nan
 
-    # True-range / compression features use only closed historical bars.
     prev_close = pd.to_numeric(hist["close"], errors="coerce").shift(1)
     hi = pd.to_numeric(hist["high"], errors="coerce")
     lo = pd.to_numeric(hist["low"], errors="coerce")
@@ -124,8 +126,16 @@ def snapshot_features(df: pd.DataFrame, idx: int) -> dict:
     if "tbQuote" in hist and qv is not None:
         taker_share = _safe_ratio(float(row.get("tbQuote") or 0), float(row.get("quoteVolume") or 0))
 
+    open_ts = pd.Timestamp(row["openTime"]).isoformat()
+    close_ts = pd.Timestamp(row["closeTime"]).isoformat() if "closeTime" in row and pd.notna(row["closeTime"]) else None
+    tr1 = _sum_tail(trades, 4)
+    tr6 = _sum_tail(trades, 24)
+    tr24 = _sum_tail(trades, 96)
+
     return {
-        "ts": pd.Timestamp(row["openTime"]).isoformat(),
+        "ts": close_ts or open_ts,
+        "open_ts": open_ts,
+        "close_ts": close_ts,
         "close": close,
         "ret_15m": ret(1),
         "ret_1h": ret(4),
@@ -134,7 +144,13 @@ def snapshot_features(df: pd.DataFrame, idx: int) -> dict:
         "ret_24h": ret(96),
         "vol_ratio_20": _safe_ratio(recent_vol, vol_med_20),
         "quote_volume": float(row["quoteVolume"]) if "quoteVolume" in row and pd.notna(row["quoteVolume"]) else None,
+        "quote_volume_1h": _sum_tail(qv, 4),
+        "quote_volume_6h": _sum_tail(qv, 24),
+        "quote_volume_24h": _sum_tail(qv, 96),
         "trades": int(row["trades"]) if "trades" in row and pd.notna(row["trades"]) else None,
+        "trades_1h": int(tr1) if tr1 is not None else None,
+        "trades_6h": int(tr6) if tr6 is not None else None,
+        "trades_24h": int(tr24) if tr24 is not None else None,
         "taker_buy_quote_share": taker_share,
         "atr14_pct": (atr14 / close * 100.0) if atr14 and close else None,
         "atr_compression": _safe_ratio(atr14, atr50),
@@ -170,13 +186,7 @@ def earliest_threshold_cross(df: pd.DataFrame, start_idx: int, threshold_pct: fl
 
 
 def feature_path(df: pd.DataFrame, start_idx: int, offsets: Iterable[int]) -> list[dict]:
-    """Past-only snapshots around an event start.
-
-    Negative offsets inspect the hours/bars before the labelled runner start;
-    zero is the label start. Positive offsets are allowed only for execution
-    studies and are explicitly tagged so they cannot be mixed into pre-runner
-    prediction training by accident.
-    """
+    """Past-only snapshots around an event start."""
     out = []
     for off in offsets:
         i = start_idx + int(off)
