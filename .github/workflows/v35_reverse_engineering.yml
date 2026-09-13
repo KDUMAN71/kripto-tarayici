@@ -1,0 +1,54 @@
+name: v3.5-reverse-engineering
+
+on:
+  workflow_dispatch:
+    inputs:
+      days:
+        description: Lookback days
+        required: false
+        default: '30'
+      min_run_pct:
+        description: Minimum future max move for runner label
+        required: false
+        default: '10'
+      top_events:
+        description: Max runner events to enrich at 15m
+        required: false
+        default: '250'
+      max_symbols:
+        description: Optional symbol cap for smoke tests; blank = all
+        required: false
+        default: ''
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Build 30-day runner dataset
+        shell: bash
+        run: |
+          EXTRA=()
+          if [ -n "${{ inputs.max_symbols }}" ]; then
+            EXTRA+=(--max-symbols "${{ inputs.max_symbols }}")
+          fi
+          python -m research.build_runner_dataset \
+            --days "${{ inputs.days }}" \
+            --min-run-pct "${{ inputs.min_run_pct }}" \
+            --top-events "${{ inputs.top_events }}" \
+            --output artifacts/v35_runner_dataset.json \
+            "${EXTRA[@]}"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: v35-runner-dataset
+          path: artifacts/v35_runner_dataset.json
+          retention-days: 14
