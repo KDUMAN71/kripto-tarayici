@@ -1,10 +1,10 @@
 {
- "generated_at": 1789706322,
+ "generated_at": 1789706938,
  "engine_version": "3.3",
- "last_ok_run": 1789706136,
+ "last_ok_run": 1789706741,
  "fail_count": 0,
  "known_symbols_count": 528,
- "open_signal_count": 37,
+ "open_signal_count": 40,
  "open_signals": [
   {
    "symbol": "UNIUSDT",
@@ -355,6 +355,31 @@
    "htf_resistance": 0.0037117499999999998,
    "created": 1789676208,
    "last_update": 1789676208
+  },
+  {
+   "symbol": "POLUSDT",
+   "status": "EARLY",
+   "side": "LONG",
+   "price": 0.10023,
+   "trigger": 0.09865,
+   "sl": 0.09766199495790437,
+   "tp1": 0.10024,
+   "tp2": 0.10163,
+   "tp3": null,
+   "rr1": 1.6093035280745989,
+   "rr2": 3.016178939410262,
+   "rr3": null,
+   "risk_pct": 1.0015256382114879,
+   "score": 9,
+   "score_max": 13,
+   "setup_type": "double_bottom",
+   "priority_setup": true,
+   "decision_bias": "LONG",
+   "decision_strength": "guclu",
+   "htf_support": 0.10011999999999999,
+   "htf_resistance": null,
+   "created": 1789706863,
+   "last_update": 1789706863
   },
   {
    "symbol": "PENDLEUSDT",
@@ -931,18 +956,59 @@
    "htf_resistance": 0.0010528,
    "created": 1789705976,
    "last_update": 1789705976
+  },
+  {
+   "symbol": "MAGMAUSDT",
+   "status": "EARLY",
+   "side": "SHORT",
+   "price": 0.20643,
+   "trigger": 0.20974,
+   "sl": 0.21295282332266308,
+   "tp1": 0.19833,
+   "tp2": 0.19629,
+   "tp3": 0.19418,
+   "rr1": 3.5513935420956813,
+   "rr2": 4.186349092128568,
+   "rr3": 4.843092332603756,
+   "risk_pct": 1.53181239756988,
+   "score": 8,
+   "score_max": 13,
+   "setup_type": "breakout_retest",
+   "priority_setup": true,
+   "decision_bias": "SHORT",
+   "decision_strength": "guclu",
+   "htf_support": 0.18068,
+   "htf_resistance": 0.21362956666666666,
+   "created": 1789706877,
+   "last_update": 1789706877
+  },
+  {
+   "symbol": "LAUSDT",
+   "status": "EARLY",
+   "side": "LONG",
+   "price": 0.06774,
+   "trigger": 0.06603,
+   "sl": 0.06523498384572107,
+   "tp1": 0.06859,
+   "tp2": 0.069,
+   "tp3": 0.06966,
+   "rr1": 3.22006035502747,
+   "rr2": 3.735773146262349,
+   "rr3": 4.565944956542863,
+   "risk_pct": 1.2040226477039717,
+   "score": 12,
+   "score_max": 13,
+   "setup_type": "breakout_retest",
+   "priority_setup": true,
+   "decision_bias": "LONG",
+   "decision_strength": "guclu",
+   "htf_support": 0.06771264,
+   "htf_resistance": 0.06950666666666667,
+   "created": 1789706923,
+   "last_update": 1789706923
   }
  ],
  "scan_log": [
-  {
-   "ts": 1789625289,
-   "ok": true,
-   "symbols": 528,
-   "liquid": 139,
-   "candidates": 131,
-   "open_signals": 31,
-   "duration_s": 128
-  },
   {
    "ts": 1789625861,
    "ok": true,
@@ -1797,69 +1863,18 @@
    "candidates": 131,
    "open_signals": 37,
    "duration_s": 187
+  },
+  {
+   "ts": 1789706937,
+   "ok": true,
+   "symbols": 528,
+   "liquid": 136,
+   "candidates": 130,
+   "open_signals": 40,
+   "duration_s": 198
   }
  ],
  "log_last_24h": [
-  {
-   "t": 1789698667,
-   "sym": "XMRUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (525.875); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1789698676,
-   "sym": "1000PEPEUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (0.00371175); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1789698684,
-   "sym": "WIFUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (0.192895); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1789698692,
-   "sym": "XLMUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (0.186574); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1789698705,
-   "sym": "BULLAUSDT",
-   "event": "VETO",
-   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
-  },
-  {
-   "t": 1789698737,
-   "sym": "\u9f99\u867eUSDT",
-   "event": "VETO",
-   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
-  },
-  {
-   "t": 1789698745,
-   "sym": "AVAXUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (7.57907); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1789698758,
-   "sym": "KSMUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (4.292); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1789698767,
-   "sym": "CRVUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (0.336639); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1789698776,
-   "sym": "ETHFIUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (0.64325); kirilim/hold olmadan LONG yok"
-  },
   {
    "t": 1789699547,
    "sym": "LITUSDT",
@@ -2519,6 +2534,66 @@
    "sym": "PEOPLEUSDT",
    "event": "VETO",
    "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
+  },
+  {
+   "t": 1789706758,
+   "sym": "DASHUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (61.285); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1789706762,
+   "sym": "1000PEPEUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (0.00371175); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1789706767,
+   "sym": "WIFUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (0.192899); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1789706799,
+   "sym": "XRPUSDT",
+   "event": "RETEST_ENTRY",
+   "detail": "LONG retest @ 1.3214"
+  },
+  {
+   "t": 1789706848,
+   "sym": "KSMUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (4.292); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1789706854,
+   "sym": "HBARUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (0.0781976); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1789706863,
+   "sym": "POLUSDT",
+   "event": "EARLY",
+   "detail": "LONG @ 0.10023"
+  },
+  {
+   "t": 1789706873,
+   "sym": "CAKEUSDT",
+   "event": "VETO",
+   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
+  },
+  {
+   "t": 1789706877,
+   "sym": "MAGMAUSDT",
+   "event": "EARLY",
+   "detail": "SHORT @ 0.20643"
+  },
+  {
+   "t": 1789706923,
+   "sym": "LAUSDT",
+   "event": "EARLY",
+   "detail": "LONG @ 0.06774"
   }
  ],
  "trades_stats": {
