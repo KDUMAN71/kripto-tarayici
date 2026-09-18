@@ -3333,7 +3333,8 @@
     "condition": "breakdown+hold+retest failure"
    },
    "created": 1789706863,
-   "last_update": 1789706863
+   "last_update": 1789706863,
+   "retest_wait": true
   },
   "ACEUSDT": {
    "status": "EXPIRED",
@@ -6063,7 +6064,8 @@
     "condition": "breakout+hold+retest"
    },
    "created": 1789706877,
-   "last_update": 1789706877
+   "last_update": 1789706877,
+   "retest_wait": true
   },
   "LAUSDT": {
    "status": "EARLY",
@@ -6155,7 +6157,8 @@
     "condition": "breakdown+hold+retest failure"
    },
    "created": 1789706923,
-   "last_update": 1789706923
+   "last_update": 1789706923,
+   "retest_wait": true
   }
  },
  "pump_alerts": {
@@ -6287,54 +6290,6 @@
   "DRIFTUSDT": 1789696087
  },
  "log": [
-  {
-   "t": 1789656344,
-   "sym": "LINKUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (11.4667); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1789656356,
-   "sym": "XMRUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (508.574); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1789656369,
-   "sym": "ETHUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (2496.83); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1789656387,
-   "sym": "ATOMUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (1.53893); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1789656398,
-   "sym": "XRPUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (1.31767); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1789656406,
-   "sym": "SUIUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (0.722219); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1789656416,
-   "sym": "WLDUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (0.372026); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1789656423,
-   "sym": "AVAXUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (7.70603); kirilim/hold olmadan LONG yok"
-  },
   {
    "t": 1789656433,
    "sym": "LTCUSDT",
@@ -11086,6 +11041,54 @@
    "sym": "LAUSDT",
    "event": "EARLY",
    "detail": "LONG @ 0.06774"
+  },
+  {
+   "t": 1789707667,
+   "sym": "LITUSDT",
+   "event": "VETO",
+   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
+  },
+  {
+   "t": 1789707676,
+   "sym": "XMRUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (522.192); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1789707684,
+   "sym": "1000PEPEUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (0.00371175); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1789707698,
+   "sym": "XPLUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (0.08942); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1789707724,
+   "sym": "HEIUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (0.132566); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1789707738,
+   "sym": "LAUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (0.0677126); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1789707774,
+   "sym": "XAUTUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (4338.72); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1789707780,
+   "sym": "PAXGUSDT",
+   "event": "EARLY_PUMP",
+   "detail": "OI %+2.9, 15d hacim 6.1x"
   }
  ],
  "trades": [
@@ -11196,17 +11199,8 @@
   }
  ],
  "fail_count": 0,
- "last_ok_run": 1789706741,
+ "last_ok_run": 1789707659,
  "scan_log": [
-  {
-   "ts": 1789625861,
-   "ok": true,
-   "symbols": 528,
-   "liquid": 138,
-   "candidates": 131,
-   "open_signals": 32,
-   "duration_s": 128
-  },
   {
    "ts": 1789626775,
    "ok": true,
@@ -12061,6 +12055,15 @@
    "candidates": 130,
    "open_signals": 40,
    "duration_s": 198
+  },
+  {
+   "ts": 1789707788,
+   "ok": true,
+   "symbols": 528,
+   "liquid": 136,
+   "candidates": 131,
+   "open_signals": 40,
+   "duration_s": 131
   }
  ],
  "engine_version": "3.3",
@@ -12090,7 +12093,7 @@
   "PENGUUSDT": 1789696080,
   "ONDOUSDT": 1789605016,
   "ENAUSDT": 1788940046,
-  "PAXGUSDT": 1789460239,
+  "PAXGUSDT": 1789707780,
   "BULLAUSDT": 1788834819,
   "XLMUSDT": 1788921192,
   "AVAXUSDT": 1789387401,
