@@ -1076,7 +1076,8 @@
     "condition": "breakdown+hold+retest failure"
    },
    "created": 1789875128,
-   "last_update": 1789875128
+   "last_update": 1789875128,
+   "retest_wait": true
   },
   "DASHUSDT": {
    "status": "CANCELLED",
@@ -6920,7 +6921,8 @@
     "condition": "breakdown+hold+retest failure"
    },
    "created": 1789875180,
-   "last_update": 1789875180
+   "last_update": 1789875180,
+   "retest_wait": true
   },
   "HOMEUSDT": {
    "status": "EARLY",
@@ -7009,7 +7011,8 @@
     "condition": "breakdown+hold+retest failure"
    },
    "created": 1789875244,
-   "last_update": 1789875244
+   "last_update": 1789875244,
+   "retest_wait": true
   }
  },
  "pump_alerts": {
@@ -7145,60 +7148,6 @@
   "CELRUSDT": 1789861659
  },
  "log": [
-  {
-   "t": 1789827674,
-   "sym": "LITUSDT",
-   "event": "VETO",
-   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
-  },
-  {
-   "t": 1789827697,
-   "sym": "AEROUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (0.676); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1789827712,
-   "sym": "JTOUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (0.467413); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1789827715,
-   "sym": "MONUSDT",
-   "event": "VETO",
-   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
-  },
-  {
-   "t": 1789827723,
-   "sym": "CAKEUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (2.41426); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1789827726,
-   "sym": "SUSHIUSDT",
-   "event": "VETO",
-   "detail": "ilk yapisal engel 0.20R (<1.5R)"
-  },
-  {
-   "t": 1789827729,
-   "sym": "MINAUSDT",
-   "event": "VETO",
-   "detail": "15d EMA20/MA7 yonu veya EMA20 egimi uyumsuz"
-  },
-  {
-   "t": 1789827738,
-   "sym": "1000SHIBUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (0.00549163); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1789827744,
-   "sym": "VIRTUALUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (0.670678); kirilim/hold olmadan SHORT yok"
-  },
   {
    "t": 1789827752,
    "sym": "LINKUSDT",
@@ -11944,6 +11893,60 @@
    "sym": "HOMEUSDT",
    "event": "EARLY",
    "detail": "LONG @ 0.006535"
+  },
+  {
+   "t": 1789875944,
+   "sym": "ADAUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (0.221836); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1789875987,
+   "sym": "HBARUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (0.0794147); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1789875998,
+   "sym": "TIAUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (0.422946); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1789876034,
+   "sym": "ONDOUSDT",
+   "event": "VETO",
+   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
+  },
+  {
+   "t": 1789876059,
+   "sym": "XMRUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (534.505); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1789876066,
+   "sym": "1000SHIBUSDT",
+   "event": "VETO",
+   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
+  },
+  {
+   "t": 1789876085,
+   "sym": "LABUSDT",
+   "event": "VETO",
+   "detail": "15d EMA20/MA7 yonu veya EMA20 egimi uyumsuz"
+  },
+  {
+   "t": 1789876089,
+   "sym": "STXUSDT",
+   "event": "VETO",
+   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
+  },
+  {
+   "t": 1789876098,
+   "sym": "VETUSDT",
+   "event": "VETO",
+   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
   }
  ],
  "trades": [
@@ -12096,17 +12099,8 @@
   }
  ],
  "fail_count": 0,
- "last_ok_run": 1789875046,
+ "last_ok_run": 1789875935,
  "scan_log": [
-  {
-   "ts": 1789795979,
-   "ok": true,
-   "symbols": 528,
-   "liquid": 165,
-   "candidates": 133,
-   "open_signals": 55,
-   "duration_s": 130
-  },
   {
    "ts": 1789796858,
    "ok": true,
@@ -12961,6 +12955,15 @@
    "candidates": 150,
    "open_signals": 34,
    "duration_s": 213
+  },
+  {
+   "ts": 1789876113,
+   "ok": true,
+   "symbols": 528,
+   "liquid": 167,
+   "candidates": 150,
+   "open_signals": 34,
+   "duration_s": 179
   }
  ],
  "engine_version": "3.3",
