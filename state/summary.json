@@ -1,10 +1,10 @@
 {
- "generated_at": 1790173134,
+ "generated_at": 1790174059,
  "engine_version": "3.3",
- "last_ok_run": 1790172944,
+ "last_ok_run": 1790173853,
  "fail_count": 0,
  "known_symbols_count": 528,
- "open_signal_count": 50,
+ "open_signal_count": 51,
  "open_signals": [
   {
    "symbol": "ARBUSDT",
@@ -1255,18 +1255,34 @@
    "htf_resistance": null,
    "created": 1790173106,
    "last_update": 1790173106
+  },
+  {
+   "symbol": "PROMUSDT",
+   "status": "EARLY",
+   "side": "LONG",
+   "price": 5.04,
+   "trigger": 4.93,
+   "sl": 4.807020973753976,
+   "tp1": 5.204,
+   "tp2": 5.268,
+   "tp3": 5.445,
+   "rr1": 2.2280221950355434,
+   "rr2": 2.74843613840151,
+   "rr3": 4.187705950523014,
+   "risk_pct": 2.4945035749700604,
+   "score": 10,
+   "score_max": 13,
+   "setup_type": "breakout_retest",
+   "priority_setup": true,
+   "decision_bias": "WAIT",
+   "decision_strength": "zayif/karisik",
+   "htf_support": 4.833545333333333,
+   "htf_resistance": 5.132166394939157,
+   "created": 1790174009,
+   "last_update": 1790174009
   }
  ],
  "scan_log": [
-  {
-   "ts": 1790092068,
-   "ok": true,
-   "symbols": 528,
-   "liquid": 184,
-   "candidates": 146,
-   "open_signals": 37,
-   "duration_s": 124
-  },
   {
    "ts": 1790092982,
    "ok": true,
@@ -2121,57 +2137,18 @@
    "candidates": 147,
    "open_signals": 50,
    "duration_s": 191
+  },
+  {
+   "ts": 1790174058,
+   "ok": true,
+   "symbols": 528,
+   "liquid": 206,
+   "candidates": 147,
+   "open_signals": 51,
+   "duration_s": 206
   }
  ],
  "log_last_24h": [
-  {
-   "t": 1790165012,
-   "sym": "FETUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (0.203897); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1790165761,
-   "sym": "WLDUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (0.461062); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1790165767,
-   "sym": "FILUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (1.03817); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1790165777,
-   "sym": "ASTERUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (0.70636); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1790165788,
-   "sym": "XRPUSDT",
-   "event": "VETO",
-   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
-  },
-  {
-   "t": 1790165803,
-   "sym": "LABUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (0.0590389); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1790165857,
-   "sym": "1000PEPEUSDT",
-   "event": "VETO",
-   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
-  },
-  {
-   "t": 1790165863,
-   "sym": "TAOUSDT",
-   "event": "VETO",
-   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
-  },
   {
    "t": 1790165868,
    "sym": "LINKUSDT",
@@ -2840,6 +2817,54 @@
   },
   {
    "t": 1790173115,
+   "sym": "LAUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (0.0741425); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1790173858,
+   "sym": "DASHUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (60.8897); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1790173909,
+   "sym": "LITUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (5.15597); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1790173914,
+   "sym": "KERNELUSDT",
+   "event": "VETO",
+   "detail": "15d failed reclaim/hold (0/1 kapanis)"
+  },
+  {
+   "t": 1790173922,
+   "sym": "0GUSDT",
+   "event": "VETO",
+   "detail": "15d EMA20/MA7 yonu veya EMA20 egimi uyumsuz"
+  },
+  {
+   "t": 1790173962,
+   "sym": "ONEUSDT",
+   "event": "VETO",
+   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
+  },
+  {
+   "t": 1790173966,
+   "sym": "TIAUSDT",
+   "event": "VETO",
+   "detail": "15d failed reclaim/hold (0/1 kapanis)"
+  },
+  {
+   "t": 1790174009,
+   "sym": "PROMUSDT",
+   "event": "EARLY",
+   "detail": "LONG @ 5.04"
+  },
+  {
+   "t": 1790174038,
    "sym": "LAUSDT",
    "event": "VETO",
    "detail": "guclu HTF direnc bolgesinde (0.0741425); kirilim/hold olmadan LONG yok"
