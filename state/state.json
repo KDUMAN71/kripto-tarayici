@@ -2167,7 +2167,8 @@
     "condition": "breakout+hold+retest"
    },
    "created": 1790238823,
-   "last_update": 1790238823
+   "last_update": 1790238823,
+   "retest_wait": true
   },
   "1000BONKUSDT": {
    "status": "EXPIRED",
@@ -7425,66 +7426,6 @@
  },
  "log": [
   {
-   "t": 1790189185,
-   "sym": "LAUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (0.0725264); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1790189226,
-   "sym": "HYPEUSDT",
-   "event": "VETO",
-   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
-  },
-  {
-   "t": 1790189236,
-   "sym": "SUIUSDT",
-   "event": "VETO",
-   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
-  },
-  {
-   "t": 1790189241,
-   "sym": "ADAUSDT",
-   "event": "VETO",
-   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
-  },
-  {
-   "t": 1790189246,
-   "sym": "AVAXUSDT",
-   "event": "VETO",
-   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
-  },
-  {
-   "t": 1790189256,
-   "sym": "AKEUSDT",
-   "event": "VETO",
-   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
-  },
-  {
-   "t": 1790189262,
-   "sym": "ONDOUSDT",
-   "event": "VETO",
-   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
-  },
-  {
-   "t": 1790189266,
-   "sym": "XLMUSDT",
-   "event": "VETO",
-   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
-  },
-  {
-   "t": 1790189277,
-   "sym": "ETCUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (8.7784); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1790190071,
-   "sym": "ARBUSDT",
-   "event": "VETO",
-   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
-  },
-  {
    "t": 1790190075,
    "sym": "AAVEUSDT",
    "event": "VETO",
@@ -12223,6 +12164,66 @@
    "sym": "SYSTEM",
    "event": "KNOWN_SYMBOLS_PRUNED",
    "detail": "1 stale perpetual silindi"
+  },
+  {
+   "t": 1790239544,
+   "sym": "AAVEUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (139.208); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1790239569,
+   "sym": "DOTUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (1.11326); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1790239582,
+   "sym": "PROMUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (5.2538); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1790239589,
+   "sym": "PUMPUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (0.0038965); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1790239602,
+   "sym": "1000SHIBUSDT",
+   "event": "VETO",
+   "detail": "canli fiyat reclaim/breakdown seviyesini kaybetti"
+  },
+  {
+   "t": 1790239633,
+   "sym": "SOLUSDT",
+   "event": "VETO",
+   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
+  },
+  {
+   "t": 1790239642,
+   "sym": "BNBUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (766.359); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1790239658,
+   "sym": "ONDOUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (0.428763); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1790239666,
+   "sym": "BRUSDT",
+   "event": "VETO",
+   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
+  },
+  {
+   "t": 1790239673,
+   "sym": "ASTERUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (0.708803); kirilim/hold olmadan LONG yok"
   }
  ],
  "trades": [
@@ -12396,17 +12397,8 @@
   }
  ],
  "fail_count": 0,
- "last_ok_run": 1790238658,
+ "last_ok_run": 1790239538,
  "scan_log": [
-  {
-   "ts": 1790157809,
-   "ok": true,
-   "symbols": 528,
-   "liquid": 191,
-   "candidates": 138,
-   "open_signals": 51,
-   "duration_s": 153
-  },
   {
    "ts": 1790158692,
    "ok": true,
@@ -13261,6 +13253,15 @@
    "candidates": 140,
    "open_signals": 33,
    "duration_s": 176
+  },
+  {
+   "ts": 1790239691,
+   "ok": true,
+   "symbols": 527,
+   "liquid": 203,
+   "candidates": 141,
+   "open_signals": 33,
+   "duration_s": 155
   }
  ],
  "engine_version": "3.3",
