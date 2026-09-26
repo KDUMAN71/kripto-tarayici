@@ -3650,7 +3650,7 @@
    "retest_wait": true
   },
   "ETHUSDT": {
-   "status": "EARLY",
+   "status": "EXPIRED",
    "side": "LONG",
    "price": 2723.8,
    "trigger": 2669.0,
@@ -3739,7 +3739,7 @@
     "condition": "breakdown+hold+retest failure"
    },
    "created": 1790335950,
-   "last_update": 1790335950,
+   "last_update": 1790466388,
    "retest_wait": true
   },
   "DOGEUSDT": {
@@ -7009,60 +7009,6 @@
   "ORDIUSDT": 1790442540
  },
  "log": [
-  {
-   "t": 1790408761,
-   "sym": "TAOUSDT",
-   "event": "VETO",
-   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
-  },
-  {
-   "t": 1790408767,
-   "sym": "ICPUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (3.1925); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1790408776,
-   "sym": "DOGEUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (0.0960886); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1790408784,
-   "sym": "DOTUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (1.236); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1790408787,
-   "sym": "FARTCOINUSDT",
-   "event": "VETO",
-   "detail": "15d EMA20/MA7 yonu veya EMA20 egimi uyumsuz"
-  },
-  {
-   "t": 1790408821,
-   "sym": "XRPUSDT",
-   "event": "VETO",
-   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
-  },
-  {
-   "t": 1790408824,
-   "sym": "SUIUSDT",
-   "event": "VETO",
-   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
-  },
-  {
-   "t": 1790408828,
-   "sym": "ENAUSDT",
-   "event": "VETO",
-   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
-  },
-  {
-   "t": 1790408873,
-   "sym": "TRXUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (0.338458); kirilim/hold olmadan LONG yok"
-  },
   {
    "t": 1790409669,
    "sym": "TRUMPUSDT",
@@ -11808,6 +11754,60 @@
    "sym": "AAVEUSDT",
    "event": "VETO",
    "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
+  },
+  {
+   "t": 1790466354,
+   "sym": "NEARUSDT",
+   "event": "VETO",
+   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
+  },
+  {
+   "t": 1790466388,
+   "sym": "ETHUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (2706.16); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1790466388,
+   "sym": "ETHUSDT",
+   "event": "EXPIRED_SILENT",
+   "detail": "pretrade expired"
+  },
+  {
+   "t": 1790466415,
+   "sym": "EIGENUSDT",
+   "event": "VETO",
+   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
+  },
+  {
+   "t": 1790466427,
+   "sym": "XMRUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (560.786); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1790466438,
+   "sym": "PYTHUSDT",
+   "event": "VETO",
+   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
+  },
+  {
+   "t": 1790466444,
+   "sym": "ATOMUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (1.864); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1790466460,
+   "sym": "ETHUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (2706.16); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1790466467,
+   "sym": "XRPUSDT",
+   "event": "VETO",
+   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
   }
  ],
  "trades": [
@@ -12023,17 +12023,8 @@
   }
  ],
  "fail_count": 0,
- "last_ok_run": 1790465448,
+ "last_ok_run": 1790466338,
  "scan_log": [
-  {
-   "ts": 1790385442,
-   "ok": true,
-   "symbols": 527,
-   "liquid": 164,
-   "candidates": 137,
-   "open_signals": 42,
-   "duration_s": 104
-  },
   {
    "ts": 1790386271,
    "ok": true,
@@ -12888,6 +12879,15 @@
    "candidates": 131,
    "open_signals": 48,
    "duration_s": 151
+  },
+  {
+   "ts": 1790466482,
+   "ok": true,
+   "symbols": 527,
+   "liquid": 159,
+   "candidates": 131,
+   "open_signals": 47,
+   "duration_s": 145
   }
  ],
  "engine_version": "3.3",
