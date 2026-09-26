@@ -617,7 +617,8 @@
     "condition": "breakdown+hold+retest failure"
    },
    "created": 1790396256,
-   "last_update": 1790396256
+   "last_update": 1790396256,
+   "retest_wait": true
   },
   "DASHUSDT": {
    "status": "EARLY",
@@ -1529,7 +1530,8 @@
     "condition": "breakdown+hold+retest failure"
    },
    "created": 1790396235,
-   "last_update": 1790396235
+   "last_update": 1790396235,
+   "retest_wait": true
   },
   "WLDUSDT": {
    "status": "EARLY",
@@ -6456,60 +6458,6 @@
  },
  "log": [
   {
-   "t": 1790336817,
-   "sym": "BTCUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (84990.8); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1790336820,
-   "sym": "VVVUSDT",
-   "event": "VETO",
-   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
-  },
-  {
-   "t": 1790337680,
-   "sym": "WLDUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (0.4557); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1790337683,
-   "sym": "FILUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (1.03817); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1790337702,
-   "sym": "TIAUSDT",
-   "event": "VETO",
-   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
-  },
-  {
-   "t": 1790337707,
-   "sym": "1000PEPEUSDT",
-   "event": "VETO",
-   "detail": "canli stop riski %3.25; izin verilen %0.35-%3.0"
-  },
-  {
-   "t": 1790337712,
-   "sym": "ADAUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (0.257372); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1790337716,
-   "sym": "VTHOUSDT",
-   "event": "VETO",
-   "detail": "ilk yapisal engel 0.12R (<1.5R)"
-  },
-  {
-   "t": 1790337723,
-   "sym": "ICPUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (3.1925); kirilim/hold olmadan SHORT yok"
-  },
-  {
    "t": 1790337733,
    "sym": "PENDLEUSDT",
    "event": "VETO",
@@ -11254,6 +11202,60 @@
    "sym": "APTUSDT",
    "event": "VETO",
    "detail": "guclu HTF destek bolgesinde (0.85435); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1790397053,
+   "sym": "TRUMPUSDT",
+   "event": "VETO",
+   "detail": "15d EMA20/MA7 yonu veya EMA20 egimi uyumsuz"
+  },
+  {
+   "t": 1790397062,
+   "sym": "FILUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (1.03817); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1790397066,
+   "sym": "ASTERUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (0.741904); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1790397081,
+   "sym": "1000SHIBUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (0.005857); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1790397095,
+   "sym": "DOGEUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (0.0960886); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1790397106,
+   "sym": "FARTCOINUSDT",
+   "event": "VETO",
+   "detail": "15d failed reclaim/hold (0/1 kapanis)"
+  },
+  {
+   "t": 1790397149,
+   "sym": "AAVEUSDT",
+   "event": "VETO",
+   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
+  },
+  {
+   "t": 1790397160,
+   "sym": "LITUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (4.89605); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1790397180,
+   "sym": "MARSCOINUSDT",
+   "event": "VETO",
+   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
   }
  ],
  "trades": [
@@ -11427,17 +11429,8 @@
   }
  ],
  "fail_count": 0,
- "last_ok_run": 1790396139,
+ "last_ok_run": 1790397046,
  "scan_log": [
-  {
-   "ts": 1790315314,
-   "ok": true,
-   "symbols": 527,
-   "liquid": 168,
-   "candidates": 132,
-   "open_signals": 38,
-   "duration_s": 173
-  },
   {
    "ts": 1790316201,
    "ok": true,
@@ -12292,6 +12285,15 @@
    "candidates": 132,
    "open_signals": 35,
    "duration_s": 157
+  },
+  {
+   "ts": 1790397192,
+   "ok": true,
+   "symbols": 527,
+   "liquid": 162,
+   "candidates": 133,
+   "open_signals": 35,
+   "duration_s": 147
   }
  ],
  "engine_version": "3.3",
