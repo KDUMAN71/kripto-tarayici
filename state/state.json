@@ -3649,7 +3649,7 @@
    "retest_wait": true
   },
   "ZECUSDT": {
-   "status": "EARLY",
+   "status": "EXPIRED",
    "side": "LONG",
    "price": 1579.1,
    "trigger": 1540.35,
@@ -3737,7 +3737,7 @@
     "condition": "breakdown+hold+retest failure"
    },
    "created": 1790331436,
-   "last_update": 1790331436,
+   "last_update": 1790461875,
    "retest_wait": true
   },
   "ETHUSDT": {
@@ -7100,60 +7100,6 @@
   "ORDIUSDT": 1790442540
  },
  "log": [
-  {
-   "t": 1790406116,
-   "sym": "JUPUSDT",
-   "event": "VETO",
-   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
-  },
-  {
-   "t": 1790406134,
-   "sym": "BTCUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (83090.2); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1790406139,
-   "sym": "ENAUSDT",
-   "event": "VETO",
-   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
-  },
-  {
-   "t": 1790406156,
-   "sym": "LYNUSDT",
-   "event": "EARLY",
-   "detail": "LONG @ 0.04599"
-  },
-  {
-   "t": 1790406168,
-   "sym": "USELESSUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (0.281099); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1790406172,
-   "sym": "APTUSDT",
-   "event": "VETO",
-   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
-  },
-  {
-   "t": 1790406184,
-   "sym": "RAYSOLUSDT",
-   "event": "VETO",
-   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
-  },
-  {
-   "t": 1790406190,
-   "sym": "TRXUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (0.338458); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1790406203,
-   "sym": "ETHFIUSDT",
-   "event": "VETO",
-   "detail": "15d EMA20/MA7 yonu veya EMA20 egimi uyumsuz"
-  },
   {
    "t": 1790406214,
    "sym": "ZAMAUSDT",
@@ -11899,6 +11845,60 @@
    "sym": "TRUMPUSDT",
    "event": "VETO",
    "detail": "guclu HTF direnc bolgesinde (2.124); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1790461871,
+   "sym": "ICPUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (3.1925); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1790461875,
+   "sym": "ZECUSDT",
+   "event": "EXPIRED_SILENT",
+   "detail": "pretrade expired"
+  },
+  {
+   "t": 1790461878,
+   "sym": "ETHUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (2706.16); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1790461887,
+   "sym": "FETUSDT",
+   "event": "VETO",
+   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
+  },
+  {
+   "t": 1790461912,
+   "sym": "XMRUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (560.786); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1790461923,
+   "sym": "PYTHUSDT",
+   "event": "VETO",
+   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
+  },
+  {
+   "t": 1790461957,
+   "sym": "TRUMPUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (2.124); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1790461961,
+   "sym": "AEROUSDT",
+   "event": "VETO",
+   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
+  },
+  {
+   "t": 1790461967,
+   "sym": "SEIUSDT",
+   "event": "VETO",
+   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
   }
  ],
  "trades": [
@@ -12114,17 +12114,8 @@
   }
  ],
  "fail_count": 0,
- "last_ok_run": 1790460947,
+ "last_ok_run": 1790461849,
  "scan_log": [
-  {
-   "ts": 1790380085,
-   "ok": true,
-   "symbols": 527,
-   "liquid": 165,
-   "candidates": 130,
-   "open_signals": 40,
-   "duration_s": 149
-  },
   {
    "ts": 1790380995,
    "ok": true,
@@ -12979,6 +12970,15 @@
    "candidates": 133,
    "open_signals": 48,
    "duration_s": 164
+  },
+  {
+   "ts": 1790461979,
+   "ok": true,
+   "symbols": 527,
+   "liquid": 160,
+   "candidates": 133,
+   "open_signals": 47,
+   "duration_s": 130
   }
  ],
  "engine_version": "3.3",
