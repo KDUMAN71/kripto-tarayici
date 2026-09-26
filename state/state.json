@@ -2811,7 +2811,8 @@
     "condition": "breakdown+hold+retest failure"
    },
    "created": 1790436784,
-   "last_update": 1790436784
+   "last_update": 1790436784,
+   "retest_wait": true
   },
   "PUMPUSDT": {
    "status": "EARLY",
@@ -5842,7 +5843,7 @@
    "retest_wait": true,
    "activated_at": 1790427737,
    "entry_ref": 7.80075,
-   "mfe_pct": 2.900362144665569,
+   "mfe_pct": 3.0798320674294204,
    "mae_pct": 0.6121206294266544,
    "retest_armed": true,
    "retest_alerted": true,
@@ -7009,60 +7010,6 @@
   "QUSDT": 1790415218
  },
  "log": [
-  {
-   "t": 1790379067,
-   "sym": "ASTERUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (0.741205); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1790379074,
-   "sym": "TAOUSDT",
-   "event": "VETO",
-   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
-  },
-  {
-   "t": 1790379086,
-   "sym": "ICPUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (3.1925); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1790379089,
-   "sym": "SOLUSDT",
-   "event": "VETO",
-   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
-  },
-  {
-   "t": 1790379105,
-   "sym": "DOTUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (1.21363); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1790379127,
-   "sym": "ADAUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (0.257372); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1790379133,
-   "sym": "XLMUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (0.219646); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1790379139,
-   "sym": "LSKUSDT",
-   "event": "VETO",
-   "detail": "funding asiri kalabalik (-0.287%/8s)"
-  },
-  {
-   "t": 1790379153,
-   "sym": "PAXGUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (4295.57); kirilim/hold olmadan LONG yok"
-  },
   {
    "t": 1790379159,
    "sym": "XMRUSDT",
@@ -11808,6 +11755,60 @@
    "sym": "VVVUSDT",
    "event": "VETO",
    "detail": "guclu HTF direnc bolgesinde (30.2668); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1790437543,
+   "sym": "ARBUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (0.230483); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1790437553,
+   "sym": "NEARUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (4.80947); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1790437568,
+   "sym": "AVAXUSDT",
+   "event": "VETO",
+   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
+  },
+  {
+   "t": 1790437581,
+   "sym": "ETHUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (2706.16); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1790437584,
+   "sym": "DOGEUSDT",
+   "event": "VETO",
+   "detail": "1s hacim yetersiz (0.6749449512968244x)"
+  },
+  {
+   "t": 1790437595,
+   "sym": "ZROUSDT",
+   "event": "VETO",
+   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
+  },
+  {
+   "t": 1790437604,
+   "sym": "JUPUSDT",
+   "event": "VETO",
+   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
+  },
+  {
+   "t": 1790437626,
+   "sym": "XMRUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (544.303); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1790437630,
+   "sym": "ONEUSDT",
+   "event": "VETO",
+   "detail": "funding asiri kalabalik (-0.129%/8s)"
   }
  ],
  "trades": [
@@ -12002,17 +12003,8 @@
   }
  ],
  "fail_count": 0,
- "last_ok_run": 1790436650,
+ "last_ok_run": 1790437538,
  "scan_log": [
-  {
-   "ts": 1790355807,
-   "ok": true,
-   "symbols": 527,
-   "liquid": 168,
-   "candidates": 136,
-   "open_signals": 41,
-   "duration_s": 143
-  },
   {
    "ts": 1790356646,
    "ok": true,
@@ -12867,6 +12859,15 @@
    "candidates": 137,
    "open_signals": 48,
    "duration_s": 162
+  },
+  {
+   "ts": 1790437658,
+   "ok": true,
+   "symbols": 527,
+   "liquid": 155,
+   "candidates": 138,
+   "open_signals": 48,
+   "duration_s": 121
   }
  ],
  "engine_version": "3.3",
