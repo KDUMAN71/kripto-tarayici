@@ -3372,7 +3372,8 @@
     "condition": "breakdown+hold+retest failure"
    },
    "created": 1790499783,
-   "last_update": 1790499783
+   "last_update": 1790499783,
+   "retest_wait": true
   },
   "FETUSDT": {
    "status": "EXPIRED",
@@ -6841,7 +6842,8 @@
     "condition": "breakdown+hold+retest failure"
    },
    "created": 1790499812,
-   "last_update": 1790499812
+   "last_update": 1790499812,
+   "retest_wait": true
   },
   "1000BONKUSDT": {
    "status": "EARLY",
@@ -6933,7 +6935,8 @@
     "condition": "breakdown+hold+retest failure"
    },
    "created": 1790499834,
-   "last_update": 1790499834
+   "last_update": 1790499834,
+   "retest_wait": true
   }
  },
  "pump_alerts": {
@@ -7098,60 +7101,6 @@
   "TAIKOUSDT": 1790488084
  },
  "log": [
-  {
-   "t": 1790442482,
-   "sym": "ENAUSDT",
-   "event": "VETO",
-   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
-  },
-  {
-   "t": 1790442508,
-   "sym": "PONSUSDT",
-   "event": "EARLY",
-   "detail": "LONG @ 0.6498"
-  },
-  {
-   "t": 1790442514,
-   "sym": "ETHFIUSDT",
-   "event": "VETO",
-   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
-  },
-  {
-   "t": 1790442522,
-   "sym": "POLUSDT",
-   "event": "VETO",
-   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
-  },
-  {
-   "t": 1790442540,
-   "sym": "ORDIUSDT",
-   "event": "PUMP_ALERT",
-   "detail": "vol 11.1x, 3h %6.6"
-  },
-  {
-   "t": 1790442946,
-   "sym": "NEARUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (4.80947); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1790442956,
-   "sym": "ASTERUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (0.741904); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1790442976,
-   "sym": "ZECUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (1574.93); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1790442980,
-   "sym": "DOGEUSDT",
-   "event": "VETO",
-   "detail": "15d EMA20/MA7 yonu veya EMA20 egimi uyumsuz"
-  },
   {
    "t": 1790443026,
    "sym": "ENAUSDT",
@@ -11897,6 +11846,60 @@
    "sym": "JELLYJELLYUSDT",
    "event": "VETO",
    "detail": "guclu HTF destek bolgesinde (0.058009); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1790500542,
+   "sym": "ARBUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (0.229852); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1790500548,
+   "sym": "VIRTUALUSDT",
+   "event": "VETO",
+   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
+  },
+  {
+   "t": 1790500553,
+   "sym": "WLDUSDT",
+   "event": "VETO",
+   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
+  },
+  {
+   "t": 1790500557,
+   "sym": "RAYSOLUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (2.2145); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1790500587,
+   "sym": "XMRUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (560.902); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1790500595,
+   "sym": "LITUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (4.69958); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1790500601,
+   "sym": "INJUSDT",
+   "event": "VETO",
+   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
+  },
+  {
+   "t": 1790500632,
+   "sym": "HYPEUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (93.5292); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1790500657,
+   "sym": "DOTUSDT",
+   "event": "VETO",
+   "detail": "15d EMA20/MA7 yonu veya EMA20 egimi uyumsuz"
   }
  ],
  "trades": [
@@ -12112,17 +12115,8 @@
   }
  ],
  "fail_count": 0,
- "last_ok_run": 1790499696,
+ "last_ok_run": 1790500538,
  "scan_log": [
-  {
-   "ts": 1790419707,
-   "ok": true,
-   "symbols": 527,
-   "liquid": 159,
-   "candidates": 137,
-   "open_signals": 39,
-   "duration_s": 170
-  },
   {
    "ts": 1790420592,
    "ok": true,
@@ -12977,6 +12971,15 @@
    "candidates": 133,
    "open_signals": 44,
    "duration_s": 153
+  },
+  {
+   "ts": 1790500669,
+   "ok": true,
+   "symbols": 527,
+   "liquid": 154,
+   "candidates": 133,
+   "open_signals": 44,
+   "duration_s": 131
   }
  ],
  "engine_version": "3.3",
