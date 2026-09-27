@@ -7011,7 +7011,8 @@
     "condition": "breakdown+hold+retest failure"
    },
    "created": 1790504257,
-   "last_update": 1790504257
+   "last_update": 1790504257,
+   "retest_wait": true
   },
   "CCUSDT": {
    "status": "EARLY",
@@ -7101,7 +7102,8 @@
     "condition": "breakdown+hold+retest failure"
    },
    "created": 1790504279,
-   "last_update": 1790504279
+   "last_update": 1790504279,
+   "retest_wait": true
   },
   "COTIUSDT": {
    "status": "EARLY",
@@ -7189,7 +7191,8 @@
     "condition": "breakout+hold+retest"
    },
    "created": 1790504283,
-   "last_update": 1790504283
+   "last_update": 1790504283,
+   "retest_wait": true
   }
  },
  "pump_alerts": {
@@ -7355,60 +7358,6 @@
   "XVGUSDT": 1790503412
  },
  "log": [
-  {
-   "t": 1790446678,
-   "sym": "ETHFIUSDT",
-   "event": "EARLY",
-   "detail": "LONG @ 0.745"
-  },
-  {
-   "t": 1790446686,
-   "sym": "POLUSDT",
-   "event": "VETO",
-   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
-  },
-  {
-   "t": 1790446697,
-   "sym": "CRVUSDT",
-   "event": "VETO",
-   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
-  },
-  {
-   "t": 1790446701,
-   "sym": "PENDLEUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (2.60276); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1790447462,
-   "sym": "TRUMPUSDT",
-   "event": "VETO",
-   "detail": "15d EMA20/MA7 yonu veya EMA20 egimi uyumsuz"
-  },
-  {
-   "t": 1790447471,
-   "sym": "NEARUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (4.80947); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1790447480,
-   "sym": "ASTERUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (0.741904); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1790447502,
-   "sym": "ZECUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (1574.93); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1790447524,
-   "sym": "LSKUSDT",
-   "event": "VETO",
-   "detail": "funding asiri kalabalik (-0.235%/8s)"
-  },
   {
    "t": 1790447598,
    "sym": "POLUSDT",
@@ -12154,6 +12103,60 @@
    "sym": "COTIUSDT",
    "event": "EARLY",
    "detail": "SHORT @ 0.014976"
+  },
+  {
+   "t": 1790505059,
+   "sym": "ZECUSDT",
+   "event": "VETO",
+   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
+  },
+  {
+   "t": 1790505064,
+   "sym": "ONDOUSDT",
+   "event": "VETO",
+   "detail": "15d EMA20/MA7 yonu veya EMA20 egimi uyumsuz"
+  },
+  {
+   "t": 1790505067,
+   "sym": "BCHUSDT",
+   "event": "VETO",
+   "detail": "15d EMA20/MA7 yonu veya EMA20 egimi uyumsuz"
+  },
+  {
+   "t": 1790505088,
+   "sym": "XMRUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (560.902); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1790505131,
+   "sym": "ETHUSDT",
+   "event": "VETO",
+   "detail": "15d EMA20/MA7 yonu veya EMA20 egimi uyumsuz"
+  },
+  {
+   "t": 1790505155,
+   "sym": "TRUMPUSDT",
+   "event": "VETO",
+   "detail": "ilk yapisal engel 0.13R (<1.5R)"
+  },
+  {
+   "t": 1790505168,
+   "sym": "LSKUSDT",
+   "event": "VETO",
+   "detail": "funding asiri kalabalik (-0.208%/8s)"
+  },
+  {
+   "t": 1790505190,
+   "sym": "HBARUSDT",
+   "event": "VETO",
+   "detail": "15d EMA20/MA7 yonu veya EMA20 egimi uyumsuz"
+  },
+  {
+   "t": 1790505195,
+   "sym": "SPELLUSDT",
+   "event": "VETO",
+   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
   }
  ],
  "trades": [
@@ -12369,17 +12372,8 @@
   }
  ],
  "fail_count": 0,
- "last_ok_run": 1790504139,
+ "last_ok_run": 1790505044,
  "scan_log": [
-  {
-   "ts": 1790424220,
-   "ok": true,
-   "symbols": 527,
-   "liquid": 158,
-   "candidates": 137,
-   "open_signals": 45,
-   "duration_s": 162
-  },
   {
    "ts": 1790425067,
    "ok": true,
@@ -13234,6 +13228,15 @@
    "candidates": 138,
    "open_signals": 45,
    "duration_s": 157
+  },
+  {
+   "ts": 1790505209,
+   "ok": true,
+   "symbols": 527,
+   "liquid": 161,
+   "candidates": 138,
+   "open_signals": 45,
+   "duration_s": 166
   }
  ],
  "engine_version": "3.3",
