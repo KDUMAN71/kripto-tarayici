@@ -4667,7 +4667,7 @@
    "retest_wait": true
   },
   "LYNUSDT": {
-   "status": "EARLY",
+   "status": "CANCELLED",
    "side": "LONG",
    "price": 0.04087,
    "trigger": 0.04017,
@@ -4757,7 +4757,7 @@
     "condition": "breakdown+hold+retest failure"
    },
    "created": 1790472788,
-   "last_update": 1790472788,
+   "last_update": 1790492520,
    "retest_wait": true
   },
   "METUSDT": {
@@ -5572,7 +5572,7 @@
    "retest_wait": true
   },
   "MUBARAKUSDT": {
-   "status": "EARLY",
+   "status": "CANCELLED",
    "side": "LONG",
    "price": 0.05806,
    "trigger": 0.05705,
@@ -5660,7 +5660,7 @@
     "condition": "breakdown+hold+retest failure"
    },
    "created": 1790439444,
-   "last_update": 1790439444,
+   "last_update": 1790492531,
    "retest_wait": true
   },
   "LITUSDT": {
@@ -6659,7 +6659,8 @@
     "condition": "breakdown+hold+retest failure"
    },
    "created": 1790491657,
-   "last_update": 1790491657
+   "last_update": 1790491657,
+   "retest_wait": true
   },
   "RUNEUSDT": {
    "status": "EARLY",
@@ -6749,7 +6750,8 @@
     "condition": "breakdown+hold+retest failure"
    },
    "created": 1790491675,
-   "last_update": 1790491675
+   "last_update": 1790491675,
+   "retest_wait": true
   }
  },
  "pump_alerts": {
@@ -6914,60 +6916,6 @@
   "TAIKOUSDT": 1790488084
  },
  "log": [
-  {
-   "t": 1790436654,
-   "sym": "ARBUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (0.230483); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1790436692,
-   "sym": "ETHUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (2706.16); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1790436695,
-   "sym": "DOGEUSDT",
-   "event": "VETO",
-   "detail": "1s hacim yetersiz (0.6749449512968244x)"
-  },
-  {
-   "t": 1790436706,
-   "sym": "ZROUSDT",
-   "event": "VETO",
-   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
-  },
-  {
-   "t": 1790436721,
-   "sym": "LSKUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (0.3336); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1790436732,
-   "sym": "PROMUSDT",
-   "event": "VETO",
-   "detail": "15d EMA20/MA7 yonu veya EMA20 egimi uyumsuz"
-  },
-  {
-   "t": 1790436736,
-   "sym": "XMRUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (544.303); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1790436762,
-   "sym": "1000PEPEUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (0.00445544); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1790436784,
-   "sym": "TIAUSDT",
-   "event": "EARLY",
-   "detail": "LONG @ 0.5115"
-  },
   {
    "t": 1790436800,
    "sym": "VVVUSDT",
@@ -11713,6 +11661,60 @@
    "sym": "PENGUUSDT",
    "event": "EARLY_PUMP",
    "detail": "OI %+1.9, 15d hacim 1.7x"
+  },
+  {
+   "t": 1790492464,
+   "sym": "ARBUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (0.229852); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1790492501,
+   "sym": "ZROUSDT",
+   "event": "VETO",
+   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
+  },
+  {
+   "t": 1790492519,
+   "sym": "LSKUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (0.3336); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1790492520,
+   "sym": "LYNUSDT",
+   "event": "CANCELLED",
+   "detail": "1h close 0.03904 invalidation beyond"
+  },
+  {
+   "t": 1790492527,
+   "sym": "XMRUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (560.86); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1790492531,
+   "sym": "MUBARAKUSDT",
+   "event": "CANCELLED",
+   "detail": "1h close 0.05511 invalidation beyond"
+  },
+  {
+   "t": 1790492534,
+   "sym": "LITUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (4.69901); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1790492563,
+   "sym": "ETHUSDT",
+   "event": "VETO",
+   "detail": "ilk yapisal engel 0.28R (<1.5R)"
+  },
+  {
+   "t": 1790492572,
+   "sym": "HYPEUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (93.5292); kirilim/hold olmadan LONG yok"
   }
  ],
  "trades": [
@@ -11928,17 +11930,8 @@
   }
  ],
  "fail_count": 0,
- "last_ok_run": 1790491536,
+ "last_ok_run": 1790492460,
  "scan_log": [
-  {
-   "ts": 1790410680,
-   "ok": true,
-   "symbols": 527,
-   "liquid": 155,
-   "candidates": 132,
-   "open_signals": 40,
-   "duration_s": 145
-  },
   {
    "ts": 1790411590,
    "ok": true,
@@ -12793,6 +12786,15 @@
    "candidates": 132,
    "open_signals": 43,
    "duration_s": 154
+  },
+  {
+   "ts": 1790492586,
+   "ok": true,
+   "symbols": 527,
+   "liquid": 161,
+   "candidates": 133,
+   "open_signals": 41,
+   "duration_s": 128
   }
  ],
  "engine_version": "3.3",
