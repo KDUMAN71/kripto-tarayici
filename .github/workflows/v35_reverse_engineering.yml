@@ -1,4 +1,4 @@
-name: v3.5-reverse-engineering
+name: v3.5-reverse-engineering-v3
 
 on:
   workflow_dispatch:
@@ -8,7 +8,7 @@ on:
         required: false
         default: '30'
       min_run_pct:
-        description: First threshold-cross percentage from trailing 24h low
+        description: Outcome threshold used to label runner episodes; not assumed move start
         required: false
         default: '10'
       max_events:
@@ -57,10 +57,10 @@ jobs:
             --max-events "${{ inputs.max_events }}" \
             --events-per-day "${{ inputs.events_per_day }}" \
             --controls-per-runner "${{ inputs.controls_per_runner }}" \
-            --output artifacts/v35_episode_replay_v2.json \
+            --output artifacts/v35_prerunner_replay_v3.json \
             "${EXTRA[@]}"
       - uses: actions/upload-artifact@v4
         with:
-          name: v35-episode-replay-v2
-          path: artifacts/v35_episode_replay_v2.json
+          name: v35-prerunner-replay-v3
+          path: artifacts/v35_prerunner_replay_v3.json
           retention-days: 14
