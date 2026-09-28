@@ -1,4 +1,4 @@
-"""V3.5 episode-first replay dataset (schema v2)."""
+"""V3.5 pre-runner replay dataset (schema v3)."""
 from __future__ import annotations
 import argparse, json, math
 from collections import defaultdict
@@ -171,11 +171,22 @@ def enrich(e,btc,warmup_h=72):
     out["execution_24h"]=excursion_from_entry(d,i,horizon_bars=96)
     out["legacy_prefilter_proxy_t0"]=legacy_proxy(out["features_t0"])
     path=[]
-    for h in [24,12,6,3,1,0]:
-        target=cross-pd.Timedelta(hours=h); j=idx_at(d,target)
+    # V3 keeps the old threshold-cross anchor for comparability, but records
+    # finer pre-cross snapshots and point-in-time derivatives at every point.
+    # These are research features only; they do not change live execution.
+    for minutes in [1440,720,360,180,60,30,15,0]:
+        target=cross-pd.Timedelta(minutes=minutes); j=idx_at(d,target)
         if j is not None:
-            s=attach_btc(snapshot_features(d,j),btc); s["hours_before_cross"]=h; s["target_ts"]=target.isoformat(); path.append(s)
-    out["feature_path"]=path; out["open_interest"]=oi(e["symbol"],cross); out["funding"]=funding(e["symbol"],cross)
+            s=attach_btc(snapshot_features(d,j),btc)
+            s["minutes_before_cross"]=minutes
+            s["hours_before_cross"]=minutes/60.0
+            s["target_ts"]=target.isoformat()
+            s["open_interest"]=oi(e["symbol"],target)
+            s["funding"]=funding(e["symbol"],target)
+            path.append(s)
+    out["feature_path"]=path
+    out["open_interest"]=oi(e["symbol"],cross)
+    out["funding"]=funding(e["symbol"],cross)
     return out
 
 def build(days,min_run,max_events,max_symbols,events_per_day=8,controls_per_runner=1):
@@ -203,12 +214,12 @@ def build(days,min_run,max_events,max_symbols,events_per_day=8,controls_per_runn
                   "oi_available_runners":sum(e.get("kind")=="runner" and e.get("open_interest",{}).get("available",False) for e in enriched),
                   "funding_available_runners":sum(e.get("kind")=="runner" and e.get("funding",{}).get("available",False) for e in enriched),
                   "aligned_within_1s":sum("alignment_delta_ms" in e and e["alignment_delta_ms"]<=1000 for e in enriched)}
-    return {"meta":{"schema_version":2,"generated_at":pd.Timestamp.now(tz="UTC").isoformat(),
+    return {"meta":{"schema_version":3,"generated_at":pd.Timestamp.now(tz="UTC").isoformat(),
                     "lookback_days":days,"min_run_pct":min_run,"symbols_scanned":len(syms),"failures":failures,
                     "raw_episode_count":len(raw),"selected_runner_count":len(runners),"events_per_day_cap":events_per_day,
                     "controls_per_runner":controls_per_runner,"missing_controls":missing,
-                    "event_definition":"first 1h threshold-cross above trailing 24h low; candle-close timestamp",
-                    "feature_rule":"closed candles only; 72h warmup; BTC-relative + point-in-time OI/funding",
+                    "event_definition":"first 1h threshold-cross above trailing 24h low; candle-close timestamp; threshold cross is an outcome anchor, not assumed move start",
+                    "feature_rule":"closed candles only; 72h warmup; BTC-relative; T-24h/T-12h/T-6h/T-3h/T-1h/T-30m/T-15m/T0 point-in-time OI/funding",
                     "label_warning":"future data only labels peak/extension, dedupes episode, and verifies negative controls",
                     "survivorship_bias_warning":"current exchangeInfo omits delisted contracts","availability":availability},
             "events":enriched}
@@ -218,7 +229,7 @@ def main():
     p.add_argument("--days",type=int,default=30); p.add_argument("--min-run-pct",type=float,default=10)
     p.add_argument("--max-events",type=int,default=240); p.add_argument("--events-per-day",type=int,default=8)
     p.add_argument("--controls-per-runner",type=int,default=1); p.add_argument("--max-symbols",type=int)
-    p.add_argument("--output",default="artifacts/v35_episode_replay_v2.json"); a=p.parse_args()
+    p.add_argument("--output",default="artifacts/v35_prerunner_replay_v3.json"); a=p.parse_args()
     payload=build(a.days,a.min_run_pct,a.max_events,a.max_symbols,a.events_per_day,a.controls_per_runner)
     path=Path(a.output); path.parent.mkdir(parents=True,exist_ok=True); path.write_text(json.dumps(payload,ensure_ascii=False,indent=2),encoding="utf-8")
     print(f"wrote {path} | runners={payload['meta']['selected_runner_count']} controls={payload['meta']['availability']['control_count']}")
