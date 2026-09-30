@@ -1622,7 +1622,7 @@
    "retest_wait": true
   },
   "ZROUSDT": {
-   "status": "EARLY",
+   "status": "EXPIRED",
    "side": "LONG",
    "price": 1.5856,
    "trigger": 1.5443,
@@ -1710,7 +1710,7 @@
     "condition": "breakdown+hold+retest failure"
    },
    "created": 1790666264,
-   "last_update": 1790666264,
+   "last_update": 1790796664,
    "retest_wait": true
   },
   "ADAUSDT": {
@@ -2977,7 +2977,7 @@
    "retest_wait": true
   },
   "UNIUSDT": {
-   "status": "EARLY",
+   "status": "EXPIRED",
    "side": "LONG",
    "price": 8.847,
    "trigger": 8.636,
@@ -3065,7 +3065,7 @@
     "condition": "breakdown+hold+retest failure"
    },
    "created": 1790666223,
-   "last_update": 1790666223,
+   "last_update": 1790796677,
    "retest_wait": true
   },
   "FETUSDT": {
@@ -5688,66 +5688,6 @@
   "SOMIUSDT": 1790773385
  },
  "log": [
-  {
-   "t": 1790734639,
-   "sym": "1000PEPEUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (0.00423464); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1790734644,
-   "sym": "ONDOUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (0.500133); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1790735470,
-   "sym": "DOTUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (1.2184); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1790735473,
-   "sym": "PENGUUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (0.0102265); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1790735484,
-   "sym": "XLMUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (0.220714); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1790735495,
-   "sym": "FETUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (0.22109); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1790735499,
-   "sym": "ICPUSDT",
-   "event": "VETO",
-   "detail": "15d failed reclaim/hold (0/1 kapanis)"
-  },
-  {
-   "t": 1790735512,
-   "sym": "ETHFIUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (0.774225); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1790735527,
-   "sym": "ETHUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (2630.19); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1790735532,
-   "sym": "LINKUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (14.2978); kirilim/hold olmadan SHORT yok"
-  },
   {
    "t": 1790735535,
    "sym": "BNBUSDT",
@@ -10487,6 +10427,66 @@
    "sym": "SOLUSDT",
    "event": "VETO",
    "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
+  },
+  {
+   "t": 1790796651,
+   "sym": "SUIUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (1.14804); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1790796664,
+   "sym": "ZROUSDT",
+   "event": "EXPIRED_SILENT",
+   "detail": "pretrade expired"
+  },
+  {
+   "t": 1790796675,
+   "sym": "ASTERUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (0.744133); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1790796677,
+   "sym": "UNIUSDT",
+   "event": "EXPIRED_SILENT",
+   "detail": "pretrade expired"
+  },
+  {
+   "t": 1790796692,
+   "sym": "ETHFIUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (0.774225); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1790796698,
+   "sym": "LDOUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (0.451864); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1790796702,
+   "sym": "1000BONKUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (0.0037845); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1790796732,
+   "sym": "BTCUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (83564.7); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1790796737,
+   "sym": "SOLUSDT",
+   "event": "VETO",
+   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
+  },
+  {
+   "t": 1790796750,
+   "sym": "AVAXUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (11.1001); kirilim/hold olmadan LONG yok"
   }
  ],
  "trades": [
@@ -10702,17 +10702,8 @@
   }
  ],
  "fail_count": 0,
- "last_ok_run": 1790795739,
+ "last_ok_run": 1790796646,
  "scan_log": [
-  {
-   "ts": 1790714662,
-   "ok": true,
-   "symbols": 527,
-   "liquid": 158,
-   "candidates": 131,
-   "open_signals": 31,
-   "duration_s": 109
-  },
   {
    "ts": 1790714844,
    "ok": true,
@@ -11567,6 +11558,15 @@
    "candidates": 134,
    "open_signals": 36,
    "duration_s": 135
+  },
+  {
+   "ts": 1790796767,
+   "ok": true,
+   "symbols": 527,
+   "liquid": 162,
+   "candidates": 135,
+   "open_signals": 34,
+   "duration_s": 123
   }
  ],
  "engine_version": "3.3",
