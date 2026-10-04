@@ -88,6 +88,44 @@ def _pattern_levels(side, pattern, a15, a1h, a4h):
             "rr3": abs(tp3 - entry) / risk if tp3 is not None else None}, trigger
 
 
+
+def _apply_htf_thesis_sl(side, plan, price, zones, atr):
+    """Yakindaki HTF zone tezin lehineyse hard SL zone'un disinda kalmalidir.
+
+    HTF zone uzaksa execution stopunu genisletmez. Zone siniri cluster
+    uyelerinden alinir; ATR buffer normal support/resistance testindeki fitilin
+    hard stop sayilmasini engeller.
+    """
+    if not plan or not zones or not price:
+        return plan, False
+    key = "support" if side == "long" else "resistance"
+    zone = zones.get(key)
+    if not zone:
+        return plan, False
+    dist = abs(price - zone["level"]) / price * 100
+    if dist > C.HTF_LOCATION_PROX_PCT:
+        return plan, False
+    members = zone.get("members") or [zone["level"]]
+    buf = 0.15 * (atr or price * 0.01)
+    boundary = min(members) if side == "long" else max(members)
+    required = boundary - buf if side == "long" else boundary + buf
+    old_sl = float(plan["sl"])
+    new_sl = min(old_sl, required) if side == "long" else max(old_sl, required)
+    if new_sl == old_sl:
+        return plan, False
+    out = dict(plan)
+    out["sl"] = new_sl
+    entry = float(out["entry"])
+    risk = abs(entry - new_sl)
+    out["risk_pct"] = risk / entry * 100 if entry else float("inf")
+    out["rr1"] = abs(out["tp1"] - entry) / risk if out.get("tp1") is not None and risk else None
+    out["rr2"] = abs(out["tp2"] - entry) / risk if out.get("tp2") is not None and risk else None
+    out["rr3"] = abs(out["tp3"] - entry) / risk if out.get("tp3") is not None and risk else None
+    out["htf_sl_adjusted"] = True
+    out["htf_thesis_zone"] = zone["level"]
+    return out, True
+
+
 def _pretrade_feasible(plan):
     if not plan or plan.get("tp1") is None or plan.get("tp2") is None:
         return False
@@ -340,6 +378,23 @@ def evaluate_v3(sym, a15, a1h, a4h, regime, ctx_fn):
     eligible, vetoes = [], []
     for cand in cands:
         side, pat, plan = cand["side"], cand["pattern"], cand["plan"]
+        plan, htf_sl_adjusted = _apply_htf_thesis_sl(
+            side, plan, a15["price"], decision["zones"], a1h.get("atr"))
+        cand["plan"] = plan
+        if htf_sl_adjusted and not _pretrade_feasible(plan):
+            # Tez icin dogru structural stop mevcut giriste R:R'yi bozuyorsa
+            # stopu yapay daraltma; tetik/retest fiyatinda tekrar degerlendir.
+            trigger_ok, _ = geometry_gate(cand["trigger"], plan["sl"], plan.get("tp1"))
+            if cand["stage"] == "ACTIVE" and trigger_ok:
+                cand["stage"] = "WATCH"
+                cand["retest"] = True
+                cand["dist"] = abs(cand["trigger"] - a15["price"]) / a15["price"] * 100
+                pat = dict(pat)
+                pat["note"] = ((pat.get("note") or "") + " | HTF structural SL nedeniyle retest bekleniyor").strip(" |")
+                cand["pattern"] = pat
+            else:
+                vetoes.append("HTF structural SL sonrasi minimum R:R saglanmiyor")
+                continue
         holds = trigger_hold_count(side, cand["trigger"], a15) if cand["stage"] == "ACTIVE" else 0
         loc_veto = location_gate(side, cand["stage"], cand["trigger"], a15["price"], decision["zones"], holds)
         if loc_veto:
