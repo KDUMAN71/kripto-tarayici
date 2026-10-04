@@ -384,7 +384,18 @@ def evaluate_v3(sym, a15, a1h, a4h, regime, ctx_fn):
         if htf_sl_adjusted and not _pretrade_feasible(plan):
             # Tez icin dogru structural stop mevcut giriste R:R'yi bozuyorsa
             # stopu yapay daraltma; tetik/retest fiyatinda tekrar degerlendir.
-            trigger_ok, _ = geometry_gate(cand["trigger"], plan["sl"], plan.get("tp1"))
+            trigger = float(cand["trigger"])
+            trigger_risk = abs(trigger - float(plan["sl"]))
+            trigger_risk_pct = trigger_risk / trigger * 100 if trigger else float("inf")
+            trigger_rr1 = (abs(float(plan["tp1"]) - trigger) / trigger_risk
+                           if plan.get("tp1") is not None and trigger_risk else None)
+            trigger_rr2 = (abs(float(plan["tp2"]) - trigger) / trigger_risk
+                           if plan.get("tp2") is not None and trigger_risk else None)
+            trigger_ok = (
+                C.MIN_RISK_PCT <= trigger_risk_pct <= C.ACTIVE_MAX_LIVE_RISK_PCT
+                and trigger_rr1 is not None and trigger_rr1 >= C.MIN_RR_TP1
+                and trigger_rr2 is not None and trigger_rr2 >= C.MIN_RR_TP2
+            )
             if cand["stage"] == "ACTIVE" and trigger_ok:
                 cand["stage"] = "WATCH"
                 cand["retest"] = True
