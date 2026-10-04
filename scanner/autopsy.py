@@ -22,6 +22,7 @@ PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
                     "state", "runner_autopsy.json")
 MAX_SYMBOLS = 400
 MAX_ENTRIES_PER_SYMBOL = 8
+TRACE_WATCHLIST = {"METISUSDT", "RECALLUSDT"}
 TS_BUCKET_S = 6 * 3600
 NEARMISS_MIN_QV = 2_000_000       # likidite kaydi yalniz 2M ustu yakin-kacirma bandinda
 REPORT_PERIOD_S = 7 * 86400
@@ -100,11 +101,21 @@ def record_universe(tickers, symbols, liquid, tdf):
     try:
         t = tickers[tickers["symbol"].isin(symbols)]
         near = t[(t["quoteVolume"] < C.MIN_QUOTE_VOLUME_24H) &
-                 (t["quoteVolume"] >= NEARMISS_MIN_QV)]
+                 ((t["quoteVolume"] >= NEARMISS_MIN_QV) | t["symbol"].isin(TRACE_WATCHLIST))]
         for _, r in near.iterrows():
             record(r["symbol"], "liquidity",
                    "24s hacim 8M$ tabaninin altinda (yakin-kacirma bandi)",
                    extra={"qv_musd": int(float(r["quoteVolume"]) / 1e6)})
+        # Research watchlist must leave an explicit trace even when a symbol is
+        # below the ordinary near-miss band. This does not admit it to live scan.
+        seen = set(near["symbol"])
+        for sym in TRACE_WATCHLIST.intersection(set(symbols)):
+            if sym not in seen and sym not in set(tdf["symbol"]):
+                row = t[t["symbol"] == sym]
+                qv = float(row.iloc[0]["quoteVolume"]) if not row.empty else None
+                record(sym, "liquidity",
+                       "24s hacim live likidite tabaninin altinda (research trace)",
+                       extra={"qv_musd": round(qv / 1e6, 2) if qv is not None else None})
         liq = set(liquid)
         for sym in tdf["symbol"]:
             if sym not in liq:
