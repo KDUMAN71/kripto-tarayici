@@ -68,3 +68,11 @@ def test_matched_control_rejects_future_runner():
     event={"symbol":"RUNUSDT","cross_ts":runner.loc[30,"closeTime"].isoformat(),"quote_volume_1h":float(runner.loc[30,"quoteVolume"]),"_idx":30}
     c=controls(event,frames,hm,10.0,1)
     assert len(c)==1 and c[0]["symbol"]=="GOODUSDT" and c[0]["future_max_24h_pct"]<10.0
+
+
+def test_v3_snapshot_schedule_includes_early_entry_windows():
+    # Dataset V3 must inspect the last hour at 30m/15m resolution instead of
+    # first looking only at the +10% threshold-cross candle.
+    schedule=[1440,720,360,180,60,30,15,0]
+    assert schedule[-4:] == [60,30,15,0]
+    assert all(a>b for a,b in zip(schedule,schedule[1:]))
