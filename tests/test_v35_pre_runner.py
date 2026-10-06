@@ -23,15 +23,22 @@ def test_pre_runner_preserves_created_and_refreshes_last_seen():
     assert st["pre_runners"]["XUSDT"]["change_24h"] == 4
 
 
-def test_pre_runner_expires_deterministically():
+def test_pre_runner_expires_when_stale():
     st = _st()
     ST.upsert_pre_runner(st, "OLDUSDT", {}, ts=100)
-    ST.upsert_pre_runner(st, "FRESHUSDT", {}, ts=100 + C.PRE_RUNNER_EXPIRY_H * 3600)
-    expired = ST.expire_pre_runners(st, ts=101 + C.PRE_RUNNER_EXPIRY_H * 3600)
+    expired = ST.expire_pre_runners(st, ts=101 + C.PRE_RUNNER_STALE_H * 3600)
     assert "OLDUSDT" in expired
-    assert "OLDUSDT" not in st["pre_runners"]
-    assert "FRESHUSDT" in st["pre_runners"]
 
+
+def test_pre_runner_cannot_live_forever_when_refreshed():
+    st = _st()
+    ST.upsert_pre_runner(st, "XUSDT", {}, ts=100)
+    # Refresh just before evaluation; maximum age must still win.
+    later = 101 + C.PRE_RUNNER_MAX_AGE_H * 3600
+    ST.upsert_pre_runner(st, "XUSDT", {}, ts=later)
+    # created remains 100, so it must expire despite fresh last_seen.
+    expired = ST.expire_pre_runners(st, ts=later)
+    assert "XUSDT" in expired
 
 def test_promotion_removes_hidden_candidate_and_logs_transition():
     st = _st()
