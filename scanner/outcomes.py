@@ -9,6 +9,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PATH = os.path.join(ROOT, "state", "outcome_ledger.json")
 MAX_EPISODES = 600
 MAX_EVENTS = 16
+EVAL_HORIZON_H = 24
 _OPEN = {"PRE_RUNNER", "EARLY", "WATCH", "ACTIVE"}
 _L = None
 
@@ -116,6 +117,42 @@ def close(sym, outcome, reason=None, ts=None):
     e["events"].append({"ts": t, "from": prev, "to": outcome, "reason": reason})
     e["events"] = e["events"][-MAX_EVENTS:]
     return e
+
+
+
+def update_evaluation_prices(price_by_symbol, ts=None):
+    """Terminal/rejected episode'lar icin 24s outcome-label MFE/MAE.
+
+    Bu gelecek veri yalniz evaluation labelidir; live karar motoruna geri
+    beslenmez. Episode kapanisindan sonra horizon dolana kadar guncellenir.
+    """
+    if _L is None:
+        return 0
+    t = _now(ts)
+    n = 0
+    for e in _L["episodes"]:
+        if e.get("status") in _OPEN:
+            continue
+        closed = e.get("closed_at")
+        ref = e.get("reference_price") or e.get("initial_features", {}).get("price")
+        px = price_by_symbol.get(e.get("symbol"))
+        if not closed or t - closed > EVAL_HORIZON_H * 3600 or not ref or not px:
+            continue
+        move = (float(px) - float(ref)) / float(ref) * 100
+        side = e.get("side")
+        # Discovery/rejected adaylarda yon henuz yoksa mutlak move runner-label
+        # icin tutulur; direction-specific trade attribution yapilmaz.
+        if side == "SHORT":
+            fav, adv = -move, move
+        elif side == "LONG":
+            fav, adv = move, -move
+        else:
+            fav, adv = abs(move), 0.0
+        e["mfe_pct"] = max(float(e.get("mfe_pct", 0)), fav)
+        e["mae_pct"] = max(float(e.get("mae_pct", 0)), adv)
+        e["evaluation_last_ts"] = t
+        n += 1
+    return n
 
 
 def save():
