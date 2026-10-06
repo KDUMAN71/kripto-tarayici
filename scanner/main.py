@@ -212,6 +212,10 @@ def run():
 
     all_tdf = tickers[tickers["symbol"].isin(symbols)].copy()
     all_tdf = all_tdf.sort_values("quoteVolume", ascending=False)
+    # Terminal/rejected candidate'larin sonraki 24s outcome label'ini guncelle.
+    # Evaluation-only; live policy bu gelecek bilgiyi kullanmaz.
+    _px_col = "lastPrice" if "lastPrice" in all_tdf.columns else "weightedAvgPrice"
+    OUT.update_evaluation_prices(dict(zip(all_tdf["symbol"], all_tdf[_px_col])))
     # V3.5 broad discovery: 8M$ artik firsati daha pattern/structure
     # degerlendirmesine ulasmadan olduren hard universe gate degil.
     tdf = all_tdf[all_tdf["quoteVolume"] >= C.DISCOVERY_MIN_QUOTE_VOLUME_24H].copy()
