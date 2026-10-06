@@ -275,7 +275,9 @@ def run():
     ranked = OPP.rank_candidates(ranked)
     ranked_syms = [r["symbol"] for r in ranked]
     _pool = core + [s for s in ranked_syms if s not in core]
-    ST.expire_pre_runners(st, open_syms)
+    expired_pre = ST.expire_pre_runners(st, open_syms)
+    for sym in expired_pre:
+        OUT.close(sym, "PRE_RUNNER_EXPIRED", reason="hidden watchlist stale/max-age")
     candidates = _pool[:C.DEEP_SCAN_CAP]
     for sym in _pool[C.DEEP_SCAN_CAP:]:
         AU.record(sym, "cap", "derin analiz kapasitesi disinda kaldi")
