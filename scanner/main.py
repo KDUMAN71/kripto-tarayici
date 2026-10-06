@@ -208,11 +208,14 @@ def run():
         if not first_run: tg.send(f"🆕 <b>YENİ LİSTELEME — {s}</b>\nİlk {C.YOUNG_COIN_DAYS} gün teknik sinyal yok; yapı otursun.")
     if first_run: tg.send(f"🚀 Kripto Tarayıcı V3.3 aktif. {len(symbols)} perpetual kayıtlı; 15 dakikalık tarama başladı.")
 
-    tdf = tickers[tickers["symbol"].isin(symbols)].copy()
-    tdf = tdf[tdf["quoteVolume"] >= C.MIN_QUOTE_VOLUME_24H].sort_values("quoteVolume", ascending=False)
+    all_tdf = tickers[tickers["symbol"].isin(symbols)].copy()
+    all_tdf = all_tdf.sort_values("quoteVolume", ascending=False)
+    # V3.5 broad discovery: 8M$ artik firsati daha pattern/structure
+    # degerlendirmesine ulasmadan olduren hard universe gate degil.
+    tdf = all_tdf[all_tdf["quoteVolume"] >= C.DISCOVERY_MIN_QUOTE_VOLUME_24H].copy()
     young_cut = ST.now() - C.YOUNG_COIN_DAYS * 86400
     liquid = [s for s in tdf["symbol"] if st["known_symbols"].get(s, 0) <= young_cut or first_run]
-    chg = dict(zip(tdf["symbol"], tdf["priceChangePercent"]))
+    chg = dict(zip(all_tdf["symbol"], all_tdf["priceChangePercent"]))
     AU.record_universe(tickers, symbols, liquid, tdf); AU.note_baseline(tickers)
     global REGIME, CHANGE_24H
     REGIME = btc_regime(); CHANGE_24H = chg
@@ -244,9 +247,8 @@ def run():
     core = list(liquid[:C.CORE_SCAN_CAP]); momentum = []
     for sym in liquid[:C.MOMENTUM_SCAN_POOL]:
         if sym in core: continue
-        if abs(chg.get(sym, 0)) > C.MAX_ABS_24H_CHANGE_TECH:
-            AU.record(sym, "max_abs", "24s |degisim| > %25 — teknik evren disi",
-                      extra={"chg": round(chg.get(sym, 0), 1)}); continue
+        # >25% mover discovery'den atilmaz. Continuation/retest firsati olabilir;
+        # execution motoru stretch/freshness/risk/R:R kurallarini yine uygular.
         k1 = data.klines(sym, "1h", 80)
         if k1 is None or len(k1) < 30: continue
         a1 = analyze(k1, piv_lookback=50); c = a1["closed"]
@@ -265,9 +267,6 @@ def run():
         if new_sent >= 8 or CTX_BUDGET["n"] >= 18:
             _budget_cut = _ci; break
         if sym in st["signals"] and st["signals"][sym]["status"] in ("EARLY", "WATCH", "ACTIVE"): continue
-        if abs(chg.get(sym, 0)) > C.MAX_ABS_24H_CHANGE_TECH:
-            AU.record(sym, "max_abs", "24s |degisim| > %25 — teknik evren disi",
-                      extra={"chg": round(chg.get(sym, 0), 1)}); continue
         md = _market_data(sym, need_4h=True, min_tscore=C.PREFILTER_MIN_TSCORE)
         if not md: AU.record(sym, "prefilter", "veri/tscore on esigi gecilemedi"); continue
         a15, a1, a4 = md; sig = evaluate_v3(sym, a15, a1, a4, REGIME, _build_ctx)
