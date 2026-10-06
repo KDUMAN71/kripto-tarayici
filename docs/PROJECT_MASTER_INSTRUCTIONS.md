@@ -1,7 +1,7 @@
 # Kripto Tarayici — Project Master Instructions
 
 > Living source of truth for KDUMAN71/kripto-tarayici.
-> Current position: Execution Gate V3.5 centralization (GitHub PR #24).
+> Current position: Outcome Ledger implementation (GitHub PR #25).
 > Last research milestone: V3.5 30-day pre-runner replay V3 completed; 234 runners + 234 matched controls.
 
 ## 0. New ChatGPT session protocol
@@ -146,13 +146,13 @@ Labels may use future price; features at T cannot. Respect candle-close alignmen
 The user wants fewer useless suggestions, not fewer discovered opportunities. Hidden discovery may be broad; Telegram/trade recommendations remain selective. Prefer actionable early breakout/retest entries over post-pump reporting. Give structural invalidation, not arbitrary tight stops. Safer retest can beat chasing. Alternative direction plans require independent confirmation; no automatic flip.
 
 ## 13. Current status / next action
-Completed: research (#14/#15/#19), geometry safety (#17), observability (#18), continuity (#20), Broad Discovery (#21), PRE_RUNNER (#22), trajectory ranking (#23, 0cd32cb).
+Completed: research (#14/#15/#19), geometry safety (#17), observability (#18), continuity (#20), Broad Discovery (#21), PRE_RUNNER (#22), trajectory ranking (#23), centralized execution gate (#24, 66214f6).
 
-Current implementation PR: **#24 Execution Gate V3.5 centralization**.
-Scope: central geometry helpers now own entry-risk and TP1/TP2 R:R feasibility; pattern candidates route through thesis-aware HTF SL adjustment -> live/trigger geometry -> PASS/RETEST_WAIT/REJECT. Structural fallback also requires the same TP1/TP2 geometry. Existing confluence, location, obstacle, spread, hold, taker/OI and trend vetoes remain intact.
-Non-goals: no execution threshold relaxation and no new probability model.
+Current implementation PR: **#25 Outcome Ledger**.
+Scope: separate bounded `state/outcome_ledger.json` stores candidate episodes across PRE_RUNNER -> EARLY/WATCH -> ACTIVE or terminal outcomes. Initial discovery features remain immutable; latest features/events, trade geometry and ACTIVE MAE/MFE are recorded. VETO, news/structural cancellation, MISSED, expiry, STOP and final TP outcomes close episodes. PRE_RUNNER stale/max-age expiry is also terminal.
+Non-goal: ledger does not yet classify failure causes or alter policy; that is #26.
 
-Next after #24: **#25 Outcome Ledger**.
+Next after #25: **#26 Failure Attribution / Missed Opportunity Learner**.
 
 ## 14. Maintenance rule
 This file is part of the Definition of Done for implementation PRs #21-#28. A roadmap PR is incomplete if it materially changes architecture, evidence, invariants, or roadmap status without updating this document.
