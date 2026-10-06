@@ -412,8 +412,11 @@ def evaluate_v3(sym, a15, a1h, a4h, regime, ctx_fn):
         need = SCORE_ACTIVE_MIN if v2["status"] == "ACTIVE" else SCORE_WATCH_MIN
         if veto: return ("__veto__", veto)
         if score < need: return None
-        ok_geo, rr1 = geometry_gate(v2["price"] if v2["status"] == "ACTIVE" else v2["trigger"], v2["sl"], v2.get("tp1"))
-        if not ok_geo: return ("__veto__", f"TP1 riske degmiyor ({rr1 if rr1 is not None else '-'}R)")
+        ref_entry = v2["price"] if v2["status"] == "ACTIVE" else v2["trigger"]
+        v2_plan = {"sl": v2["sl"], "tp1": v2.get("tp1"), "tp2": v2.get("tp2"), "tp3": v2.get("tp3")}
+        v2_geo = _geometry_at(ref_entry, v2_plan)
+        if not _geometry_feasible(v2_geo):
+            return ("__veto__", "structural fallback minimum risk/TP1/TP2 geometry saglamiyor")
         execution_quality, execution_checks = 0, []
         if v2["status"] == "ACTIVE":
             plan = {"sl": v2["sl"], "tp1": v2.get("tp1")}
