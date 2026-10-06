@@ -3,7 +3,11 @@
 ENGINE_VERSION = "3.3"
 
 # ---- Evren / likidite ----
-MIN_QUOTE_VOLUME_24H = 8_000_000   # V3.4: ATOM gibi orta hacimli majorler evrene girsin
+# V3.5: discovery ve execution likiditesi ayridir.
+# 30g replay: 8M hard discovery tabani runnerlarin ~%36.3'unu T-24s,
+# ~%25.6'sini T-6s ve ~%17.9'unu T0'da disarida birakiyordu.
+DISCOVERY_MIN_QUOTE_VOLUME_24H = 2_000_000
+MIN_QUOTE_VOLUME_24H = 8_000_000   # execution/reference liquidity; discovery gate degil
 MAX_ABS_24H_CHANGE_TECH = 25.0
 YOUNG_COIN_DAYS = 5
 CORE_SCAN_CAP = 130
