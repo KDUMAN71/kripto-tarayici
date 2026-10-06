@@ -235,11 +235,16 @@ def run():
             if res and res["status"] == "ACTIVE" and res["side"] == sig["side"]:
                 news = radars.news_check(sym); nn = news["note"] if news else "haber modülü kapalı"
                 if news and news["veto"]:
-                    sig["status"], sig["last_update"] = "CANCELLED", ST.now(); tg.send(f"🛑 <b>İPTAL (HABER VETOSU) — {sym}</b>\n{news['note']}"); continue
-                ST.activate(st, sym, sig, res); ST.log_event(st, sym, "ACTIVATED", f"{res['side']} @ {res['price']:.6g}")
+                    sig["status"], sig["last_update"] = "CANCELLED", ST.now()
+                    OUT.close(sym, "CANCELLED", reason="news veto")
+                    tg.send(f"🛑 <b>İPTAL (HABER VETOSU) — {sym}</b>\n{news['note']}"); continue
+                full = ST.activate(st, sym, sig, res)
+                OUT.transition(sym, "ACTIVE"); OUT.set_trade_geometry(sym, full)
+                ST.log_event(st, sym, "ACTIVATED", f"{res['side']} @ {res['price']:.6g}")
                 tg.send(active_msg(sym, res, nn)); continue
             if res and res["status"] == "WATCH" and sig["status"] == "EARLY" and res["side"] == sig["side"]:
                 res["created"] = sig.get("created", ST.now()); res["last_update"] = ST.now(); st["signals"][sym] = res
+                OUT.transition(sym, "WATCH"); OUT.set_trade_geometry(sym, res)
                 news = radars.news_check(sym); nn = news["note"] if news else "haber modülü kapalı"
                 ST.log_event(st, sym, "WATCH", f"{res['side']} @ {res['price']:.6g}"); tg.send(pretrade_msg(sym, res, nn)); continue
             ST.update_pretrade(st, sym, a15, a1, tg)
