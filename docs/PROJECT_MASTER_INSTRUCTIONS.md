@@ -1,7 +1,7 @@
 # Kripto Tarayici — Project Master Instructions
 
 > Living source of truth for KDUMAN71/kripto-tarayici.
-> Current position: Hidden PRE_RUNNER watchlist implementation (GitHub PR #22).
+> Current position: Opportunity Ranking / trajectory scoring implementation (GitHub PR #23).
 > Last research milestone: V3.5 30-day pre-runner replay V3 completed; 234 runners + 234 matched controls.
 
 ## 0. New ChatGPT session protocol
@@ -146,13 +146,13 @@ Labels may use future price; features at T cannot. Respect candle-close alignmen
 The user wants fewer useless suggestions, not fewer discovered opportunities. Hidden discovery may be broad; Telegram/trade recommendations remain selective. Prefer actionable early breakout/retest entries over post-pump reporting. Give structural invalidation, not arbitrary tight stops. Safer retest can beat chasing. Alternative direction plans require independent confirmation; no automatic flip.
 
 ## 13. Current status / next action
-Completed: research foundation (#14/#15/#19), execution geometry (#17), missed-opportunity observability (#18), continuity (#20), Broad Discovery (#21, f5bfd8c).
+Completed: research (#14/#15/#19), execution geometry (#17), observability (#18), continuity (#20), Broad Discovery (#21), hidden PRE_RUNNER (#22, 42877c1).
 
-Current implementation PR: **#22 Hidden PRE_RUNNER Watchlist**.
-Implementation scope: bounded separate `pre_runners` state; current momentum-pre candidates are tracked silently; no normal Telegram message; deterministic refresh/expiry; promotion removes hidden record when a real signal is created; autopsy receives PRE_RUNNER trace.
-Non-goals: no new ranking model and no ACTIVE threshold relaxation. The current momentum prefilter remains only the seed mechanism; trajectory-based candidate ranking is #23.
+Current implementation PR: **#23 Opportunity Ranking / trajectory scoring**.
+Scope: discovery-tail candidates are scored from closed 1h 3h/6h return trajectory, BTC-relative trajectory and 1h participation/volume; score is direction-agnostic, bounded and used only to prioritize deep-scan/API budget. Top liquid core remains preserved. The former 1.8x-volume OR 3%-3h hard admission gate is no longer required for the ranked tail.
+Non-goals: opportunity score is NOT win probability, is NOT added to ACTIVE confluence, and does not relax execution thresholds.
 
-Next after #22: **#23 Opportunity Ranking / trajectory scoring**.
+Next after #23: **#24 Execution Gate V3.5 centralization**.
 
 ## 14. Maintenance rule
 This file is part of the Definition of Done for implementation PRs #21-#28. A roadmap PR is incomplete if it materially changes architecture, evidence, invariants, or roadmap status without updating this document.
