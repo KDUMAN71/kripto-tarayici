@@ -20,6 +20,7 @@ def load():
               "trades": [], "fail_count": 0, "last_ok_run": 0}
     st.setdefault("trades", [])
     st.setdefault("scan_log", [])
+    st.setdefault("pre_runners", {})
     migrate_engine(st)
     return st
 
@@ -132,6 +133,49 @@ def append_scan(st, rec):
         cur = []
     cur.append(rec)
     st["scan_log"] = cur
+
+
+
+def upsert_pre_runner(st, sym, features, ts=None):
+    """Sessiz opportunity watchlist: Telegram/signal defterine girmez."""
+    t = now() if ts is None else int(ts)
+    book = st.setdefault("pre_runners", {})
+    old = book.get(sym) or {}
+    row = dict(old)
+    row.update(features or {})
+    row["symbol"] = sym
+    row["created"] = old.get("created", t)
+    row["last_seen"] = t
+    row["status"] = "PRE_RUNNER"
+    book[sym] = row
+    # bounded: en eski gorulen adaylari at
+    if len(book) > C.PRE_RUNNER_MAX:
+        order = sorted(book, key=lambda s: book[s].get("last_seen", 0))
+        for dead in order[:len(book) - C.PRE_RUNNER_MAX]:
+            del book[dead]
+    return row
+
+
+def expire_pre_runners(st, active_symbols=(), ts=None):
+    t = now() if ts is None else int(ts)
+    active = set(active_symbols or ())
+    book = st.setdefault("pre_runners", {})
+    expired = []
+    for sym, row in list(book.items()):
+        if sym in active:
+            del book[sym]
+            continue
+        if t - row.get("last_seen", row.get("created", t)) > C.PRE_RUNNER_EXPIRY_H * 3600:
+            expired.append(sym)
+            del book[sym]
+    return expired
+
+
+def promote_pre_runner(st, sym, status):
+    row = st.setdefault("pre_runners", {}).pop(sym, None)
+    if row:
+        log_event(st, sym, "PRE_RUNNER_PROMOTED", f"PRE_RUNNER -> {status}")
+    return row
 
 
 def cleanup_terminal(st):
