@@ -28,8 +28,11 @@ def classify_episode(e):
     events = e.get("events") or []
 
     if outcome == "STOPPED":
+        setup = str(e.get("setup_type") or "").lower()
         if mfe >= PREMATURE_STOP_MFE_PCT:
             return {"class": "PREMATURE_STOP", "evidence": {"mfe_pct": mfe, "mae_pct": mae}}
+        if setup in ("breakout_retest", "trendline_break"):
+            return {"class": "FALSE_BREAKOUT", "evidence": {"setup": setup, "mfe_pct": mfe, "mae_pct": mae}}
         return {"class": "VALID_LOSS", "evidence": {"mfe_pct": mfe, "mae_pct": mae}}
 
     if outcome in ("TP2_HIT", "TP3_HIT", "TP1_HIT", "CLOSED"):
@@ -43,7 +46,7 @@ def classify_episode(e):
             if "geometry" in reason or "r:r" in reason or "risk" in reason:
                 cls = "BAD_RR"
             elif "reclaim" in reason or "hold" in reason or "breakout" in reason:
-                cls = "FALSE_BREAKOUT" if outcome == "CANCELLED" else "MISSED_RUNNER"
+                cls = "MISSED_RUNNER"
             elif "liquid" in reason or "hacim" in reason:
                 cls = "DISCOVERY_GATE_REJECT"
             else:
