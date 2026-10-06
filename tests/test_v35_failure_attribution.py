@@ -1,4 +1,5 @@
 from research.failure_attribution import classify_episode, attribute_ledger
+import scanner.outcomes as OUT
 
 
 def test_stop_with_large_post_entry_mfe_is_premature_stop():
@@ -39,3 +40,23 @@ def test_summary_counts_classes():
     assert out["total"] == 2
     assert out["counts"]["VALID_LOSS"] == 1
     assert out["counts"]["LATE_DETECTION"] == 1
+
+
+def test_rejected_candidate_gets_future_evaluation_mfe(monkeypatch):
+    monkeypatch.setattr(OUT, "_L", {"episodes": [{
+        "candidate_id": "x", "symbol": "XUSDT", "status": "REJECTED",
+        "closed_at": 100, "initial_features": {"price": 10.0},
+        "mfe_pct": 0.0, "mae_pct": 0.0, "events": []
+    }]})
+    OUT.update_evaluation_prices({"XUSDT": 11.2}, ts=200)
+    assert round(OUT._L["episodes"][0]["mfe_pct"], 1) == 12.0
+
+
+def test_evaluation_horizon_prevents_indefinite_future_leakage(monkeypatch):
+    monkeypatch.setattr(OUT, "_L", {"episodes": [{
+        "candidate_id": "x", "symbol": "XUSDT", "status": "REJECTED",
+        "closed_at": 100, "initial_features": {"price": 10.0},
+        "mfe_pct": 0.0, "mae_pct": 0.0, "events": []
+    }]})
+    OUT.update_evaluation_prices({"XUSDT": 20.0}, ts=101 + OUT.EVAL_HORIZON_H * 3600)
+    assert OUT._L["episodes"][0]["mfe_pct"] == 0.0
