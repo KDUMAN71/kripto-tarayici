@@ -137,6 +137,65 @@ def _pretrade_feasible(plan):
             and rr2 is not None and rr2 >= C.MIN_RR_TP2)
 
 
+
+def _geometry_at(entry, plan):
+    """Tek kaynak: verilen entry icin risk + TP R:R geometrisini hesaplar."""
+    if not plan or not entry or plan.get("sl") is None:
+        return None
+    risk = abs(float(entry) - float(plan["sl"]))
+    if not risk:
+        return None
+    return {
+        "entry": float(entry),
+        "risk": risk,
+        "risk_pct": risk / float(entry) * 100,
+        "rr1": abs(float(plan["tp1"]) - float(entry)) / risk if plan.get("tp1") is not None else None,
+        "rr2": abs(float(plan["tp2"]) - float(entry)) / risk if plan.get("tp2") is not None else None,
+        "rr3": abs(float(plan["tp3"]) - float(entry)) / risk if plan.get("tp3") is not None else None,
+    }
+
+
+def _geometry_feasible(g):
+    return bool(g and C.MIN_RISK_PCT <= g["risk_pct"] <= C.ACTIVE_MAX_LIVE_RISK_PCT
+                and g["rr1"] is not None and g["rr1"] >= C.MIN_RR_TP1
+                and g["rr2"] is not None and g["rr2"] >= C.MIN_RR_TP2)
+
+
+def _execution_geometry(side, cand, price, zones, atr):
+    """Thesis -> structural SL -> entry geometry -> ACTIVE/RETEST_WAIT/REJECT.
+
+    HTF thesis SL adjustment and all R:R recomputation live here so callers
+    cannot preserve ACTIVE with stale geometry.
+    """
+    plan, changed = _apply_htf_thesis_sl(side, cand["plan"], price, zones, atr)
+    cand["plan"] = plan
+    stage = cand["stage"]
+    entry = float(price) if stage == "ACTIVE" else float(cand["trigger"])
+    live = _geometry_at(entry, plan)
+    if _geometry_feasible(live):
+        return {"decision": "PASS", "candidate": cand, "geometry": live,
+                "htf_sl_adjusted": changed}
+
+    # Only an ACTIVE candidate may be downgraded to a safer retest. The retest
+    # itself must already have feasible structural geometry.
+    trigger_geo = _geometry_at(float(cand["trigger"]), plan)
+    if stage == "ACTIVE" and _geometry_feasible(trigger_geo):
+        out = dict(cand)
+        out["stage"] = "WATCH"
+        out["retest"] = True
+        out["dist"] = abs(float(cand["trigger"]) - float(price)) / float(price) * 100
+        pat = dict(out["pattern"])
+        note = "HTF structural SL nedeniyle retest bekleniyor" if changed else "canli geometry nedeniyle retest bekleniyor"
+        pat["note"] = ((pat.get("note") or "") + " | " + note).strip(" |")
+        out["pattern"] = pat
+        return {"decision": "RETEST_WAIT", "candidate": out,
+                "geometry": trigger_geo, "htf_sl_adjusted": changed}
+
+    return {"decision": "REJECT", "candidate": cand, "geometry": live,
+            "trigger_geometry": trigger_geo, "htf_sl_adjusted": changed,
+            "reason": "structural geometry minimum risk/R:R kosullarini saglamiyor"}
+
+
 def _fresh_1h(side, trigger, a1h, pattern_type):
     if pattern_type in ("liquidity_sweep", "breakout_retest"):
         return True
