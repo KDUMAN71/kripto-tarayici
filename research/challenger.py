@@ -3,9 +3,11 @@
 Never mutates scanner config. Policies are pure scoring/selection functions.
 """
 from __future__ import annotations
-from collections import defaultdict
+import time
 
 RUNNER_MFE = 10.0
+EVAL_HORIZON_H = 24
+MIN_MATURE_EPISODES = 20
 
 
 def _f(e, key, default=0.0):
@@ -35,11 +37,15 @@ def policy_trajectory_balanced(e):
 POLICIES = {"current": policy_current, "trajectory_balanced": policy_trajectory_balanced}
 
 
-def evaluate_policy(episodes, fn, top_fraction=0.25):
-    eligible = [e for e in episodes if (e.get("initial_features") or {}).get("price")]
-    if not eligible:
-        return {"n": 0, "selected": 0, "runner_recall": None, "precision": None,
-                "avg_mfe_selected": None}
+def evaluate_policy(episodes, fn, top_fraction=0.25, now_ts=None):
+    now_ts = int(time.time() if now_ts is None else now_ts)
+    eligible = [e for e in episodes
+                if (e.get("initial_features") or {}).get("price")
+                and e.get("closed_at")
+                and now_ts - int(e["closed_at"]) >= EVAL_HORIZON_H * 3600]
+    if len(eligible) < MIN_MATURE_EPISODES:
+        return {"n": len(eligible), "selected": 0, "runner_recall": None, "precision": None,
+                "avg_mfe_selected": None, "status": "INSUFFICIENT_MATURE_DATA"}
     ranked = sorted(eligible, key=fn, reverse=True)
     k = max(1, int(round(len(ranked) * top_fraction)))
     selected = ranked[:k]
@@ -51,9 +57,11 @@ def evaluate_policy(episodes, fn, top_fraction=0.25):
         "runner_recall": len(caught) / len(runners) if runners else None,
         "precision": len(caught) / len(selected) if selected else None,
         "avg_mfe_selected": sum(float(e.get("mfe_pct") or 0) for e in selected) / len(selected),
+        "status": "EVALUATED",
     }
 
 
-def compare(ledger, top_fraction=0.25):
+def compare(ledger, top_fraction=0.25, now_ts=None):
     eps = ledger.get("episodes") or []
-    return {name: evaluate_policy(eps, fn, top_fraction) for name, fn in POLICIES.items()}
+    return {name: evaluate_policy(eps, fn, top_fraction, now_ts=now_ts)
+            for name, fn in POLICIES.items()}
