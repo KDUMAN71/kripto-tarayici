@@ -437,34 +437,12 @@ def evaluate_v3(sym, a15, a1h, a4h, regime, ctx_fn):
     eligible, vetoes = [], []
     for cand in cands:
         side, pat, plan = cand["side"], cand["pattern"], cand["plan"]
-        plan, htf_sl_adjusted = _apply_htf_thesis_sl(
-            side, plan, a15["price"], decision["zones"], a1h.get("atr"))
-        cand["plan"] = plan
-        if htf_sl_adjusted and not _pretrade_feasible(plan):
-            # Tez icin dogru structural stop mevcut giriste R:R'yi bozuyorsa
-            # stopu yapay daraltma; tetik/retest fiyatinda tekrar degerlendir.
-            trigger = float(cand["trigger"])
-            trigger_risk = abs(trigger - float(plan["sl"]))
-            trigger_risk_pct = trigger_risk / trigger * 100 if trigger else float("inf")
-            trigger_rr1 = (abs(float(plan["tp1"]) - trigger) / trigger_risk
-                           if plan.get("tp1") is not None and trigger_risk else None)
-            trigger_rr2 = (abs(float(plan["tp2"]) - trigger) / trigger_risk
-                           if plan.get("tp2") is not None and trigger_risk else None)
-            trigger_ok = (
-                C.MIN_RISK_PCT <= trigger_risk_pct <= C.ACTIVE_MAX_LIVE_RISK_PCT
-                and trigger_rr1 is not None and trigger_rr1 >= C.MIN_RR_TP1
-                and trigger_rr2 is not None and trigger_rr2 >= C.MIN_RR_TP2
-            )
-            if cand["stage"] == "ACTIVE" and trigger_ok:
-                cand["stage"] = "WATCH"
-                cand["retest"] = True
-                cand["dist"] = abs(cand["trigger"] - a15["price"]) / a15["price"] * 100
-                pat = dict(pat)
-                pat["note"] = ((pat.get("note") or "") + " | HTF structural SL nedeniyle retest bekleniyor").strip(" |")
-                cand["pattern"] = pat
-            else:
-                vetoes.append("HTF structural SL sonrasi minimum R:R saglanmiyor")
-                continue
+        geo = _execution_geometry(side, cand, a15["price"], decision["zones"], a1h.get("atr"))
+        if geo["decision"] == "REJECT":
+            vetoes.append(geo["reason"])
+            continue
+        cand = geo["candidate"]
+        side, pat, plan = cand["side"], cand["pattern"], cand["plan"]
         holds = trigger_hold_count(side, cand["trigger"], a15) if cand["stage"] == "ACTIVE" else 0
         loc_veto = location_gate(side, cand["stage"], cand["trigger"], a15["price"], decision["zones"], holds)
         if loc_veto:
