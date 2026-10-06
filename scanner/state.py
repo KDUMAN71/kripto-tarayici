@@ -165,7 +165,9 @@ def expire_pre_runners(st, active_symbols=(), ts=None):
         if sym in active:
             del book[sym]
             continue
-        if t - row.get("last_seen", row.get("created", t)) > C.PRE_RUNNER_EXPIRY_H * 3600:
+        stale = t - row.get("last_seen", row.get("created", t)) > C.PRE_RUNNER_STALE_H * 3600
+        too_old = t - row.get("created", t) > C.PRE_RUNNER_MAX_AGE_H * 3600
+        if stale or too_old:
             expired.append(sym)
             del book[sym]
     return expired
