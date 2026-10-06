@@ -12,6 +12,7 @@ REGIME = {}
 CHANGE_24H = {}
 from . import config as C
 from . import data, radars, state as ST
+from . import opportunity as OPP
 from .engine_v3 import evaluate_v3
 from . import autopsy as AU
 from .confluence import (btc_regime, taker_pressure, long_short_ratios,
@@ -244,32 +245,28 @@ def run():
         else:
             ST.update_active(st, sym, a15, tg)
 
-    core = list(liquid[:C.CORE_SCAN_CAP]); momentum = []
+    core = list(liquid[:C.CORE_SCAN_CAP]); ranked = []
+    btc_k1 = data.klines("BTCUSDT", "1h", 80)
+    btc_a1 = analyze(btc_k1, piv_lookback=50) if btc_k1 is not None and len(btc_k1) >= 30 else None
     for sym in liquid[:C.MOMENTUM_SCAN_POOL]:
         if sym in core: continue
-        # >25% mover discovery'den atilmaz. Continuation/retest firsati olabilir;
-        # execution motoru stretch/freshness/risk/R:R kurallarini yine uygular.
         k1 = data.klines(sym, "1h", 80)
         if k1 is None or len(k1) < 30: continue
-        a1 = analyze(k1, piv_lookback=50); c = a1["closed"]
-        chg3h = abs((c["close"].iloc[-1] / c["close"].iloc[-4] - 1) * 100) if len(c) > 4 else 0
-        if (a1["vol_ratio"] == a1["vol_ratio"] and a1["vol_ratio"] >= C.MOMENTUM_PRE_VOL_MULT) or chg3h >= C.MOMENTUM_PRE_3H_PCT:
-            momentum.append(sym)
-        else:
-            AU.record(sym, "momentum_pre", "1s hacim/3s ivme on esigi altinda")
-    _pool = core + [s for s in momentum if s not in core]
-    # PRE_RUNNER = discovery tarafinda ilginc hale gelen fakat henuz
-    # EARLY/WATCH/ACTIVE olmayan sessiz aday. Telegram gondermez.
-    for sym in momentum:
-        if sym in st["signals"] and st["signals"][sym].get("status") in ("EARLY", "WATCH", "ACTIVE"):
-            continue
-        ST.upsert_pre_runner(st, sym, {
-            "quote_volume_24h": float(tdf.loc[tdf["symbol"] == sym, "quoteVolume"].iloc[0])
-                if not tdf.loc[tdf["symbol"] == sym].empty else None,
-            "change_24h": float(chg.get(sym, 0)),
-            "source": "momentum_pre",
-        })
-        AU.record(sym, "pre_runner", "hidden opportunity watchlist")
+        a1 = analyze(k1, piv_lookback=50)
+        feat = OPP.trajectory_features(a1, btc_a1)
+        score = OPP.opportunity_score(feat)
+        qrow = tdf.loc[tdf["symbol"] == sym, "quoteVolume"]
+        qv = float(qrow.iloc[0]) if not qrow.empty else 0.0
+        row = {"symbol": sym, "opportunity_score": score, "quote_volume_24h": qv, **feat}
+        ranked.append(row)
+        if sym not in st["signals"] or st["signals"][sym].get("status") not in ("EARLY", "WATCH", "ACTIVE"):
+            ST.upsert_pre_runner(st, sym, {**row, "change_24h": float(chg.get(sym, 0)),
+                                           "source": "trajectory_rank"})
+            AU.record(sym, "pre_runner", "trajectory-ranked hidden opportunity",
+                      extra={"opp_score": score})
+    ranked = OPP.rank_candidates(ranked)
+    ranked_syms = [r["symbol"] for r in ranked]
+    _pool = core + [s for s in ranked_syms if s not in core]
     ST.expire_pre_runners(st, open_syms)
     candidates = _pool[:C.DEEP_SCAN_CAP]
     for sym in _pool[C.DEEP_SCAN_CAP:]:
