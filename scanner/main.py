@@ -297,7 +297,9 @@ def run():
             AU.record(sym, "no_setup", "formasyon/skor uretmedi")
             OUT.transition(sym, "PRE_RUNNER", reason="no_setup"); continue
         news = radars.news_check(sym); nn = news["note"] if news else "haber modülü kapalı"
-        if news and news["veto"]: ST.log_event(st, sym, "NEWS_VETO", news["note"]); AU.record(sym, "news_veto", str(news["note"])); continue
+        if news and news["veto"]:
+            ST.log_event(st, sym, "NEWS_VETO", news["note"]); AU.record(sym, "news_veto", str(news["note"]))
+            OUT.close(sym, "REJECTED", reason="news veto: " + str(news["note"])); continue
         sig["created"] = ST.now(); sig["last_update"] = ST.now()
         if sig["status"] == "ACTIVE":
             sig["entry_ref"] = (sig["entry_lo"] + sig["entry_hi"]) / 2; sig["activated_at"] = ST.now(); sig["mfe_pct"] = 0; sig["mae_pct"] = 0
