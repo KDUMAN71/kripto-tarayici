@@ -13,6 +13,7 @@ CHANGE_24H = {}
 from . import config as C
 from . import data, radars, state as ST
 from . import opportunity as OPP
+from . import outcomes as OUT
 from .engine_v3 import evaluate_v3
 from . import autopsy as AU
 from .confluence import (btc_regime, taker_pressure, long_short_ratios,
@@ -192,7 +193,7 @@ def _legacy_attach(sym, sig):
 
 def run():
     CTX_BUDGET["n"] = 0
-    tg = Telegram(); st = ST.load(); t0 = time.time(); AU.load()
+    tg = Telegram(); st = ST.load(); t0 = time.time(); AU.load(); OUT.load()
     symbols = data.exchange_perp_symbols(); tickers = data.ticker_24h()
     if symbols is None or tickers is None:
         st["fail_count"] = st.get("fail_count", 0) + 1
@@ -260,8 +261,10 @@ def run():
         row = {"symbol": sym, "opportunity_score": score, "quote_volume_24h": qv, **feat}
         ranked.append(row)
         if sym not in st["signals"] or st["signals"][sym].get("status") not in ("EARLY", "WATCH", "ACTIVE"):
-            ST.upsert_pre_runner(st, sym, {**row, "change_24h": float(chg.get(sym, 0)),
-                                           "source": "trajectory_rank"})
+            pre = {**row, "change_24h": float(chg.get(sym, 0)),
+                   "source": "trajectory_rank", "price": float(a1["price"])}
+            ST.upsert_pre_runner(st, sym, pre)
+            OUT.start(sym, "PRE_RUNNER", features=pre)
             AU.record(sym, "pre_runner", "trajectory-ranked hidden opportunity",
                       extra={"opp_score": score})
     ranked = OPP.rank_candidates(ranked)
@@ -280,14 +283,20 @@ def run():
         md = _market_data(sym, need_4h=True, min_tscore=C.PREFILTER_MIN_TSCORE)
         if not md: AU.record(sym, "prefilter", "veri/tscore on esigi gecilemedi"); continue
         a15, a1, a4 = md; sig = evaluate_v3(sym, a15, a1, a4, REGIME, _build_ctx)
-        if isinstance(sig, tuple): ST.log_event(st, sym, "VETO", sig[1]); AU.record(sym, "veto", str(sig[1])); continue
-        if not sig: AU.record(sym, "no_setup", "formasyon/skor uretmedi"); continue
+        if isinstance(sig, tuple):
+            ST.log_event(st, sym, "VETO", sig[1]); AU.record(sym, "veto", str(sig[1]))
+            OUT.close(sym, "REJECTED", reason=str(sig[1])); continue
+        if not sig:
+            AU.record(sym, "no_setup", "formasyon/skor uretmedi")
+            OUT.transition(sym, "PRE_RUNNER", reason="no_setup"); continue
         news = radars.news_check(sym); nn = news["note"] if news else "haber modülü kapalı"
         if news and news["veto"]: ST.log_event(st, sym, "NEWS_VETO", news["note"]); AU.record(sym, "news_veto", str(news["note"])); continue
         sig["created"] = ST.now(); sig["last_update"] = ST.now()
         if sig["status"] == "ACTIVE":
             sig["entry_ref"] = (sig["entry_lo"] + sig["entry_hi"]) / 2; sig["activated_at"] = ST.now(); sig["mfe_pct"] = 0; sig["mae_pct"] = 0
         ST.promote_pre_runner(st, sym, sig["status"])
+        OUT.transition(sym, sig["status"])
+        OUT.set_trade_geometry(sym, sig)
         st["signals"][sym] = sig; ST.log_event(st, sym, sig["status"], f"{sig['side']} @ {sig['price']:.6g}")
         tg.send(active_msg(sym, sig, nn) if sig["status"] == "ACTIVE" else pretrade_msg(sym, sig, nn)); new_sent += 1
 
@@ -329,6 +338,7 @@ def run():
     AU.observe_signals(st)
     _aurep = AU.maybe_weekly_report(st, tickers, data)
     if _aurep: tg.send(_aurep)
+    OUT.save()
     AU.save()
     ST.append_scan(st, {"ts": ST.now(), "ok": True, "symbols": len(symbols), "liquid": len(liquid), "candidates": len(candidates), "open_signals": active_count, "duration_s": round(time.time() - t0)})
     ST.save(st)
