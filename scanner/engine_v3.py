@@ -137,6 +137,65 @@ def _pretrade_feasible(plan):
             and rr2 is not None and rr2 >= C.MIN_RR_TP2)
 
 
+
+def _geometry_at(entry, plan):
+    """Tek kaynak: verilen entry icin risk + TP R:R geometrisini hesaplar."""
+    if not plan or not entry or plan.get("sl") is None:
+        return None
+    risk = abs(float(entry) - float(plan["sl"]))
+    if not risk:
+        return None
+    return {
+        "entry": float(entry),
+        "risk": risk,
+        "risk_pct": risk / float(entry) * 100,
+        "rr1": abs(float(plan["tp1"]) - float(entry)) / risk if plan.get("tp1") is not None else None,
+        "rr2": abs(float(plan["tp2"]) - float(entry)) / risk if plan.get("tp2") is not None else None,
+        "rr3": abs(float(plan["tp3"]) - float(entry)) / risk if plan.get("tp3") is not None else None,
+    }
+
+
+def _geometry_feasible(g):
+    return bool(g and C.MIN_RISK_PCT <= g["risk_pct"] <= C.ACTIVE_MAX_LIVE_RISK_PCT
+                and g["rr1"] is not None and g["rr1"] >= C.MIN_RR_TP1
+                and g["rr2"] is not None and g["rr2"] >= C.MIN_RR_TP2)
+
+
+def _execution_geometry(side, cand, price, zones, atr):
+    """Thesis -> structural SL -> entry geometry -> ACTIVE/RETEST_WAIT/REJECT.
+
+    HTF thesis SL adjustment and all R:R recomputation live here so callers
+    cannot preserve ACTIVE with stale geometry.
+    """
+    plan, changed = _apply_htf_thesis_sl(side, cand["plan"], price, zones, atr)
+    cand["plan"] = plan
+    stage = cand["stage"]
+    entry = float(price) if stage == "ACTIVE" else float(cand["trigger"])
+    live = _geometry_at(entry, plan)
+    if _geometry_feasible(live):
+        return {"decision": "PASS", "candidate": cand, "geometry": live,
+                "htf_sl_adjusted": changed}
+
+    # Only an ACTIVE candidate may be downgraded to a safer retest. The retest
+    # itself must already have feasible structural geometry.
+    trigger_geo = _geometry_at(float(cand["trigger"]), plan)
+    if stage == "ACTIVE" and _geometry_feasible(trigger_geo):
+        out = dict(cand)
+        out["stage"] = "WATCH"
+        out["retest"] = True
+        out["dist"] = abs(float(cand["trigger"]) - float(price)) / float(price) * 100
+        pat = dict(out["pattern"])
+        note = "HTF structural SL nedeniyle retest bekleniyor" if changed else "canli geometry nedeniyle retest bekleniyor"
+        pat["note"] = ((pat.get("note") or "") + " | " + note).strip(" |")
+        out["pattern"] = pat
+        return {"decision": "RETEST_WAIT", "candidate": out,
+                "geometry": trigger_geo, "htf_sl_adjusted": changed}
+
+    return {"decision": "REJECT", "candidate": cand, "geometry": live,
+            "trigger_geometry": trigger_geo, "htf_sl_adjusted": changed,
+            "reason": "structural geometry minimum risk/R:R kosullarini saglamiyor"}
+
+
 def _fresh_1h(side, trigger, a1h, pattern_type):
     if pattern_type in ("liquidity_sweep", "breakout_retest"):
         return True
@@ -232,14 +291,13 @@ def _execution_veto(side, pattern, plan, a15, a1h, a4h, ctx):
     if reversal and side == "long" and oi_collapse and (taker15 is None or taker15 < C.PANIC_TAKER_LONG_15M):
         return "OI 4s/24s cokusu guclu 15d taker donusu olmadan reversal LONG'u veto etti", 0, []
 
-    risk = abs(price - float(plan["sl"]))
-    risk_pct = risk / price * 100 if price else float("inf")
-    if not (C.MIN_RISK_PCT <= risk_pct <= C.ACTIVE_MAX_LIVE_RISK_PCT):
-        return (f"canli stop riski %{risk_pct:.2f}; izin verilen %{C.MIN_RISK_PCT:.2f}-%{C.ACTIVE_MAX_LIVE_RISK_PCT:.1f}"), 0, []
-
-    ok_geo, rr1_live = geometry_gate(price, plan["sl"], plan.get("tp1"))
-    if not ok_geo:
-        return f"TP1 riske degmiyor ({rr1_live if rr1_live is not None else '-'}R < {C.MIN_RR_TP1:.1f}R)", 0, []
+    live_geo = _geometry_at(price, plan)
+    if not _geometry_feasible(live_geo):
+        rp = live_geo["risk_pct"] if live_geo else float("inf")
+        return (f"canli execution geometry gecersiz (risk %{rp:.2f}, TP1/TP2 minimum R:R)"), 0, []
+    risk = live_geo["risk"]
+    risk_pct = live_geo["risk_pct"]
+    rr1_live = live_geo["rr1"]
     obstacle_r, obstacle = _first_obstacle_r(side, price, risk, a15, a1h, a4h)
     if obstacle_r is not None and obstacle_r < C.ACTIVE_MIN_OBSTACLE_R:
         return f"ilk yapisal engel {obstacle_r:.2f}R (<{C.ACTIVE_MIN_OBSTACLE_R:.1f}R)", 0, []
@@ -353,12 +411,14 @@ def evaluate_v3(sym, a15, a1h, a4h, regime, ctx_fn):
         need = SCORE_ACTIVE_MIN if v2["status"] == "ACTIVE" else SCORE_WATCH_MIN
         if veto: return ("__veto__", veto)
         if score < need: return None
-        ok_geo, rr1 = geometry_gate(v2["price"] if v2["status"] == "ACTIVE" else v2["trigger"], v2["sl"], v2.get("tp1"))
-        if not ok_geo: return ("__veto__", f"TP1 riske degmiyor ({rr1 if rr1 is not None else '-'}R)")
+        ref_entry = v2["price"] if v2["status"] == "ACTIVE" else v2["trigger"]
+        v2_plan = {"sl": v2["sl"], "tp1": v2.get("tp1"), "tp2": v2.get("tp2"), "tp3": v2.get("tp3")}
+        v2_geo = _geometry_at(ref_entry, v2_plan)
+        if not _geometry_feasible(v2_geo):
+            return ("__veto__", "structural fallback minimum risk/TP1/TP2 geometry saglamiyor")
         execution_quality, execution_checks = 0, []
         if v2["status"] == "ACTIVE":
-            plan = {"sl": v2["sl"], "tp1": v2.get("tp1")}
-            veto, execution_quality, execution_checks = _execution_veto(side, fake_pat, plan, a15, a1h, a4h, ctx)
+            veto, execution_quality, execution_checks = _execution_veto(side, fake_pat, v2_plan, a15, a1h, a4h, ctx)
             if veto: return ("__veto__", veto)
             if not any(p.startswith("15d tetik") for p in parts): return ("__veto__", "15d trigger hacmi teyitsiz")
         ref = v2["price"] if v2["status"] == "ACTIVE" else v2["trigger"]
@@ -378,34 +438,12 @@ def evaluate_v3(sym, a15, a1h, a4h, regime, ctx_fn):
     eligible, vetoes = [], []
     for cand in cands:
         side, pat, plan = cand["side"], cand["pattern"], cand["plan"]
-        plan, htf_sl_adjusted = _apply_htf_thesis_sl(
-            side, plan, a15["price"], decision["zones"], a1h.get("atr"))
-        cand["plan"] = plan
-        if htf_sl_adjusted and not _pretrade_feasible(plan):
-            # Tez icin dogru structural stop mevcut giriste R:R'yi bozuyorsa
-            # stopu yapay daraltma; tetik/retest fiyatinda tekrar degerlendir.
-            trigger = float(cand["trigger"])
-            trigger_risk = abs(trigger - float(plan["sl"]))
-            trigger_risk_pct = trigger_risk / trigger * 100 if trigger else float("inf")
-            trigger_rr1 = (abs(float(plan["tp1"]) - trigger) / trigger_risk
-                           if plan.get("tp1") is not None and trigger_risk else None)
-            trigger_rr2 = (abs(float(plan["tp2"]) - trigger) / trigger_risk
-                           if plan.get("tp2") is not None and trigger_risk else None)
-            trigger_ok = (
-                C.MIN_RISK_PCT <= trigger_risk_pct <= C.ACTIVE_MAX_LIVE_RISK_PCT
-                and trigger_rr1 is not None and trigger_rr1 >= C.MIN_RR_TP1
-                and trigger_rr2 is not None and trigger_rr2 >= C.MIN_RR_TP2
-            )
-            if cand["stage"] == "ACTIVE" and trigger_ok:
-                cand["stage"] = "WATCH"
-                cand["retest"] = True
-                cand["dist"] = abs(cand["trigger"] - a15["price"]) / a15["price"] * 100
-                pat = dict(pat)
-                pat["note"] = ((pat.get("note") or "") + " | HTF structural SL nedeniyle retest bekleniyor").strip(" |")
-                cand["pattern"] = pat
-            else:
-                vetoes.append("HTF structural SL sonrasi minimum R:R saglanmiyor")
-                continue
+        geo = _execution_geometry(side, cand, a15["price"], decision["zones"], a1h.get("atr"))
+        if geo["decision"] == "REJECT":
+            vetoes.append(geo["reason"])
+            continue
+        cand = geo["candidate"]
+        side, pat, plan = cand["side"], cand["pattern"], cand["plan"]
         holds = trigger_hold_count(side, cand["trigger"], a15) if cand["stage"] == "ACTIVE" else 0
         loc_veto = location_gate(side, cand["stage"], cand["trigger"], a15["price"], decision["zones"], holds)
         if loc_veto:
