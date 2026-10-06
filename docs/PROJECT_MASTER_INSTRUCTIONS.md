@@ -1,7 +1,7 @@
 # Kripto Tarayici — Project Master Instructions
 
 > Living source of truth for KDUMAN71/kripto-tarayici.
-> Current position: Failure Attribution / Missed Opportunity Learner (GitHub PR #26).
+> Current position: Challenger Learning / shadow policy evaluation (GitHub PR #27).
 > Last research milestone: V3.5 30-day pre-runner replay V3 completed; 234 runners + 234 matched controls.
 
 ## 0. New ChatGPT session protocol
@@ -146,13 +146,13 @@ Labels may use future price; features at T cannot. Respect candle-close alignmen
 The user wants fewer useless suggestions, not fewer discovered opportunities. Hidden discovery may be broad; Telegram/trade recommendations remain selective. Prefer actionable early breakout/retest entries over post-pump reporting. Give structural invalidation, not arbitrary tight stops. Safer retest can beat chasing. Alternative direction plans require independent confirmation; no automatic flip.
 
 ## 13. Current status / next action
-Completed: research (#14/#15/#19), geometry safety (#17), observability (#18), continuity (#20), Broad Discovery (#21), PRE_RUNNER (#22), trajectory ranking (#23), centralized execution (#24), Outcome Ledger (#25, 8a4d8a2).
+Completed: research (#14/#15/#19), geometry safety (#17), observability (#18), continuity (#20), Broad Discovery (#21), PRE_RUNNER (#22), trajectory ranking (#23), centralized execution (#24), Outcome Ledger (#25), Failure Attribution (#26, 6c3e53f).
 
-Current implementation PR: **#26 Failure Attribution / Missed Opportunity Learner**.
-Scope: deterministic offline classification over ledger outcomes; rejected/terminal candidates receive a bounded 24h post-decision MFE/MAE evaluation label so false negatives become measurable. Classes include MISSED_RUNNER, LATE_DETECTION, BAD_RR, PREMATURE_STOP, VALID_LOSS/WIN/REJECT and explicit historical CORRECT_THESIS_BAD_EXECUTION. A reproducible `state/failure_attribution.json` report is built each scanner run.
-Critical rule: post-decision MFE is future-looking evaluation data only and must never enter live features/policy.
+Current implementation PR: **#27 Challenger Learning**.
+Scope: offline/shadow policy comparison over immutable discovery features and evaluation MFE labels. Current opportunity score is compared with a trajectory-balanced challenger at the same selection fraction using runner recall, precision and selected-average MFE. Report is persisted as `state/challenger_report.json`.
+Non-negotiable: challenger is SHADOW_ONLY, cannot mutate config, and cannot be promoted from the young live ledger alone.
 
-Next after #26: **#27 Challenger Learning**.
+Next after #27: **#28 Walk-forward / OOS Promotion Gate**.
 
 ## 14. Maintenance rule
 This file is part of the Definition of Done for implementation PRs #21-#28. A roadmap PR is incomplete if it materially changes architecture, evidence, invariants, or roadmap status without updating this document.
