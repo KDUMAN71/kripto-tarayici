@@ -60,3 +60,8 @@ def test_evaluation_horizon_prevents_indefinite_future_leakage(monkeypatch):
     }]})
     OUT.update_evaluation_prices({"XUSDT": 20.0}, ts=101 + OUT.EVAL_HORIZON_H * 3600)
     assert OUT._L["episodes"][0]["mfe_pct"] == 0.0
+
+
+def test_failed_breakout_trade_is_false_breakout_not_missed_runner():
+    e = {"outcome": "STOPPED", "setup_type": "breakout_retest", "mfe_pct": 0.5, "mae_pct": 2.0}
+    assert classify_episode(e)["class"] == "FALSE_BREAKOUT"
