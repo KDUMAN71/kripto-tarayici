@@ -3,6 +3,7 @@ import json
 import os
 import time
 from . import config as C
+from . import outcomes as OUT
 
 OPEN_STATUSES = ("EARLY", "WATCH", "ACTIVE")
 
@@ -253,6 +254,7 @@ def update_pretrade(st, sym, a15, a1h, tg):
     if (is_long and last1 < inval) or (not is_long and last1 > inval):
         s["status"], s["last_update"] = "CANCELLED", now()
         log_event(st, sym, "CANCELLED", f"1h close {last1:.6g} invalidation beyond")
+        OUT.close(sym, "CANCELLED", reason="structural invalidation")
         return
 
     # V3.3 hotfix: motor breakout sonrasi fiyati uzakta gorurse bunu bilincli
@@ -267,11 +269,13 @@ def update_pretrade(st, sym, a15, a1h, tg):
     if run > C.ACTIVE_MAX_RUN_PCT and not retest_wait:
         s["status"], s["last_update"] = "MISSED", now()
         log_event(st, sym, "MISSED_SILENT", f"trigger {trig:.6g}, price {price:.6g}")
+        OUT.close(sym, "MISSED", reason="entry ran beyond allowed distance")
         return
 
     if now() - s.get("created", now()) > C.WATCH_EXPIRY_H * 3600:
         s["status"], s["last_update"] = "EXPIRED", now()
         log_event(st, sym, "EXPIRED_SILENT", "pretrade expired")
+        OUT.close(sym, "EXPIRED", reason="pretrade expiry")
 
 
 def update_active(st, sym, a15, tg):
@@ -294,6 +298,8 @@ def update_active(st, sym, a15, tg):
 
     hi = max(float(seen["high"].max()), price)
     lo = min(float(seen["low"].min()), price)
+    OUT.update_excursion(sym, hi if is_long else lo)
+    OUT.update_excursion(sym, lo if is_long else hi)
     _track_excursions(s, hi if is_long else lo)
     e = s.get("entry_ref")
     if e:
@@ -305,6 +311,7 @@ def update_active(st, sym, a15, tg):
         s["status"], s["last_update"] = "STOPPED", now()
         log_event(st, sym, "STOPPED", f"hard SL touched {s['sl']:.6g}")
         _record_trade(st, sym, s, "STOPPED", s["sl"])
+        OUT.close(sym, "STOPPED", reason="hard SL touched")
         tg.send(f"🔴 <b>STOP — {sym} {s['side']}</b>\n"
                 f"15d mum aralığında hard SL {fmtp(s['sl'])} görüldü. Kurulum sona erdi.")
         return
@@ -328,6 +335,7 @@ def update_active(st, sym, a15, tg):
                 outcome = f"{tag}_HIT"
                 s["status"] = "TP3_HIT" if lvl == "tp3" else "CLOSED"
                 _record_trade(st, sym, s, outcome, s[lvl])
+                OUT.close(sym, outcome, reason=f"{tag} final target")
             log_event(st, sym, f"{tag}_HIT", f"{s[lvl]:.6g}")
             tail = ""
             if tag == "TP1" and C.MOVE_SL_TO_BE_AFTER_TP1:
