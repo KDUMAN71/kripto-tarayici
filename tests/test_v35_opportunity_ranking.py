@@ -1,5 +1,6 @@
 import pandas as pd
 from scanner.opportunity import opportunity_score, rank_candidates, return_pct
+from scanner import config as C
 
 
 def _closed(vals):
@@ -37,3 +38,8 @@ def test_rank_uses_score_before_raw_liquidity():
         {"symbol": "METISUSDT", "opportunity_score": 5.0, "quote_volume_24h": 3_000_000},
     ]
     assert rank_candidates(rows)[0]["symbol"] == "METISUSDT"
+
+
+def test_ranked_tail_has_bounded_capacity_beyond_core():
+    assert C.DEEP_SCAN_CAP > C.CORE_SCAN_CAP
+    assert C.DEEP_SCAN_CAP - C.CORE_SCAN_CAP == 40
