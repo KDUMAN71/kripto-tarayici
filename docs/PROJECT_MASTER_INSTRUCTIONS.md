@@ -146,10 +146,13 @@ Labels may use future price; features at T cannot. Respect candle-close alignmen
 The user wants fewer useless suggestions, not fewer discovered opportunities. Hidden discovery may be broad; Telegram/trade recommendations remain selective. Prefer actionable early breakout/retest entries over post-pump reporting. Give structural invalidation, not arbitrary tight stops. Safer retest can beat chasing. Alternative direction plans require independent confirmation; no automatic flip.
 
 ## 13. Current status / next action
-Completed: research foundation (#14/#15/#19), execution-geometry safety (#17), missed-opportunity observability (#18), 30d V3 replay run and evidence synthesis.
-Next implementation PR: **#20 Broad Discovery / Opportunity Universe**.
-Before #20, close obsolete PR #7 (superseded by merged #8).
-Do not loosen ACTIVE execution thresholds in #20.
+Completed: research foundation (#14/#15/#19), execution-geometry safety (#17), missed-opportunity observability (#18), 30d V3 replay/evidence synthesis, continuity PR #20 (de4ba0b). Obsolete PR #7 is closed.
+
+Current implementation PR: **#21 Broad Discovery / Opportunity Universe**.
+Scope: 2M discovery floor separated from the retained 8M reference threshold; >25% movers are no longer hard-rejected from discovery. The 8M value is not claimed to be an execution hard gate in current code. ACTIVE/execution rules are unchanged.
+Deliberately deferred: lowering the 1.8x momentum threshold without trajectory logic. PRE_RUNNER/trajectory work belongs to #22/#23.
+
+Next after #21: **#22 Hidden PRE_RUNNER Watchlist**.
 
 ## 14. Maintenance rule
 This file is part of the Definition of Done for implementation PRs #21-#28. A roadmap PR is incomplete if it materially changes architecture, evidence, invariants, or roadmap status without updating this document.
