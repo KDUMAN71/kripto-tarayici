@@ -1,7 +1,7 @@
 # Kripto Tarayici — Project Master Instructions
 
 > Living source of truth for KDUMAN71/kripto-tarayici.
-> Current position: continuity baseline before roadmap PR #20.
+> Current position: Broad Discovery implementation (actual GitHub PR #21; roadmap numbering shifted by continuity PR #20).
 > Last research milestone: V3.5 30-day pre-runner replay V3 completed; 234 runners + 234 matched controls.
 
 ## 0. New ChatGPT session protocol
@@ -94,32 +94,32 @@ Execution vetoes; breakout/retest/hold lifecycle; EMA/MA checks; 15m/1h taker co
 - #18 MERGED d90851b — METIS/RECALL gate trace.
 - #19 MERGED 289b27a — pre-runner replay V3 current-main port.
 
-## 8. CURRENT ROADMAP POSITION: PR #20 -> #27
+## 8. CURRENT ROADMAP POSITION: implementation PR #21 -> #28
 
-### #20 Broad Discovery / Opportunity Universe
+### #21 Broad Discovery / Opportunity Universe
 Goal: stop killing runners before opportunity analysis.
 Direction: separate discovery liquidity from execution liquidity; test ~2M discovery floor; 8M no longer first hard opportunity gate; trajectory inputs replace overly strict single-point prefilter; >25% movers not automatically discarded from discovery; preserve young-coin/API/execution safety.
 Acceptance: replay recall improves; API/deep scan bounded; no automatic Telegram increase; ACTIVE rules unchanged; METIS-like regression; update this file.
 
-### #21 Hidden PRE_RUNNER Watchlist
+### #22 Hidden PRE_RUNNER Watchlist
 Goal: recall without spam. Internal PRE_RUNNER retains feature trajectory/gate history. No normal trade alert. Deterministic promotion/demotion/expiry and autopsy trace.
 
-### #22 Opportunity Ranking
+### #23 Opportunity Ranking
 Allocate expensive analysis to highest-value candidates. Inputs: 3h/6h trajectory, BTC-relative strength, relative volume/participation acceleration, HTF structure/pattern/compression. OI/taker/funding are supporting features unless further evidence proves hard gates. Avoid overfitting exact medians.
 
-### #23 Execution Gate V3.5
+### #24 Execution Gate V3.5
 Centralize thesis -> structural invalidation -> buffered SL -> live entry -> targets -> R:R -> obstacle -> spread/liquidity/slippage -> retest/hold -> taker/OI/EMA. If correct SL destroys R:R: RETEST_WAIT or reject; never tighten SL to save trade.
 
-### #24 Outcome Ledger
+### #25 Outcome Ledger
 Track PRE_RUNNER/WATCH/REJECTED/ACTIVE: candidate_id, detection features, lifecycle, rejection reason, hypothetical entry, structural SL, MAE, MFE, max future move, time-to-run, final outcome.
 
-### #25 Failure Attribution / Missed Opportunity Learner
+### #26 Failure Attribution / Missed Opportunity Learner
 Classes: MISSED_RUNNER, LATE_DETECTION, FALSE_BREAKOUT, WRONG_DIRECTION, BAD_RR, PREMATURE_STOP, CORRECT_THESIS_BAD_EXECUTION. METIS = discovery-gate miss; historical HBAR = correct thesis/bad execution.
 
-### #26 Challenger Learning
+### #27 Challenger Learning
 Offline/nightly challenger vs current policy. Production does not self-edit. Suggestions must be reproducible and optimize decision quality, not signal count.
 
-### #27 Walk-forward / OOS Promotion
+### #28 Walk-forward / OOS Promotion
 Use ~30d calibration and separate 30-60d OOS where data permits. Promote only if recall/lead time improve without unacceptable false positives and ACTIVE expectancy/profit factor/MAE remain acceptable.
 
 ## 9. Failure taxonomy
@@ -152,4 +152,4 @@ Before #20, close obsolete PR #7 (superseded by merged #8).
 Do not loosen ACTIVE execution thresholds in #20.
 
 ## 14. Maintenance rule
-This file is part of the Definition of Done for #20-#27. A roadmap PR is incomplete if it materially changes architecture, evidence, invariants, or roadmap status without updating this document.
+This file is part of the Definition of Done for implementation PRs #21-#28. A roadmap PR is incomplete if it materially changes architecture, evidence, invariants, or roadmap status without updating this document.
