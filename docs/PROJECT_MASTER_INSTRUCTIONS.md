@@ -1,7 +1,7 @@
 # Kripto Tarayici — Project Master Instructions
 
 > Living source of truth for KDUMAN71/kripto-tarayici.
-> Current position: Broad Discovery implementation (actual GitHub PR #21; roadmap numbering shifted by continuity PR #20).
+> Current position: Hidden PRE_RUNNER watchlist implementation (GitHub PR #22).
 > Last research milestone: V3.5 30-day pre-runner replay V3 completed; 234 runners + 234 matched controls.
 
 ## 0. New ChatGPT session protocol
@@ -146,13 +146,13 @@ Labels may use future price; features at T cannot. Respect candle-close alignmen
 The user wants fewer useless suggestions, not fewer discovered opportunities. Hidden discovery may be broad; Telegram/trade recommendations remain selective. Prefer actionable early breakout/retest entries over post-pump reporting. Give structural invalidation, not arbitrary tight stops. Safer retest can beat chasing. Alternative direction plans require independent confirmation; no automatic flip.
 
 ## 13. Current status / next action
-Completed: research foundation (#14/#15/#19), execution-geometry safety (#17), missed-opportunity observability (#18), 30d V3 replay/evidence synthesis, continuity PR #20 (de4ba0b). Obsolete PR #7 is closed.
+Completed: research foundation (#14/#15/#19), execution geometry (#17), missed-opportunity observability (#18), continuity (#20), Broad Discovery (#21, f5bfd8c).
 
-Current implementation PR: **#21 Broad Discovery / Opportunity Universe**.
-Scope: 2M discovery floor separated from the retained 8M reference threshold; >25% movers are no longer hard-rejected from discovery. The 8M value is not claimed to be an execution hard gate in current code. ACTIVE/execution rules are unchanged.
-Deliberately deferred: lowering the 1.8x momentum threshold without trajectory logic. PRE_RUNNER/trajectory work belongs to #22/#23.
+Current implementation PR: **#22 Hidden PRE_RUNNER Watchlist**.
+Implementation scope: bounded separate `pre_runners` state; current momentum-pre candidates are tracked silently; no normal Telegram message; deterministic refresh/expiry; promotion removes hidden record when a real signal is created; autopsy receives PRE_RUNNER trace.
+Non-goals: no new ranking model and no ACTIVE threshold relaxation. The current momentum prefilter remains only the seed mechanism; trajectory-based candidate ranking is #23.
 
-Next after #21: **#22 Hidden PRE_RUNNER Watchlist**.
+Next after #22: **#23 Opportunity Ranking / trajectory scoring**.
 
 ## 14. Maintenance rule
 This file is part of the Definition of Done for implementation PRs #21-#28. A roadmap PR is incomplete if it materially changes architecture, evidence, invariants, or roadmap status without updating this document.
