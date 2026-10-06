@@ -291,14 +291,13 @@ def _execution_veto(side, pattern, plan, a15, a1h, a4h, ctx):
     if reversal and side == "long" and oi_collapse and (taker15 is None or taker15 < C.PANIC_TAKER_LONG_15M):
         return "OI 4s/24s cokusu guclu 15d taker donusu olmadan reversal LONG'u veto etti", 0, []
 
-    risk = abs(price - float(plan["sl"]))
-    risk_pct = risk / price * 100 if price else float("inf")
-    if not (C.MIN_RISK_PCT <= risk_pct <= C.ACTIVE_MAX_LIVE_RISK_PCT):
-        return (f"canli stop riski %{risk_pct:.2f}; izin verilen %{C.MIN_RISK_PCT:.2f}-%{C.ACTIVE_MAX_LIVE_RISK_PCT:.1f}"), 0, []
-
-    ok_geo, rr1_live = geometry_gate(price, plan["sl"], plan.get("tp1"))
-    if not ok_geo:
-        return f"TP1 riske degmiyor ({rr1_live if rr1_live is not None else '-'}R < {C.MIN_RR_TP1:.1f}R)", 0, []
+    live_geo = _geometry_at(price, plan)
+    if not _geometry_feasible(live_geo):
+        rp = live_geo["risk_pct"] if live_geo else float("inf")
+        return (f"canli execution geometry gecersiz (risk %{rp:.2f}, TP1/TP2 minimum R:R)"), 0, []
+    risk = live_geo["risk"]
+    risk_pct = live_geo["risk_pct"]
+    rr1_live = live_geo["rr1"]
     obstacle_r, obstacle = _first_obstacle_r(side, price, risk, a15, a1h, a4h)
     if obstacle_r is not None and obstacle_r < C.ACTIVE_MIN_OBSTACLE_R:
         return f"ilk yapisal engel {obstacle_r:.2f}R (<{C.ACTIVE_MIN_OBSTACLE_R:.1f}R)", 0, []
@@ -419,8 +418,7 @@ def evaluate_v3(sym, a15, a1h, a4h, regime, ctx_fn):
             return ("__veto__", "structural fallback minimum risk/TP1/TP2 geometry saglamiyor")
         execution_quality, execution_checks = 0, []
         if v2["status"] == "ACTIVE":
-            plan = {"sl": v2["sl"], "tp1": v2.get("tp1")}
-            veto, execution_quality, execution_checks = _execution_veto(side, fake_pat, plan, a15, a1h, a4h, ctx)
+            veto, execution_quality, execution_checks = _execution_veto(side, fake_pat, v2_plan, a15, a1h, a4h, ctx)
             if veto: return ("__veto__", veto)
             if not any(p.startswith("15d tetik") for p in parts): return ("__veto__", "15d trigger hacmi teyitsiz")
         ref = v2["price"] if v2["status"] == "ACTIVE" else v2["trigger"]
