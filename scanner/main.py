@@ -258,6 +258,19 @@ def run():
         else:
             AU.record(sym, "momentum_pre", "1s hacim/3s ivme on esigi altinda")
     _pool = core + [s for s in momentum if s not in core]
+    # PRE_RUNNER = discovery tarafinda ilginc hale gelen fakat henuz
+    # EARLY/WATCH/ACTIVE olmayan sessiz aday. Telegram gondermez.
+    for sym in momentum:
+        if sym in st["signals"] and st["signals"][sym].get("status") in ("EARLY", "WATCH", "ACTIVE"):
+            continue
+        ST.upsert_pre_runner(st, sym, {
+            "quote_volume_24h": float(tdf.loc[tdf["symbol"] == sym, "quoteVolume"].iloc[0])
+                if not tdf.loc[tdf["symbol"] == sym].empty else None,
+            "change_24h": float(chg.get(sym, 0)),
+            "source": "momentum_pre",
+        })
+        AU.record(sym, "pre_runner", "hidden opportunity watchlist")
+    ST.expire_pre_runners(st, open_syms)
     candidates = _pool[:C.DEEP_SCAN_CAP]
     for sym in _pool[C.DEEP_SCAN_CAP:]:
         AU.record(sym, "cap", "derin analiz kapasitesi disinda kaldi")
@@ -277,6 +290,7 @@ def run():
         sig["created"] = ST.now(); sig["last_update"] = ST.now()
         if sig["status"] == "ACTIVE":
             sig["entry_ref"] = (sig["entry_lo"] + sig["entry_hi"]) / 2; sig["activated_at"] = ST.now(); sig["mfe_pct"] = 0; sig["mae_pct"] = 0
+        ST.promote_pre_runner(st, sym, sig["status"])
         st["signals"][sym] = sig; ST.log_event(st, sym, sig["status"], f"{sig['side']} @ {sig['price']:.6g}")
         tg.send(active_msg(sym, sig, nn) if sig["status"] == "ACTIVE" else pretrade_msg(sym, sig, nn)); new_sent += 1
 
