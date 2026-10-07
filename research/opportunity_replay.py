@@ -63,3 +63,37 @@ def build_episode_set(census):
     for e in episodes:
         e["episode_key"]=f'{e["symbol"]}:{e["side"]}:{e["episode_start"]}'
     return episodes
+
+
+def canonicalize(episodes, overlap_days=3):
+    """Merge horizon views that describe the same economic move.
+
+    Same symbol+side episodes whose starts are within overlap_days are one
+    canonical opportunity. Preserve all horizon views as evidence.
+    """
+    by={}
+    for e in episodes:
+        by.setdefault((e["symbol"],e["side"]),[]).append(e)
+    out=[]; gap=pd.Timedelta(days=overlap_days)
+    for (sym,side),rows in by.items():
+        rows=sorted(rows,key=lambda x:x["episode_start"]); group=[]
+        def flush(g):
+            if not g:return
+            first=min(g,key=lambda x:x["episode_start"])
+            best=max(g,key=lambda x:x["max_excursion_pct"])
+            out.append({
+                "opportunity_id":f'{sym}:{side}:{first["episode_start"]}',
+                "symbol":sym,"side":side,"start_ts":first["episode_start"],
+                "end_ts":max(x["episode_end"] for x in g),
+                "max_excursion_pct":best["max_excursion_pct"],
+                "best_horizon":best["horizon"],"magnitude_bin":best["magnitude_bin"],
+                "views":[{"horizon":x["horizon"],"max_excursion_pct":x["max_excursion_pct"],
+                          "episode_start":x["episode_start"],"episode_end":x["episode_end"]}
+                         for x in g],
+            })
+        for e in rows:
+            if group and pd.Timestamp(e["episode_start"])-pd.Timestamp(group[-1]["episode_start"])>gap:
+                flush(group); group=[]
+            group.append(e)
+        flush(group)
+    return sorted(out,key=lambda x:(x["start_ts"],x["symbol"],x["side"]))
