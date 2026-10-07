@@ -40,11 +40,13 @@ jobs:
         run: python -m tools.failure_attribution
       - name: Build shadow challenger report
         run: python -m tools.challenger_report
+      - name: Build OOS promotion review report
+        run: python -m tools.promotion_report
       - name: Commit state
         run: |
           git config user.name "scanner-bot"
           git config user.email "bot@users.noreply.github.com"
-          git add state/state.json state/summary.json state/runner_autopsy.json state/outcome_ledger.json state/failure_attribution.json state/challenger_report.json
+          git add state/state.json state/summary.json state/runner_autopsy.json state/outcome_ledger.json state/failure_attribution.json state/challenger_report.json state/promotion_report.json
 
           if git diff --cached --quiet; then
             exit 0

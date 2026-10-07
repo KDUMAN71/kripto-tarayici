@@ -1,7 +1,7 @@
 # Kripto Tarayici — Project Master Instructions
 
 > Living source of truth for KDUMAN71/kripto-tarayici.
-> Current position: Challenger Learning / shadow policy evaluation (GitHub PR #27).
+> Current position: Walk-forward / OOS Promotion Gate (GitHub PR #28).
 > Last research milestone: V3.5 30-day pre-runner replay V3 completed; 234 runners + 234 matched controls.
 
 ## 0. New ChatGPT session protocol
@@ -146,13 +146,13 @@ Labels may use future price; features at T cannot. Respect candle-close alignmen
 The user wants fewer useless suggestions, not fewer discovered opportunities. Hidden discovery may be broad; Telegram/trade recommendations remain selective. Prefer actionable early breakout/retest entries over post-pump reporting. Give structural invalidation, not arbitrary tight stops. Safer retest can beat chasing. Alternative direction plans require independent confirmation; no automatic flip.
 
 ## 13. Current status / next action
-Completed: research (#14/#15/#19), geometry safety (#17), observability (#18), continuity (#20), Broad Discovery (#21), PRE_RUNNER (#22), trajectory ranking (#23), centralized execution (#24), Outcome Ledger (#25), Failure Attribution (#26, 6c3e53f).
+Completed: research (#14/#15/#19), geometry safety (#17), observability (#18), continuity (#20), Broad Discovery (#21), PRE_RUNNER (#22), ranking (#23), centralized execution (#24), Outcome Ledger (#25), Failure Attribution (#26), shadow Challenger (#27, 68cd4c0).
 
-Current implementation PR: **#27 Challenger Learning**.
-Scope: offline/shadow policy comparison over immutable discovery features and evaluation MFE labels. Current opportunity score is compared with a trajectory-balanced challenger at the same selection fraction using runner recall, precision and selected-average MFE. Report is persisted as `state/challenger_report.json`.
-Non-negotiable: challenger is SHADOW_ONLY, cannot mutate config, and cannot be promoted from the young live ledger alone.
+Current implementation PR: **#28 Walk-forward / OOS Promotion Gate**.
+Scope: time-based calibration vs last-30d OOS split after excluding the still-evaluating final 24h; minimum 60 calibration + 40 OOS episodes; equal selection budget; OOS recall non-inferiority, precision tolerance <=3 percentage points, selected-average-MFE tolerance <=0.5 percentage point, plus calibration recall non-worsening. Output is only BLOCKED or ELIGIBLE_FOR_REVIEW.
+Non-negotiable: automatic promotion is always false. This first gate is episode-level screening evidence; any future production promotion additionally requires a time-slice replay that ranks the contemporaneous candidate universe, followed by human/code review.
 
-Next after #27: **#28 Walk-forward / OOS Promotion Gate**.
+After #28: V3.5 roadmap implementation is complete. Next phase is **observation and evidence accumulation**, not immediate threshold tuning: allow ledger/challenger/OOS samples to mature, then review reports before proposing a new production policy PR.
 
 ## 14. Maintenance rule
 This file is part of the Definition of Done for implementation PRs #21-#28. A roadmap PR is incomplete if it materially changes architecture, evidence, invariants, or roadmap status without updating this document.
