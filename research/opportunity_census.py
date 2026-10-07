@@ -28,7 +28,8 @@ def forward_excursion(d, i, bars):
     up=(float(f.high.max())/entry-1)*100
     down=(1-float(f.low.min())/entry)*100
     return {"up_pct":up,"down_pct":down,
-            "up_bin":_bin(up,UP_BINS),"down_bin":_bin(down,DOWN_BINS)}
+            "up_bin":_bin(up,UP_BINS),"down_bin":_bin(down,DOWN_BINS),
+            "available_bars":len(f),"requested_bars":bars,"mature":len(f)>=bars}
 
 
 def census_symbol(symbol,d):
@@ -61,12 +62,16 @@ def build(days=60,max_symbols=None):
         if n%25==0: print(f"census {n}/{len(syms)} events={len(events)}")
     counts={}
     for h in HORIZONS_H:
-        counts[h]={"up":{},"down":{}}
+        counts[h]={"all_available":{"up":{},"down":{}},"mature_only":{"up":{},"down":{}},"mature_anchors":0}
         for e in events:
             x=e.get(h)
             if not x: continue
-            if x["up_bin"]: counts[h]["up"][x["up_bin"]]=counts[h]["up"].get(x["up_bin"],0)+1
-            if x["down_bin"]: counts[h]["down"][x["down_bin"]]=counts[h]["down"].get(x["down_bin"],0)+1
+            if x["up_bin"]: counts[h]["all_available"]["up"][x["up_bin"]]=counts[h]["all_available"]["up"].get(x["up_bin"],0)+1
+            if x["down_bin"]: counts[h]["all_available"]["down"][x["down_bin"]]=counts[h]["all_available"]["down"].get(x["down_bin"],0)+1
+            if x["mature"]:
+                counts[h]["mature_anchors"]+=1
+                if x["up_bin"]: counts[h]["mature_only"]["up"][x["up_bin"]]=counts[h]["mature_only"]["up"].get(x["up_bin"],0)+1
+                if x["down_bin"]: counts[h]["mature_only"]["down"][x["down_bin"]]=counts[h]["mature_only"]["down"].get(x["down_bin"],0)+1
     return {"meta":{"schema_version":1,"generated_at":now.isoformat(),"lookback_days":days,
                     "symbols_scanned":len(syms),"failures":failures,
                     "anchor_rule":"one anchor per 24h per symbol; opportunity labels use future excursion",
