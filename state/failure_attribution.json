@@ -305,7 +305,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 5.024115755626997
+    "mfe_pct": 7.556270096463013
    }
   },
   {
@@ -388,11 +388,11 @@
   {
    "candidate_id": "BASEDUSDT-1791317817-7dc6bf",
    "symbol": "BASEDUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "PRE_RUNNER_EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "PRE_RUNNER_EXPIRED",
+    "reason": "hidden watchlist stale/max-age",
     "mfe_pct": 0.0
    }
   },
@@ -410,11 +410,11 @@
   {
    "candidate_id": "BEATUSDT-1791317818-77b628",
    "symbol": "BEATUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "PRE_RUNNER_EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "PRE_RUNNER_EXPIRED",
+    "reason": "hidden watchlist stale/max-age",
     "mfe_pct": 0.0
    }
   },
@@ -542,11 +542,11 @@
   {
    "candidate_id": "4USDT-1791317822-9d3b0c",
    "symbol": "4USDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "PRE_RUNNER_EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "PRE_RUNNER_EXPIRED",
+    "reason": "hidden watchlist stale/max-age",
     "mfe_pct": 0.0
    }
   },
@@ -3880,7 +3880,7 @@
    "evidence": {
     "outcome": "CANCELLED",
     "reason": "structural invalidation",
-    "mfe_pct": 2.3175696836830566
+    "mfe_pct": 4.290635765737553
    }
   },
   {
@@ -5019,11 +5019,11 @@
   {
    "candidate_id": "AVAXUSDT-1791388028-add651",
    "symbol": "AVAXUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "guclu htf direnc bolgesinde (11.4861); kirilim/hold olmadan long yok",
     "mfe_pct": 0.0
    }
   },
@@ -5063,11 +5063,11 @@
   {
    "candidate_id": "1000PEPEUSDT-1791388970-d64862",
    "symbol": "1000PEPEUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "btc ters yonde sert rejim kirilimi (btc 4s: kararsiz, 1s yapi: lh-ll, sert asagi kirilim)",
     "mfe_pct": 0.0
    }
   },
@@ -5092,12 +5092,23 @@
     "reason": "",
     "mfe_pct": 0.0
    }
+  },
+  {
+   "candidate_id": "IMXUSDT-1791390022-bdd468",
+   "symbol": "IMXUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
   }
  ],
  "counts": {
-  "UNCLASSIFIED": 180,
-  "VALID_REJECT": 278,
+  "UNCLASSIFIED": 176,
+  "VALID_REJECT": 283,
   "MISSED_RUNNER": 5
  },
- "total": 463
+ "total": 464
 }
