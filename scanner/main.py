@@ -342,7 +342,7 @@ def run():
                     f"15d hacim: {ep['vol_ratio']:.1f}x | Taker alım: %{ep['taker']*100:.0f} | RSI(1s): {rsi_txt}\n"
                     f"Para giriyor ama fiyat henüz koşmadı; hareket başlarsa giriş hâlâ mümkün.\n"
                     f"<i>Teknik giriş sinyali değildir; 15d kapanış teyidi bekleyin.</i>")
-            esent += 1
+        esent += 1
 
     pcands = radars.pump_candidates(tdf); sent = 0
     for _, row in pcands.iterrows():
@@ -352,7 +352,7 @@ def run():
         st.setdefault("pump_alerts", {})[sym] = ST.now(); ST.log_event(st, sym, "PUMP_ALERT", f"vol {p['vol_ratio']:.1f}x, 3h %{p['chg3h']:.1f}")
         if not C.USER_SIGNAL_ACTIVE_ONLY:
             tg.send(f"⚡ <b>PUMP RADARI — {sym}</b> (SPEKÜLATİF)\nFiyat: {fmtp(p['price'])} | 24s: %{row['priceChangePercent']:.1f} | 3s: %{p['chg3h']:.1f}\n1s hacim: {p['vol_ratio']:.1f}x | OI(~6s): %{p['oi_chg']:+.1f} | RSI(1s): {p['rsi1h']:.0f}\nTeknik giriş sinyali değildir; manipülasyon riski yüksek.")
-            sent += 1
+        sent += 1
 
     active_count = len([1 for v in st["signals"].values() if v["status"] in ("EARLY", "WATCH", "ACTIVE")])
     AU.observe_signals(st)
