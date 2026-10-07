@@ -17,9 +17,11 @@ Suggested prompt:
 "Read docs/PROJECT_MASTER_INSTRUCTIONS.md in KDUMAN71/kripto-tarayici, verify it against current main/open PRs, and continue from CURRENT ROADMAP POSITION. Do not redo merged work."
 
 ## 1. Mission
-Build a Binance Futures opportunity system that detects high-value moves early enough to trade, avoids low-quality suggestion spam, separates discovery from execution, uses real structural invalidation/R:R, learns from false positives and false negatives, and promotes changes only after replay + out-of-sample evidence.
+The primary objective is **risk-adjusted realized profit from actionable Futures trades**: find the highest-value coins early enough internally, notify the user only when an executable ACTIVE entry exists, manage risk structurally, and exit so favorable movement is converted into realized R.
 
-Success metrics: catchable runner recall; first-third detection rate; detection lead time; false-positive rate; ACTIVE expectancy (R); profit factor; MAE/MFE; stop-out-then-MFE; performance by setup family. Research target: >=50% of catchable Top-10 runners should reach EARLY/WATCH in the first third of the move. Production ACTIVE additionally requires positive OOS expectancy.
+Discovery recall is an internal enabling metric, not the product. PRE_RUNNER/EARLY/WATCH/rejected candidates exist only to improve ACTIVE quality and learning.
+
+Primary production metrics, in order: ACTIVE expectancy (R), profit factor, net R, max drawdown (R), captured-MFE ratio, then win rate and setup-family stability. Runner recall / first-third detection / lead time remain diagnostic discovery metrics. A policy that catches more runners but reduces realized risk-adjusted profitability is worse.
 
 ## 2. Non-negotiable rules
 1. Discovery != execution.
@@ -143,16 +145,21 @@ Prefer small reversible PRs over a large rewrite.
 Labels may use future price; features at T cannot. Respect candle-close alignment. OI/funding/news must be point-in-time. No future pivots. Controls matched by time/liquidity and verified non-runner in outcome horizon. Report missing-data availability. Disclose delisted-contract survivorship bias.
 
 ## 12. User-facing principles
-The user wants fewer useless suggestions, not fewer discovered opportunities. Hidden discovery may be broad; Telegram/trade recommendations remain selective. Prefer actionable early breakout/retest entries over post-pump reporting. Give structural invalidation, not arbitrary tight stops. Safer retest can beat chasing. Alternative direction plans require independent confirmation; no automatic flip.
+**User-facing Telegram policy is ACTIVE-only.** PRE_RUNNER, EARLY, WATCH, early-pump and pump-radar observations are internal and must not create ordinary user alerts. Once ACTIVE, entry/SL/TP and subsequent TP/STOP/position-management messages remain user-facing because they are actionable. System/data-source health alerts may also remain.
+
+Prefer actionable breakout/retest entries over post-pump reporting. Give structural invalidation, not arbitrary tight stops. Safer retest can beat chasing. Alternative direction plans require independent confirmation; no automatic flip.
 
 ## 13. Current status / next action
-Completed: research (#14/#15/#19), geometry safety (#17), observability (#18), continuity (#20), Broad Discovery (#21), PRE_RUNNER (#22), ranking (#23), centralized execution (#24), Outcome Ledger (#25), Failure Attribution (#26), shadow Challenger (#27, 68cd4c0).
+V3.5 roadmap #21-#28 is merged. Product objective was subsequently clarified: **profit first, ACTIVE-only user signals**.
 
-Current implementation PR: **#28 Walk-forward / OOS Promotion Gate**.
-Scope: time-based calibration vs last-30d OOS split after excluding the still-evaluating final 24h; minimum 60 calibration + 40 OOS episodes; equal selection budget; OOS recall non-inferiority, precision tolerance <=3 percentage points, selected-average-MFE tolerance <=0.5 percentage point, plus calibration recall non-worsening. Output is only BLOCKED or ELIGIBLE_FOR_REVIEW.
-Non-negotiable: automatic promotion is always false. This first gate is episode-level screening evidence; any future production promotion additionally requires a time-slice replay that ranks the contemporaneous candidate universe, followed by human/code review.
+Current implementation: Profit Objective & User Signal Policy.
+- Telegram ordinary trade alerts: ACTIVE only.
+- PRE_RUNNER/EARLY/WATCH/pump observations remain internal for discovery/learning.
+- ACTIVE TP/STOP management and system health messages remain user-facing.
+- Profit evaluation adds expectancy R, profit factor, net R, max drawdown R and captured-MFE ratio.
+- Runner recall remains diagnostic, not the optimization objective.
 
-After #28: V3.5 roadmap implementation is complete. Next phase is **observation and evidence accumulation**, not immediate threshold tuning: allow ledger/challenger/OOS samples to mature, then review reports before proposing a new production policy PR.
+Next research priority: time-slice replay and exit/position-management evaluation using the profit-first objective before proposing further production threshold changes.
 
 ## 14. Maintenance rule
 This file is part of the Definition of Done for implementation PRs #21-#28. A roadmap PR is incomplete if it materially changes architecture, evidence, invariants, or roadmap status without updating this document.

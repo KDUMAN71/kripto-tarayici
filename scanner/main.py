@@ -250,7 +250,9 @@ def run():
                 res["created"] = sig.get("created", ST.now()); res["last_update"] = ST.now(); st["signals"][sym] = res
                 OUT.transition(sym, "WATCH"); OUT.set_trade_geometry(sym, res)
                 news = radars.news_check(sym); nn = news["note"] if news else "haber modülü kapalı"
-                ST.log_event(st, sym, "WATCH", f"{res['side']} @ {res['price']:.6g}"); tg.send(pretrade_msg(sym, res, nn)); continue
+                ST.log_event(st, sym, "WATCH", f"{res['side']} @ {res['price']:.6g}")
+                if not C.USER_SIGNAL_ACTIVE_ONLY: tg.send(pretrade_msg(sym, res, nn))
+                continue
             ST.update_pretrade(st, sym, a15, a1, tg)
         else:
             ST.update_active(st, sym, a15, tg)
@@ -311,7 +313,10 @@ def run():
         OUT.transition(sym, sig["status"])
         OUT.set_trade_geometry(sym, sig)
         st["signals"][sym] = sig; ST.log_event(st, sym, sig["status"], f"{sig['side']} @ {sig['price']:.6g}")
-        tg.send(active_msg(sym, sig, nn) if sig["status"] == "ACTIVE" else pretrade_msg(sym, sig, nn)); new_sent += 1
+        if sig["status"] == "ACTIVE":
+            tg.send(active_msg(sym, sig, nn)); new_sent += 1
+        elif not C.USER_SIGNAL_ACTIVE_ONLY:
+            tg.send(pretrade_msg(sym, sig, nn)); new_sent += 1
 
     if _budget_cut is not None:
         for _s2 in candidates[_budget_cut:]:
@@ -330,12 +335,13 @@ def run():
         st.setdefault("early_pump_alerts", {})[sym] = ST.now()
         ST.log_event(st, sym, "EARLY_PUMP", f"OI %{ep['oi_chg']:+.1f}, 15d hacim {ep['vol_ratio']:.1f}x")
         rsi_txt = f"{ep['rsi1h']:.0f}" if ep["rsi1h"] is not None else "-"
-        tg.send(f"🟠 <b>ERKEN PUMP İZİ — {sym}</b>\n"
-                f"Fiyat: {fmtp(ep['price'])} | son 1s fiyat: %{ep['run1h']:+.2f} (henüz sakin)\n"
-                f"OI (~1s): %{ep['oi_chg']:+.1f} ← pozisyon birikiyor\n"
-                f"15d hacim: {ep['vol_ratio']:.1f}x | Taker alım: %{ep['taker']*100:.0f} | RSI(1s): {rsi_txt}\n"
-                f"Para giriyor ama fiyat henüz koşmadı; hareket başlarsa giriş hâlâ mümkün.\n"
-                f"<i>Teknik giriş sinyali değildir; 15d kapanış teyidi bekleyin.</i>")
+        if not C.USER_SIGNAL_ACTIVE_ONLY:
+            tg.send(f"🟠 <b>ERKEN PUMP İZİ — {sym}</b>\n"
+                    f"Fiyat: {fmtp(ep['price'])} | son 1s fiyat: %{ep['run1h']:+.2f} (henüz sakin)\n"
+                    f"OI (~1s): %{ep['oi_chg']:+.1f} ← pozisyon birikiyor\n"
+                    f"15d hacim: {ep['vol_ratio']:.1f}x | Taker alım: %{ep['taker']*100:.0f} | RSI(1s): {rsi_txt}\n"
+                    f"Para giriyor ama fiyat henüz koşmadı; hareket başlarsa giriş hâlâ mümkün.\n"
+                    f"<i>Teknik giriş sinyali değildir; 15d kapanış teyidi bekleyin.</i>")
         esent += 1
 
     pcands = radars.pump_candidates(tdf); sent = 0
@@ -344,7 +350,8 @@ def run():
         sym = row["symbol"]; p = radars.check_pump(sym, ST.now(), st.get("pump_alerts", {}))
         if not p: continue
         st.setdefault("pump_alerts", {})[sym] = ST.now(); ST.log_event(st, sym, "PUMP_ALERT", f"vol {p['vol_ratio']:.1f}x, 3h %{p['chg3h']:.1f}")
-        tg.send(f"⚡ <b>PUMP RADARI — {sym}</b> (SPEKÜLATİF)\nFiyat: {fmtp(p['price'])} | 24s: %{row['priceChangePercent']:.1f} | 3s: %{p['chg3h']:.1f}\n1s hacim: {p['vol_ratio']:.1f}x | OI(~6s): %{p['oi_chg']:+.1f} | RSI(1s): {p['rsi1h']:.0f}\nTeknik giriş sinyali değildir; manipülasyon riski yüksek.")
+        if not C.USER_SIGNAL_ACTIVE_ONLY:
+            tg.send(f"⚡ <b>PUMP RADARI — {sym}</b> (SPEKÜLATİF)\nFiyat: {fmtp(p['price'])} | 24s: %{row['priceChangePercent']:.1f} | 3s: %{p['chg3h']:.1f}\n1s hacim: {p['vol_ratio']:.1f}x | OI(~6s): %{p['oi_chg']:+.1f} | RSI(1s): {p['rsi1h']:.0f}\nTeknik giriş sinyali değildir; manipülasyon riski yüksek.")
         sent += 1
 
     active_count = len([1 for v in st["signals"].values() if v["status"] in ("EARLY", "WATCH", "ACTIVE")])
