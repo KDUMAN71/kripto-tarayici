@@ -17,6 +17,7 @@ MOMENTUM_PRE_VOL_MULT = 1.8
 MOMENTUM_PRE_3H_PCT = 3.0
 
 # ---- Uyari katmanlari ----
+USER_SIGNAL_ACTIVE_ONLY = True  # PRE_RUNNER/EARLY/WATCH/radar internal; kullaniciya sadece islem-acilabilir ACTIVE
 EARLY_PROXIMITY_PCT = 3.0
 WATCH_PROXIMITY_PCT = 1.2
 EARLY_ALERT_PRICE_BUFFER_PCT = 0.35
