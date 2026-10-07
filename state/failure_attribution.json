@@ -107,7 +107,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 2.7687456892304594
+    "mfe_pct": 6.325746378953601
    }
   },
   {
@@ -294,7 +294,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 0.7234726688102878
+    "mfe_pct": 1.2459807073955034
    }
   },
   {
@@ -305,7 +305,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 4.099678456591626
+    "mfe_pct": 5.024115755626997
    }
   },
   {
@@ -1202,11 +1202,11 @@
   {
    "candidate_id": "MUBARAKUSDT-1791325038-815765",
    "symbol": "MUBARAKUSDT",
-   "status": "EARLY",
-   "class": "UNCLASSIFIED",
+   "status": "CANCELLED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "EARLY",
-    "reason": "",
+    "outcome": "CANCELLED",
+    "reason": "structural invalidation",
     "mfe_pct": 0.0
    }
   },
@@ -1719,11 +1719,11 @@
   {
    "candidate_id": "DOGEUSDT-1791338532-9910c3",
    "symbol": "DOGEUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "btc ters yonde sert rejim kirilimi (btc 4s: kararsiz, 1s yapi: lh-ll, sert asagi kirilim)",
     "mfe_pct": 0.0
    }
   },
@@ -3600,11 +3600,11 @@
   {
    "candidate_id": "ADAUSDT-1791363756-edc304",
    "symbol": "ADAUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "guclu htf destek bolgesinde (0.255278); kirilim/hold olmadan short yok",
     "mfe_pct": 0.0
    }
   },
@@ -3880,7 +3880,7 @@
    "evidence": {
     "outcome": "CANCELLED",
     "reason": "structural invalidation",
-    "mfe_pct": 2.0357031005324226
+    "mfe_pct": 2.3175696836830566
    }
   },
   {
@@ -4370,10 +4370,10 @@
   {
    "candidate_id": "USUSDT-1791379040-7ddd61",
    "symbol": "USUSDT",
-   "status": "PRE_RUNNER",
+   "status": "EARLY",
    "class": "UNCLASSIFIED",
    "evidence": {
-    "outcome": "PRE_RUNNER",
+    "outcome": "EARLY",
     "reason": "",
     "mfe_pct": 0.0
    }
@@ -4634,10 +4634,10 @@
   {
    "candidate_id": "XPLUSDT-1791383598-74724e",
    "symbol": "XPLUSDT",
-   "status": "PRE_RUNNER",
+   "status": "EARLY",
    "class": "UNCLASSIFIED",
    "evidence": {
-    "outcome": "PRE_RUNNER",
+    "outcome": "EARLY",
     "reason": "",
     "mfe_pct": 0.0
    }
@@ -5037,12 +5037,67 @@
     "reason": "",
     "mfe_pct": 0.0
    }
+  },
+  {
+   "candidate_id": "BTCUSDT-1791388940-04e46b",
+   "symbol": "BTCUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
+  },
+  {
+   "candidate_id": "HYPEUSDT-1791388951-bc6a3f",
+   "symbol": "HYPEUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
+  },
+  {
+   "candidate_id": "1000PEPEUSDT-1791388970-d64862",
+   "symbol": "1000PEPEUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
+  },
+  {
+   "candidate_id": "BCHUSDT-1791388998-0748b3",
+   "symbol": "BCHUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
+  },
+  {
+   "candidate_id": "TIAUSDT-1791389010-0d4134",
+   "symbol": "TIAUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
   }
  ],
  "counts": {
-  "UNCLASSIFIED": 178,
-  "VALID_REJECT": 275,
+  "UNCLASSIFIED": 180,
+  "VALID_REJECT": 278,
   "MISSED_RUNNER": 5
  },
- "total": 458
+ "total": 463
 }
