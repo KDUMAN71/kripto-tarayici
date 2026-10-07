@@ -1834,7 +1834,7 @@
    "evidence": {
     "outcome": "CANCELLED",
     "reason": "structural invalidation",
-    "mfe_pct": 2.660526988999749
+    "mfe_pct": 3.146584804297783
    }
   },
   {
@@ -3440,7 +3440,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 0.0
+    "mfe_pct": 1.7723244717109816
    }
   },
   {
@@ -3732,11 +3732,11 @@
   {
    "candidate_id": "PONSUSDT-1791366473-958c43",
    "symbol": "PONSUSDT",
-   "status": "EARLY",
-   "class": "UNCLASSIFIED",
+   "status": "CANCELLED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "EARLY",
-    "reason": "",
+    "outcome": "CANCELLED",
+    "reason": "structural invalidation",
     "mfe_pct": 0.0
    }
   },
@@ -5525,11 +5525,11 @@
   {
    "candidate_id": "BCHUSDT-1791403383-6f5327",
    "symbol": "BCHUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "structural geometry minimum risk/r:r kosullarini saglamiyor",
     "mfe_pct": 0.0
    }
   },
@@ -5679,11 +5679,11 @@
   {
    "candidate_id": "LTCUSDT-1791408761-78f76d",
    "symbol": "LTCUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "guclu htf direnc bolgesinde (66.7578); kirilim/hold olmadan long yok",
     "mfe_pct": 0.0
    }
   },
@@ -5719,12 +5719,23 @@
     "reason": "",
     "mfe_pct": 0.0
    }
+  },
+  {
+   "candidate_id": "PONSUSDT-1791410582-569268",
+   "symbol": "PONSUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
   }
  ],
  "counts": {
-  "UNCLASSIFIED": 182,
-  "VALID_REJECT": 328,
+  "UNCLASSIFIED": 180,
+  "VALID_REJECT": 331,
   "MISSED_RUNNER": 10
  },
- "total": 520
+ "total": 521
 }
