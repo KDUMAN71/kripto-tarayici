@@ -1,0 +1,58 @@
+name: opportunity-to-profit-phase-b4-v1
+on:
+  workflow_dispatch:
+    inputs:
+      b3_run_id:
+        description: Successful Phase B3 run id
+        required: true
+        default: '37642567379'
+permissions: {actions: read, contents: read}
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - uses: actions/download-artifact@v4
+        with:
+          name: opportunity-phase-b3-snapshots-v1
+          path: artifacts/b3
+          run-id: ${{ inputs.b3_run_id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build visibility report
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          src=next(Path("artifacts/b3").glob("*.json")); x=json.loads(src.read_text())
+          out={"source_meta":x["meta"],"groups":{}}
+          for cutoff in (100,200):
+              ops=[o for o in x["opportunities"] if o["max_excursion_pct"]>=cutoff]; by={}
+              for o in ops:
+                  for s in o["snapshots"]: by.setdefault(str(s["hours_from_episode_start"]),[]).append(s)
+              rows=[]
+              for h,ss in sorted(by.items(),key=lambda kv:int(kv[0])):
+                  q=[float(s["quote_volume_24h"]) for s in ss if s.get("quote_volume_24h") is not None]
+                  score=[float(s["opportunity_score"]) for s in ss if s.get("opportunity_score") is not None]
+                  feats=[s.get("features") or {} for s in ss]
+                  def med(k):
+                      a=sorted(float(f[k]) for f in feats if f.get(k) is not None)
+                      return a[len(a)//2] if a else None
+                  rows.append({"hours_from_start":int(h),"n":len(ss),
+                    "discovery_2m_rate":sum(v>=2e6 for v in q)/len(q) if q else None,
+                    "legacy_8m_rate":sum(v>=8e6 for v in q)/len(q) if q else None,
+                    "score_ge3_rate":sum(v>=3 for v in score)/len(score) if score else None,
+                    "score_ge5_rate":sum(v>=5 for v in score)/len(score) if score else None,
+                    "median_score":sorted(score)[len(score)//2] if score else None,
+                    "median_ret_3h":med("ret_3h"),"median_ret_6h":med("ret_6h"),
+                    "median_rel_btc_3h":med("rel_btc_3h"),"median_vol_ratio_1h":med("vol_ratio_1h")})
+              out["groups"][f"GE{cutoff}"]={"opportunities":len(ops),"timeline":rows}
+          Path("artifacts/phase_b4_visibility_report.json").write_text(json.dumps(out,indent=2))
+          print(json.dumps(out,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: opportunity-phase-b4-visibility-v1
+          path: artifacts/phase_b4_visibility_report.json
+          retention-days: 14
