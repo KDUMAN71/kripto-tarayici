@@ -1,0 +1,57 @@
+name: opportunity-to-profit-phase-b2-v1
+
+on:
+  workflow_dispatch:
+    inputs:
+      phase_b_run_id:
+        description: Successful Phase B1 workflow run id
+        required: true
+        default: '37599611824'
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  canonical:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - run: pip install -r requirements.txt pytest
+      - run: python -m pytest -q tests/test_opportunity_replay.py
+      - uses: actions/download-artifact@v4
+        with:
+          name: opportunity-phase-b-episodes-v1
+          path: artifacts/b1
+          run-id: ${{ inputs.phase_b_run_id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Canonicalize economic opportunities
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from research.opportunity_replay import canonicalize
+          src=next(Path("artifacts/b1").glob("*.json"))
+          x=json.loads(src.read_text())
+          ops=canonicalize(x["episodes"])
+          counts={"LONG":0,"SHORT":0,"GE50":0,"GE100":0,"GE200":0}
+          for o in ops:
+              counts[o["side"]]+=1
+              v=o["max_excursion_pct"]
+              if v>=50: counts["GE50"]+=1
+              if v>=100: counts["GE100"]+=1
+              if v>=200: counts["GE200"]+=1
+          out={"meta":{"source":str(src),"canonical_count":len(ops),"counts":counts,
+                       "warning":"future excursion labels only; not live features"},"opportunities":ops}
+          Path("artifacts/opportunity_phase_b_canonical_v1.json").write_text(json.dumps(out,indent=2))
+          print(out["meta"])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: opportunity-phase-b-canonical-v1
+          path: artifacts/opportunity_phase_b_canonical_v1.json
+          retention-days: 14
