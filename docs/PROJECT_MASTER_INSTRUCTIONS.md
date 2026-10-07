@@ -150,7 +150,7 @@ Completed: research (#14/#15/#19), geometry safety (#17), observability (#18), c
 
 Current implementation PR: **#28 Walk-forward / OOS Promotion Gate**.
 Scope: time-based calibration vs last-30d OOS split after excluding the still-evaluating final 24h; minimum 60 calibration + 40 OOS episodes; equal selection budget; OOS recall non-inferiority, precision tolerance <=3 percentage points, selected-average-MFE tolerance <=0.5 percentage point, plus calibration recall non-worsening. Output is only BLOCKED or ELIGIBLE_FOR_REVIEW.
-Non-negotiable: automatic promotion is always false. Human/code-review action is required for any future production policy change.
+Non-negotiable: automatic promotion is always false. This first gate is episode-level screening evidence; any future production promotion additionally requires a time-slice replay that ranks the contemporaneous candidate universe, followed by human/code review.
 
 After #28: V3.5 roadmap implementation is complete. Next phase is **observation and evidence accumulation**, not immediate threshold tuning: allow ledger/challenger/OOS samples to mature, then review reports before proposing a new production policy PR.
 
