@@ -63,6 +63,8 @@ def promotion_gate(ledger, challenger="trajectory_balanced", now_ts=None):
     return {
         "status": "ELIGIBLE_FOR_REVIEW" if eligible else "BLOCKED",
         "automatic_promotion": False,
+        "evidence_scope": "EPISODE_LEVEL_SCREENING",
+        "requires_time_slice_replay_before_production": True,
         "challenger": challenger,
         "calibration_n": len(cal), "oos_n": len(oos),
         "checks": checks,
