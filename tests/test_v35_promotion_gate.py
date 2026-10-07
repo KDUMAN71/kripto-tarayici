@@ -28,6 +28,8 @@ def test_gate_never_automatically_promotes(monkeypatch):
     ]
     out = P.promotion_gate({"episodes": eps}, now_ts=10_000_000)
     assert out.get("automatic_promotion") is False
+    if out.get("status") == "ELIGIBLE_FOR_REVIEW":
+        assert out["requires_time_slice_replay_before_production"] is True
 
 
 def test_invalid_challenger_is_blocked():
