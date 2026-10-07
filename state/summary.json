@@ -1,11 +1,36 @@
 {
- "generated_at": 1791395476,
+ "generated_at": 1791396219,
  "engine_version": "3.3",
- "last_ok_run": 1791395323,
+ "last_ok_run": 1791396059,
  "fail_count": 0,
  "known_symbols_count": 525,
  "open_signal_count": 30,
  "open_signals": [
+  {
+   "symbol": "ZROUSDT",
+   "status": "EARLY",
+   "side": "LONG",
+   "price": 2.1607,
+   "trigger": 2.1335,
+   "sl": 2.0755785869514902,
+   "tp1": 2.2397,
+   "tp2": 2.2829,
+   "tp3": null,
+   "rr1": 1.8335188043678414,
+   "rr2": 2.579356962076797,
+   "rr3": null,
+   "risk_pct": 2.7148541386693203,
+   "score": 8,
+   "score_max": 13,
+   "setup_type": "liquidity_sweep",
+   "priority_setup": true,
+   "decision_bias": "LONG",
+   "decision_strength": "guclu",
+   "htf_support": 2.1448113,
+   "htf_resistance": null,
+   "created": 1791396197,
+   "last_update": 1791396197
+  },
   {
    "symbol": "AAVEUSDT",
    "status": "EARLY",
@@ -382,31 +407,6 @@
    "last_update": 1791298998
   },
   {
-   "symbol": "USUSDT",
-   "status": "EARLY",
-   "side": "SHORT",
-   "price": 0.014566,
-   "trigger": 0.014853,
-   "sl": 0.01505994900806727,
-   "tp1": 0.014504,
-   "tp2": 0.014311,
-   "tp3": 0.014131,
-   "rr1": 1.6864057637162244,
-   "rr2": 2.619002647375906,
-   "rr3": 3.488782124364222,
-   "risk_pct": 1.3933145362369252,
-   "score": 8,
-   "score_max": 13,
-   "setup_type": "breakout_retest",
-   "priority_setup": true,
-   "decision_bias": "SHORT",
-   "decision_strength": "guclu",
-   "htf_support": 0.013739000000000001,
-   "htf_resistance": 0.015396,
-   "created": 1791388987,
-   "last_update": 1791388987
-  },
-  {
    "symbol": "BOMEUSDT",
    "status": "EARLY",
    "side": "SHORT",
@@ -758,15 +758,6 @@
   }
  ],
  "scan_log": [
-  {
-   "ts": 1791311567,
-   "ok": true,
-   "symbols": 525,
-   "liquid": 326,
-   "candidates": 170,
-   "open_signals": 28,
-   "duration_s": 114
-  },
   {
    "ts": 1791312454,
    "ok": true,
@@ -1621,81 +1612,18 @@
    "candidates": 170,
    "open_signals": 30,
    "duration_s": 153
+  },
+  {
+   "ts": 1791396218,
+   "ok": true,
+   "symbols": 525,
+   "liquid": 390,
+   "candidates": 170,
+   "open_signals": 30,
+   "duration_s": 160
   }
  ],
  "log_last_24h": [
-  {
-   "t": 1791387060,
-   "sym": "ENAUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (0.22762); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1791387064,
-   "sym": "ZECUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (1336.75); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1791387072,
-   "sym": "NEARUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (4.93192); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1791387079,
-   "sym": "ETHFIUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (0.691394); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1791387123,
-   "sym": "SOLUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (116.594); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1791387128,
-   "sym": "HYPEUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (88.4961); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1791387133,
-   "sym": "PUMPUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (0.0061815); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1791387136,
-   "sym": "BNBUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (765.65); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1791387148,
-   "sym": "AVAXUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (11.1245); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1791387153,
-   "sym": "1000PEPEUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (0.00406227); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1791387166,
-   "sym": "ZROUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (2.14481); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1791387172,
-   "sym": "BCHUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (302.731); kirilim/hold olmadan LONG yok"
-  },
   {
    "t": 1791387175,
    "sym": "FETUSDT",
@@ -2343,6 +2271,78 @@
    "sym": "STRKUSDT",
    "event": "VETO",
    "detail": "guclu HTF destek bolgesinde (0.0485504); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1791396067,
+   "sym": "ENAUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (0.22762); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1791396088,
+   "sym": "USUSDT",
+   "event": "CANCELLED",
+   "detail": "1h close 0.016185 invalidation beyond"
+  },
+  {
+   "t": 1791396097,
+   "sym": "RENDERUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (1.99436); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1791396142,
+   "sym": "SOLUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (116.591); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1791396154,
+   "sym": "PUMPUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (0.006153); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1791396165,
+   "sym": "AVAXUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (11.4861); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1791396168,
+   "sym": "ADAUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (0.255278); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1791396190,
+   "sym": "LTCUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (66.9292); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1791396197,
+   "sym": "ZROUSDT",
+   "event": "EARLY",
+   "detail": "LONG @ 2.1607"
+  },
+  {
+   "t": 1791396207,
+   "sym": "XAUTUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (4136.66); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1791396217,
+   "sym": "METUSDT",
+   "event": "PUMP_ALERT",
+   "detail": "vol 5.2x, 3h %24.5"
+  },
+  {
+   "t": 1791396218,
+   "sym": "HEMIUSDT",
+   "event": "PUMP_ALERT",
+   "detail": "vol 7.9x, 3h %11.3"
   }
  ],
  "trades_stats": {
