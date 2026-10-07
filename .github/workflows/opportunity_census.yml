@@ -1,0 +1,44 @@
+name: opportunity-census-60d-v1
+
+on:
+  workflow_dispatch:
+    inputs:
+      days:
+        description: Lookback days
+        required: false
+        default: '60'
+      max_symbols:
+        description: Optional symbol cap for smoke tests; blank = all current perpetuals
+        required: false
+        default: ''
+
+permissions:
+  contents: read
+
+jobs:
+  census:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - run: pip install -r requirements.txt pytest
+      - name: Census regression tests
+        run: python -m pytest -q tests/test_opportunity_census.py
+      - name: Build comprehensive opportunity census
+        shell: bash
+        run: |
+          EXTRA=()
+          if [ -n "${{ inputs.max_symbols }}" ]; then
+            EXTRA+=(--max-symbols "${{ inputs.max_symbols }}")
+          fi
+          python -m research.opportunity_census --days "${{ inputs.days }}" \
+            --output artifacts/opportunity_census_60d_v1.json "${EXTRA[@]}"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: opportunity-census-60d-v1
+          path: artifacts/opportunity_census_60d_v1.json
+          retention-days: 14
