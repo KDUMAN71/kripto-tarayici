@@ -219,7 +219,7 @@ Current implementation: Profit Objective & User Signal Policy.
 - Profit evaluation adds expectancy R, profit factor, net R, max drawdown R and captured-MFE ratio.
 - Runner recall remains diagnostic, not the optimization objective.
 
-Current work: **Phase A — 60-day comprehensive opportunity census**. Research branch adds multi-horizon LONG/SHORT excursion labels for 6h/1d/3d/7d/14d/30d/60d and magnitude bins through >200%, with explicit horizon-maturity/censoring metadata. After the real census artifact is generated and analyzed, proceed to Phase B full time-slice Opportunity-to-Profit replay. Do not narrow research back to +10% runners or one strategy family.
+**Phase A COMPLETE.** 60d census scanned 525 current perpetuals / 28,614 daily anchors. Mature unique-symbol opportunity counts include 31 coins >=200% in 7d, 38 in 14d, 43 in 30d; >=100% counts are 79/104/127 respectively. Large downside opportunities also existed. See `docs/OPPORTUNITY_TO_PROFIT_PHASE_A_RESULTS.md`. **Current work: Phase B — deduplicated full time-slice Opportunity-to-Profit replay.** The purpose is to explain why this opportunity-rich market did not become realized profit.
 
 
 ## 13A. Next research and development plan — Opportunity-to-Profit program
