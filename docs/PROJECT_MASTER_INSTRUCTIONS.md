@@ -219,7 +219,7 @@ Current implementation: Profit Objective & User Signal Policy.
 - Profit evaluation adds expectancy R, profit factor, net R, max drawdown R and captured-MFE ratio.
 - Runner recall remains diagnostic, not the optimization objective.
 
-Next research priority: execute the **Opportunity-to-Profit program in §13A**, beginning with the 60-day comprehensive opportunity census and full time-slice replay. Do not narrow the research back to +10% runners or to a single strategy family.
+Current work: **Phase A — 60-day comprehensive opportunity census**. Research branch adds multi-horizon LONG/SHORT excursion labels for 6h/1d/3d/7d/14d/30d/60d and magnitude bins through >200%, with explicit horizon-maturity/censoring metadata. After the real census artifact is generated and analyzed, proceed to Phase B full time-slice Opportunity-to-Profit replay. Do not narrow research back to +10% runners or one strategy family.
 
 
 ## 13A. Next research and development plan — Opportunity-to-Profit program
