@@ -1,0 +1,54 @@
+name: opportunity-to-profit-phase-b3-v1
+
+on:
+  workflow_dispatch:
+    inputs:
+      canonical_run_id:
+        description: Successful Phase B2 run id
+        required: true
+        default: '37600417241'
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  trace:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - run: pip install -r requirements.txt pytest
+      - run: python -m pytest -q tests/test_phase_b_replay.py
+      - uses: actions/download-artifact@v4
+        with:
+          name: opportunity-phase-b-canonical-v1
+          path: artifacts/b2
+          run-id: ${{ inputs.canonical_run_id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build point-in-time replay snapshots
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from research.phase_b_replay import select_cohort,build_snapshots
+          src=next(Path("artifacts/b2").glob("*.json")); x=json.loads(src.read_text())
+          cohort=select_cohort(x["opportunities"])
+          rows=build_snapshots(cohort)
+          meta={"canonical_total":len(x["opportunities"]),"cohort":len(cohort),
+                "ge100_kept":sum(o["max_excursion_pct"]>=100 for o in cohort),
+                "ge200_kept":sum(o["max_excursion_pct"]>=200 for o in cohort),
+                "warning":"future opportunity labels never enter snapshot features; context is candles-only"}
+          out={"meta":meta,"opportunities":rows}
+          Path("artifacts/opportunity_phase_b3_snapshots_v1.json").write_text(json.dumps(out,indent=2))
+          print(meta)
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: opportunity-phase-b3-snapshots-v1
+          path: artifacts/opportunity_phase_b3_snapshots_v1.json
+          retention-days: 14
