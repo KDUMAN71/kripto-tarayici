@@ -217,7 +217,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 12.546501554298514
+    "mfe_pct": 13.08668399327319
    }
   },
   {
@@ -3154,7 +3154,7 @@
    "evidence": {
     "outcome": "CANCELLED",
     "reason": "structural invalidation",
-    "mfe_pct": 0.34923732730727325
+    "mfe_pct": 1.2171948025268375
    }
   },
   {
@@ -3248,11 +3248,11 @@
   {
    "candidate_id": "IOTXUSDT-1791354715-86aabf",
    "symbol": "IOTXUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "PRE_RUNNER_EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "PRE_RUNNER_EXPIRED",
+    "reason": "hidden watchlist stale/max-age",
     "mfe_pct": 0.0
    }
   },
@@ -3820,6 +3820,28 @@
   {
    "candidate_id": "MOVRUSDT-1791368254-1bbe43",
    "symbol": "MOVRUSDT",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
+   "evidence": {
+    "outcome": "REJECTED",
+    "reason": "iki yonlu karar motoru long tarafini guclu buldu",
+    "mfe_pct": 0.0
+   }
+  },
+  {
+   "candidate_id": "OGNUSDT-1791369105-184444",
+   "symbol": "OGNUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
+  },
+  {
+   "candidate_id": "INJUSDT-1791369154-77709b",
+   "symbol": "INJUSDT",
    "status": "PRE_RUNNER",
    "class": "UNCLASSIFIED",
    "evidence": {
@@ -3831,8 +3853,8 @@
  ],
  "counts": {
   "UNCLASSIFIED": 184,
-  "VALID_REJECT": 163,
+  "VALID_REJECT": 165,
   "MISSED_RUNNER": 1
  },
- "total": 348
+ "total": 350
 }
