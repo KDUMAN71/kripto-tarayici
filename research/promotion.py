@@ -13,8 +13,12 @@ MAX_PRECISION_DROP = 0.03
 MAX_AVG_MFE_DROP = 0.50
 
 
-def split_time(episodes, oos_days=OOS_DAYS):
-    mature = sorted([e for e in episodes if e.get("closed_at")],
+def split_time(episodes, oos_days=OOS_DAYS, now_ts=None):
+    import time
+    now_ts = int(time.time() if now_ts is None else now_ts)
+    # Exclude the still-evaluating final 24h before splitting.
+    mature = sorted([e for e in episodes if e.get("closed_at")
+                     and now_ts - int(e["closed_at"]) >= 24 * 3600],
                     key=lambda e: int(e["closed_at"]))
     if not mature:
         return [], []
@@ -31,7 +35,7 @@ def _delta(ch, cur, key):
 def promotion_gate(ledger, challenger="trajectory_balanced", now_ts=None):
     if challenger not in POLICIES or challenger == "current":
         return {"status": "BLOCKED", "reason": "invalid challenger"}
-    cal, oos = split_time(ledger.get("episodes") or [])
+    cal, oos = split_time(ledger.get("episodes") or [], now_ts=now_ts)
     if len(cal) < MIN_CALIBRATION or len(oos) < MIN_OOS:
         return {"status": "BLOCKED", "reason": "insufficient split sample",
                 "calibration_n": len(cal), "oos_n": len(oos)}
