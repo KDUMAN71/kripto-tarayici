@@ -1,7 +1,7 @@
 # Kripto Tarayici — Project Master Instructions
 
 > Living source of truth for KDUMAN71/kripto-tarayici.
-> Current position: Walk-forward / OOS Promotion Gate (GitHub PR #28).
+> Current position: Profit-System Master Plan after V3.5 and PR #29.
 > Last research milestone: V3.5 30-day pre-runner replay V3 completed; 234 runners + 234 matched controls.
 
 ## 0. New ChatGPT session protocol
@@ -16,12 +16,43 @@ Before changing code:
 Suggested prompt:
 "Read docs/PROJECT_MASTER_INSTRUCTIONS.md in KDUMAN71/kripto-tarayici, verify it against current main/open PRs, and continue from CURRENT ROADMAP POSITION. Do not redo merged work."
 
-## 1. Mission
-The primary objective is **risk-adjusted realized profit from actionable Futures trades**: find the highest-value coins early enough internally, notify the user only when an executable ACTIVE entry exists, manage risk structurally, and exit so favorable movement is converted into realized R.
+## 1. Mission — the one objective that must not drift
+**PRIMARY OBJECTIVE: MAKE MONEY.** Maximize robust, risk-adjusted realized profit by finding and correctly trading all types of actionable market opportunities, with extra priority to opportunities offering the greatest realistic profit potential.
 
-Discovery recall is an internal enabling metric, not the product. PRE_RUNNER/EARLY/WATCH/rejected candidates exist only to improve ACTIVE quality and learning.
+No strategy, setup, timeframe, direction or instrument is the objective itself. Trend, reversal, breakout/retest, momentum, range, new-listing behavior, short-term trades, multi-week moves, spot, futures, LONG and SHORT are tools/opportunity families. We do not have to choose only one.
 
-Primary production metrics, in order: ACTIVE expectancy (R), profit factor, net R, max drawdown (R), captured-MFE ratio, then win rate and setup-family stability. Runner recall / first-third detection / lead time remain diagnostic discovery metrics. A policy that catches more runners but reduces realized risk-adjusted profitability is worse.
+The system may be simple or complex. Complexity is justified only when evidence shows it materially improves profit capture, opportunity capture, risk control or execution quality. Simplicity is not a goal if it leaves money on the table; complexity is not a virtue if it does not improve results.
+
+Discovery states are internal enabling machinery. PRE_RUNNER/EARLY/WATCH/rejected candidates exist to improve the quality and timing of actionable trades and learning. The user-facing product is an executable trade decision and subsequent position-management decision.
+
+Primary production metrics: net R, expectancy R, profit factor, max drawdown R, captured available-R/MFE, profitable-opportunity capture, and stability across regimes/setup families. Discovery recall, detection lead time and runner capture are diagnostic metrics that explain why profit was made or missed.
+
+
+## 1A. Opportunity philosophy and portfolio rule
+The scanner must be **strategy-agnostic and opportunity-seeking**.
+
+Examples of valid opportunities (not an exhaustive list):
+- major multi-day / multi-week trend continuation;
+- explosive momentum or breakout;
+- breakout-retest continuation;
+- reversal after genuine structural invalidation;
+- range expansion;
+- high-quality short opportunity;
+- new/newly-listed coin with a tradeable entry;
+- spot accumulation / longer-duration opportunity;
+- futures swing or shorter-duration opportunity.
+
+A +8% move that offers a clean 4R futures trade can be valuable. A +200% emerging trend can be far more valuable and must not be ignored merely because it does not fit a short-term pattern. Opportunity value, not category membership, determines priority.
+
+**Concurrent ACTIVE cap: maximum 10 positions/recommendations.**
+- The system never needs to fill 10 slots.
+- If 1 valid opportunity exists, return 1.
+- If 6 exist, return 6.
+- If >10 exist simultaneously, rank all valid ACTIVE opportunities by realistic expected profitability/risk quality and return the best 10.
+- Ranking must eventually incorporate expected return/available move, setup reliability, execution quality, structural risk, liquidity/cost, correlation/concentration and regime fit.
+- The exact ranking formula must be calibrated from data; do not invent probability-like numbers without calibration.
+
+Spot vs futures is an **execution/router decision after an opportunity is recognized**, not a discovery restriction. The same underlying opportunity may be suitable for spot, futures, both, or neither.
 
 ## 2. Non-negotiable rules
 1. Discovery != execution.
@@ -39,6 +70,11 @@ Primary production metrics, in order: ACTIVE expectancy (R), profit factor, net 
 13. Production policy never silently self-modifies; learning produces challengers, promotion is explicit.
 14. Verify current main before coding; do not duplicate merged work.
 15. Every architecture/roadmap PR updates this document.
+16. Never reduce the project objective to one opportunity family (e.g. +10% runners, mega-trends, double bottoms, futures-only).
+17. Never optimize signal count. Optimize realized risk-adjusted profit and opportunity capture.
+18. A stopped trade is not automatically a bad thesis: measure post-stop continuation before changing entry/SL logic.
+19. A missed entry does not mean the coin/opportunity is dead; if the larger thesis remains valid, search for the next tradeable continuation/re-entry.
+20. Maximum concurrent user-facing ACTIVE opportunities is 10; when more qualify, rank by profit/risk priority.
 
 ## 3. Target architecture
 Broad Discovery -> PRE_RUNNER hidden watchlist -> Opportunity Ranking -> EARLY/WATCH -> Execution Gate -> RETEST_WAIT/ACTIVE -> Trade Management -> Outcome Ledger/Autopsy -> Offline Learning -> Challenger -> Calibration/OOS -> Explicit Promotion.
@@ -52,6 +88,20 @@ Goal: high discovery recall + low ACTIVE false-positive rate.
 - HBARUSDT: HTF support ~0.101535 while hard SL ~0.101668. A normal support test could stop a LONG whose thesis relied on that support. PR #17 binds nearby thesis S/R to structural SL boundary + ATR buffer and recomputes R:R; bad corrected geometry cannot remain ACTIVE by tightening SL.
 - METISUSDT: autopsy recorded 18 liquidity rejections, ~3M 24h quote volume vs hard 8M discovery floor. It died before pattern/execution evaluation. Static absolute liquidity is wrong as the first opportunity gate.
 - RECALLUSDT: initially no autopsy trace despite symbol presence. Missing trace is an observability failure. PR #18 adds missed-opportunity gate tracing without admitting research watchlist symbols to execution.
+
+
+## 4A. Corrections to earlier project assumptions
+These corrections are important because they prevent future sessions from repeating old mistakes.
+
+1. **+10% runner is not the project objective.** It was a convenient research label for one reverse-engineering experiment. The market can produce +50%, +100%, +200%+ opportunities over longer horizons, and smaller moves can also be highly profitable with good futures execution.
+2. **Mega-trend is also not the sole objective.** Large trends deserve high priority because of their profit potential, but the system must capture any robust profitable opportunity.
+3. **Exit optimization alone is not the root problem.** During a market with many large moves, the system failed to convert enough opportunities into profitable ACTIVE trades. Discovery, ranking, entry, structural stop, re-entry and management all require end-to-end evaluation.
+4. **Pre-stop MFE is insufficient for stop diagnosis.** DOGE/LIT/ZEN/HBAR examples show favorable movement before stop, but the key question is also what happened after stop. Post-stop +1h/+3h/+6h/+12h/+24h/+3d/+7d continuation must be measured.
+5. **A fixed TP1/TP2/TP3 framework may leave major trends uncaptured.** It remains a valid execution model, but must be compared against partial realization + structural/volatility trailing and re-entry.
+6. **Professional risk sequence:** thesis -> structural invalidation -> volatility buffer -> stop -> position size. Do not choose a convenient stop first and force the thesis around it.
+7. **Strong movers must not be rejected simply because they already moved.** A large move can contain multiple continuation/retest entries.
+8. **Spot and futures are both allowed.** Instrument choice follows opportunity and execution quality.
+9. **User does not want internal watch states.** Telegram ordinary trade recommendations are ACTIVE-only; internal breadth may remain large.
 
 ## 5. Reverse-engineering evidence
 Research chain:
@@ -159,7 +209,91 @@ Current implementation: Profit Objective & User Signal Policy.
 - Profit evaluation adds expectancy R, profit factor, net R, max drawdown R and captured-MFE ratio.
 - Runner recall remains diagnostic, not the optimization objective.
 
-Next research priority: time-slice replay and exit/position-management evaluation using the profit-first objective before proposing further production threshold changes.
+Next research priority: execute the **Opportunity-to-Profit program in §13A**, beginning with the 60-day comprehensive opportunity census and full time-slice replay. Do not narrow the research back to +10% runners or to a single strategy family.
+
+
+## 13A. Next research and development plan — Opportunity-to-Profit program
+
+### Phase A — 60-day comprehensive opportunity census
+Do not label only +10% events. Build a time-sliced census of meaningful money-making opportunities over the last 60 days, including both directions and multiple horizons.
+
+At minimum segment forward moves by magnitude/horizon:
+- meaningful short/swing opportunities;
+- +10–25%;
+- +25–50%;
+- +50–100%;
+- +100–200%;
+- >200%;
+- material downside/SHORT analogues.
+
+Horizons should include intraday where useful plus 1d/3d/7d/14d/30d/60d. Include newly listed coins when data quality permits. The categories are analytical bins, not strategies.
+
+For each opportunity determine whether it was realistically tradeable with information available at the time. Avoid hindsight-only entries.
+
+### Phase B — full Opportunity-to-Profit replay
+Replay the contemporaneous candidate universe through the real pipeline:
+
+UNSEEN -> DISCOVERED -> PRE_RUNNER -> RANKED -> SETUP -> VETO/WATCH -> ACTIVE -> MANAGEMENT -> EXIT.
+
+For every profitable opportunity record:
+- first detectable timestamp;
+- first tradeable timestamp;
+- system detection timestamp;
+- reason for every rejection/veto;
+- whether ACTIVE was produced;
+- entry delay and remaining move at entry;
+- structural SL and normal volatility;
+- spot/futures suitability;
+- realized/hypothetical R under realistic execution;
+- maximum available R and captured-R ratio.
+
+Key metrics:
+- Tradeable Opportunity Capture Rate;
+- Profitable Capture Rate;
+- high-value-opportunity weighted capture;
+- ACTIVE conversion rate;
+- entry delay / remaining-move-at-entry;
+- net R, expectancy, PF, max DD;
+- available-R vs realized-R.
+
+Large opportunities should carry more economic importance than trivial moves, without allowing one hindsight outlier to dominate calibration.
+
+### Phase C — complete stop autopsy
+For every historical STOP, including DOGE/ENA-related cases where applicable, LIT, HBAR, ZEN and future stops, calculate post-stop path at:
++1h, +3h, +6h, +12h, +24h, +3d, +7d.
+
+Classify:
+- GOOD_STOP: thesis invalidated and continuation did not recover;
+- PREMATURE_STOP: thesis remained broadly valid and price resumed strongly in trade direction;
+- BAD_ENTRY: larger opportunity was correct but normal volatility/retest made the entry poor;
+- WRONG_THESIS/DIRECTION;
+- REENTRY_MISSED: first trade failed/expired but a later valid entry appeared and was not taken.
+
+Do not widen stops blindly. Diagnose whether the solution is better entry, structural stop, volatility buffer, position sizing, re-entry, or rejection.
+
+### Phase D — strategy/opportunity family evaluation
+Use evidence to determine which opportunity families deserve dedicated detection/execution logic. Do not create a new engine merely because a pattern has a name. Add complexity only when it improves the profit objective.
+
+Potential families may include trend continuation, breakout/retest, reversal, range expansion, momentum, new-listing behavior and spot accumulation, but this list is not binding.
+
+### Phase E — ACTIVE ranking and max-10 portfolio selection
+Once candidates pass execution quality, rank all simultaneously valid ACTIVE opportunities. Maximum concurrent ACTIVE recommendations/positions = 10. Do not force-fill.
+
+The ranking model must be evaluated using realized/available R and portfolio risk, not raw opportunity score alone. Include correlation/concentration so ten highly correlated altcoin LONGs are not treated as ten independent bets.
+
+### Phase F — position management / re-entry research
+Compare current fixed-target behavior against realistic alternatives:
+- partial profit;
+- structural trailing;
+- ATR/volatility trailing;
+- trend persistence exits;
+- re-entry after valid stop/failed first entry;
+- spot hold vs futures swing where appropriate.
+
+Choose management by OOS profit metrics, not by aesthetic preference.
+
+### Phase G — promotion
+Any production change follows time-slice replay, calibration/OOS separation, challenger comparison and explicit review. No automatic self-modification.
 
 ## 14. Maintenance rule
 This file is part of the Definition of Done for implementation PRs #21-#28. A roadmap PR is incomplete if it materially changes architecture, evidence, invariants, or roadmap status without updating this document.
