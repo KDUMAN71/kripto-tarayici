@@ -1,0 +1,55 @@
+name: opportunity-to-profit-phase-b-v1
+
+on:
+  workflow_dispatch:
+    inputs:
+      census_run_id:
+        description: Successful opportunity census workflow run id
+        required: true
+        default: '37592186840'
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  replay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - run: pip install -r requirements.txt pytest
+      - name: Replay regression tests
+        run: python -m pytest -q tests/test_opportunity_replay.py tests/test_opportunity_census.py
+      - name: Download Phase A census
+        uses: actions/download-artifact@v4
+        with:
+          name: opportunity-census-60d-v1
+          path: artifacts/phase_a
+          run-id: ${{ inputs.census_run_id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build deduplicated Phase B episode set
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from research.opportunity_replay import build_episode_set
+          src=next(Path("artifacts/phase_a").glob("*.json"))
+          census=json.loads(src.read_text())
+          eps=build_episode_set(census)
+          out={"meta":{"source_census":str(src),"episode_count":len(eps),
+                       "warning":"episode labels use future data; Phase B decision snapshots must not"},
+               "episodes":eps}
+          Path("artifacts/opportunity_phase_b_episodes_v1.json").write_text(json.dumps(out,indent=2))
+          print("episodes",len(eps))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: opportunity-phase-b-episodes-v1
+          path: artifacts/opportunity_phase_b_episodes_v1.json
+          retention-days: 14
