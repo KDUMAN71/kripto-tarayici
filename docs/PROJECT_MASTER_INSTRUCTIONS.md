@@ -219,7 +219,7 @@ Current implementation: Profit Objective & User Signal Policy.
 - Profit evaluation adds expectancy R, profit factor, net R, max drawdown R and captured-MFE ratio.
 - Runner recall remains diagnostic, not the optimization objective.
 
-**Phase A COMPLETE.** 60d census scanned 525 current perpetuals / 28,614 daily anchors. Mature unique-symbol opportunity counts include 31 coins >=200% in 7d, 38 in 14d, 43 in 30d; >=100% counts are 79/104/127. See `docs/OPPORTUNITY_TO_PROFIT_PHASE_A_RESULTS.md`. **Phase B IN PROGRESS:** first deduplicate overlapping daily labels into economic opportunity episodes; then build point-in-time pipeline traces. Historical context that cannot be reconstructed (funding/OI/taker/spread at timestamp) must be UNKNOWN, never replaced with current data. Full engine replay is allowed only when each consumed feature is point-in-time safe.
+**Phase A COMPLETE.** 60d census scanned 525 current perpetuals / 28,614 daily anchors. Mature unique-symbol opportunity counts include 31 coins >=200% in 7d, 38 in 14d, 43 in 30d; >=100% counts are 79/104/127. See `docs/OPPORTUNITY_TO_PROFIT_PHASE_A_RESULTS.md`. **Phase B IN PROGRESS.** B2 canonical universe contains 1,688 economic opportunities: 1,346 LONG / 342 SHORT; 742 >=50%, 274 >=100%, 90 >=200% max excursion labels. B3 builds point-in-time candle snapshots for all >=100% opportunities plus a bounded representative 25–100% cohort. Historical context that cannot be reconstructed (funding/OI/taker/spread at timestamp) remains UNKNOWN; never substitute current data. Full engine replay is allowed only for point-in-time-safe inputs.
 
 
 ## 13A. Next research and development plan — Opportunity-to-Profit program
