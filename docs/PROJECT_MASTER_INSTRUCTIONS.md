@@ -79,7 +79,7 @@ Spot vs futures is an **execution/router decision after an opportunity is recogn
 ## 3. Target architecture
 Broad Discovery -> PRE_RUNNER hidden watchlist -> Opportunity Ranking -> EARLY/WATCH -> Execution Gate -> RETEST_WAIT/ACTIVE -> Trade Management -> Outcome Ledger/Autopsy -> Offline Learning -> Challenger -> Calibration/OOS -> Explicit Promotion.
 
-Goal: high discovery recall + low ACTIVE false-positive rate.
+Architecture sub-goal: broad opportunity recall + selective, high-quality ACTIVE conversion. This serves the primary profit objective; it is not the objective itself.
 
 ## 4. Historical cases / lessons
 - USELESSUSDT: valid double structure missed by narrow pivot logic. PR #5 expanded detect_double() with broader pivot search, ATR/% tolerance, separation and neckline-depth guards.
@@ -145,6 +145,16 @@ Execution vetoes; breakout/retest/hold lifecycle; EMA/MA checks; 15m/1h taker co
 - #17 MERGED dd2805b — HTF thesis <-> structural SL integrity.
 - #18 MERGED d90851b — METIS/RECALL gate trace.
 - #19 MERGED 289b27a — pre-runner replay V3 current-main port.
+- #20 MERGED de4ba0b — persistent project continuity/master instructions.
+- #21 MERGED f5bfd8c — broad discovery universe.
+- #22 MERGED 42877c1 — hidden PRE_RUNNER watchlist.
+- #23 MERGED 0cd32cb — trajectory opportunity ranking.
+- #24 MERGED 66214f6 — centralized thesis-aware execution geometry.
+- #25 MERGED 8a4d8a2 — candidate outcome ledger.
+- #26 MERGED 6c3e53f — failure attribution / missed-opportunity learner.
+- #27 MERGED 68cd4c0 — shadow challenger learning.
+- #28 MERGED 42fe6ee — OOS promotion review gate.
+- #29 MERGED d616499 — profit-first objective and ACTIVE-only user signals.
 
 ## 8. CURRENT ROADMAP POSITION: implementation PR #21 -> #28
 
@@ -296,4 +306,4 @@ Choose management by OOS profit metrics, not by aesthetic preference.
 Any production change follows time-slice replay, calibration/OOS separation, challenger comparison and explicit review. No automatic self-modification.
 
 ## 14. Maintenance rule
-This file is part of the Definition of Done for implementation PRs #21-#28. A roadmap PR is incomplete if it materially changes architecture, evidence, invariants, or roadmap status without updating this document.
+This file is a permanent part of the Definition of Done for all future architecture/research/production PRs. A PR is incomplete if it materially changes the objective, architecture, evidence, invariants, roadmap, opportunity taxonomy, execution policy or learning methodology without updating this document.
