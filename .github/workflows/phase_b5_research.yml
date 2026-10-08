@@ -1,0 +1,33 @@
+name: phase-b5-independent-research
+on:
+  push:
+    branches: [research/phase-b5-independent-controls]
+    paths: ['research/**', '.github/workflows/phase_b5_research.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - run: pip install -r requirements.txt pytest
+      - run: python -m pytest -q tests/test_independent_controls.py
+      - uses: actions/download-artifact@v4
+        with:
+          name: opportunity-phase-b-canonical-v1
+          path: artifacts/canonical
+          run-id: 37600417241
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Run real matched-control comparison
+        run: python -m research.run_independent_study --source artifacts/canonical/opportunity_phase_b_canonical_v1.json --output artifacts/phase_b5_independent_study.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: phase-b5-independent-results
+          path: artifacts/phase_b5_independent_study.json
+          retention-days: 30
