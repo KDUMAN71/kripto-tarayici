@@ -1,17 +1,6 @@
 {
  "episodes": [
   {
-   "candidate_id": "SANDUSDT-1791343945-c26e21",
-   "symbol": "SANDUSDT",
-   "status": "EXPIRED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "EXPIRED",
-    "reason": "pretrade expiry",
-    "mfe_pct": 0.20482809070958485
-   }
-  },
-  {
    "candidate_id": "STRKUSDT-1791343993-719474",
    "symbol": "STRKUSDT",
    "status": "REJECTED",
@@ -63,7 +52,7 @@
    "evidence": {
     "outcome": "CANCELLED",
     "reason": "structural invalidation",
-    "mfe_pct": 1.7841736549677336
+    "mfe_pct": 4.196431652690059
    }
   },
   {
@@ -986,7 +975,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 141.60268714011514
+    "mfe_pct": 148.32053742802302
    }
   },
   {
@@ -2741,11 +2730,11 @@
   {
    "candidate_id": "JSTUSDT-1791405131-547b1d",
    "symbol": "JSTUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "PRE_RUNNER_EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "PRE_RUNNER_EXPIRED",
+    "reason": "hidden watchlist stale/max-age",
     "mfe_pct": 0.0
    }
   },
@@ -5227,11 +5216,11 @@
   {
    "candidate_id": "ONDOUSDT-1791473535-99b4c4",
    "symbol": "ONDOUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "btc ters yonde sert rejim kirilimi (btc 4s: dusus, 1s yapi: lh-ll, sert asagi kirilim)",
     "mfe_pct": 0.0
    }
   },
@@ -5595,17 +5584,17 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 0.0
+    "mfe_pct": 2.390863118786328
    }
   },
   {
    "candidate_id": "SUPERUSDT-1791475315-2d77fd",
    "symbol": "SUPERUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "PRE_RUNNER_EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "PRE_RUNNER_EXPIRED",
+    "reason": "hidden watchlist stale/max-age",
     "mfe_pct": 0.0
    }
   },
@@ -6558,11 +6547,11 @@
   {
    "candidate_id": "WUSDT-1791490639-fab91b",
    "symbol": "WUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "guclu htf direnc bolgesinde (0.0154296); kirilim/hold olmadan long yok",
     "mfe_pct": 0.0
    }
   },
@@ -6598,11 +6587,22 @@
     "reason": "",
     "mfe_pct": 0.0
    }
+  },
+  {
+   "candidate_id": "SKYUSDT-1791491518-bae8bf",
+   "symbol": "SKYUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
   }
  ],
  "counts": {
-  "VALID_REJECT": 384,
-  "UNCLASSIFIED": 195,
+  "VALID_REJECT": 387,
+  "UNCLASSIFIED": 192,
   "MISSED_RUNNER": 20,
   "PREMATURE_STOP": 1
  },
