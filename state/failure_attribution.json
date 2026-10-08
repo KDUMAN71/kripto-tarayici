@@ -503,7 +503,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 5.122732123799361
+    "mfe_pct": 5.44290288153682
    }
   },
   {
@@ -2725,7 +2725,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 1.3275212997820427
+    "mfe_pct": 1.3671488012680724
    }
   },
   {
@@ -3363,7 +3363,7 @@
    "evidence": {
     "outcome": "CANCELLED",
     "reason": "structural invalidation",
-    "mfe_pct": 0.8954413892908847
+    "mfe_pct": 1.6597322720694727
    }
   },
   {
@@ -4199,7 +4199,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 3.523654159869505
+    "mfe_pct": 4.763458401305058
    }
   },
   {
@@ -4551,7 +4551,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 2.703954069821285
+    "mfe_pct": 2.833595703305868
    }
   },
   {
@@ -5173,10 +5173,10 @@
   {
    "candidate_id": "1000PEPEUSDT-1791391648-540a0b",
    "symbol": "1000PEPEUSDT",
-   "status": "PRE_RUNNER",
+   "status": "EARLY",
    "class": "UNCLASSIFIED",
    "evidence": {
-    "outcome": "PRE_RUNNER",
+    "outcome": "EARLY",
     "reason": "",
     "mfe_pct": 0.0
    }
@@ -5833,11 +5833,11 @@
   {
    "candidate_id": "ADAUSDT-1791418638-4a4100",
    "symbol": "ADAUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "guclu htf direnc bolgesinde (0.259731); kirilim/hold olmadan long yok",
     "mfe_pct": 0.0
    }
   },
@@ -5866,11 +5866,11 @@
   {
    "candidate_id": "HYPEUSDT-1791421352-8d9a9b",
    "symbol": "HYPEUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "guclu htf destek bolgesinde (88.144); kirilim/hold olmadan short yok",
     "mfe_pct": 0.0
    }
   },
@@ -5906,12 +5906,23 @@
     "reason": "",
     "mfe_pct": 0.0
    }
+  },
+  {
+   "candidate_id": "FETUSDT-1791422259-8ab7cd",
+   "symbol": "FETUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
   }
  ],
  "counts": {
-  "UNCLASSIFIED": 172,
-  "VALID_REJECT": 351,
+  "UNCLASSIFIED": 171,
+  "VALID_REJECT": 353,
   "MISSED_RUNNER": 14
  },
- "total": 537
+ "total": 538
 }
