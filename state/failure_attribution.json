@@ -1,50 +1,6 @@
 {
  "episodes": [
   {
-   "candidate_id": "AKEUSDT-1791344891-81df7d",
-   "symbol": "AKEUSDT",
-   "status": "CANCELLED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "CANCELLED",
-    "reason": "structural invalidation",
-    "mfe_pct": 9.224557407599125
-   }
-  },
-  {
-   "candidate_id": "PONSUSDT-1791345787-2229c2",
-   "symbol": "PONSUSDT",
-   "status": "REJECTED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "REJECTED",
-    "reason": "iki yonlu karar motoru short tarafini guclu buldu",
-    "mfe_pct": 0.0
-   }
-  },
-  {
-   "candidate_id": "XMRUSDT-1791345825-2a6cbf",
-   "symbol": "XMRUSDT",
-   "status": "REJECTED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "REJECTED",
-    "reason": "guclu htf direnc bolgesinde (568.967); kirilim/hold olmadan long yok",
-    "mfe_pct": 0.0
-   }
-  },
-  {
-   "candidate_id": "STRKUSDT-1791345830-d91e16",
-   "symbol": "STRKUSDT",
-   "status": "REJECTED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "REJECTED",
-    "reason": "guclu htf direnc bolgesinde (0.05109); kirilim/hold olmadan long yok",
-    "mfe_pct": 0.0
-   }
-  },
-  {
    "candidate_id": "CRVUSDT-1791345839-4c3966",
    "symbol": "CRVUSDT",
    "status": "CANCELLED",
@@ -3945,7 +3901,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 12.777176852352623
+    "mfe_pct": 13.615467820443477
    }
   },
   {
@@ -4590,11 +4546,11 @@
    "candidate_id": "SKLUSDT-1791466364-b59e9c",
    "symbol": "SKLUSDT",
    "status": "REJECTED",
-   "class": "VALID_REJECT",
+   "class": "MISSED_RUNNER",
    "evidence": {
     "outcome": "REJECTED",
     "reason": "guclu htf direnc bolgesinde (0.00472843); kirilim/hold olmadan long yok",
-    "mfe_pct": 5.461665292662811
+    "mfe_pct": 10.11953833470732
    }
   },
   {
@@ -5551,7 +5507,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 0.2927867979771067
+    "mfe_pct": 0.3016591251885431
    }
   },
   {
@@ -5694,7 +5650,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 0.0
+    "mfe_pct": 3.508771929824566
    }
   },
   {
@@ -5733,11 +5689,11 @@
   {
    "candidate_id": "BRUSDT-1791477148-fce17d",
    "symbol": "BRUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "iki yonlu karar motoru short tarafini guclu buldu",
     "mfe_pct": 0.0
    }
   },
@@ -6492,11 +6448,11 @@
   {
    "candidate_id": "ATOMUSDT-1791489793-06bea8",
    "symbol": "ATOMUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "guclu htf destek bolgesinde (1.73174); kirilim/hold olmadan short yok",
     "mfe_pct": 0.0
    }
   },
@@ -6598,12 +6554,56 @@
     "reason": "",
     "mfe_pct": 0.0
    }
+  },
+  {
+   "candidate_id": "UBUSDT-1791493343-f17d88",
+   "symbol": "UBUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
+  },
+  {
+   "candidate_id": "ONDOUSDT-1791493356-ebd81e",
+   "symbol": "ONDOUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
+  },
+  {
+   "candidate_id": "LTCUSDT-1791493365-11382c",
+   "symbol": "LTCUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
+  },
+  {
+   "candidate_id": "AEROUSDT-1791493401-2ed866",
+   "symbol": "AEROUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
   }
  ],
  "counts": {
-  "VALID_REJECT": 385,
-  "UNCLASSIFIED": 194,
-  "MISSED_RUNNER": 20,
+  "VALID_REJECT": 382,
+  "UNCLASSIFIED": 196,
+  "MISSED_RUNNER": 21,
   "PREMATURE_STOP": 1
  },
  "total": 600
