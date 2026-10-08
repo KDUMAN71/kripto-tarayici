@@ -1,28 +1,6 @@
 {
  "episodes": [
   {
-   "candidate_id": "FILUSDT-1791352981-5772ed",
-   "symbol": "FILUSDT",
-   "status": "REJECTED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "REJECTED",
-    "reason": "guclu htf direnc bolgesinde (1.08295); kirilim/hold olmadan long yok",
-    "mfe_pct": 0.0
-   }
-  },
-  {
-   "candidate_id": "FLOWUSDT-1791353811-7e1cd0",
-   "symbol": "FLOWUSDT",
-   "status": "PRE_RUNNER_EXPIRED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "PRE_RUNNER_EXPIRED",
-    "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 8.898847631242003
-   }
-  },
-  {
    "candidate_id": "ZECUSDT-1791353820-928319",
    "symbol": "ZECUSDT",
    "status": "REJECTED",
@@ -80,11 +58,11 @@
   {
    "candidate_id": "JASMYUSDT-1791355600-24c9d1",
    "symbol": "JASMYUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "PRE_RUNNER_EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "PRE_RUNNER_EXPIRED",
+    "reason": "hidden watchlist stale/max-age",
     "mfe_pct": 0.0
    }
   },
@@ -541,11 +519,11 @@
   {
    "candidate_id": "LITUSDT-1791366484-ea35b4",
    "symbol": "LITUSDT",
-   "status": "EARLY",
-   "class": "UNCLASSIFIED",
+   "status": "EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "EARLY",
-    "reason": "",
+    "outcome": "EXPIRED",
+    "reason": "pretrade expiry",
     "mfe_pct": 0.0
    }
   },
@@ -1382,7 +1360,7 @@
    "evidence": {
     "outcome": "REJECTED",
     "reason": "iki yonlu karar motoru short tarafini guclu buldu",
-    "mfe_pct": 23.542600896860986
+    "mfe_pct": 23.878923766816147
    }
   },
   {
@@ -1525,7 +1503,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 2.9567382508559006
+    "mfe_pct": 3.018985371926562
    }
   },
   {
@@ -2878,7 +2856,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 7.548346849656894
+    "mfe_pct": 7.610729881472232
    }
   },
   {
@@ -4814,7 +4792,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 0.0
+    "mfe_pct": 4.428044280442807
    }
   },
   {
@@ -5210,7 +5188,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 2.49961425705909
+    "mfe_pct": 2.6076222805122615
    }
   },
   {
@@ -6024,7 +6002,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 1.083238312428729
+    "mfe_pct": 1.539338654503986
    }
   },
   {
@@ -6591,6 +6569,28 @@
   {
    "candidate_id": "龙虾USDT-1791499643-a209f1",
    "symbol": "龙虾USDT",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
+   "evidence": {
+    "outcome": "REJECTED",
+    "reason": "15d failed reclaim/hold (0/1 kapanis)",
+    "mfe_pct": 0.0
+   }
+  },
+  {
+   "candidate_id": "RAYSOLUSDT-1791501491-0f07e5",
+   "symbol": "RAYSOLUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
+  },
+  {
+   "candidate_id": "LITUSDT-1791501493-5a4d97",
+   "symbol": "LITUSDT",
    "status": "PRE_RUNNER",
    "class": "UNCLASSIFIED",
    "evidence": {
@@ -6601,9 +6601,9 @@
   }
  ],
  "counts": {
-  "VALID_REJECT": 391,
-  "UNCLASSIFIED": 185,
+  "VALID_REJECT": 392,
   "MISSED_RUNNER": 23,
+  "UNCLASSIFIED": 184,
   "PREMATURE_STOP": 1
  },
  "total": 600
