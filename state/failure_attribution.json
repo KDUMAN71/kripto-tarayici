@@ -1,28 +1,6 @@
 {
  "episodes": [
   {
-   "candidate_id": "CAPUSDT-1791317849-03daad",
-   "symbol": "CAPUSDT",
-   "status": "REJECTED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "REJECTED",
-    "reason": "iki yonlu karar motoru long tarafini guclu buldu",
-    "mfe_pct": 0.0
-   }
-  },
-  {
-   "candidate_id": "API3USDT-1791317850-21cfcc",
-   "symbol": "API3USDT",
-   "status": "CANCELLED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "CANCELLED",
-    "reason": "structural invalidation",
-    "mfe_pct": 0.0
-   }
-  },
-  {
    "candidate_id": "TAOUSDT-1791317851-30b2f7",
    "symbol": "TAOUSDT",
    "status": "REJECTED",
@@ -598,11 +576,11 @@
    "candidate_id": "MORPHOUSDT-1791331318-9042b1",
    "symbol": "MORPHOUSDT",
    "status": "PRE_RUNNER_EXPIRED",
-   "class": "VALID_REJECT",
+   "class": "MISSED_RUNNER",
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 9.579769431015249
+    "mfe_pct": 10.200818148010422
    }
   },
   {
@@ -767,7 +745,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 5.959999999999993
+    "mfe_pct": 7.120000000000001
    }
   },
   {
@@ -1394,7 +1372,7 @@
    "evidence": {
     "outcome": "CANCELLED",
     "reason": "structural invalidation",
-    "mfe_pct": 5.357142857142845
+    "mfe_pct": 6.964285714285706
    }
   },
   {
@@ -3033,7 +3011,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 6.6564002639932065
+    "mfe_pct": 6.816681856752258
    }
   },
   {
@@ -3407,7 +3385,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 3.184230477634579
+    "mfe_pct": 3.335860500379087
    }
   },
   {
@@ -3512,11 +3490,11 @@
   {
    "candidate_id": "CCUSDT-1791379919-c1115c",
    "symbol": "CCUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "PRE_RUNNER_EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "PRE_RUNNER_EXPIRED",
+    "reason": "hidden watchlist stale/max-age",
     "mfe_pct": 0.0
    }
   },
@@ -5002,7 +4980,7 @@
    "evidence": {
     "outcome": "CANCELLED",
     "reason": "structural invalidation",
-    "mfe_pct": 2.5342465753424697
+    "mfe_pct": 3.1438356164383516
    }
   },
   {
@@ -5299,7 +5277,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 2.878916172734971
+    "mfe_pct": 2.9466553767993173
    }
   },
   {
@@ -6284,11 +6262,11 @@
   {
    "candidate_id": "FILUSDT-1791457372-efaa8b",
    "symbol": "FILUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "btc ters yonde sert rejim kirilimi (btc 4s: dusus, 1s yapi: lh-ll, sert asagi kirilim, taze dip süpürme)",
     "mfe_pct": 0.0
    }
   },
@@ -6592,6 +6570,28 @@
   {
    "candidate_id": "ETHUSDT-1791465433-a549d3",
    "symbol": "ETHUSDT",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
+   "evidence": {
+    "outcome": "REJECTED",
+    "reason": "guclu htf direnc bolgesinde (2543.86); kirilim/hold olmadan long yok",
+    "mfe_pct": 0.0
+   }
+  },
+  {
+   "candidate_id": "SKLUSDT-1791466364-b59e9c",
+   "symbol": "SKLUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
+  },
+  {
+   "candidate_id": "ORCAUSDT-1791466385-9c7867",
+   "symbol": "ORCAUSDT",
    "status": "PRE_RUNNER",
    "class": "UNCLASSIFIED",
    "evidence": {
@@ -6603,8 +6603,8 @@
  ],
  "counts": {
   "VALID_REJECT": 405,
-  "UNCLASSIFIED": 186,
-  "MISSED_RUNNER": 9
+  "UNCLASSIFIED": 185,
+  "MISSED_RUNNER": 10
  },
  "total": 600
 }
