@@ -1,17 +1,6 @@
 {
  "episodes": [
   {
-   "candidate_id": "PONSUSDT-1791410582-569268",
-   "symbol": "PONSUSDT",
-   "status": "REJECTED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "REJECTED",
-    "reason": "guclu htf direnc bolgesinde (0.3765); kirilim/hold olmadan long yok",
-    "mfe_pct": 0.0
-   }
-  },
-  {
    "candidate_id": "LTCUSDT-1791411458-f3af3c",
    "symbol": "LTCUSDT",
    "status": "REJECTED",
@@ -74,7 +63,7 @@
    "evidence": {
     "outcome": "EXPIRED",
     "reason": "pretrade expiry",
-    "mfe_pct": 6.017881705639615
+    "mfe_pct": 6.026478679504807
    }
   },
   {
@@ -316,7 +305,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 3.8480272771553805
+    "mfe_pct": 4.018509498295178
    }
   },
   {
@@ -459,7 +448,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 5.370732767993043
+    "mfe_pct": 5.82735377255925
    }
   },
   {
@@ -602,7 +591,7 @@
    "evidence": {
     "outcome": "EXPIRED",
     "reason": "pretrade expiry",
-    "mfe_pct": 1.6739963115335397
+    "mfe_pct": 1.844233224570863
    }
   },
   {
@@ -1037,11 +1026,11 @@
   {
    "candidate_id": "TAUSDT-1791439412-8f7308",
    "symbol": "TAUSDT",
-   "status": "EARLY",
-   "class": "UNCLASSIFIED",
+   "status": "EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "EARLY",
-    "reason": "",
+    "outcome": "EXPIRED",
+    "reason": "pretrade expiry",
     "mfe_pct": 0.0
    }
   },
@@ -1405,7 +1394,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 1.1705685618728996
+    "mfe_pct": 1.254180602006677
    }
   },
   {
@@ -1416,7 +1405,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 6.655142610198789
+    "mfe_pct": 7.000864304235089
    }
   },
   {
@@ -1581,7 +1570,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 15.139573070607545
+    "mfe_pct": 15.435139573070602
    }
   },
   {
@@ -2142,7 +2131,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 3.854389721627409
+    "mfe_pct": 4.037932089323966
    }
   },
   {
@@ -3044,7 +3033,7 @@
    "evidence": {
     "outcome": "CANCELLED",
     "reason": "structural invalidation",
-    "mfe_pct": 1.3950920861143086
+    "mfe_pct": 2.042454960606211
    }
   },
   {
@@ -3198,7 +3187,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 7.175925925925933
+    "mfe_pct": 7.870370370370377
    }
   },
   {
@@ -4238,11 +4227,11 @@
   {
    "candidate_id": "OGNUSDT-1791505026-27c57d",
    "symbol": "OGNUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "iki yonlu karar motoru long tarafini guclu buldu",
     "mfe_pct": 0.0
    }
   },
@@ -4793,7 +4782,7 @@
    "evidence": {
     "outcome": "CANCELLED",
     "reason": "structural invalidation",
-    "mfe_pct": 1.8421052631578887
+    "mfe_pct": 2.749731471535975
    }
   },
   {
@@ -5343,7 +5332,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 3.0153015301530175
+    "mfe_pct": 3.600360036003594
    }
   },
   {
@@ -6599,12 +6588,23 @@
     "reason": "",
     "mfe_pct": 0.0
    }
+  },
+  {
+   "candidate_id": "GMTUSDT-1791573440-6d3188",
+   "symbol": "GMTUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
   }
  ],
  "counts": {
-  "VALID_REJECT": 379,
+  "VALID_REJECT": 380,
   "MISSED_RUNNER": 30,
-  "UNCLASSIFIED": 191
+  "UNCLASSIFIED": 190
  },
  "total": 600
 }
