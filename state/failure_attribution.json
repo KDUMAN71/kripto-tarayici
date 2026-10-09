@@ -1,28 +1,6 @@
 {
  "episodes": [
   {
-   "candidate_id": "NEARUSDT-1791357431-b53023",
-   "symbol": "NEARUSDT",
-   "status": "REJECTED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "REJECTED",
-    "reason": "guclu htf direnc bolgesinde (5.17251); kirilim/hold olmadan long yok",
-    "mfe_pct": 0.0
-   }
-  },
-  {
-   "candidate_id": "AAVEUSDT-1791357459-b23650",
-   "symbol": "AAVEUSDT",
-   "status": "REJECTED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "REJECTED",
-    "reason": "iki yonlu karar motoru long tarafini guclu buldu",
-    "mfe_pct": 0.0
-   }
-  },
-  {
    "candidate_id": "LITUSDT-1791357494-0815e1",
    "symbol": "LITUSDT",
    "status": "REJECTED",
@@ -370,7 +348,7 @@
    "evidence": {
     "outcome": "EXPIRED",
     "reason": "pretrade expiry",
-    "mfe_pct": 0.10220994475138837
+    "mfe_pct": 0.5911602209944836
    }
   },
   {
@@ -832,7 +810,7 @@
    "evidence": {
     "outcome": "EXPIRED",
     "reason": "pretrade expiry",
-    "mfe_pct": 0.0
+    "mfe_pct": 8.436286893832028
    }
   },
   {
@@ -1206,7 +1184,7 @@
    "evidence": {
     "outcome": "REJECTED",
     "reason": "iki yonlu karar motoru short tarafini guclu buldu",
-    "mfe_pct": 24.476831091180866
+    "mfe_pct": 24.51420029895366
    }
   },
   {
@@ -2691,7 +2669,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 26.24971257760405
+    "mfe_pct": 26.44286042768452
    }
   },
   {
@@ -3230,7 +3208,7 @@
    "evidence": {
     "outcome": "REJECTED",
     "reason": "iki yonlu karar motoru short tarafini guclu buldu",
-    "mfe_pct": 9.197324414715716
+    "mfe_pct": 9.36454849498328
    }
   },
   {
@@ -3896,11 +3874,11 @@
   {
    "candidate_id": "CTSIUSDT-1791460938-162dfb",
    "symbol": "CTSIUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "btc ters yonde sert rejim kirilimi (btc 4s: dusus, 1s yapi: lh-ll, sert asagi kirilim)",
     "mfe_pct": 0.0
    }
   },
@@ -4429,7 +4407,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 4.03804178359837
+    "mfe_pct": 4.1627689429373165
    }
   },
   {
@@ -5326,11 +5304,11 @@
   {
    "candidate_id": "ACEUSDT-1791478099-72a569",
    "symbol": "ACEUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "guclu htf destek bolgesinde (0.176745); kirilim/hold olmadan short yok",
     "mfe_pct": 0.0
    }
   },
@@ -6272,11 +6250,11 @@
   {
    "candidate_id": "ATOMUSDT-1791497002-f46566",
    "symbol": "ATOMUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "guclu htf direnc bolgesinde (1.80375); kirilim/hold olmadan long yok",
     "mfe_pct": 0.0
    }
   },
@@ -6316,11 +6294,11 @@
   {
    "candidate_id": "MONUSDT-1791497920-d7ea50",
    "symbol": "MONUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "guclu htf destek bolgesinde (0.024125); kirilim/hold olmadan short yok",
     "mfe_pct": 0.0
    }
   },
@@ -6598,11 +6576,33 @@
     "reason": "",
     "mfe_pct": 0.0
    }
+  },
+  {
+   "candidate_id": "PYTHUSDT-1791505965-64b7ae",
+   "symbol": "PYTHUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
+  },
+  {
+   "candidate_id": "ERAUSDT-1791505984-11c043",
+   "symbol": "ERAUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
   }
  ],
  "counts": {
-  "VALID_REJECT": 388,
-  "UNCLASSIFIED": 187,
+  "VALID_REJECT": 390,
+  "UNCLASSIFIED": 185,
   "PREMATURE_STOP": 1,
   "MISSED_RUNNER": 24
  },
