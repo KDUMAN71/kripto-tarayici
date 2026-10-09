@@ -1,28 +1,6 @@
 {
  "episodes": [
   {
-   "candidate_id": "SYRUPUSDT-1791383528-574be3",
-   "symbol": "SYRUPUSDT",
-   "status": "PRE_RUNNER_EXPIRED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "PRE_RUNNER_EXPIRED",
-    "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 4.438389875197761
-   }
-  },
-  {
-   "candidate_id": "HYPEUSDT-1791383535-16030c",
-   "symbol": "HYPEUSDT",
-   "status": "REJECTED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "REJECTED",
-    "reason": "guclu htf destek bolgesinde (88.4961); kirilim/hold olmadan short yok",
-    "mfe_pct": 0.0
-   }
-  },
-  {
    "candidate_id": "XPLUSDT-1791383598-74724e",
    "symbol": "XPLUSDT",
    "status": "EXPIRED",
@@ -597,10 +575,10 @@
   {
    "candidate_id": "METUSDT-1791391674-f902a2",
    "symbol": "METUSDT",
-   "status": "PRE_RUNNER",
+   "status": "EARLY",
    "class": "UNCLASSIFIED",
    "evidence": {
-    "outcome": "PRE_RUNNER",
+    "outcome": "EARLY",
     "reason": "",
     "mfe_pct": 0.0
    }
@@ -1180,11 +1158,11 @@
   {
    "candidate_id": "SOLUSDT-1791415934-5899c0",
    "symbol": "SOLUSDT",
-   "status": "EARLY",
-   "class": "UNCLASSIFIED",
+   "status": "EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "EARLY",
-    "reason": "",
+    "outcome": "EXPIRED",
+    "reason": "pretrade expiry",
     "mfe_pct": 0.0
    }
   },
@@ -1680,7 +1658,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 3.553454323623606
+    "mfe_pct": 4.354125362208321
    }
   },
   {
@@ -2890,7 +2868,7 @@
    "evidence": {
     "outcome": "REJECTED",
     "reason": "guclu htf direnc bolgesinde (0.00472843); kirilim/hold olmadan long yok",
-    "mfe_pct": 10.11953833470732
+    "mfe_pct": 15.189612530915081
    }
   },
   {
@@ -3451,7 +3429,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 1.8478798878072973
+    "mfe_pct": 1.8643788153770107
    }
   },
   {
@@ -3704,7 +3682,7 @@
    "evidence": {
     "outcome": "REJECTED",
     "reason": "guclu htf destek bolgesinde (0.0289495); kirilim/hold olmadan short yok",
-    "mfe_pct": 5.649910971099844
+    "mfe_pct": 5.995754006300504
    }
   },
   {
@@ -3836,7 +3814,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 6.140562110839721
+    "mfe_pct": 6.48801128349788
    }
   },
   {
@@ -6047,7 +6025,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 1.737725459161802
+    "mfe_pct": 2.070762027236456
    }
   },
   {
@@ -6384,11 +6362,11 @@
    "candidate_id": "KAIAUSDT-1791533821-a6fdf0",
    "symbol": "KAIAUSDT",
    "status": "PRE_RUNNER_EXPIRED",
-   "class": "VALID_REJECT",
+   "class": "MISSED_RUNNER",
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 0.0
+    "mfe_pct": 23.17822651448639
    }
   },
   {
@@ -6548,11 +6526,11 @@
   {
    "candidate_id": "FILUSDT-1791543760-fa440f",
    "symbol": "FILUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "guclu htf direnc bolgesinde (1.09958); kirilim/hold olmadan long yok",
     "mfe_pct": 0.0
    }
   },
@@ -6599,11 +6577,33 @@
     "reason": "",
     "mfe_pct": 0.0
    }
+  },
+  {
+   "candidate_id": "ETHUSDT-1791546418-239fa0",
+   "symbol": "ETHUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
+  },
+  {
+   "candidate_id": "SOLUSDT-1791546419-4bc5d7",
+   "symbol": "SOLUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
   }
  ],
  "counts": {
-  "VALID_REJECT": 400,
-  "MISSED_RUNNER": 22,
+  "VALID_REJECT": 399,
+  "MISSED_RUNNER": 23,
   "UNCLASSIFIED": 178
  },
  "total": 600
