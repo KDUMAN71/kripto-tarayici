@@ -1,17 +1,6 @@
 {
  "episodes": [
   {
-   "candidate_id": "QNTUSDT-1791366442-00346a",
-   "symbol": "QNTUSDT",
-   "status": "REJECTED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "REJECTED",
-    "reason": "iki yonlu karar motoru long tarafini guclu buldu",
-    "mfe_pct": 0.0
-   }
-  },
-  {
    "candidate_id": "AVAXUSDT-1791366447-e0d527",
    "symbol": "AVAXUSDT",
    "status": "REJECTED",
@@ -1141,7 +1130,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 5.895821408128218
+    "mfe_pct": 6.468231253577557
    }
   },
   {
@@ -2511,11 +2500,11 @@
   {
    "candidate_id": "ENJUSDT-1791428522-bf0737",
    "symbol": "ENJUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "PRE_RUNNER_EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "PRE_RUNNER_EXPIRED",
+    "reason": "hidden watchlist stale/max-age",
     "mfe_pct": 0.0
    }
   },
@@ -3270,10 +3259,10 @@
   {
    "candidate_id": "DOGEUSDT-1791445652-2dfe6d",
    "symbol": "DOGEUSDT",
-   "status": "EARLY",
+   "status": "WATCH",
    "class": "UNCLASSIFIED",
    "evidence": {
-    "outcome": "EARLY",
+    "outcome": "WATCH",
     "reason": "",
     "mfe_pct": 0.0
    }
@@ -4705,7 +4694,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 5.230674278660685
+    "mfe_pct": 8.702360746798322
    }
   },
   {
@@ -4727,7 +4716,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 2.8310502283105015
+    "mfe_pct": 3.2876712328767126
    }
   },
   {
@@ -4892,7 +4881,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 6.485911749069638
+    "mfe_pct": 7.2833599149388615
    }
   },
   {
@@ -5332,7 +5321,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 0.12458471760798276
+    "mfe_pct": 1.2458471760797265
    }
   },
   {
@@ -5349,11 +5338,11 @@
   {
    "candidate_id": "PROMUSDT-1791483466-254bf4",
    "symbol": "PROMUSDT",
-   "status": "EARLY",
-   "class": "UNCLASSIFIED",
+   "status": "CANCELLED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "EARLY",
-    "reason": "",
+    "outcome": "CANCELLED",
+    "reason": "structural invalidation",
     "mfe_pct": 0.0
    }
   },
@@ -5426,11 +5415,11 @@
   {
    "candidate_id": "TIAUSDT-1791486157-d380db",
    "symbol": "TIAUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "btc ters yonde sert rejim kirilimi (btc 4s: dusus, 1s yapi: lh-ll, sert asagi kirilim)",
     "mfe_pct": 0.0
    }
   },
@@ -6599,12 +6588,23 @@
     "reason": "",
     "mfe_pct": 0.0
    }
+  },
+  {
+   "candidate_id": "PYTHUSDT-1791515009-6c4284",
+   "symbol": "PYTHUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
   }
  ],
  "counts": {
-  "VALID_REJECT": 391,
+  "VALID_REJECT": 393,
   "MISSED_RUNNER": 25,
-  "UNCLASSIFIED": 184
+  "UNCLASSIFIED": 182
  },
  "total": 600
 }
