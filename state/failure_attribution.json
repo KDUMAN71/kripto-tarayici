@@ -1,27 +1,6 @@
 {
  "episodes": [
   {
-   "candidate_id": "AAVEUSDT-1791365560-c96a65",
-   "symbol": "AAVEUSDT",
-   "status": "STOPPED",
-   "class": "PREMATURE_STOP",
-   "evidence": {
-    "mfe_pct": 5.015970661303673,
-    "mae_pct": 2.135336566899317
-   }
-  },
-  {
-   "candidate_id": "HYPEUSDT-1791366430-b9c738",
-   "symbol": "HYPEUSDT",
-   "status": "REJECTED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "REJECTED",
-    "reason": "guclu htf destek bolgesinde (88.4892); kirilim/hold olmadan short yok",
-    "mfe_pct": 0.0
-   }
-  },
-  {
    "candidate_id": "QNTUSDT-1791366442-00346a",
    "symbol": "QNTUSDT",
    "status": "REJECTED",
@@ -4726,7 +4705,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 3.98086715013115
+    "mfe_pct": 5.230674278660685
    }
   },
   {
@@ -4748,7 +4727,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 0.0
+    "mfe_pct": 2.8310502283105015
    }
   },
   {
@@ -4913,7 +4892,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 5.92769803296118
+    "mfe_pct": 6.485911749069638
    }
   },
   {
@@ -6580,11 +6559,11 @@
   {
    "candidate_id": "SKLUSDT-1791513208-a1f10e",
    "symbol": "SKLUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "funding asiri kalabalik (-0.363%/8s)",
     "mfe_pct": 0.0
    }
   },
@@ -6598,13 +6577,34 @@
     "reason": "",
     "mfe_pct": 0.0
    }
+  },
+  {
+   "candidate_id": "RVNUSDT-1791514034-87a138",
+   "symbol": "RVNUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
+  },
+  {
+   "candidate_id": "STRKUSDT-1791514051-603ab3",
+   "symbol": "STRKUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
   }
  ],
  "counts": {
-  "PREMATURE_STOP": 1,
   "VALID_REJECT": 391,
   "MISSED_RUNNER": 25,
-  "UNCLASSIFIED": 183
+  "UNCLASSIFIED": 184
  },
  "total": 600
 }
