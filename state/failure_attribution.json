@@ -1,17 +1,6 @@
 {
  "episodes": [
   {
-   "candidate_id": "SOLUSDT-1791415934-5899c0",
-   "symbol": "SOLUSDT",
-   "status": "EXPIRED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "EXPIRED",
-    "reason": "pretrade expiry",
-    "mfe_pct": 6.490715268225583
-   }
-  },
-  {
    "candidate_id": "LTCUSDT-1791417779-6db1b1",
    "symbol": "LTCUSDT",
    "status": "REJECTED",
@@ -25,11 +14,11 @@
   {
    "candidate_id": "MORPHOUSDT-1791418605-33e54a",
    "symbol": "MORPHOUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "PRE_RUNNER_EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "PRE_RUNNER_EXPIRED",
+    "reason": "hidden watchlist stale/max-age",
     "mfe_pct": 0.0
    }
   },
@@ -393,7 +382,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 6.283974777125459
+    "mfe_pct": 6.305718634485752
    }
   },
   {
@@ -569,7 +558,7 @@
    "evidence": {
     "outcome": "EXPIRED",
     "reason": "pretrade expiry",
-    "mfe_pct": 4.827907717147839
+    "mfe_pct": 4.956394191956529
    }
   },
   {
@@ -1191,11 +1180,11 @@
   {
    "candidate_id": "DOGEUSDT-1791445652-2dfe6d",
    "symbol": "DOGEUSDT",
-   "status": "WATCH",
-   "class": "UNCLASSIFIED",
+   "status": "EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "WATCH",
-    "reason": "",
+    "outcome": "EXPIRED",
+    "reason": "pretrade expiry",
     "mfe_pct": 0.0
    }
   },
@@ -1515,7 +1504,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 16.814449917898184
+    "mfe_pct": 16.912972085385874
    }
   },
   {
@@ -2076,7 +2065,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 4.649739981645777
+    "mfe_pct": 5.139186295503223
    }
   },
   {
@@ -3589,11 +3578,11 @@
   {
    "candidate_id": "ONTUSDT-1791489726-d5271f",
    "symbol": "ONTUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "PRE_RUNNER_EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "PRE_RUNNER_EXPIRED",
+    "reason": "hidden watchlist stale/max-age",
     "mfe_pct": 0.0
    }
   },
@@ -3891,7 +3880,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 2.6011167097916505
+    "mfe_pct": 2.982432248399852
    }
   },
   {
@@ -4727,7 +4716,7 @@
    "evidence": {
     "outcome": "CANCELLED",
     "reason": "structural invalidation",
-    "mfe_pct": 4.2857142857142785
+    "mfe_pct": 4.656283566057993
    }
   },
   {
@@ -6229,11 +6218,11 @@
   {
    "candidate_id": "BRUSDT-1791564497-2b81f4",
    "symbol": "BRUSDT",
-   "status": "EARLY",
-   "class": "UNCLASSIFIED",
+   "status": "CANCELLED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "EARLY",
-    "reason": "",
+    "outcome": "CANCELLED",
+    "reason": "structural invalidation",
     "mfe_pct": 0.0
    }
   },
@@ -6559,11 +6548,11 @@
   {
    "candidate_id": "SANDUSDT-1791574317-b124e6",
    "symbol": "SANDUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "iki yonlu karar motoru long tarafini guclu buldu",
     "mfe_pct": 0.0
    }
   },
@@ -6581,11 +6570,11 @@
   {
    "candidate_id": "APTUSDT-1791575262-fc24f2",
    "symbol": "APTUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "guclu htf destek bolgesinde (0.79193); kirilim/hold olmadan short yok",
     "mfe_pct": 0.0
    }
   },
@@ -6599,11 +6588,22 @@
     "reason": "",
     "mfe_pct": 0.0
    }
+  },
+  {
+   "candidate_id": "DOGEUSDT-1791576186-d0ff48",
+   "symbol": "DOGEUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
   }
  ],
  "counts": {
-  "VALID_REJECT": 379,
-  "UNCLASSIFIED": 192,
+  "VALID_REJECT": 384,
+  "UNCLASSIFIED": 187,
   "MISSED_RUNNER": 29
  },
  "total": 600
