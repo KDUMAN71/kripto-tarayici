@@ -1,17 +1,6 @@
 {
  "episodes": [
   {
-   "candidate_id": "RAYSOLUSDT-1791372759-455930",
-   "symbol": "RAYSOLUSDT",
-   "status": "REJECTED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "REJECTED",
-    "reason": "iki yonlu karar motoru long tarafini guclu buldu",
-    "mfe_pct": 0.0
-   }
-  },
-  {
    "candidate_id": "MONUSDT-1791372766-81e7f1",
    "symbol": "MONUSDT",
    "status": "REJECTED",
@@ -855,7 +844,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 5.739210284664836
+    "mfe_pct": 6.703397612488536
    }
   },
   {
@@ -2681,7 +2670,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 5.26571220577531
+    "mfe_pct": 7.837903421499645
    }
   },
   {
@@ -2780,7 +2769,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 5.819051414906335
+    "mfe_pct": 6.8951773614986
    }
   },
   {
@@ -3249,11 +3238,11 @@
    "candidate_id": "CTSIUSDT-1791460938-162dfb",
    "symbol": "CTSIUSDT",
    "status": "REJECTED",
-   "class": "VALID_REJECT",
+   "class": "MISSED_RUNNER",
    "evidence": {
     "outcome": "REJECTED",
     "reason": "btc ters yonde sert rejim kirilimi (btc 4s: dusus, 1s yapi: lh-ll, sert asagi kirilim)",
-    "mfe_pct": 6.061529089247636
+    "mfe_pct": 10.295461468169362
    }
   },
   {
@@ -3286,7 +3275,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 1.9124678190511204
+    "mfe_pct": 2.0411916145641777
    }
   },
   {
@@ -4458,11 +4447,11 @@
   {
    "candidate_id": "1000PEPEUSDT-1791475324-e50adc",
    "symbol": "1000PEPEUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "guclu htf destek bolgesinde (0.0038772); kirilim/hold olmadan short yok",
     "mfe_pct": 0.0
    }
   },
@@ -5294,11 +5283,11 @@
   {
    "candidate_id": "SAGAUSDT-1791488811-ac4a9a",
    "symbol": "SAGAUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "PRE_RUNNER_EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "PRE_RUNNER_EXPIRED",
+    "reason": "hidden watchlist stale/max-age",
     "mfe_pct": 0.0
    }
   },
@@ -6599,12 +6588,23 @@
     "reason": "",
     "mfe_pct": 0.0
    }
+  },
+  {
+   "candidate_id": "ETHUSDT-1791523944-63159c",
+   "symbol": "ETHUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
   }
  ],
  "counts": {
   "VALID_REJECT": 389,
-  "MISSED_RUNNER": 26,
-  "UNCLASSIFIED": 185
+  "MISSED_RUNNER": 27,
+  "UNCLASSIFIED": 184
  },
  "total": 600
 }
