@@ -1,28 +1,6 @@
 {
  "episodes": [
   {
-   "candidate_id": "MOVRUSDT-1791439405-9f0cf1",
-   "symbol": "MOVRUSDT",
-   "status": "REJECTED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "REJECTED",
-    "reason": "btc ters yonde sert rejim kirilimi (btc 4s: dusus, 1s yapi: karisik, sert asagi kirilim)",
-    "mfe_pct": 0.0
-   }
-  },
-  {
-   "candidate_id": "TAUSDT-1791439412-8f7308",
-   "symbol": "TAUSDT",
-   "status": "EXPIRED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "EXPIRED",
-    "reason": "pretrade expiry",
-    "mfe_pct": 0.0
-   }
-  },
-  {
    "candidate_id": "CRVUSDT-1791439416-af9fe4",
    "symbol": "CRVUSDT",
    "status": "CANCELLED",
@@ -520,11 +498,11 @@
   {
    "candidate_id": "INJUSDT-1791460085-9207af",
    "symbol": "INJUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "guclu htf destek bolgesinde (6.93514); kirilim/hold olmadan short yok",
     "mfe_pct": 0.0
    }
   },
@@ -3627,7 +3605,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 4.893138357705285
+    "mfe_pct": 6.074240719910004
    }
   },
   {
@@ -3671,7 +3649,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 0.0
+    "mfe_pct": 3.8819332727145475
    }
   },
   {
@@ -4430,7 +4408,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 2.476547842401499
+    "mfe_pct": 3.1519699812382598
    }
   },
   {
@@ -5112,7 +5090,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 0.5514705882352972
+    "mfe_pct": 0.6433823529411822
    }
   },
   {
@@ -6570,11 +6548,11 @@
   {
    "candidate_id": "ASTERUSDT-1791604994-185abb",
    "symbol": "ASTERUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "structural geometry minimum risk/r:r kosullarini saglamiyor",
     "mfe_pct": 0.0
    }
   },
@@ -6592,6 +6570,28 @@
   {
    "candidate_id": "XPLUSDT-1791605006-6c9ec8",
    "symbol": "XPLUSDT",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
+   "evidence": {
+    "outcome": "REJECTED",
+    "reason": "iki yonlu karar motoru short tarafini guclu buldu",
+    "mfe_pct": 0.0
+   }
+  },
+  {
+   "candidate_id": "PARTIUSDT-1791605832-e4dc28",
+   "symbol": "PARTIUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
+  },
+  {
+   "candidate_id": "PENGUUSDT-1791605881-200c4c",
+   "symbol": "PENGUUSDT",
    "status": "PRE_RUNNER",
    "class": "UNCLASSIFIED",
    "evidence": {
@@ -6602,9 +6602,9 @@
   }
  ],
  "counts": {
-  "VALID_REJECT": 382,
+  "VALID_REJECT": 383,
   "MISSED_RUNNER": 28,
-  "UNCLASSIFIED": 190
+  "UNCLASSIFIED": 189
  },
  "total": 600
 }
