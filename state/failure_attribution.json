@@ -1,17 +1,6 @@
 {
  "episodes": [
   {
-   "candidate_id": "NMRUSDT-1791484395-5cf3de",
-   "symbol": "NMRUSDT",
-   "status": "REJECTED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "REJECTED",
-    "reason": "btc ters yonde sert rejim kirilimi (btc 4s: dusus, 1s yapi: lh-ll, sert asagi kirilim)",
-    "mfe_pct": 0.0
-   }
-  },
-  {
    "candidate_id": "USUSDT-1791484397-67ccb6",
    "symbol": "USUSDT",
    "status": "REJECTED",
@@ -3154,7 +3143,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 2.773246329526925
+    "mfe_pct": 3.122815194593337
    }
   },
   {
@@ -3330,7 +3319,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 3.3284117274836524
+    "mfe_pct": 3.3874709976798254
    }
   },
   {
@@ -3517,7 +3506,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 0.0
+    "mfe_pct": 0.3050738599871479
    }
   },
   {
@@ -6394,11 +6383,11 @@
   {
    "candidate_id": "LINKUSDT-1791665242-faed0a",
    "symbol": "LINKUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "guclu htf direnc bolgesinde (13.1439); kirilim/hold olmadan long yok",
     "mfe_pct": 0.0
    }
   },
@@ -6493,11 +6482,11 @@
   {
    "candidate_id": "BCHUSDT-1791669765-87953a",
    "symbol": "BCHUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "iki yonlu karar motoru short tarafini guclu buldu",
     "mfe_pct": 0.0
    }
   },
@@ -6515,10 +6504,10 @@
   {
    "candidate_id": "WUSDT-1791669785-ff1d17",
    "symbol": "WUSDT",
-   "status": "PRE_RUNNER",
+   "status": "EARLY",
    "class": "UNCLASSIFIED",
    "evidence": {
-    "outcome": "PRE_RUNNER",
+    "outcome": "EARLY",
     "reason": "",
     "mfe_pct": 0.0
    }
@@ -6599,12 +6588,23 @@
     "reason": "",
     "mfe_pct": 0.0
    }
+  },
+  {
+   "candidate_id": "OPNUSDT-1791670618-9172cd",
+   "symbol": "OPNUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
   }
  ],
  "counts": {
-  "VALID_REJECT": 379,
+  "VALID_REJECT": 380,
   "MISSED_RUNNER": 23,
-  "UNCLASSIFIED": 198
+  "UNCLASSIFIED": 197
  },
  "total": 600
 }
