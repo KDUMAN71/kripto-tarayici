@@ -1,10 +1,10 @@
 {
- "generated_at": 1791659882,
+ "generated_at": 1791660799,
  "engine_version": "3.3",
- "last_ok_run": 1791659738,
+ "last_ok_run": 1791660650,
  "fail_count": 0,
  "known_symbols_count": 525,
- "open_signal_count": 38,
+ "open_signal_count": 39,
  "open_signals": [
   {
    "symbol": "AAVEUSDT",
@@ -105,6 +105,31 @@
    "htf_resistance": 1.098624321701904,
    "created": 1791547362,
    "last_update": 1791547362
+  },
+  {
+   "symbol": "LITUSDT",
+   "status": "EARLY",
+   "side": "SHORT",
+   "price": 3.6726,
+   "trigger": 3.72,
+   "sl": 3.7632518667979498,
+   "tp1": 3.6418,
+   "tp2": 3.6182,
+   "tp3": 3.5869,
+   "rr1": 1.8080144462968586,
+   "rr2": 2.353655634693353,
+   "rr3": 3.0773238209988674,
+   "risk_pct": 1.1626845913427304,
+   "score": 7,
+   "score_max": 13,
+   "setup_type": "liquidity_sweep",
+   "priority_setup": true,
+   "decision_bias": "SHORT",
+   "decision_strength": "guclu",
+   "htf_support": 3.6073250000000003,
+   "htf_resistance": 3.69938612,
+   "created": 1791660780,
+   "last_update": 1791660780
   },
   {
    "symbol": "APTUSDT",
@@ -933,9 +958,9 @@
   },
   {
    "symbol": "C98USDT",
-   "status": "EARLY",
+   "status": "WATCH",
    "side": "LONG",
-   "price": 0.0176,
+   "price": 0.0175,
    "trigger": 0.01738,
    "sl": 0.017153697940336103,
    "tp1": 0.01794,
@@ -945,7 +970,7 @@
    "rr2": 2.872267273949607,
    "rr3": 3.13739963769879,
    "risk_pct": 1.3020831971455493,
-   "score": 11,
+   "score": 8,
    "score_max": 13,
    "setup_type": "breakout_retest",
    "priority_setup": true,
@@ -954,19 +979,10 @@
    "htf_support": 0.017308726666666666,
    "htf_resistance": 0.018550955,
    "created": 1791659872,
-   "last_update": 1791659872
+   "last_update": 1791660711
   }
  ],
  "scan_log": [
-  {
-   "ts": 1791577980,
-   "ok": true,
-   "symbols": 525,
-   "liquid": 327,
-   "candidates": 170,
-   "open_signals": 35,
-   "duration_s": 130
-  },
   {
    "ts": 1791578902,
    "ok": true,
@@ -1821,69 +1837,18 @@
    "candidates": 170,
    "open_signals": 38,
    "duration_s": 145
+  },
+  {
+   "ts": 1791660798,
+   "ok": true,
+   "symbols": 525,
+   "liquid": 321,
+   "candidates": 170,
+   "open_signals": 39,
+   "duration_s": 149
   }
  ],
  "log_last_24h": [
-  {
-   "t": 1791652687,
-   "sym": "PONSUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (0.363587); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1791652701,
-   "sym": "XPLUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (0.088595); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1791652706,
-   "sym": "RAYSOLUSDT",
-   "event": "VETO",
-   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
-  },
-  {
-   "t": 1791653460,
-   "sym": "DOTUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (1.2432); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1791653469,
-   "sym": "METUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (0.421216); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1791653476,
-   "sym": "NEARUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (5.39346); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1791653484,
-   "sym": "BNBUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (750.75); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1791653551,
-   "sym": "BTWUSDT",
-   "event": "EARLY",
-   "detail": "LONG @ 1.6307"
-  },
-  {
-   "t": 1791653565,
-   "sym": "XMRUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (528.667); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1791653568,
-   "sym": "LITUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (3.60733); kirilim/hold olmadan SHORT yok"
-  },
   {
    "t": 1791653571,
    "sym": "PONSUSDT",
@@ -2543,6 +2508,66 @@
    "sym": "C98USDT",
    "event": "EARLY",
    "detail": "LONG @ 0.0176"
+  },
+  {
+   "t": 1791660662,
+   "sym": "DOTUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (1.2432); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1791660669,
+   "sym": "QNTUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (243.008); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1791660679,
+   "sym": "JUPUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (0.358757); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1791660687,
+   "sym": "PYTHUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (0.0788766); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1791660711,
+   "sym": "C98USDT",
+   "event": "WATCH",
+   "detail": "LONG @ 0.0175"
+  },
+  {
+   "t": 1791660742,
+   "sym": "XRPUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (1.39369); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1791660773,
+   "sym": "TRUMPUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (1.89969); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1791660777,
+   "sym": "PONSUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (0.363587); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1791660780,
+   "sym": "LITUSDT",
+   "event": "EARLY",
+   "detail": "SHORT @ 3.6726"
+  },
+  {
+   "t": 1791660788,
+   "sym": "WUSDT",
+   "event": "VETO",
+   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
   }
  ],
  "trades_stats": {
