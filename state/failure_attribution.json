@@ -1,28 +1,6 @@
 {
  "episodes": [
   {
-   "candidate_id": "BTCUSDT-1791443838-9f7edb",
-   "symbol": "BTCUSDT",
-   "status": "REJECTED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "REJECTED",
-    "reason": "guclu htf destek bolgesinde (82389.3); kirilim/hold olmadan short yok",
-    "mfe_pct": 0.0
-   }
-  },
-  {
-   "candidate_id": "FLUIDUSDT-1791444737-8bfbd1",
-   "symbol": "FLUIDUSDT",
-   "status": "PRE_RUNNER_EXPIRED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "PRE_RUNNER_EXPIRED",
-    "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 2.3972602739725994
-   }
-  },
-  {
    "candidate_id": "DOGEUSDT-1791445652-2dfe6d",
    "symbol": "DOGEUSDT",
    "status": "EXPIRED",
@@ -1015,11 +993,11 @@
   {
    "candidate_id": "HEMIUSDT-1791472644-eafa45",
    "symbol": "HEMIUSDT",
-   "status": "EARLY",
-   "class": "UNCLASSIFIED",
+   "status": "EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "EARLY",
-    "reason": "",
+    "outcome": "EXPIRED",
+    "reason": "pretrade expiry",
     "mfe_pct": 0.0
    }
   },
@@ -2505,7 +2483,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 2.9434954007884437
+    "mfe_pct": 2.982917214191845
    }
   },
   {
@@ -3418,7 +3396,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 7.480314960629922
+    "mfe_pct": 9.842519685039372
    }
   },
   {
@@ -4782,7 +4760,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 2.0062695924764724
+    "mfe_pct": 2.2570532915360455
    }
   },
   {
@@ -4881,7 +4859,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 0.20348021330340474
+    "mfe_pct": 0.3297782767330888
    }
   },
   {
@@ -5299,7 +5277,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 0.26902382782475254
+    "mfe_pct": 0.8839354342813259
    }
   },
   {
@@ -5855,11 +5833,11 @@
   {
    "candidate_id": "REUSDT-1791594129-c3a3b1",
    "symbol": "REUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "PRE_RUNNER_EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "PRE_RUNNER_EXPIRED",
+    "reason": "hidden watchlist stale/max-age",
     "mfe_pct": 0.0
    }
   },
@@ -6427,11 +6405,11 @@
   {
    "candidate_id": "XPLUSDT-1791606789-fa6e25",
    "symbol": "XPLUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "guclu htf direnc bolgesinde (0.088595); kirilim/hold olmadan long yok",
     "mfe_pct": 0.0
    }
   },
@@ -6599,11 +6577,33 @@
     "reason": "",
     "mfe_pct": 0.0
    }
+  },
+  {
+   "candidate_id": "HEMIUSDT-1791613026-0c7d43",
+   "symbol": "HEMIUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
+  },
+  {
+   "candidate_id": "PAXGUSDT-1791613067-633c0f",
+   "symbol": "PAXGUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
   }
  ],
  "counts": {
-  "VALID_REJECT": 387,
-  "UNCLASSIFIED": 189,
+  "VALID_REJECT": 388,
+  "UNCLASSIFIED": 188,
   "MISSED_RUNNER": 24
  },
  "total": 600
