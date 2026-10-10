@@ -1,17 +1,6 @@
 {
  "episodes": [
   {
-   "candidate_id": "ACEUSDT-1791478099-72a569",
-   "symbol": "ACEUSDT",
-   "status": "REJECTED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "REJECTED",
-    "reason": "guclu htf destek bolgesinde (0.176745); kirilim/hold olmadan short yok",
-    "mfe_pct": 0.0
-   }
-  },
-  {
    "candidate_id": "GRIFFAINUSDT-1791478107-c5a8c1",
    "symbol": "GRIFFAINUSDT",
    "status": "REJECTED",
@@ -1423,11 +1412,11 @@
    "candidate_id": "CTSIUSDT-1791509593-378216",
    "symbol": "CTSIUSDT",
    "status": "CANCELLED",
-   "class": "VALID_REJECT",
+   "class": "MISSED_RUNNER",
    "evidence": {
     "outcome": "CANCELLED",
     "reason": "structural invalidation",
-    "mfe_pct": 5.442752397067122
+    "mfe_pct": 10.603496897913141
    }
   },
   {
@@ -1537,7 +1526,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 1.689785624211858
+    "mfe_pct": 1.9419924337957115
    }
   },
   {
@@ -2967,7 +2956,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 7.735583684950781
+    "mfe_pct": 7.946554149085798
    }
   },
   {
@@ -3099,7 +3088,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 5.488974113135189
+    "mfe_pct": 5.608820709491851
    }
   },
   {
@@ -3110,7 +3099,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 1.1850152905198859
+    "mfe_pct": 1.758409785932723
    }
   },
   {
@@ -3275,7 +3264,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 4.199353945546838
+    "mfe_pct": 4.47623442547301
    }
   },
   {
@@ -3330,7 +3319,7 @@
    "evidence": {
     "outcome": "CANCELLED",
     "reason": "structural invalidation",
-    "mfe_pct": 4.8176187198898806
+    "mfe_pct": 6.022023399862347
    }
   },
   {
@@ -3374,7 +3363,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 7.415036045314105
+    "mfe_pct": 7.741160315825621
    }
   },
   {
@@ -3407,7 +3396,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 3.598099117447405
+    "mfe_pct": 4.276985743380856
    }
   },
   {
@@ -3539,7 +3528,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 0.0
+    "mfe_pct": 1.2138521956444086
    }
   },
   {
@@ -3748,7 +3737,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 1.0285714285714265
+    "mfe_pct": 1.142857142857144
    }
   },
   {
@@ -5244,7 +5233,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 0.0
+    "mfe_pct": 2.3022118247554237
    }
   },
   {
@@ -6130,11 +6119,11 @@
   {
    "candidate_id": "TRUMPUSDT-1791648194-eff99f",
    "symbol": "TRUMPUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "guclu htf direnc bolgesinde (1.89969); kirilim/hold olmadan long yok",
     "mfe_pct": 0.0
    }
   },
@@ -6581,11 +6570,11 @@
   {
    "candidate_id": "XMRUSDT-1791656278-c1d4ef",
    "symbol": "XMRUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "guclu htf direnc bolgesinde (528.667); kirilim/hold olmadan long yok",
     "mfe_pct": 0.0
    }
   },
@@ -6599,12 +6588,23 @@
     "reason": "",
     "mfe_pct": 0.0
    }
+  },
+  {
+   "candidate_id": "CTUSDT-1791657108-15d278",
+   "symbol": "CTUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
   }
  ],
  "counts": {
   "VALID_REJECT": 377,
-  "UNCLASSIFIED": 205,
-  "MISSED_RUNNER": 18
+  "UNCLASSIFIED": 204,
+  "MISSED_RUNNER": 19
  },
  "total": 600
 }
