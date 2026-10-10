@@ -1,28 +1,6 @@
 {
  "episodes": [
   {
-   "candidate_id": "QNTUSDT-1791471771-e44d35",
-   "symbol": "QNTUSDT",
-   "status": "REJECTED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "REJECTED",
-    "reason": "btc ters yonde sert rejim kirilimi (btc 4s: dusus, 1s yapi: lh-ll, sert asagi kirilim, taze dip süpürme)",
-    "mfe_pct": 0.0
-   }
-  },
-  {
-   "candidate_id": "WUSDT-1791471777-afc13c",
-   "symbol": "WUSDT",
-   "status": "REJECTED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "REJECTED",
-    "reason": "btc ters yonde sert rejim kirilimi (btc 4s: dusus, 1s yapi: lh-ll, sert asagi kirilim, taze dip süpürme)",
-    "mfe_pct": 0.0
-   }
-  },
-  {
    "candidate_id": "PONSUSDT-1791471782-f881c3",
    "symbol": "PONSUSDT",
    "status": "REJECTED",
@@ -2104,11 +2082,11 @@
   {
    "candidate_id": "LITUSDT-1791501493-5a4d97",
    "symbol": "LITUSDT",
-   "status": "EARLY",
-   "class": "UNCLASSIFIED",
+   "status": "EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "EARLY",
-    "reason": "",
+    "outcome": "EXPIRED",
+    "reason": "pretrade expiry",
     "mfe_pct": 0.0
    }
   },
@@ -3242,7 +3220,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 3.5356904603068706
+    "mfe_pct": 3.5490326884589667
    }
   },
   {
@@ -3407,7 +3385,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 2.334469103969056
+    "mfe_pct": 2.3851183350216236
    }
   },
   {
@@ -5426,11 +5404,11 @@
   {
    "candidate_id": "ADAUSDT-1791601353-fd8fc5",
    "symbol": "ADAUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "guclu htf direnc bolgesinde (0.257255); kirilim/hold olmadan long yok",
     "mfe_pct": 0.0
    }
   },
@@ -6548,11 +6526,11 @@
   {
    "candidate_id": "BTWUSDT-1791629249-f3ccf9",
    "symbol": "BTWUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "iki yonlu karar motoru long tarafini guclu buldu",
     "mfe_pct": 0.0
    }
   },
@@ -6599,11 +6577,33 @@
     "reason": "",
     "mfe_pct": 0.0
    }
+  },
+  {
+   "candidate_id": "CYBERUSDT-1791632816-25aca3",
+   "symbol": "CYBERUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
+  },
+  {
+   "candidate_id": "BTCUSDT-1791632842-18ec2a",
+   "symbol": "BTCUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
   }
  ],
  "counts": {
-  "VALID_REJECT": 377,
-  "UNCLASSIFIED": 202,
+  "VALID_REJECT": 378,
+  "UNCLASSIFIED": 201,
   "MISSED_RUNNER": 21
  },
  "total": 600
