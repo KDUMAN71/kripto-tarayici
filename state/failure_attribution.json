@@ -1,25 +1,14 @@
 {
  "episodes": [
   {
-   "candidate_id": "DOGEUSDT-1791445652-2dfe6d",
-   "symbol": "DOGEUSDT",
-   "status": "EXPIRED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "EXPIRED",
-    "reason": "pretrade expiry",
-    "mfe_pct": 0.3181711053499957
-   }
-  },
-  {
    "candidate_id": "APRUSDT-1791447444-aa60f5",
    "symbol": "APRUSDT",
    "status": "PRE_RUNNER_EXPIRED",
-   "class": "VALID_REJECT",
+   "class": "MISSED_RUNNER",
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 4.743833017077803
+    "mfe_pct": 11.290322580645157
    }
   },
   {
@@ -3392,11 +3381,11 @@
    "candidate_id": "LPTUSDT-1791516726-997e33",
    "symbol": "LPTUSDT",
    "status": "PRE_RUNNER_EXPIRED",
-   "class": "VALID_REJECT",
+   "class": "MISSED_RUNNER",
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 9.842519685039372
+    "mfe_pct": 15.691788526434191
    }
   },
   {
@@ -3440,7 +3429,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 3.8819332727145475
+    "mfe_pct": 4.035811708750078
    }
   },
   {
@@ -4052,11 +4041,11 @@
    "candidate_id": "APRUSDT-1791534742-28ffd2",
    "symbol": "APRUSDT",
    "status": "PRE_RUNNER_EXPIRED",
-   "class": "VALID_REJECT",
+   "class": "MISSED_RUNNER",
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 1.7511520737327178
+    "mfe_pct": 13.824884792626726
    }
   },
   {
@@ -4760,7 +4749,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 2.2570532915360455
+    "mfe_pct": 2.6645768025078267
    }
   },
   {
@@ -4859,7 +4848,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 0.3297782767330888
+    "mfe_pct": 0.35082795397137273
    }
   },
   {
@@ -5277,7 +5266,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 0.8839354342813259
+    "mfe_pct": 1.652574942352036
    }
   },
   {
@@ -5541,7 +5530,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 0.44543429844097215
+    "mfe_pct": 0.504825538233121
    }
   },
   {
@@ -5838,7 +5827,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 0.0
+    "mfe_pct": 0.4272543287609528
    }
   },
   {
@@ -6548,11 +6537,11 @@
   {
    "candidate_id": "ASTERUSDT-1791612213-2b7a3b",
    "symbol": "ASTERUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "guclu htf direnc bolgesinde (0.719353); kirilim/hold olmadan long yok",
     "mfe_pct": 0.0
    }
   },
@@ -6570,11 +6559,11 @@
   {
    "candidate_id": "POLUSDT-1791612229-daeb89",
    "symbol": "POLUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "guclu htf direnc bolgesinde (0.101618); kirilim/hold olmadan long yok",
     "mfe_pct": 0.0
    }
   },
@@ -6599,12 +6588,23 @@
     "reason": "",
     "mfe_pct": 0.0
    }
+  },
+  {
+   "candidate_id": "TRUMPUSDT-1791613961-a50dea",
+   "symbol": "TRUMPUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
   }
  ],
  "counts": {
-  "VALID_REJECT": 388,
-  "UNCLASSIFIED": 188,
-  "MISSED_RUNNER": 24
+  "MISSED_RUNNER": 27,
+  "VALID_REJECT": 386,
+  "UNCLASSIFIED": 187
  },
  "total": 600
 }
