@@ -1,17 +1,6 @@
 {
  "episodes": [
   {
-   "candidate_id": "1000FLOKIUSDT-1791472601-77bda7",
-   "symbol": "1000FLOKIUSDT",
-   "status": "PRE_RUNNER_EXPIRED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "PRE_RUNNER_EXPIRED",
-    "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 6.83018867924528
-   }
-  },
-  {
    "candidate_id": "AKTUSDT-1791472601-df7a56",
    "symbol": "AKTUSDT",
    "status": "PRE_RUNNER_EXPIRED",
@@ -2269,11 +2258,11 @@
   {
    "candidate_id": "ETHFIUSDT-1791509604-48c1d5",
    "symbol": "ETHFIUSDT",
-   "status": "EARLY",
-   "class": "UNCLASSIFIED",
+   "status": "EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "EARLY",
-    "reason": "",
+    "outcome": "EXPIRED",
+    "reason": "pretrade expiry",
     "mfe_pct": 0.0
    }
   },
@@ -3407,7 +3396,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 1.8591519284040074
+    "mfe_pct": 1.9763477519710324
    }
   },
   {
@@ -5800,11 +5789,11 @@
   {
    "candidate_id": "KITEUSDT-1791616610-1d172f",
    "symbol": "KITEUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "PRE_RUNNER_EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "PRE_RUNNER_EXPIRED",
+    "reason": "hidden watchlist stale/max-age",
     "mfe_pct": 0.0
    }
   },
@@ -6599,11 +6588,22 @@
     "reason": "",
     "mfe_pct": 0.0
    }
+  },
+  {
+   "candidate_id": "MAVUSDT-1791640023-948c2a",
+   "symbol": "MAVUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
   }
  ],
  "counts": {
-  "VALID_REJECT": 379,
-  "UNCLASSIFIED": 200,
+  "VALID_REJECT": 380,
+  "UNCLASSIFIED": 199,
   "MISSED_RUNNER": 21
  },
  "total": 600
