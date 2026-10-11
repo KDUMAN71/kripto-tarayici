@@ -1,17 +1,6 @@
 {
  "episodes": [
   {
-   "candidate_id": "VTHOUSDT-1791498723-6e095b",
-   "symbol": "VTHOUSDT",
-   "status": "PRE_RUNNER_EXPIRED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "PRE_RUNNER_EXPIRED",
-    "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 2.3977221639442625
-   }
-  },
-  {
    "candidate_id": "TAOUSDT-1791498740-5e2156",
    "symbol": "TAOUSDT",
    "status": "EXPIRED",
@@ -1785,11 +1774,11 @@
   {
    "candidate_id": "BIOUSDT-1791557239-2eef0d",
    "symbol": "BIOUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "PRE_RUNNER_EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "PRE_RUNNER_EXPIRED",
+    "reason": "hidden watchlist stale/max-age",
     "mfe_pct": 0.0
    }
   },
@@ -1807,11 +1796,11 @@
   {
    "candidate_id": "FILUSDT-1791557255-9d6aa3",
    "symbol": "FILUSDT",
-   "status": "EARLY",
-   "class": "UNCLASSIFIED",
+   "status": "EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "EARLY",
-    "reason": "",
+    "outcome": "EXPIRED",
+    "reason": "pretrade expiry",
     "mfe_pct": 0.0
    }
   },
@@ -1845,7 +1834,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 2.0028109627547472
+    "mfe_pct": 2.2487702037948054
    }
   },
   {
@@ -1955,7 +1944,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 8.438818565400851
+    "mfe_pct": 8.790436005625887
    }
   },
   {
@@ -2461,7 +2450,7 @@
    "evidence": {
     "outcome": "CANCELLED",
     "reason": "structural invalidation",
-    "mfe_pct": 14.478186484174508
+    "mfe_pct": 14.485315084117484
    }
   },
   {
@@ -2483,7 +2472,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 3.6379769299023943
+    "mfe_pct": 3.8154392191659254
    }
   },
   {
@@ -2791,7 +2780,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 2.972050082205647
+    "mfe_pct": 3.0858732768433006
    }
   },
   {
@@ -3847,7 +3836,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 1.2686439225098478
+    "mfe_pct": 1.3715069432538889
    }
   },
   {
@@ -4474,7 +4463,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 0.03339455668725862
+    "mfe_pct": 0.19201870095173995
    }
   },
   {
@@ -6548,11 +6537,11 @@
   {
    "candidate_id": "XRPUSDT-1791684154-266ad7",
    "symbol": "XRPUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "structural geometry minimum risk/r:r kosullarini saglamiyor",
     "mfe_pct": 0.0
    }
   },
@@ -6599,11 +6588,22 @@
     "reason": "",
     "mfe_pct": 0.0
    }
+  },
+  {
+   "candidate_id": "FILUSDT-1791687798-b07637",
+   "symbol": "FILUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
   }
  ],
  "counts": {
-  "VALID_REJECT": 376,
-  "UNCLASSIFIED": 203,
+  "VALID_REJECT": 378,
+  "UNCLASSIFIED": 201,
   "MISSED_RUNNER": 21
  },
  "total": 600
