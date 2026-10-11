@@ -1,28 +1,6 @@
 {
  "episodes": [
   {
-   "candidate_id": "MANTAUSDT-1791537461-b30185",
-   "symbol": "MANTAUSDT",
-   "status": "PRE_RUNNER_EXPIRED",
-   "class": "MISSED_RUNNER",
-   "evidence": {
-    "outcome": "PRE_RUNNER_EXPIRED",
-    "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 23.101467772814306
-   }
-  },
-  {
-   "candidate_id": "ARKUSDT-1791538351-703afa",
-   "symbol": "ARKUSDT",
-   "status": "PRE_RUNNER_EXPIRED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "PRE_RUNNER_EXPIRED",
-    "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 3.4990791896869227
-   }
-  },
-  {
    "candidate_id": "HUMAUSDT-1791541050-524978",
    "symbol": "HUMAUSDT",
    "status": "PRE_RUNNER_EXPIRED",
@@ -1961,11 +1939,11 @@
   {
    "candidate_id": "METUSDT-1791599570-494333",
    "symbol": "METUSDT",
-   "status": "WATCH",
-   "class": "UNCLASSIFIED",
+   "status": "EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "WATCH",
-    "reason": "",
+    "outcome": "EXPIRED",
+    "reason": "pretrade expiry",
     "mfe_pct": 0.0
    }
   },
@@ -3286,7 +3264,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 9.924775539917505
+    "mfe_pct": 9.997573404513481
    }
   },
   {
@@ -3451,7 +3429,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 2.187263396988311
+    "mfe_pct": 2.4985278034827965
    }
   },
   {
@@ -3534,11 +3512,11 @@
   {
    "candidate_id": "WLDUSDT-1791644565-299a92",
    "symbol": "WLDUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "guclu htf direnc bolgesinde (0.572027); kirilim/hold olmadan long yok",
     "mfe_pct": 0.0
    }
   },
@@ -3737,7 +3715,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 6.968278731149251
+    "mfe_pct": 8.632345293811742
    }
   },
   {
@@ -3792,7 +3770,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 2.8479154433352862
+    "mfe_pct": 2.9947152084556565
    }
   },
   {
@@ -3891,7 +3869,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 2.609254498714658
+    "mfe_pct": 2.8277634961439686
    }
   },
   {
@@ -4012,7 +3990,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 1.354136002355017
+    "mfe_pct": 2.3550191345304703
    }
   },
   {
@@ -4727,7 +4705,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 4.795595065981721
+    "mfe_pct": 5.21701682610968
    }
   },
   {
@@ -5046,7 +5024,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 0.296087062500904
+    "mfe_pct": 0.31353206295494146
    }
   },
   {
@@ -5651,7 +5629,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 5.312803440144264
+    "mfe_pct": 7.213205715078369
    }
   },
   {
@@ -6599,11 +6577,33 @@
     "reason": "",
     "mfe_pct": 0.0
    }
+  },
+  {
+   "candidate_id": "SYRUPUSDT-1791739946-9dc07e",
+   "symbol": "SYRUPUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
+  },
+  {
+   "candidate_id": "METUSDT-1791740010-265a3f",
+   "symbol": "METUSDT",
+   "status": "EARLY",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "EARLY",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
   }
  ],
  "counts": {
-  "MISSED_RUNNER": 26,
-  "VALID_REJECT": 373,
+  "MISSED_RUNNER": 25,
+  "VALID_REJECT": 374,
   "UNCLASSIFIED": 201
  },
  "total": 600
