@@ -1,28 +1,6 @@
 {
  "episodes": [
   {
-   "candidate_id": "ETHUSDT-1791546418-239fa0",
-   "symbol": "ETHUSDT",
-   "status": "REJECTED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "REJECTED",
-    "reason": "guclu htf direnc bolgesinde (2504.85); kirilim/hold olmadan long yok",
-    "mfe_pct": 0.0
-   }
-  },
-  {
-   "candidate_id": "SOLUSDT-1791546419-4bc5d7",
-   "symbol": "SOLUSDT",
-   "status": "REJECTED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "REJECTED",
-    "reason": "structural geometry minimum risk/r:r kosullarini saglamiyor",
-    "mfe_pct": 0.0
-   }
-  },
-  {
    "candidate_id": "PROMUSDT-1791547328-7beed7",
    "symbol": "PROMUSDT",
    "status": "PRE_RUNNER_EXPIRED",
@@ -316,7 +294,7 @@
    "evidence": {
     "outcome": "EXPIRED",
     "reason": "pretrade expiry",
-    "mfe_pct": 7.3991655076495215
+    "mfe_pct": 9.040333796940187
    }
   },
   {
@@ -410,11 +388,11 @@
   {
    "candidate_id": "KAITOUSDT-1791559931-5e0b75",
    "symbol": "KAITOUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "PRE_RUNNER_EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "PRE_RUNNER_EXPIRED",
+    "reason": "hidden watchlist stale/max-age",
     "mfe_pct": 0.0
    }
   },
@@ -2923,7 +2901,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 4.419031483834526
+    "mfe_pct": 4.51785966398419
    }
   },
   {
@@ -4034,7 +4012,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 6.662665066026409
+    "mfe_pct": 7.623049219687876
    }
   },
   {
@@ -4111,7 +4089,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 0.0
+    "mfe_pct": 0.15611402778972527
    }
   },
   {
@@ -4144,7 +4122,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 8.670053105518356
+    "mfe_pct": 9.432001847148465
    }
   },
   {
@@ -4584,7 +4562,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 6.890399581654306
+    "mfe_pct": 7.453320618905517
    }
   },
   {
@@ -5338,11 +5316,11 @@
   {
    "candidate_id": "INJUSDT-1791697655-0c5df8",
    "symbol": "INJUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "guclu htf destek bolgesinde (7.77978); kirilim/hold olmadan short yok",
     "mfe_pct": 0.0
    }
   },
@@ -6416,10 +6394,10 @@
   {
    "candidate_id": "龙虾USDT-1791738185-7683f4",
    "symbol": "龙虾USDT",
-   "status": "EARLY",
+   "status": "WATCH",
    "class": "UNCLASSIFIED",
    "evidence": {
-    "outcome": "EARLY",
+    "outcome": "WATCH",
     "reason": "",
     "mfe_pct": 0.0
    }
@@ -6592,6 +6570,28 @@
   {
    "candidate_id": "AEROUSDT-1791745390-d9a700",
    "symbol": "AEROUSDT",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
+   "evidence": {
+    "outcome": "REJECTED",
+    "reason": "iki yonlu karar motoru long tarafini guclu buldu",
+    "mfe_pct": 0.0
+   }
+  },
+  {
+   "candidate_id": "XAUTUSDT-1791746223-6795f2",
+   "symbol": "XAUTUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
+  },
+  {
+   "candidate_id": "TAOUSDT-1791746278-de72d2",
+   "symbol": "TAOUSDT",
    "status": "PRE_RUNNER",
    "class": "UNCLASSIFIED",
    "evidence": {
@@ -6602,8 +6602,8 @@
   }
  ],
  "counts": {
-  "VALID_REJECT": 377,
-  "UNCLASSIFIED": 197,
+  "VALID_REJECT": 378,
+  "UNCLASSIFIED": 196,
   "MISSED_RUNNER": 26
  },
  "total": 600
