@@ -1620,11 +1620,11 @@
   {
    "candidate_id": "DOTUSDT-1791549167-741624",
    "symbol": "DOTUSDT",
-   "status": "EARLY",
-   "class": "UNCLASSIFIED",
+   "status": "EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "EARLY",
-    "reason": "",
+    "outcome": "EXPIRED",
+    "reason": "pretrade expiry",
     "mfe_pct": 0.0
    }
   },
@@ -3270,11 +3270,11 @@
   {
    "candidate_id": "THETAUSDT-1791597757-9073a7",
    "symbol": "THETAUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "PRE_RUNNER_EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "PRE_RUNNER_EXPIRED",
+    "reason": "hidden watchlist stale/max-age",
     "mfe_pct": 0.0
    }
   },
@@ -4859,7 +4859,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 3.1889763779527542
+    "mfe_pct": 5.393700787401575
    }
   },
   {
@@ -6602,8 +6602,8 @@
   }
  ],
  "counts": {
-  "VALID_REJECT": 373,
-  "UNCLASSIFIED": 206,
+  "VALID_REJECT": 375,
+  "UNCLASSIFIED": 204,
   "MISSED_RUNNER": 21
  },
  "total": 600
