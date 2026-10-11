@@ -1,28 +1,6 @@
 {
  "episodes": [
   {
-   "candidate_id": "FILUSDT-1791516773-d74d99",
-   "symbol": "FILUSDT",
-   "status": "REJECTED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "REJECTED",
-    "reason": "guclu htf direnc bolgesinde (1.08705); kirilim/hold olmadan long yok",
-    "mfe_pct": 0.0
-   }
-  },
-  {
-   "candidate_id": "EULUSDT-1791518532-133dc5",
-   "symbol": "EULUSDT",
-   "status": "PRE_RUNNER_EXPIRED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "PRE_RUNNER_EXPIRED",
-    "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 4.980065748059029
-   }
-  },
-  {
    "candidate_id": "QNTUSDT-1791518553-eb9eaf",
    "symbol": "QNTUSDT",
    "status": "REJECTED",
@@ -1247,11 +1225,11 @@
    "candidate_id": "PLUMEUSDT-1791559933-c86aed",
    "symbol": "PLUMEUSDT",
    "status": "PRE_RUNNER_EXPIRED",
-   "class": "VALID_REJECT",
+   "class": "MISSED_RUNNER",
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 9.172259507829974
+    "mfe_pct": 10.794183445190162
    }
   },
   {
@@ -2153,7 +2131,7 @@
    "evidence": {
     "outcome": "EXPIRED",
     "reason": "pretrade expiry",
-    "mfe_pct": 0.0
+    "mfe_pct": 4.608868958644754
    }
   },
   {
@@ -3451,7 +3429,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 4.715969989281881
+    "mfe_pct": 5.359056806002148
    }
   },
   {
@@ -3649,7 +3627,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 6.995884773662555
+    "mfe_pct": 7.502374169040834
    }
   },
   {
@@ -3792,7 +3770,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 1.8533978961429287
+    "mfe_pct": 1.8867924528301872
    }
   },
   {
@@ -3957,7 +3935,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 6.4547439941761775
+    "mfe_pct": 6.576073768502801
    }
   },
   {
@@ -3990,7 +3968,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 0.0
+    "mfe_pct": 0.94739596964146
    }
   },
   {
@@ -4045,7 +4023,7 @@
    "evidence": {
     "outcome": "CANCELLED",
     "reason": "structural invalidation",
-    "mfe_pct": 2.7411541055988202
+    "mfe_pct": 3.0477708959342524
    }
   },
   {
@@ -4463,7 +4441,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 0.3229594832648314
+    "mfe_pct": 0.6752789195537292
    }
   },
   {
@@ -4914,7 +4892,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 4.55558066703258
+    "mfe_pct": 5.27233396829497
    }
   },
   {
@@ -6064,11 +6042,11 @@
   {
    "candidate_id": "BTCUSDT-1791692236-b102e1",
    "symbol": "BTCUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "structural geometry minimum risk/r:r kosullarini saglamiyor",
     "mfe_pct": 0.0
    }
   },
@@ -6570,11 +6548,11 @@
   {
    "candidate_id": "PUMPUSDT-1791721067-cb0147",
    "symbol": "PUMPUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "iki yonlu karar motoru short tarafini guclu buldu",
     "mfe_pct": 0.0
    }
   },
@@ -6599,12 +6577,34 @@
     "reason": "",
     "mfe_pct": 0.0
    }
+  },
+  {
+   "candidate_id": "TRBUSDT-1791722814-239f24",
+   "symbol": "TRBUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
+  },
+  {
+   "candidate_id": "ENSUSDT-1791722824-f15f43",
+   "symbol": "ENSUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
   }
  ],
  "counts": {
-  "VALID_REJECT": 385,
+  "VALID_REJECT": 384,
   "UNCLASSIFIED": 189,
-  "MISSED_RUNNER": 26
+  "MISSED_RUNNER": 27
  },
  "total": 600
 }
