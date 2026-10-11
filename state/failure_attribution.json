@@ -1,17 +1,6 @@
 {
  "episodes": [
   {
-   "candidate_id": "SPELLUSDT-1791559945-e7e508",
-   "symbol": "SPELLUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
-   "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
-    "mfe_pct": 0.0
-   }
-  },
-  {
    "candidate_id": "MERLUSDT-1791559946-5f496f",
    "symbol": "MERLUSDT",
    "status": "PRE_RUNNER_EXPIRED",
@@ -1691,7 +1680,7 @@
    "evidence": {
     "outcome": "EXPIRED",
     "reason": "pretrade expiry",
-    "mfe_pct": 10.922607701105594
+    "mfe_pct": 11.170415554708336
    }
   },
   {
@@ -2043,7 +2032,7 @@
    "evidence": {
     "outcome": "CANCELLED",
     "reason": "structural invalidation",
-    "mfe_pct": 1.9597344185050238
+    "mfe_pct": 2.184621974726915
    }
   },
   {
@@ -2527,7 +2516,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 5.679045811873143
+    "mfe_pct": 6.031444835998923
    }
   },
   {
@@ -4045,7 +4034,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 0.0
+    "mfe_pct": 0.039771974015646624
    }
   },
   {
@@ -4084,11 +4073,11 @@
   {
    "candidate_id": "BRETTUSDT-1791674216-a12186",
    "symbol": "BRETTUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "PRE_RUNNER_EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "PRE_RUNNER_EXPIRED",
+    "reason": "hidden watchlist stale/max-age",
     "mfe_pct": 0.0
    }
   },
@@ -4529,7 +4518,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 2.1003178112477454
+    "mfe_pct": 2.2108608539449914
    }
   },
   {
@@ -4793,7 +4782,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 3.052278385106605
+    "mfe_pct": 3.2795757116571
    }
   },
   {
@@ -5074,11 +5063,11 @@
   {
    "candidate_id": "ETHUSDT-1791710245-174a40",
    "symbol": "ETHUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "structural geometry minimum risk/r:r kosullarini saglamiyor",
     "mfe_pct": 0.0
    }
   },
@@ -5233,7 +5222,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 7.837713231904103
+    "mfe_pct": 7.906869525126776
    }
   },
   {
@@ -5354,7 +5343,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 2.1997786386275706
+    "mfe_pct": 2.3381294964028734
    }
   },
   {
@@ -6025,7 +6014,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 1.2790146849834174
+    "mfe_pct": 2.558029369966835
    }
   },
   {
@@ -6135,7 +6124,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 0.0
+    "mfe_pct": 0.9960681520314615
    }
   },
   {
@@ -6599,11 +6588,22 @@
     "reason": "guclu htf destek bolgesinde (64.455); kirilim/hold olmadan short yok",
     "mfe_pct": 0.0
    }
+  },
+  {
+   "candidate_id": "BANKUSDT-1791760602-4ff93b",
+   "symbol": "BANKUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
   }
  ],
  "counts": {
-  "UNCLASSIFIED": 187,
-  "VALID_REJECT": 387,
+  "VALID_REJECT": 389,
+  "UNCLASSIFIED": 185,
   "MISSED_RUNNER": 26
  },
  "total": 600
