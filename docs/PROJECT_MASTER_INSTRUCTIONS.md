@@ -317,5 +317,8 @@ Any production change follows time-slice replay, calibration/OOS separation, cha
 - Keep user-facing ACTIVE-only, max 10 concurrent opportunities, profit-first multi-strategy/spot-futures objective unchanged.
 - Do not claim all phases or profitability validation complete.
 
+## 13C. Trade accounting modes (implementation in progress)
+`scanner/trade_accounting.py` defines SIGNAL_ONLY, PAPER_FILL, VERIFIED_LIVE_FILL. Target touches are not fills. SIGNAL_ONLY cannot claim realized profit. PAPER_FILL needs explicit closing fractions and costs; VERIFIED_LIVE_FILL requires exchange fill IDs. This module is initially isolated from production lifecycle; do not claim production integration or actual exchange execution until explicitly implemented and tested.
+
 ## 14. Maintenance rule
 This file is a permanent part of the Definition of Done for all future architecture/research/production PRs. A PR is incomplete if it materially changes the objective, architecture, evidence, invariants, roadmap, opportunity taxonomy, execution policy or learning methodology without updating this document.
