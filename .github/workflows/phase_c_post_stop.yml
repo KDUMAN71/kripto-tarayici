@@ -1,0 +1,23 @@
+name: phase-c-post-stop-autopsy
+on:
+  push:
+    branches: [research/phase-c-post-stop-autopsy]
+  workflow_dispatch:
+permissions: {contents: read}
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - run: pip install -r requirements.txt
+      - name: Post-stop audit
+        run: python -m research.post_stop_autopsy --source state/state.json --output artifacts/post_stop_autopsy.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: phase-c-post-stop-results
+          path: artifacts/post_stop_autopsy.json
+          retention-days: 30
