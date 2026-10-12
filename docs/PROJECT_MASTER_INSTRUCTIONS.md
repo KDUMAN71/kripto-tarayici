@@ -219,7 +219,7 @@ Current implementation: Profit Objective & User Signal Policy.
 - Profit evaluation adds expectancy R, profit factor, net R, max drawdown R and captured-MFE ratio.
 - Runner recall remains diagnostic, not the optimization objective.
 
-**Phase A COMPLETE.** 60d census scanned 525 current perpetuals / 28,614 daily anchors. Mature unique-symbol opportunity counts include 31 coins >=200% in 7d, 38 in 14d, 43 in 30d; >=100% counts are 79/104/127. See `docs/OPPORTUNITY_TO_PROFIT_PHASE_A_RESULTS.md`. **Phase B IN PROGRESS.** B2 canonical universe contains 1,688 economic opportunities: 1,346 LONG / 342 SHORT; 742 >=50%, 274 >=100%, 90 >=200% max excursion labels. B3 builds point-in-time candle snapshots for all >=100% opportunities plus a bounded representative 25–100% cohort. Historical context that cannot be reconstructed (funding/OI/taker/spread at timestamp) remains UNKNOWN; never substitute current data. Full engine replay is allowed only for point-in-time-safe inputs.
+**Phase A COMPLETE.** 60d census scanned 525 current perpetuals / 28,614 daily anchors. Mature unique-symbol opportunity counts include 31 coins >=200% in 7d, 38 in 14d, 43 in 30d; >=100% counts are 79/104/127. See `docs/OPPORTUNITY_TO_PROFIT_PHASE_A_RESULTS.md`. **Phase B research and Phase C post-stop measurement progressed (PRs #37–#39).** B2 canonical universe contains 1,688 economic opportunities: 1,346 LONG / 342 SHORT; 742 >=50%, 274 >=100%, 90 >=200% max excursion labels. B3 builds point-in-time candle snapshots for all >=100% opportunities plus a bounded representative 25–100% cohort. Historical context that cannot be reconstructed (funding/OI/taker/spread at timestamp) remains UNKNOWN; never substitute current data. Full engine replay is allowed only for point-in-time-safe inputs.
 
 
 ## 13A. Next research and development plan — Opportunity-to-Profit program
@@ -304,6 +304,18 @@ Choose management by OOS profit metrics, not by aesthetic preference.
 
 ### Phase G — promotion
 Any production change follows time-slice replay, calibration/OOS separation, challenger comparison and explicit review. No automatic self-modification.
+
+## 13B. Verified progress and current next action — 2026-10-12
+
+- PR #37 merged (491f155): independent matched non-winner controls, 1,688 opportunities, 1,686 matched, 5,056 pairs. Report: `docs/PHASE_B5_INITIAL_RESULTS.md`.
+- PR #38 merged (f31b7ff): B6 feature comparisons, B7 pre-anchor trajectories, fixed QA test fixtures. Main QA passed. Report: `docs/PHASE_B6_VERIFIED_RESULTS.md`.
+- B6 valid feature pairs: 5,033 across 1,679 opportunities. Positive prior momentum and relative volume were NOT shown to be universal discriminators. These are exploratory, not OOS-validated.
+- PR #39 merged (6d291de): Phase C post-stop historical audit. Report: `docs/PHASE_C_POST_STOP_RESULTS.md`.
+- Stop audit: 11 stopped trades; entry recovered within 24h in 7/11, within 3d in 9/10 mature; original TP1 reached within 7d in 4/8 mature. This is NOT proof stops were wrong.
+- **Immediate priority:** verify trade lifecycle and TP accounting, particularly ICP SHORT showing `tp1_hit=true` but `pnl_r=-1`. Determine whether system models a single full-size trade or actual partial fills before changing accounting.
+- Next: structural thesis validity at stop, realistic re-entry setup replay, and B7 OOS validation. Only then consider production risk/execution policy PRs.
+- Keep user-facing ACTIVE-only, max 10 concurrent opportunities, profit-first multi-strategy/spot-futures objective unchanged.
+- Do not claim all phases or profitability validation complete.
 
 ## 14. Maintenance rule
 This file is a permanent part of the Definition of Done for all future architecture/research/production PRs. A PR is incomplete if it materially changes the objective, architecture, evidence, invariants, roadmap, opportunity taxonomy, execution policy or learning methodology without updating this document.
