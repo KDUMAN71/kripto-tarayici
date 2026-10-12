@@ -16,13 +16,20 @@ def replay(t,d,partial_fraction=0.0,fee_r=0.0):
     end=pd.Timestamp(int(t["closed_at"]),unit="s",tz="UTC")+pd.Timedelta(days=7)
     candles=d[(d["openTime"]>=start)&(d["openTime"]<=end)]
     touched=False;partial=0.0
+    final_tp=t.get("tp3") or t.get("tp2") or t.get("tp1")
+    final_tp=float(final_tp)
     for _,row in candles.iterrows():
         hi=float(row["high"]);lo=float(row["low"])
         stop=(lo<=sl if long else hi>=sl)
         hit=(hi>=tp if long else lo<=tp)
+        final_hit=(hi>=final_tp if long else lo<=final_tp)
         if stop:
             return {"r":partial+(-1)*(1-partial_fraction if touched else 1)-fee_r,
                     "tp1_touched":touched,"exit":"SL"}
+        if final_hit:
+            fraction_remaining=1-partial_fraction if touched else 1
+            return {"r":partial+fraction_remaining*abs(final_tp-entry)/risk-fee_r,
+                    "tp1_touched":touched or hit,"exit":"FINAL_TP"}
         if hit and not touched:
             touched=True;partial=partial_fraction*abs(tp-entry)/risk
             if partial_fraction==1:return {"r":partial-fee_r,"tp1_touched":True,"exit":"TP1"}
