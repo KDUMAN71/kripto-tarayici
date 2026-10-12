@@ -81,7 +81,7 @@ def test_confirmed_breakdown_retest_short_can_pass_in_bullish_4h_context():
 
     allowed, reversal = _trend_flags("short", pattern["type"], a4h)
     veto, quality, checks = _execution_veto(
-        "short", pattern, {"sl": 101.0, "tp1": 96.0}, a15, a1h, a4h,
+        "short", pattern, {"sl": 101.0, "tp1": 96.0, "tp2": 94.0}, a15, a1h, a4h,
         _ctx(taker_15m=0.46, change_24h=4.0))
 
     assert allowed and reversal
