@@ -1,28 +1,6 @@
 {
  "episodes": [
   {
-   "candidate_id": "PUMPUSDT-1791586959-e0dcf8",
-   "symbol": "PUMPUSDT",
-   "status": "REJECTED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "REJECTED",
-    "reason": "guclu htf destek bolgesinde (0.00537788); kirilim/hold olmadan short yok",
-    "mfe_pct": 0.0
-   }
-  },
-  {
-   "candidate_id": "SANDUSDT-1791586968-9544d2",
-   "symbol": "SANDUSDT",
-   "status": "CANCELLED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "CANCELLED",
-    "reason": "structural invalidation",
-    "mfe_pct": 0.0
-   }
-  },
-  {
    "candidate_id": "APTUSDT-1791586975-536741",
    "symbol": "APTUSDT",
    "status": "EXPIRED",
@@ -2071,11 +2049,11 @@
   {
    "candidate_id": "C98USDT-1791645485-27809d",
    "symbol": "C98USDT",
-   "status": "WATCH",
-   "class": "UNCLASSIFIED",
+   "status": "EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "WATCH",
-    "reason": "",
+    "outcome": "EXPIRED",
+    "reason": "pretrade expiry",
     "mfe_pct": 0.0
    }
   },
@@ -2329,7 +2307,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 4.742930591259657
+    "mfe_pct": 4.768637532133683
    }
   },
   {
@@ -2615,7 +2593,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 25.930372148859526
+    "mfe_pct": 26.050420168067223
    }
   },
   {
@@ -2709,11 +2687,11 @@
   {
    "candidate_id": "XMRUSDT-1791659860-b26333",
    "symbol": "XMRUSDT",
-   "status": "WATCH",
-   "class": "UNCLASSIFIED",
+   "status": "EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "WATCH",
-    "reason": "",
+    "outcome": "EXPIRED",
+    "reason": "pretrade expiry",
     "mfe_pct": 0.0
    }
   },
@@ -3330,7 +3308,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 6.855722847536905
+    "mfe_pct": 7.055498708765777
    }
   },
   {
@@ -3858,7 +3836,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 3.8293079714678937
+    "mfe_pct": 3.866850206482287
    }
   },
   {
@@ -4023,7 +4001,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 1.6841072596468245
+    "mfe_pct": 1.9784172661870436
    }
   },
   {
@@ -4155,7 +4133,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 0.0
+    "mfe_pct": 6.605783866057838
    }
   },
   {
@@ -4980,7 +4958,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 0.16802016241948836
+    "mfe_pct": 0.2240268832259804
    }
   },
   {
@@ -6108,11 +6086,11 @@
   {
    "candidate_id": "GRIFFAINUSDT-1791775926-8db6c4",
    "symbol": "GRIFFAINUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "PRE_RUNNER_EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "PRE_RUNNER_EXPIRED",
+    "reason": "hidden watchlist stale/max-age",
     "mfe_pct": 0.0
    }
   },
@@ -6599,12 +6577,34 @@
     "reason": "",
     "mfe_pct": 0.0
    }
+  },
+  {
+   "candidate_id": "C98USDT-1791790347-c1addd",
+   "symbol": "C98USDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
+  },
+  {
+   "candidate_id": "BTCUSDT-1791790357-9797cf",
+   "symbol": "BTCUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
   }
  ],
  "counts": {
-  "VALID_REJECT": 390,
   "MISSED_RUNNER": 24,
-  "UNCLASSIFIED": 186
+  "VALID_REJECT": 391,
+  "UNCLASSIFIED": 185
  },
  "total": 600
 }
