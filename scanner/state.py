@@ -4,6 +4,7 @@ import os
 import time
 from . import config as C
 from . import outcomes as OUT
+from .trade_accounting import SIGNAL_ONLY, target_touch
 
 OPEN_STATUSES = ("EARLY", "WATCH", "ACTIVE")
 
@@ -231,8 +232,12 @@ def _record_trade(st, sym, s, outcome, exit_price):
         "tp1": s.get("tp1"), "tp2": s.get("tp2"), "tp3": s.get("tp3"),
         "setup_type": s.get("setup_type", "v2"), "score": s.get("score"),
         "outcome": outcome, "exit": exit_price, "pnl_r": pnl_r,
+        "pnl_r_basis": "FULL_POSITION_PRICE_PATH_PROXY",
+        "execution_mode": SIGNAL_ONLY, "realized_r": None,
+        "verified_exchange_fills": False,
         "tp1_hit": bool(s.get("tp1_hit")), "tp2_hit": bool(s.get("tp2_hit")),
         "tp3_hit": bool(s.get("tp3_hit")),
+        "target_touches": list(s.get("target_touches", [])),
         "mfe_pct": s.get("mfe_pct", 0), "mae_pct": s.get("mae_pct", 0),
     })
 
@@ -329,6 +334,8 @@ def update_active(st, sym, a15, tg):
         hit = hi >= s[lvl] if is_long else lo <= s[lvl]
         if hit and not s.get(f"{lvl}_hit"):
             s[f"{lvl}_hit"] = True
+            s.setdefault("target_touches", []).append(
+                target_touch(sym, s["side"], tag, s[lvl], now()))
             s["last_update"] = now()
             is_final = lvl == final_lvl
             if is_final:
