@@ -1,0 +1,29 @@
+name: phase-b7-winner-control-trajectories
+on:
+  push:
+    branches: [research/phase-b6-results-b7-timeline]
+  workflow_dispatch:
+permissions: {contents: read, actions: read}
+jobs:
+  timeline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - run: pip install -r requirements.txt
+      - uses: actions/download-artifact@v4
+        with:
+          name: phase-b6-feature-results
+          path: artifacts/b6
+          run-id: 38153953459
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Compare pre-anchor trajectories
+        run: python -m research.phase_b7_trajectory --source artifacts/b6/phase_b6_features.json --output artifacts/phase_b7_trajectory.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: phase-b7-trajectory-results
+          path: artifacts/phase_b7_trajectory.json
+          retention-days: 30

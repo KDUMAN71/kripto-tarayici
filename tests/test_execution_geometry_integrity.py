@@ -51,7 +51,7 @@ def test_rr_is_recomputed_after_structural_stop_widens():
 
 
 def test_structural_stop_recompute_can_fail_tp2_even_if_tp1_looks_ok():
-    plan = _plan(entry=100.0, sl=99.0, tp1=103.0, tp2=103.5)
+    plan = _plan(entry=100.0, sl=99.0, tp1=103.0, tp2=102.5)
     zones = {"support": {"level": 99.0, "members": [98.8, 99.2], "evidence": 3}}
     adjusted, changed = _apply_htf_thesis_sl("long", plan, 100.0, zones, 1.0)
     assert changed is True
