@@ -320,5 +320,8 @@ Any production change follows time-slice replay, calibration/OOS separation, cha
 ## 13C. Trade accounting modes (implementation in progress)
 `scanner/trade_accounting.py` defines SIGNAL_ONLY, PAPER_FILL, VERIFIED_LIVE_FILL. Target touches are not fills. SIGNAL_ONLY cannot claim realized profit. PAPER_FILL needs explicit closing fractions and costs; VERIFIED_LIVE_FILL requires exchange fill IDs. This module is initially isolated from production lifecycle; do not claim production integration or actual exchange execution until explicitly implemented and tested.
 
+## 13D. Controlled implementation rollout
+First production-safe step: enforce a hard cap of ten concurrent ACTIVE advisory signals in both pretrade promotion and new-signal paths. Existing candidate ordering remains; `portfolio_admission.rank_active` is provisional, NOT a validated expected-profit ranking and is not yet wired to candidate selection. No automatic exchange orders. Spot/futures router, calibrated top-10 selection, re-entry and position management remain separate work. Do not claim final system is deployed.
+
 ## 14. Maintenance rule
 This file is a permanent part of the Definition of Done for all future architecture/research/production PRs. A PR is incomplete if it materially changes the objective, architecture, evidence, invariants, roadmap, opportunity taxonomy, execution policy or learning methodology without updating this document.
