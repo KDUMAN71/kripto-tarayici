@@ -1,39 +1,6 @@
 {
  "episodes": [
   {
-   "candidate_id": "MAGICUSDT-1791559986-4f35e5",
-   "symbol": "MAGICUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
-   "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
-    "mfe_pct": 0.0
-   }
-  },
-  {
-   "candidate_id": "CRVUSDT-1791559990-79ae78",
-   "symbol": "CRVUSDT",
-   "status": "REJECTED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "REJECTED",
-    "reason": "guclu htf destek bolgesinde (0.36273); kirilim/hold olmadan short yok",
-    "mfe_pct": 0.0
-   }
-  },
-  {
-   "candidate_id": "ORDIUSDT-1791560802-322802",
-   "symbol": "ORDIUSDT",
-   "status": "PRE_RUNNER_EXPIRED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "PRE_RUNNER_EXPIRED",
-    "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 5.824544582933853
-   }
-  },
-  {
    "candidate_id": "BEAMXUSDT-1791560803-94103c",
    "symbol": "BEAMXUSDT",
    "status": "PRE_RUNNER_EXPIRED",
@@ -1405,7 +1372,7 @@
    "evidence": {
     "outcome": "EXPIRED",
     "reason": "pretrade expiry",
-    "mfe_pct": 7.23448514965908
+    "mfe_pct": 7.6158557725644265
    }
   },
   {
@@ -3990,7 +3957,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 0.11931592204692147
+    "mfe_pct": 0.17234522073444417
    }
   },
   {
@@ -4183,11 +4150,11 @@
   {
    "candidate_id": "ONEUSDT-1791678716-0a8d12",
    "symbol": "ONEUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "PRE_RUNNER_EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "PRE_RUNNER_EXPIRED",
+    "reason": "hidden watchlist stale/max-age",
     "mfe_pct": 0.0
    }
   },
@@ -5404,10 +5371,10 @@
   {
    "candidate_id": "CKBUSDT-1791730991-1b6485",
    "symbol": "CKBUSDT",
-   "status": "PRE_RUNNER",
+   "status": "EARLY",
    "class": "UNCLASSIFIED",
    "evidence": {
-    "outcome": "PRE_RUNNER",
+    "outcome": "EARLY",
     "reason": "",
     "mfe_pct": 0.0
    }
@@ -5827,7 +5794,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 2.7758339164917234
+    "mfe_pct": 3.0965710286913937
    }
   },
   {
@@ -6372,11 +6339,11 @@
   {
    "candidate_id": "AVAXUSDT-1791754352-f74190",
    "symbol": "AVAXUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "guclu htf direnc bolgesinde (10.9474); kirilim/hold olmadan long yok",
     "mfe_pct": 0.0
    }
   },
@@ -6592,6 +6559,39 @@
   {
    "candidate_id": "ZECUSDT-1791764221-6a33c8",
    "symbol": "ZECUSDT",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
+   "evidence": {
+    "outcome": "REJECTED",
+    "reason": "guclu htf direnc bolgesinde (1303.34); kirilim/hold olmadan long yok",
+    "mfe_pct": 0.0
+   }
+  },
+  {
+   "candidate_id": "ACEUSDT-1791765123-6d0487",
+   "symbol": "ACEUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
+  },
+  {
+   "candidate_id": "STRKUSDT-1791765126-e7a035",
+   "symbol": "STRKUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
+  },
+  {
+   "candidate_id": "MAGICUSDT-1791765134-d69e2b",
+   "symbol": "MAGICUSDT",
    "status": "PRE_RUNNER",
    "class": "UNCLASSIFIED",
    "evidence": {
@@ -6602,9 +6602,9 @@
   }
  ],
  "counts": {
-  "UNCLASSIFIED": 184,
-  "VALID_REJECT": 389,
-  "MISSED_RUNNER": 27
+  "VALID_REJECT": 390,
+  "MISSED_RUNNER": 27,
+  "UNCLASSIFIED": 183
  },
  "total": 600
 }
