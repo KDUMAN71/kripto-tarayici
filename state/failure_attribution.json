@@ -1,28 +1,6 @@
 {
  "episodes": [
   {
-   "candidate_id": "ADAUSDT-1791730982-dbc57f",
-   "symbol": "ADAUSDT",
-   "status": "EARLY",
-   "class": "UNCLASSIFIED",
-   "evidence": {
-    "outcome": "EARLY",
-    "reason": "",
-    "mfe_pct": 0.0
-   }
-  },
-  {
-   "candidate_id": "AEROUSDT-1791730987-c2fd33",
-   "symbol": "AEROUSDT",
-   "status": "REJECTED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "REJECTED",
-    "reason": "iki yonlu karar motoru long tarafini guclu buldu",
-    "mfe_pct": 0.0
-   }
-  },
-  {
    "candidate_id": "CKBUSDT-1791730991-1b6485",
    "symbol": "CKBUSDT",
    "status": "CANCELLED",
@@ -756,7 +734,7 @@
    "evidence": {
     "outcome": "EXPIRED",
     "reason": "pretrade expiry",
-    "mfe_pct": 15.128611483603557
+    "mfe_pct": 15.61014263074485
    }
   },
   {
@@ -1635,7 +1613,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 8.666134185303507
+    "mfe_pct": 8.865814696485618
    }
   },
   {
@@ -2707,11 +2685,11 @@
   {
    "candidate_id": "PIXELUSDT-1791808333-8c70ab",
    "symbol": "PIXELUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "PRE_RUNNER_EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "PRE_RUNNER_EXPIRED",
+    "reason": "hidden watchlist stale/max-age",
     "mfe_pct": 0.0
    }
   },
@@ -3053,7 +3031,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 28.649386084583906
+    "mfe_pct": 29.331514324693046
    }
   },
   {
@@ -4989,7 +4967,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 4.531702183635888
+    "mfe_pct": 5.991844251512761
    }
   },
   {
@@ -5066,7 +5044,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 0.0
+    "mfe_pct": 3.213296398891973
    }
   },
   {
@@ -5473,7 +5451,7 @@
    "evidence": {
     "outcome": "REJECTED",
     "reason": "guclu htf destek bolgesinde (0.0028238); kirilim/hold olmadan short yok",
-    "mfe_pct": 6.943954881917508
+    "mfe_pct": 7.437433909058858
    }
   },
   {
@@ -5638,7 +5616,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 5.677464298153952
+    "mfe_pct": 6.1650992685475465
    }
   },
   {
@@ -5809,11 +5787,11 @@
   {
    "candidate_id": "DUSKUSDT-1791865051-9ea920",
    "symbol": "DUSKUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "PRE_RUNNER_EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "PRE_RUNNER_EXPIRED",
+    "reason": "hidden watchlist stale/max-age",
     "mfe_pct": 0.0
    }
   },
@@ -5880,7 +5858,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 1.7085427135678337
+    "mfe_pct": 2.1105527638190997
    }
   },
   {
@@ -6590,6 +6568,28 @@
   {
    "candidate_id": "BTCUSDT-1791894769-fd530f",
    "symbol": "BTCUSDT",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
+   "evidence": {
+    "outcome": "REJECTED",
+    "reason": "structural geometry minimum risk/r:r kosullarini saglamiyor",
+    "mfe_pct": 0.0
+   }
+  },
+  {
+   "candidate_id": "GRAMUSDT-1791895623-9a391f",
+   "symbol": "GRAMUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
+  },
+  {
+   "candidate_id": "JCTUSDT-1791895641-09c386",
+   "symbol": "JCTUSDT",
    "status": "PRE_RUNNER",
    "class": "UNCLASSIFIED",
    "evidence": {
@@ -6600,8 +6600,8 @@
   }
  ],
  "counts": {
-  "UNCLASSIFIED": 183,
-  "VALID_REJECT": 378,
+  "VALID_REJECT": 380,
+  "UNCLASSIFIED": 181,
   "MISSED_RUNNER": 37,
   "LATE_DETECTION": 2
  },
