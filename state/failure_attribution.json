@@ -1,17 +1,6 @@
 {
  "episodes": [
   {
-   "candidate_id": "USUSDT-1791730971-70f4eb",
-   "symbol": "USUSDT",
-   "status": "EARLY",
-   "class": "UNCLASSIFIED",
-   "evidence": {
-    "outcome": "EARLY",
-    "reason": "",
-    "mfe_pct": 0.0
-   }
-  },
-  {
    "candidate_id": "ADAUSDT-1791730982-dbc57f",
    "symbol": "ADAUSDT",
    "status": "EARLY",
@@ -1591,7 +1580,7 @@
    "class": "LATE_DETECTION",
    "evidence": {
     "reason": "entry ran beyond allowed distance",
-    "mfe_pct": 3.5429583702391527
+    "mfe_pct": 4.074402125775026
    }
   },
   {
@@ -5000,7 +4989,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 3.7490134175217
+    "mfe_pct": 4.531702183635888
    }
   },
   {
@@ -5072,11 +5061,11 @@
   {
    "candidate_id": "JCTUSDT-1791847928-367054",
    "symbol": "JCTUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "PRE_RUNNER_EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "PRE_RUNNER_EXPIRED",
+    "reason": "hidden watchlist stale/max-age",
     "mfe_pct": 0.0
    }
   },
@@ -5418,7 +5407,7 @@
    "evidence": {
     "outcome": "CANCELLED",
     "reason": "structural invalidation",
-    "mfe_pct": 3.113879003558731
+    "mfe_pct": 3.647686832740226
    }
   },
   {
@@ -6597,11 +6586,22 @@
     "reason": "",
     "mfe_pct": 0.0
    }
+  },
+  {
+   "candidate_id": "BTCUSDT-1791894769-fd530f",
+   "symbol": "BTCUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
   }
  ],
  "counts": {
-  "UNCLASSIFIED": 184,
-  "VALID_REJECT": 377,
+  "UNCLASSIFIED": 183,
+  "VALID_REJECT": 378,
   "MISSED_RUNNER": 37,
   "LATE_DETECTION": 2
  },
