@@ -1,17 +1,6 @@
 {
  "episodes": [
   {
-   "candidate_id": "AZTECUSDT-1791743509-a16b4e",
-   "symbol": "AZTECUSDT",
-   "status": "EARLY",
-   "class": "UNCLASSIFIED",
-   "evidence": {
-    "outcome": "EARLY",
-    "reason": "",
-    "mfe_pct": 0.0
-   }
-  },
-  {
    "candidate_id": "DYMUSDT-1791744419-54ce34",
    "symbol": "DYMUSDT",
    "status": "PRE_RUNNER_EXPIRED",
@@ -1443,11 +1432,11 @@
   {
    "candidate_id": "PENGUUSDT-1791786784-87c29d",
    "symbol": "PENGUUSDT",
-   "status": "EARLY",
-   "class": "UNCLASSIFIED",
+   "status": "EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "EARLY",
-    "reason": "",
+    "outcome": "EXPIRED",
+    "reason": "pretrade expiry",
     "mfe_pct": 0.0
    }
   },
@@ -3856,7 +3845,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 3.3094262295082006
+    "mfe_pct": 3.9805327868852456
    }
   },
   {
@@ -5050,11 +5039,11 @@
   {
    "candidate_id": "BEAMXUSDT-1791854236-d509c7",
    "symbol": "BEAMXUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "PRE_RUNNER_EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "PRE_RUNNER_EXPIRED",
+    "reason": "hidden watchlist stale/max-age",
     "mfe_pct": 0.0
    }
   },
@@ -6133,7 +6122,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 0.0
+    "mfe_pct": 0.09706853038244795
    }
   },
   {
@@ -6221,7 +6210,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 0.0
+    "mfe_pct": 0.36515388628063555
    }
   },
   {
@@ -6282,11 +6271,11 @@
   {
    "candidate_id": "BLUAIUSDT-1791906433-82aa94",
    "symbol": "BLUAIUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "PRE_RUNNER_EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "PRE_RUNNER_EXPIRED",
+    "reason": "hidden watchlist stale/max-age",
     "mfe_pct": 0.0
    }
   },
@@ -6557,11 +6546,11 @@
   {
    "candidate_id": "DOGEUSDT-1791915418-df2cde",
    "symbol": "DOGEUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "guclu htf destek bolgesinde (0.0836103); kirilim/hold olmadan short yok",
     "mfe_pct": 0.0
    }
   },
@@ -6597,12 +6586,23 @@
     "reason": "",
     "mfe_pct": 0.0
    }
+  },
+  {
+   "candidate_id": "ARKUSDT-1791917250-e07c2e",
+   "symbol": "ARKUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
   }
  ],
  "counts": {
-  "UNCLASSIFIED": 181,
-  "VALID_REJECT": 381,
+  "VALID_REJECT": 385,
   "MISSED_RUNNER": 36,
+  "UNCLASSIFIED": 177,
   "LATE_DETECTION": 2
  },
  "total": 600
