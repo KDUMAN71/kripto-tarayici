@@ -1,39 +1,6 @@
 {
  "episodes": [
   {
-   "candidate_id": "SANDUSDT-1791733656-57b1c0",
-   "symbol": "SANDUSDT",
-   "status": "REJECTED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "REJECTED",
-    "reason": "guclu htf direnc bolgesinde (0.0650162); kirilim/hold olmadan long yok",
-    "mfe_pct": 0.0
-   }
-  },
-  {
-   "candidate_id": "SUSDT-1791733657-429f4f",
-   "symbol": "SUSDT",
-   "status": "REJECTED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "REJECTED",
-    "reason": "iki yonlu karar motoru long tarafini guclu buldu",
-    "mfe_pct": 0.0
-   }
-  },
-  {
-   "candidate_id": "BNBUSDT-1791734565-5018d4",
-   "symbol": "BNBUSDT",
-   "status": "REJECTED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "REJECTED",
-    "reason": "guclu htf direnc bolgesinde (761.225); kirilim/hold olmadan long yok",
-    "mfe_pct": 0.0
-   }
-  },
-  {
    "candidate_id": "LINKUSDT-1791734582-a494da",
    "symbol": "LINKUSDT",
    "status": "REJECTED",
@@ -1734,7 +1701,7 @@
    "evidence": {
     "outcome": "CANCELLED",
     "reason": "structural invalidation",
-    "mfe_pct": 0.0
+    "mfe_pct": 0.5937412685107499
    }
   },
   {
@@ -4681,7 +4648,7 @@
    "evidence": {
     "outcome": "REJECTED",
     "reason": "guclu htf destek bolgesinde (0.0202562); kirilim/hold olmadan short yok",
-    "mfe_pct": 3.1945788964182036
+    "mfe_pct": 3.5333978702807425
    }
   },
   {
@@ -4780,7 +4747,7 @@
    "evidence": {
     "outcome": "CANCELLED",
     "reason": "structural invalidation",
-    "mfe_pct": 0.5682667863017876
+    "mfe_pct": 0.6430387318678029
    }
   },
   {
@@ -4923,7 +4890,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 4.7091412742382275
+    "mfe_pct": 5.706371191135735
    }
   },
   {
@@ -5077,7 +5044,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 0.0
+    "mfe_pct": 3.5243475921441987
    }
   },
   {
@@ -5704,7 +5671,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 1.1031946678924318
+    "mfe_pct": 1.1951275568834712
    }
   },
   {
@@ -6205,11 +6172,11 @@
   {
    "candidate_id": "NEARUSDT-1791887566-0f0bf4",
    "symbol": "NEARUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "guclu htf destek bolgesinde (5.06114); kirilim/hold olmadan short yok",
     "mfe_pct": 0.0
    }
   },
@@ -6597,12 +6564,45 @@
     "reason": "",
     "mfe_pct": 0.0
    }
+  },
+  {
+   "candidate_id": "SFPUSDT-1791902847-10717a",
+   "symbol": "SFPUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
+  },
+  {
+   "candidate_id": "ZECUSDT-1791902851-0070de",
+   "symbol": "ZECUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
+  },
+  {
+   "candidate_id": "FILUSDT-1791902867-9349da",
+   "symbol": "FILUSDT",
+   "status": "EARLY",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "EARLY",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
   }
  ],
  "counts": {
-  "VALID_REJECT": 382,
+  "VALID_REJECT": 380,
   "MISSED_RUNNER": 39,
-  "UNCLASSIFIED": 177,
+  "UNCLASSIFIED": 179,
   "LATE_DETECTION": 2
  },
  "total": 600
