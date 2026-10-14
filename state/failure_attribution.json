@@ -1,17 +1,6 @@
 {
  "episodes": [
   {
-   "candidate_id": "NEARUSDT-1791792186-e82b4c",
-   "symbol": "NEARUSDT",
-   "status": "REJECTED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "REJECTED",
-    "reason": "structural geometry minimum risk/r:r kosullarini saglamiyor",
-    "mfe_pct": 0.0
-   }
-  },
-  {
    "candidate_id": "PUMPUSDT-1791792202-00b6fe",
    "symbol": "PUMPUSDT",
    "status": "REJECTED",
@@ -465,11 +454,11 @@
    "candidate_id": "QNTUSDT-1791803055-38fef0",
    "symbol": "QNTUSDT",
    "status": "EXPIRED",
-   "class": "VALID_REJECT",
+   "class": "MISSED_RUNNER",
    "evidence": {
     "outcome": "EXPIRED",
     "reason": "pretrade expiry",
-    "mfe_pct": 9.659017243614674
+    "mfe_pct": 10.333203682095164
    }
   },
   {
@@ -733,7 +722,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 3.486870426173051
+    "mfe_pct": 3.7882049074472652
    }
   },
   {
@@ -1646,7 +1635,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 3.94053798961776
+    "mfe_pct": 3.9877300613497044
    }
   },
   {
@@ -2317,7 +2306,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 4.921111945905335
+    "mfe_pct": 4.958677685950409
    }
   },
   {
@@ -2592,7 +2581,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 12.732851194389646
+    "mfe_pct": 13.477975016436547
    }
   },
   {
@@ -3681,7 +3670,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 10.494158001929476
+    "mfe_pct": 12.734483867509919
    }
   },
   {
@@ -3901,7 +3890,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 2.7790861987753193
+    "mfe_pct": 3.01460197833254
    }
   },
   {
@@ -4044,7 +4033,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 6.141906873614194
+    "mfe_pct": 6.197339246119731
    }
   },
   {
@@ -4055,7 +4044,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 2.4122807017543764
+    "mfe_pct": 3.289473684210519
    }
   },
   {
@@ -4099,7 +4088,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 3.443996276760792
+    "mfe_pct": 3.723239218119774
    }
   },
   {
@@ -4231,7 +4220,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 0.0
+    "mfe_pct": 6.109790605546114
    }
   },
   {
@@ -4248,11 +4237,11 @@
   {
    "candidate_id": "SKYUSDT-1791889352-2e497c",
    "symbol": "SKYUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "PRE_RUNNER_EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "PRE_RUNNER_EXPIRED",
+    "reason": "hidden watchlist stale/max-age",
     "mfe_pct": 0.0
    }
   },
@@ -6558,11 +6547,11 @@
   {
    "candidate_id": "TIAUSDT-1791973986-a91a7b",
    "symbol": "TIAUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "iki yonlu karar motoru long tarafini guclu buldu",
     "mfe_pct": 0.0
    }
   },
@@ -6591,6 +6580,17 @@
   {
    "candidate_id": "PONSUSDT-1791975766-744f9b",
    "symbol": "PONSUSDT",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
+   "evidence": {
+    "outcome": "REJECTED",
+    "reason": "guclu htf destek bolgesinde (0.333383); kirilim/hold olmadan short yok",
+    "mfe_pct": 0.0
+   }
+  },
+  {
+   "candidate_id": "BRUSDT-1791976604-96ed06",
+   "symbol": "BRUSDT",
    "status": "PRE_RUNNER",
    "class": "UNCLASSIFIED",
    "evidence": {
@@ -6601,10 +6601,10 @@
   }
  ],
  "counts": {
-  "VALID_REJECT": 380,
-  "MISSED_RUNNER": 36,
+  "VALID_REJECT": 381,
+  "MISSED_RUNNER": 37,
   "LATE_DETECTION": 1,
-  "UNCLASSIFIED": 183
+  "UNCLASSIFIED": 181
  },
  "total": 600
 }
