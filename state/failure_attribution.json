@@ -1,28 +1,6 @@
 {
  "episodes": [
   {
-   "candidate_id": "GRAMUSDT-1791781317-b3bb2d",
-   "symbol": "GRAMUSDT",
-   "status": "PRE_RUNNER_EXPIRED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "PRE_RUNNER_EXPIRED",
-    "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 7.083906464924346
-   }
-  },
-  {
-   "candidate_id": "BULLAUSDT-1791781324-b07f22",
-   "symbol": "BULLAUSDT",
-   "status": "PRE_RUNNER_EXPIRED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "PRE_RUNNER_EXPIRED",
-    "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 3.995834960301952
-   }
-  },
-  {
    "candidate_id": "XAIUSDT-1791781339-3ca47e",
    "symbol": "XAIUSDT",
    "status": "PRE_RUNNER_EXPIRED",
@@ -1910,7 +1888,7 @@
    "evidence": {
     "outcome": "EXPIRED",
     "reason": "pretrade expiry",
-    "mfe_pct": 0.39964059168263505
+    "mfe_pct": 0.40366381911569343
    }
   },
   {
@@ -2174,7 +2152,7 @@
    "evidence": {
     "outcome": "EXPIRED",
     "reason": "pretrade expiry",
-    "mfe_pct": 6.08678184009642
+    "mfe_pct": 6.347930895942137
    }
   },
   {
@@ -3247,11 +3225,11 @@
   {
    "candidate_id": "DATAIPUSDT-1791847117-f6354a",
    "symbol": "DATAIPUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "PRE_RUNNER_EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "PRE_RUNNER_EXPIRED",
+    "reason": "hidden watchlist stale/max-age",
     "mfe_pct": 0.0
    }
   },
@@ -3919,11 +3897,11 @@
    "candidate_id": "GPSUSDT-1791856979-dbad6e",
    "symbol": "GPSUSDT",
    "status": "PRE_RUNNER_EXPIRED",
-   "class": "VALID_REJECT",
+   "class": "MISSED_RUNNER",
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 9.71413788643125
+    "mfe_pct": 12.068296468762124
    }
   },
   {
@@ -3934,7 +3912,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 2.77777777777778
+    "mfe_pct": 2.896825396825397
    }
   },
   {
@@ -3978,7 +3956,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 3.124999999999998
+    "mfe_pct": 3.3143939393939426
    }
   },
   {
@@ -4319,17 +4297,17 @@
    "evidence": {
     "outcome": "CANCELLED",
     "reason": "structural invalidation",
-    "mfe_pct": 0.6496519721577784
+    "mfe_pct": 2.761020881670526
    }
   },
   {
    "candidate_id": "PEOPLEUSDT-1791875826-6adbfa",
    "symbol": "PEOPLEUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "PRE_RUNNER_EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "PRE_RUNNER_EXPIRED",
+    "reason": "hidden watchlist stale/max-age",
     "mfe_pct": 0.0
    }
   },
@@ -6591,6 +6569,28 @@
   {
    "candidate_id": "SUIUSDT-1791961360-7e901a",
    "symbol": "SUIUSDT",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
+   "evidence": {
+    "outcome": "REJECTED",
+    "reason": "guclu htf destek bolgesinde (1.0442); kirilim/hold olmadan short yok",
+    "mfe_pct": 0.0
+   }
+  },
+  {
+   "candidate_id": "DEEPUSDT-1791963128-53b254",
+   "symbol": "DEEPUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
+  },
+  {
+   "candidate_id": "OGNUSDT-1791963147-4a5305",
+   "symbol": "OGNUSDT",
    "status": "PRE_RUNNER",
    "class": "UNCLASSIFIED",
    "evidence": {
@@ -6602,8 +6602,8 @@
  ],
  "counts": {
   "VALID_REJECT": 385,
-  "UNCLASSIFIED": 180,
-  "MISSED_RUNNER": 34,
+  "UNCLASSIFIED": 179,
+  "MISSED_RUNNER": 35,
   "LATE_DETECTION": 1
  },
  "total": 600
