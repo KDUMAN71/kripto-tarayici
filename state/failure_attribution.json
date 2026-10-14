@@ -1,28 +1,6 @@
 {
  "episodes": [
   {
-   "candidate_id": "RSRUSDT-1791783177-3156ce",
-   "symbol": "RSRUSDT",
-   "status": "REJECTED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "REJECTED",
-    "reason": "iki yonlu karar motoru long tarafini guclu buldu",
-    "mfe_pct": 0.0
-   }
-  },
-  {
-   "candidate_id": "KAIAUSDT-1791783183-7753db",
-   "symbol": "KAIAUSDT",
-   "status": "REJECTED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "REJECTED",
-    "reason": "iki yonlu karar motoru long tarafini guclu buldu",
-    "mfe_pct": 0.0
-   }
-  },
-  {
    "candidate_id": "NEARUSDT-1791784032-22b5a8",
    "symbol": "NEARUSDT",
    "status": "REJECTED",
@@ -1404,7 +1382,7 @@
    "evidence": {
     "outcome": "EXPIRED",
     "reason": "pretrade expiry",
-    "mfe_pct": 0.7863550780817361
+    "mfe_pct": 1.4841067670838373
    }
   },
   {
@@ -3071,11 +3049,11 @@
   {
    "candidate_id": "LSKUSDT-1791846271-73f9df",
    "symbol": "LSKUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "PRE_RUNNER_EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "PRE_RUNNER_EXPIRED",
+    "reason": "hidden watchlist stale/max-age",
     "mfe_pct": 0.0
    }
   },
@@ -3813,7 +3791,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 13.193636010865347
+    "mfe_pct": 14.577674298279646
    }
   },
   {
@@ -3857,7 +3835,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 5.4019138755980975
+    "mfe_pct": 5.732057416267949
    }
   },
   {
@@ -4209,7 +4187,7 @@
    "evidence": {
     "outcome": "CANCELLED",
     "reason": "structural invalidation",
-    "mfe_pct": 3.410672853828304
+    "mfe_pct": 3.8515081206496564
    }
   },
   {
@@ -4220,7 +4198,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 0.5791991941576543
+    "mfe_pct": 1.3094938302694528
    }
   },
   {
@@ -4429,7 +4407,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 2.2367846221057093
+    "mfe_pct": 2.346002621231963
    }
   },
   {
@@ -4649,7 +4627,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 2.823374917925147
+    "mfe_pct": 3.742613263296133
    }
   },
   {
@@ -4748,7 +4726,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 0.8295224928214335
+    "mfe_pct": 0.9146017228544113
    }
   },
   {
@@ -4759,7 +4737,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 4.129793510324474
+    "mfe_pct": 4.7787610619469
    }
   },
   {
@@ -5441,7 +5419,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 1.607843137254899
+    "mfe_pct": 2.274509803921558
    }
   },
   {
@@ -6598,11 +6576,33 @@
     "reason": "",
     "mfe_pct": 0.0
    }
+  },
+  {
+   "candidate_id": "SUIUSDT-1791965847-55ce72",
+   "symbol": "SUIUSDT",
+   "status": "EARLY",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "EARLY",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
+  },
+  {
+   "candidate_id": "PONSUSDT-1791965865-533600",
+   "symbol": "PONSUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
   }
  ],
  "counts": {
-  "VALID_REJECT": 380,
-  "UNCLASSIFIED": 184,
+  "VALID_REJECT": 379,
+  "UNCLASSIFIED": 185,
   "MISSED_RUNNER": 35,
   "LATE_DETECTION": 1
  },
