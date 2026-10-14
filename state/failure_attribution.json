@@ -1,17 +1,6 @@
 {
  "episodes": [
   {
-   "candidate_id": "SANDUSDT-1791816454-572a61",
-   "symbol": "SANDUSDT",
-   "status": "EXPIRED",
-   "class": "MISSED_RUNNER",
-   "evidence": {
-    "outcome": "EXPIRED",
-    "reason": "pretrade expiry",
-    "mfe_pct": 10.582180765519464
-   }
-  },
-  {
    "candidate_id": "HBARUSDT-1791816455-ac45f6",
    "symbol": "HBARUSDT",
    "status": "REJECTED",
@@ -2901,7 +2890,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 56.490134994807896
+    "mfe_pct": 56.749740394600224
    }
   },
   {
@@ -2984,11 +2973,11 @@
   {
    "candidate_id": "BILLUSDT-1791882139-e91366",
    "symbol": "BILLUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "PRE_RUNNER_EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "PRE_RUNNER_EXPIRED",
+    "reason": "hidden watchlist stale/max-age",
     "mfe_pct": 0.0
    }
   },
@@ -3143,7 +3132,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 8.004527447651387
+    "mfe_pct": 8.205998868138076
    }
   },
   {
@@ -3605,7 +3594,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 9.04159132007234
+    "mfe_pct": 9.064195298372512
    }
   },
   {
@@ -3737,7 +3726,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 6.227106227106239
+    "mfe_pct": 6.410256410256427
    }
   },
   {
@@ -3759,7 +3748,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 6.2636904141024266
+    "mfe_pct": 6.378429122770414
    }
   },
   {
@@ -3770,7 +3759,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 2.7307878202029854
+    "mfe_pct": 3.238279362010642
    }
   },
   {
@@ -3781,7 +3770,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 0.0
+    "mfe_pct": 2.254165305455721
    }
   },
   {
@@ -4936,7 +4925,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 4.793545325106806
+    "mfe_pct": 5.410536307546279
    }
   },
   {
@@ -6599,12 +6588,23 @@
     "reason": "",
     "mfe_pct": 0.0
    }
+  },
+  {
+   "candidate_id": "SOONUSDT-1791998220-1b0fd7",
+   "symbol": "SOONUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
   }
  ],
  "counts": {
-  "MISSED_RUNNER": 32,
-  "VALID_REJECT": 366,
-  "UNCLASSIFIED": 202
+  "VALID_REJECT": 367,
+  "UNCLASSIFIED": 202,
+  "MISSED_RUNNER": 31
  },
  "total": 600
 }
