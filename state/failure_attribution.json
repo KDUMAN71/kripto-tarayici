@@ -1,17 +1,6 @@
 {
  "episodes": [
   {
-   "candidate_id": "SKYUSDT-1791801611-0c8c1b",
-   "symbol": "SKYUSDT",
-   "status": "PRE_RUNNER_EXPIRED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "PRE_RUNNER_EXPIRED",
-    "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 5.23863493262813
-   }
-  },
-  {
    "candidate_id": "STRKUSDT-1791801636-bb1336",
    "symbol": "STRKUSDT",
    "status": "REJECTED",
@@ -476,11 +465,11 @@
    "candidate_id": "MUBARAKUSDT-1791814673-3e23d1",
    "symbol": "MUBARAKUSDT",
    "status": "EXPIRED",
-   "class": "VALID_REJECT",
+   "class": "MISSED_RUNNER",
    "evidence": {
     "outcome": "EXPIRED",
     "reason": "pretrade expiry",
-    "mfe_pct": 9.800871188550103
+    "mfe_pct": 10.392034847542012
    }
   },
   {
@@ -2059,11 +2048,11 @@
   {
    "candidate_id": "METISUSDT-1791841685-e88330",
    "symbol": "METISUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "PRE_RUNNER_EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "PRE_RUNNER_EXPIRED",
+    "reason": "hidden watchlist stale/max-age",
     "mfe_pct": 0.0
    }
   },
@@ -3571,7 +3560,7 @@
    "evidence": {
     "outcome": "CANCELLED",
     "reason": "structural invalidation",
-    "mfe_pct": 14.941995359628773
+    "mfe_pct": 15.498839907192572
    }
   },
   {
@@ -6470,11 +6459,11 @@
   {
    "candidate_id": "1000PEPEUSDT-1791982974-0b7fd8",
    "symbol": "1000PEPEUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "guclu htf direnc bolgesinde (0.00413379); kirilim/hold olmadan long yok",
     "mfe_pct": 0.0
    }
   },
@@ -6598,13 +6587,24 @@
     "reason": "",
     "mfe_pct": 0.0
    }
+  },
+  {
+   "candidate_id": "ORCAUSDT-1791985609-7d5c64",
+   "symbol": "ORCAUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
   }
  ],
  "counts": {
   "VALID_REJECT": 380,
   "LATE_DETECTION": 1,
-  "MISSED_RUNNER": 32,
-  "UNCLASSIFIED": 187
+  "MISSED_RUNNER": 33,
+  "UNCLASSIFIED": 186
  },
  "total": 600
 }
