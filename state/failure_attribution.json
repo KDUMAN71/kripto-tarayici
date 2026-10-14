@@ -1,17 +1,6 @@
 {
  "episodes": [
   {
-   "candidate_id": "BNBUSDT-1791819141-5fcbff",
-   "symbol": "BNBUSDT",
-   "status": "EXPIRED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "EXPIRED",
-    "reason": "pretrade expiry",
-    "mfe_pct": 2.2744645754824417
-   }
-  },
-  {
    "candidate_id": "PLUMEUSDT-1791819164-2edeec",
    "symbol": "PLUMEUSDT",
    "status": "CANCELLED",
@@ -674,11 +663,11 @@
   {
    "candidate_id": "VVVUSDT-1791833592-ee638d",
    "symbol": "VVVUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "guclu htf direnc bolgesinde (23.3594); kirilim/hold olmadan long yok",
     "mfe_pct": 0.0
    }
   },
@@ -3556,11 +3545,11 @@
   {
    "candidate_id": "FIDAUSDT-1791920837-18c6b3",
    "symbol": "FIDAUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "PRE_RUNNER_EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "PRE_RUNNER_EXPIRED",
+    "reason": "hidden watchlist stale/max-age",
     "mfe_pct": 0.0
    }
   },
@@ -3935,7 +3924,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 4.915912031047863
+    "mfe_pct": 5.088400172488144
    }
   },
   {
@@ -4150,11 +4139,11 @@
   {
    "candidate_id": "DUSKUSDT-1791946087-f710e6",
    "symbol": "DUSKUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "iki yonlu karar motoru long tarafini guclu buldu",
     "mfe_pct": 0.0
    }
   },
@@ -4837,7 +4826,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 2.020839911588242
+    "mfe_pct": 2.115566782443948
    }
   },
   {
@@ -5860,7 +5849,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 0.0
+    "mfe_pct": 0.08685456203587343
    }
   },
   {
@@ -6185,11 +6174,11 @@
   {
    "candidate_id": "LTCUSDT-1791999168-930dcf",
    "symbol": "LTCUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "guclu htf destek bolgesinde (59.7639); kirilim/hold olmadan short yok",
     "mfe_pct": 0.0
    }
   },
@@ -6592,6 +6581,17 @@
   {
    "candidate_id": "ZROUSDT-1792007275-e905c0",
    "symbol": "ZROUSDT",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
+   "evidence": {
+    "outcome": "REJECTED",
+    "reason": "guclu htf destek bolgesinde (1.88713); kirilim/hold olmadan short yok",
+    "mfe_pct": 0.0
+   }
+  },
+  {
+   "candidate_id": "CAKEUSDT-1792008227-522d3d",
+   "symbol": "CAKEUSDT",
    "status": "PRE_RUNNER",
    "class": "UNCLASSIFIED",
    "evidence": {
@@ -6602,9 +6602,9 @@
   }
  ],
  "counts": {
-  "VALID_REJECT": 367,
+  "VALID_REJECT": 371,
   "MISSED_RUNNER": 31,
-  "UNCLASSIFIED": 202
+  "UNCLASSIFIED": 198
  },
  "total": 600
 }
