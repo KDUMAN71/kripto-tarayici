@@ -96,7 +96,7 @@
    "evidence": {
     "outcome": "CANCELLED",
     "reason": "structural invalidation",
-    "mfe_pct": 5.018328909113896
+    "mfe_pct": 5.599797749968394
    }
   },
   {
@@ -130,17 +130,6 @@
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
     "mfe_pct": 0.0
-   }
-  },
-  {
-   "candidate_id": "BILLUSDT-1791882139-e91366",
-   "symbol": "BILLUSDT",
-   "status": "PRE_RUNNER_EXPIRED",
-   "class": "MISSED_RUNNER",
-   "evidence": {
-    "outcome": "PRE_RUNNER_EXPIRED",
-    "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 22.39130434782609
    }
   },
   {
@@ -256,11 +245,11 @@
   {
    "candidate_id": "PYTHUSDT-1791887322-dd919e",
    "symbol": "PYTHUSDT",
-   "status": "EARLY",
-   "class": "UNCLASSIFIED",
+   "status": "EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "EARLY",
-    "reason": "",
+    "outcome": "EXPIRED",
+    "reason": "pretrade expiry",
     "mfe_pct": 0.0
    }
   },
@@ -1295,7 +1284,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 19.598906107566094
+    "mfe_pct": 20.419325432999077
    }
   },
   {
@@ -2186,7 +2175,7 @@
    "evidence": {
     "outcome": "EXPIRED",
     "reason": "pretrade expiry",
-    "mfe_pct": 0.0
+    "mfe_pct": 1.9876746810172663
    }
   },
   {
@@ -2670,7 +2659,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 7.766382589436181
+    "mfe_pct": 8.705281910539753
    }
   },
   {
@@ -3825,7 +3814,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 2.292993630573258
+    "mfe_pct": 2.5053078556263277
    }
   },
   {
@@ -3891,7 +3880,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 0.8477393617021302
+    "mfe_pct": 0.9807180851063857
    }
   },
   {
@@ -4232,7 +4221,7 @@
    "evidence": {
     "outcome": "CANCELLED",
     "reason": "structural invalidation",
-    "mfe_pct": 7.92591642071944
+    "mfe_pct": 7.951580478206929
    }
   },
   {
@@ -5684,7 +5673,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 3.8922155688622917
+    "mfe_pct": 4.170230966638168
    }
   },
   {
@@ -5822,11 +5811,11 @@
   {
    "candidate_id": "PHAUSDT-1792067586-2e7dc1",
    "symbol": "PHAUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "PRE_RUNNER_EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "PRE_RUNNER_EXPIRED",
+    "reason": "hidden watchlist stale/max-age",
     "mfe_pct": 0.0
    }
   },
@@ -6003,7 +5992,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 3.028128587830081
+    "mfe_pct": 3.2290470723306366
    }
   },
   {
@@ -6317,11 +6306,11 @@
   {
    "candidate_id": "ENAUSDT-1792080204-ca6e40",
    "symbol": "ENAUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "iki yonlu karar motoru short tarafini guclu buldu",
     "mfe_pct": 0.0
    }
   },
@@ -6599,12 +6588,23 @@
     "reason": "",
     "mfe_pct": 0.0
    }
+  },
+  {
+   "candidate_id": "ELSAUSDT-1792089161-8987cc",
+   "symbol": "ELSAUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
   }
  ],
  "counts": {
-  "VALID_REJECT": 361,
-  "UNCLASSIFIED": 193,
-  "MISSED_RUNNER": 46
+  "VALID_REJECT": 364,
+  "UNCLASSIFIED": 191,
+  "MISSED_RUNNER": 45
  },
  "total": 600
 }
