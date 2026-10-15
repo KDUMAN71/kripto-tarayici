@@ -7,6 +7,7 @@ import json, os, time, uuid
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PATH = os.path.join(ROOT, "state", "outcome_ledger.json")
+ARCHIVE_DIR = os.path.join(ROOT, "state", "outcome_archive")
 MAX_EPISODES = 600
 MAX_EVENTS = 16
 EVAL_HORIZON_H = 24
@@ -55,7 +56,9 @@ def start(sym, status, features=None, ts=None):
     _L["episodes"].append(e)
     transition(sym, status, features=features, ts=t)
     if len(_L["episodes"]) > MAX_EPISODES:
-        del _L["episodes"][:len(_L["episodes"]) - MAX_EPISODES]
+        # Never discard unresolved/open episodes or evaluation-incomplete episodes.
+        # Closed, mature records are archived losslessly in monthly shards.
+        _archive_mature()
     return e
 
 
@@ -153,6 +156,40 @@ def update_evaluation_prices(price_by_symbol, ts=None):
         e["evaluation_last_ts"] = t
         n += 1
     return n
+
+
+def _archive_mature():
+    from datetime import datetime, timezone
+    episodes = _L["episodes"]
+    overflow = max(0, len(episodes) - MAX_EPISODES)
+    if not overflow:
+        return
+    now = _now()
+    eligible = [e for e in episodes if e.get("closed_at") and now - int(e["closed_at"]) >= EVAL_HORIZON_H * 3600]
+    selected = eligible[:overflow]
+    if not selected:
+        return
+    os.makedirs(ARCHIVE_DIR, exist_ok=True)
+    buckets = {}
+    for e in selected:
+        month = datetime.fromtimestamp(int(e["closed_at"]), tz=timezone.utc).strftime("%Y-%m")
+        buckets.setdefault(month, []).append(e)
+    # Atomic per-shard writes; keep archive idempotent by candidate_id.
+    for month, items in buckets.items():
+        path = os.path.join(ARCHIVE_DIR, month + ".json")
+        try:
+            with open(path, encoding="utf-8") as f:
+                previous = json.load(f).get("episodes", [])
+        except FileNotFoundError:
+            previous = []
+        by_id = {e["candidate_id"]: e for e in previous}
+        by_id.update({e["candidate_id"]: e for e in items})
+        tmp = path + ".tmp"
+        with open(tmp, "w", encoding="utf-8") as f:
+            json.dump({"episodes": list(by_id.values())}, f, ensure_ascii=False, separators=(",", ":"))
+        os.replace(tmp, path)
+    archived_ids = {e["candidate_id"] for e in selected}
+    _L["episodes"] = [e for e in episodes if e["candidate_id"] not in archived_ids]
 
 
 def save():
