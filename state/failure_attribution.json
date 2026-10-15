@@ -89,17 +89,6 @@
    }
   },
   {
-   "candidate_id": "TAOUSDT-1791886654-e35f18",
-   "symbol": "TAOUSDT",
-   "status": "EXPIRED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "EXPIRED",
-    "reason": "pretrade expiry",
-    "mfe_pct": 7.0908172834162775
-   }
-  },
-  {
    "candidate_id": "PYTHUSDT-1791887322-dd919e",
    "symbol": "PYTHUSDT",
    "status": "EXPIRED",
@@ -163,17 +152,6 @@
     "outcome": "REJECTED",
     "reason": "iki yonlu karar motoru short tarafini guclu buldu",
     "mfe_pct": 0.0
-   }
-  },
-  {
-   "candidate_id": "CTRUSDT-1791892976-58f172",
-   "symbol": "CTRUSDT",
-   "status": "PRE_RUNNER_EXPIRED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "PRE_RUNNER_EXPIRED",
-    "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 6.02339606190512
    }
   },
   {
@@ -1823,7 +1801,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 43.085815918185865
+    "mfe_pct": 43.886171631836376
    }
   },
   {
@@ -2665,11 +2643,11 @@
   {
    "candidate_id": "RLCUSDT-1791983868-14a56a",
    "symbol": "RLCUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "guclu htf destek bolgesinde (0.851971); kirilim/hold olmadan short yok",
     "mfe_pct": 0.0
    }
   },
@@ -3050,10 +3028,10 @@
   {
    "candidate_id": "ICPUSDT-1791989282-147170",
    "symbol": "ICPUSDT",
-   "status": "EARLY",
+   "status": "WATCH",
    "class": "UNCLASSIFIED",
    "evidence": {
-    "outcome": "EARLY",
+    "outcome": "WATCH",
     "reason": "",
     "mfe_pct": 0.0
    }
@@ -3814,7 +3792,7 @@
    "evidence": {
     "outcome": "CANCELLED",
     "reason": "structural invalidation",
-    "mfe_pct": 1.5785582255083075
+    "mfe_pct": 1.6968576709796612
    }
   },
   {
@@ -5255,7 +5233,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 50.655430711610485
+    "mfe_pct": 51.49812734082396
    }
   },
   {
@@ -6599,11 +6577,33 @@
     "reason": "",
     "mfe_pct": 0.0
    }
+  },
+  {
+   "candidate_id": "ZROUSDT-1792103572-2fcaff",
+   "symbol": "ZROUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
+  },
+  {
+   "candidate_id": "DOTUSDT-1792103580-66f87a",
+   "symbol": "DOTUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
   }
  ],
  "counts": {
-  "VALID_REJECT": 369,
-  "UNCLASSIFIED": 186,
+  "VALID_REJECT": 368,
+  "UNCLASSIFIED": 187,
   "MISSED_RUNNER": 45
  },
  "total": 600
