@@ -1,17 +1,6 @@
 {
  "episodes": [
   {
-   "candidate_id": "BATUSDT-1791851598-bf2b88",
-   "symbol": "BATUSDT",
-   "status": "REJECTED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "REJECTED",
-    "reason": "iki yonlu karar motoru long tarafini guclu buldu",
-    "mfe_pct": 0.0
-   }
-  },
-  {
    "candidate_id": "IOUSDT-1791851601-a4e4a4",
    "symbol": "IOUSDT",
    "status": "PRE_RUNNER_EXPIRED",
@@ -723,7 +712,7 @@
    "evidence": {
     "outcome": "EXPIRED",
     "reason": "pretrade expiry",
-    "mfe_pct": 11.367414796342484
+    "mfe_pct": 11.492103075644227
    }
   },
   {
@@ -1312,11 +1301,11 @@
   {
    "candidate_id": "CHZUSDT-1791898371-e2bc48",
    "symbol": "CHZUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "PRE_RUNNER_EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "PRE_RUNNER_EXPIRED",
+    "reason": "hidden watchlist stale/max-age",
     "mfe_pct": 0.0
    }
   },
@@ -1636,7 +1625,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 12.662981120267029
+    "mfe_pct": 14.149368937102318
    }
   },
   {
@@ -1900,7 +1889,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 9.167492566897923
+    "mfe_pct": 9.464816650148656
    }
   },
   {
@@ -3077,7 +3066,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 6.840390879478833
+    "mfe_pct": 7.858306188925083
    }
   },
   {
@@ -3264,7 +3253,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 8.869814020028608
+    "mfe_pct": 9.370529327610873
    }
   },
   {
@@ -3418,7 +3407,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 8.494666139865663
+    "mfe_pct": 9.298037666271561
    }
   },
   {
@@ -3484,7 +3473,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 0.8391608391608373
+    "mfe_pct": 1.1655011655011664
    }
   },
   {
@@ -3539,7 +3528,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 7.5236294896030325
+    "mfe_pct": 7.637051039697545
    }
   },
   {
@@ -3616,7 +3605,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 0.0
+    "mfe_pct": 5.726256983240221
    }
   },
   {
@@ -3880,7 +3869,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 3.848059454995869
+    "mfe_pct": 4.547206165703285
    }
   },
   {
@@ -4172,11 +4161,11 @@
   {
    "candidate_id": "RSRUSDT-1791990503-40fa07",
    "symbol": "RSRUSDT",
-   "status": "EARLY",
-   "class": "UNCLASSIFIED",
+   "status": "CANCELLED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "EARLY",
-    "reason": "",
+    "outcome": "CANCELLED",
+    "reason": "structural invalidation",
     "mfe_pct": 0.0
    }
   },
@@ -4452,7 +4441,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 6.116360019890613
+    "mfe_pct": 6.265539532570866
    }
   },
   {
@@ -4491,11 +4480,11 @@
   {
    "candidate_id": "BILLUSDT-1791999138-49dfc5",
    "symbol": "BILLUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "PRE_RUNNER_EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "PRE_RUNNER_EXPIRED",
+    "reason": "hidden watchlist stale/max-age",
     "mfe_pct": 0.0
    }
   },
@@ -6599,11 +6588,22 @@
     "reason": "",
     "mfe_pct": 0.0
    }
+  },
+  {
+   "candidate_id": "ROBOUSDT-1792069374-7c0710",
+   "symbol": "ROBOUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
   }
  ],
  "counts": {
-  "VALID_REJECT": 356,
-  "UNCLASSIFIED": 195,
+  "VALID_REJECT": 358,
+  "UNCLASSIFIED": 193,
   "MISSED_RUNNER": 49
  },
  "total": 600
