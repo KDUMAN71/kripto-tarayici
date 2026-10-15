@@ -207,7 +207,7 @@ def run():
     first_run = not st["known_symbols"]
     for s in radars.detect_new_listings(symbols, st["known_symbols"]):
         st["known_symbols"][s] = 0 if first_run else ST.now()
-        if not first_run: tg.send(f"🆕 <b>YENİ LİSTELEME — {s}</b>\nİlk {C.YOUNG_COIN_DAYS} gün teknik sinyal yok; yapı otursun.")
+        if not first_run and not C.USER_SIGNAL_ACTIVE_ONLY: tg.send(f"🆕 <b>YENİ LİSTELEME — {s}</b>\nİlk {C.YOUNG_COIN_DAYS} gün teknik sinyal yok; yapı otursun.")
     if first_run: tg.send(f"🚀 Kripto Tarayıcı V3.3 aktif. {len(symbols)} perpetual kayıtlı; 15 dakikalık tarama başladı.")
 
     all_tdf = tickers[tickers["symbol"].isin(symbols)].copy()
@@ -357,7 +357,7 @@ def run():
     active_count = len([1 for v in st["signals"].values() if v["status"] in ("EARLY", "WATCH", "ACTIVE")])
     AU.observe_signals(st)
     _aurep = AU.maybe_weekly_report(st, tickers, data)
-    if _aurep: tg.send(_aurep)
+    if _aurep and not C.USER_SIGNAL_ACTIVE_ONLY: tg.send(_aurep)
     OUT.save()
     AU.save()
     ST.append_scan(st, {"ts": ST.now(), "ok": True, "symbols": len(symbols), "liquid": len(liquid), "candidates": len(candidates), "open_signals": active_count, "duration_s": round(time.time() - t0)})
