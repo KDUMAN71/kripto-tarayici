@@ -34,17 +34,6 @@
    }
   },
   {
-   "candidate_id": "ONEUSDT-1791853333-616996",
-   "symbol": "ONEUSDT",
-   "status": "PRE_RUNNER_EXPIRED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "PRE_RUNNER_EXPIRED",
-    "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 7.389830508474585
-   }
-  },
-  {
    "candidate_id": "GWEIUSDT-1791853339-8e96c7",
    "symbol": "GWEIUSDT",
    "status": "PRE_RUNNER_EXPIRED",
@@ -1015,11 +1004,11 @@
   {
    "candidate_id": "XLMUSDT-1791890278-043d81",
    "symbol": "XLMUSDT",
-   "status": "EARLY",
-   "class": "UNCLASSIFIED",
+   "status": "EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "EARLY",
-    "reason": "",
+    "outcome": "EXPIRED",
+    "reason": "pretrade expiry",
     "mfe_pct": 0.0
    }
   },
@@ -1273,7 +1262,7 @@
    "evidence": {
     "outcome": "CANCELLED",
     "reason": "structural invalidation",
-    "mfe_pct": 0.14831294030404577
+    "mfe_pct": 0.48201705598814365
    }
   },
   {
@@ -1317,7 +1306,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 2.9424604907011243
+    "mfe_pct": 4.081899938880642
    }
   },
   {
@@ -3363,7 +3352,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 4.335664335664347
+    "mfe_pct": 5.330225330225334
    }
   },
   {
@@ -3748,7 +3737,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 0.0
+    "mfe_pct": 9.627329192546586
    }
   },
   {
@@ -4078,7 +4067,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 2.9269987406088487
+    "mfe_pct": 3.5349806748599506
    }
   },
   {
@@ -4595,7 +4584,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 0.0
+    "mfe_pct": 3.452899765336908
    }
   },
   {
@@ -6175,11 +6164,11 @@
    "candidate_id": "SIRENUSDT-1792045075-fde0e9",
    "symbol": "SIRENUSDT",
    "status": "PRE_RUNNER_EXPIRED",
-   "class": "VALID_REJECT",
+   "class": "MISSED_RUNNER",
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 0.0
+    "mfe_pct": 25.842696629213485
    }
   },
   {
@@ -6599,12 +6588,23 @@
     "reason": "",
     "mfe_pct": 0.0
    }
+  },
+  {
+   "candidate_id": "VELVETUSDT-1792074790-312022",
+   "symbol": "VELVETUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
   }
  ],
  "counts": {
-  "VALID_REJECT": 354,
+  "VALID_REJECT": 353,
   "UNCLASSIFIED": 193,
-  "MISSED_RUNNER": 53
+  "MISSED_RUNNER": 54
  },
  "total": 600
 }
