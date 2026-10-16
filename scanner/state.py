@@ -84,6 +84,8 @@ def _trade_stats(trades):
         "losses": len(losses),
         "win_rate": (len(wins) / len(vals) if vals else None),
         "avg_r": avg_r,
+        "basis": "FULL_POSITION_PRICE_PATH_PROXY_NOT_REALIZED",
+        "realized_trades": sum(1 for t in trades if t.get("realized_r") is not None),
     }
 
 
@@ -232,7 +234,8 @@ def _record_trade(st, sym, s, outcome, exit_price):
         "tp1": s.get("tp1"), "tp2": s.get("tp2"), "tp3": s.get("tp3"),
         "setup_type": s.get("setup_type", "v2"), "score": s.get("score"),
         "outcome": outcome, "exit": exit_price, "pnl_r": pnl_r,
-        "pnl_r_basis": "FULL_POSITION_PRICE_PATH_PROXY",
+        "pnl_r_basis": "FULL_POSITION_PRICE_PATH_PROXY_NOT_REALIZED",
+        "accounting_note": "Target touches are observations, never partial fills or realized profit.",
         "execution_mode": SIGNAL_ONLY, "realized_r": None,
         "verified_exchange_fills": False,
         "tp1_hit": bool(s.get("tp1_hit")), "tp2_hit": bool(s.get("tp2_hit")),
