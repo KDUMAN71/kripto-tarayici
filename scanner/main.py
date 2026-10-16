@@ -241,7 +241,8 @@ def run():
                 if news and news["veto"]:
                     sig["status"], sig["last_update"] = "CANCELLED", ST.now()
                     OUT.close(sym, "CANCELLED", reason="news veto")
-                    tg.send(f"🛑 <b>İPTAL (HABER VETOSU) — {sym}</b>\n{news['note']}"); continue
+                    if not C.USER_SIGNAL_ACTIVE_ONLY: tg.send(f"🛑 <b>İPTAL (HABER VETOSU) — {sym}</b>\n{news['note']}")
+                    continue
                 full = ST.activate(st, sym, sig, res)
                 OUT.transition(sym, "ACTIVE"); OUT.set_trade_geometry(sym, full)
                 ST.log_event(st, sym, "ACTIVATED", f"{res['side']} @ {res['price']:.6g}")
