@@ -155,17 +155,6 @@
    }
   },
   {
-   "candidate_id": "RENDERUSDT-1791907381-726eb2",
-   "symbol": "RENDERUSDT",
-   "status": "CANCELLED",
-   "class": "VALID_REJECT",
-   "evidence": {
-    "outcome": "CANCELLED",
-    "reason": "structural invalidation",
-    "mfe_pct": 0.0
-   }
-  },
-  {
    "candidate_id": "PONSUSDT-1791907381-3cb7c0",
    "symbol": "PONSUSDT",
    "status": "REJECTED",
@@ -2258,11 +2247,11 @@
   {
    "candidate_id": "PONSUSDT-1791983851-ff3f27",
    "symbol": "PONSUSDT",
-   "status": "EARLY",
-   "class": "UNCLASSIFIED",
+   "status": "EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "EARLY",
-    "reason": "",
+    "outcome": "EXPIRED",
+    "reason": "pretrade expiry",
     "mfe_pct": 0.0
    }
   },
@@ -6102,7 +6091,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 0.0
+    "mfe_pct": 2.1543985637342744
    }
   },
   {
@@ -6548,11 +6537,11 @@
   {
    "candidate_id": "BTWUSDT-1792114379-b97c35",
    "symbol": "BTWUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "iki yonlu karar motoru long tarafini guclu buldu",
     "mfe_pct": 0.0
    }
   },
@@ -6581,11 +6570,11 @@
   {
    "candidate_id": "DOGEUSDT-1792115249-4dc975",
    "symbol": "DOGEUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "guclu htf destek bolgesinde (0.0805165); kirilim/hold olmadan short yok",
     "mfe_pct": 0.0
    }
   },
@@ -6599,11 +6588,22 @@
     "reason": "",
     "mfe_pct": 0.0
    }
+  },
+  {
+   "candidate_id": "WLDUSDT-1792117057-723abc",
+   "symbol": "WLDUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
   }
  ],
  "counts": {
-  "VALID_REJECT": 376,
-  "UNCLASSIFIED": 181,
+  "VALID_REJECT": 378,
+  "UNCLASSIFIED": 179,
   "MISSED_RUNNER": 43
  },
  "total": 600
