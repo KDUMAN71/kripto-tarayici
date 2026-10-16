@@ -322,3 +322,10 @@ Any production change follows time-slice replay, calibration/OOS separation, cha
 
 ## 14. Maintenance rule
 This file is a permanent part of the Definition of Done for all future architecture/research/production PRs. A PR is incomplete if it materially changes the objective, architecture, evidence, invariants, roadmap, opportunity taxonomy, execution policy or learning methodology without updating this document.
+
+
+## 2026-10-16 — Signal-only accounting and notification QA
+- Signal-only `pnl_r` remains a full-position price-path proxy, not verified profit. `tp1_hit` marks a price touch, not a partial fill; `realized_r` remains null without fills. Trade summaries label this explicitly.
+- Pre-ACTIVE news-veto cancellation no longer sends user-facing Telegram messages when ACTIVE-only is enabled; audit events remain.
+- `research/opportunity_identity.py` provides deterministic, research-only setup identity and duplicate diagnostics. It is NOT linked to production suppression or selection; no OOS promotion.
+- Remaining: verify news provider credentials/API, investigate historical opportunity clusters and re-entry OOS, then evaluate any production admission change separately.
