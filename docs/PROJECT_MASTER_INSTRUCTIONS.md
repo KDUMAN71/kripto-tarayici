@@ -329,3 +329,8 @@ This file is a permanent part of the Definition of Done for all future architect
 - Pre-ACTIVE news-veto cancellation no longer sends user-facing Telegram messages when ACTIVE-only is enabled; audit events remain.
 - `research/opportunity_identity.py` provides deterministic, research-only setup identity and duplicate diagnostics. It is NOT linked to production suppression or selection; no OOS promotion.
 - Remaining: verify news provider credentials/API, investigate historical opportunity clusters and re-entry OOS, then evaluate any production admission change separately.
+
+
+## 2026-10-16 — Hourly operational throttle
+- Scanner workflow runs the expensive scan only if the previous successful scan is at least 55 minutes old. Earlier workflow_dispatch requests skip dependency installation and scanner steps; backup hourly schedule remains. A failed scan is retried at the next external trigger, rather than waiting a full hour. This is an operational cadence change, not a signal-threshold/strategy change.
+- cron-job.org external 15-minute trigger is NOT modified by GitHub commits; owner should change it to hourly to reduce unnecessary workflow startups. Hourly data sampling may miss shorter-lived intraday entry windows; review with OOS before treating it as an equal-performing configuration.
