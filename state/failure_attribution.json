@@ -169,22 +169,11 @@
    "candidate_id": "AVAUSDT-1791901965-812a1e",
    "symbol": "AVAUSDT",
    "status": "CANCELLED",
-   "class": "VALID_REJECT",
+   "class": "MISSED_RUNNER",
    "evidence": {
     "outcome": "CANCELLED",
     "reason": "structural invalidation",
-    "mfe_pct": 8.416759362254355
-   }
-  },
-  {
-   "candidate_id": "BLUAIUSDT-1791906433-82aa94",
-   "symbol": "BLUAIUSDT",
-   "status": "PRE_RUNNER_EXPIRED",
-   "class": "MISSED_RUNNER",
-   "evidence": {
-    "outcome": "PRE_RUNNER_EXPIRED",
-    "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 23.334326283387945
+    "mfe_pct": 10.307749351130884
    }
   },
   {
@@ -1537,7 +1526,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 53.26811916407293
+    "mfe_pct": 55.66918630502445
    }
   },
   {
@@ -2269,11 +2258,11 @@
   {
    "candidate_id": "DOGEUSDT-1791981162-6ca3f5",
    "symbol": "DOGEUSDT",
-   "status": "EARLY",
-   "class": "UNCLASSIFIED",
+   "status": "EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "EARLY",
-    "reason": "",
+    "outcome": "EXPIRED",
+    "reason": "pretrade expiry",
     "mfe_pct": 0.0
    }
   },
@@ -2302,11 +2291,11 @@
   {
    "candidate_id": "SOLUSDT-1791982965-d6e34f",
    "symbol": "SOLUSDT",
-   "status": "EARLY",
-   "class": "UNCLASSIFIED",
+   "status": "EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "EARLY",
-    "reason": "",
+    "outcome": "EXPIRED",
+    "reason": "pretrade expiry",
     "mfe_pct": 0.0
    }
   },
@@ -3902,7 +3891,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 0.6810442678774126
+    "mfe_pct": 0.8513053348467594
    }
   },
   {
@@ -4128,11 +4117,11 @@
   {
    "candidate_id": "GUSDT-1792026155-3a6024",
    "symbol": "GUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "PRE_RUNNER_EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "PRE_RUNNER_EXPIRED",
+    "reason": "hidden watchlist stale/max-age",
     "mfe_pct": 0.0
    }
   },
@@ -4969,7 +4958,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 61.37640449438202
+    "mfe_pct": 63.90449438202247
    }
   },
   {
@@ -5794,7 +5783,7 @@
    "evidence": {
     "outcome": "CANCELLED",
     "reason": "structural invalidation",
-    "mfe_pct": 0.0
+    "mfe_pct": 0.9972170686456397
    }
   },
   {
@@ -6207,10 +6196,10 @@
   {
    "candidate_id": "SUIUSDT-1792099038-f82386",
    "symbol": "SUIUSDT",
-   "status": "PRE_RUNNER",
+   "status": "EARLY",
    "class": "UNCLASSIFIED",
    "evidence": {
-    "outcome": "PRE_RUNNER",
+    "outcome": "EARLY",
     "reason": "",
     "mfe_pct": 0.0
    }
@@ -6599,11 +6588,22 @@
     "reason": "",
     "mfe_pct": 0.0
    }
+  },
+  {
+   "candidate_id": "SOLUSDT-1792113410-b36fe2",
+   "symbol": "SOLUSDT",
+   "status": "PRE_RUNNER",
+   "class": "UNCLASSIFIED",
+   "evidence": {
+    "outcome": "PRE_RUNNER",
+    "reason": "",
+    "mfe_pct": 0.0
+   }
   }
  ],
  "counts": {
-  "VALID_REJECT": 371,
-  "UNCLASSIFIED": 186,
+  "VALID_REJECT": 373,
+  "UNCLASSIFIED": 184,
   "MISSED_RUNNER": 43
  },
  "total": 600
