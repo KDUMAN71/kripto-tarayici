@@ -298,17 +298,6 @@
    }
   },
   {
-   "candidate_id": "ORCAUSDT-1791955923-88a226",
-   "symbol": "ORCAUSDT",
-   "status": "PRE_RUNNER_EXPIRED",
-   "class": "MISSED_RUNNER",
-   "evidence": {
-    "outcome": "PRE_RUNNER_EXPIRED",
-    "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 12.055054579971532
-   }
-  },
-  {
    "candidate_id": "BEATUSDT-1791955943-e32a14",
    "symbol": "BEATUSDT",
    "status": "PRE_RUNNER_EXPIRED",
@@ -888,7 +877,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 18.42409360104002
+    "mfe_pct": 19.630218113534596
    }
   },
   {
@@ -2434,11 +2423,11 @@
   {
    "candidate_id": "CAKEUSDT-1792008227-522d3d",
    "symbol": "CAKEUSDT",
-   "status": "EARLY",
-   "class": "UNCLASSIFIED",
+   "status": "EXPIRED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "EARLY",
-    "reason": "",
+    "outcome": "EXPIRED",
+    "reason": "pretrade expiry",
     "mfe_pct": 0.0
    }
   },
@@ -2714,7 +2703,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 4.78821362799263
+    "mfe_pct": 5.317679558011049
    }
   },
   {
@@ -3605,7 +3594,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 8.190686545186827
+    "mfe_pct": 8.41155899134916
    }
   },
   {
@@ -3935,7 +3924,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 2.2081804593015337
+    "mfe_pct": 2.3372740861530077
    }
   },
   {
@@ -3979,7 +3968,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 12.761958704495136
+    "mfe_pct": 14.051799598372886
    }
   },
   {
@@ -4089,7 +4078,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 27.92869269949066
+    "mfe_pct": 28.09847198641766
    }
   },
   {
@@ -4243,7 +4232,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 2.761747732893654
+    "mfe_pct": 3.0502885408079186
    }
   },
   {
@@ -4903,7 +4892,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 1.4251207729468605
+    "mfe_pct": 1.5942028985507266
    }
   },
   {
@@ -5849,7 +5838,7 @@
    "evidence": {
     "outcome": "PRE_RUNNER_EXPIRED",
     "reason": "hidden watchlist stale/max-age",
-    "mfe_pct": 2.0131898646303465
+    "mfe_pct": 2.221450885109339
    }
   },
   {
@@ -5921,10 +5910,10 @@
   {
    "candidate_id": "WLDUSDT-1792125183-1eb035",
    "symbol": "WLDUSDT",
-   "status": "PRE_RUNNER",
+   "status": "EARLY",
    "class": "UNCLASSIFIED",
    "evidence": {
-    "outcome": "PRE_RUNNER",
+    "outcome": "EARLY",
     "reason": "",
     "mfe_pct": 0.0
    }
@@ -6537,11 +6526,11 @@
   {
    "candidate_id": "AAVEUSDT-1792140451-e4799a",
    "symbol": "AAVEUSDT",
-   "status": "PRE_RUNNER",
-   "class": "UNCLASSIFIED",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
    "evidence": {
-    "outcome": "PRE_RUNNER",
-    "reason": "",
+    "outcome": "REJECTED",
+    "reason": "guclu htf direnc bolgesinde (162.847); kirilim/hold olmadan long yok",
     "mfe_pct": 0.0
    }
   },
@@ -6592,6 +6581,17 @@
   {
    "candidate_id": "1000SHIBUSDT-1792141419-450571",
    "symbol": "1000SHIBUSDT",
+   "status": "REJECTED",
+   "class": "VALID_REJECT",
+   "evidence": {
+    "outcome": "REJECTED",
+    "reason": "structural geometry minimum risk/r:r kosullarini saglamiyor",
+    "mfe_pct": 0.0
+   }
+  },
+  {
+   "candidate_id": "CAKEUSDT-1792142194-70c47e",
+   "symbol": "CAKEUSDT",
    "status": "PRE_RUNNER",
    "class": "UNCLASSIFIED",
    "evidence": {
@@ -6602,9 +6602,9 @@
   }
  ],
  "counts": {
-  "VALID_REJECT": 385,
-  "UNCLASSIFIED": 186,
-  "MISSED_RUNNER": 29
+  "VALID_REJECT": 388,
+  "UNCLASSIFIED": 184,
+  "MISSED_RUNNER": 28
  },
  "total": 600
 }
