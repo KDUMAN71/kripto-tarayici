@@ -61,3 +61,11 @@ def test_recovery_is_reported_once_before_alive():
 def test_epoch_is_formatted_for_turkey():
     assert _fmt_epoch(0) == "bilinmiyor"
     assert "TRT" in _fmt_epoch(1_788_860_128)
+
+
+def test_hourly_heartbeat_cadence():
+    now = 100_000
+    healthy = evaluate({'last_ok_run': now - 65*60}, {'last_alive_at': now - 60}, now, stale_minutes=85)
+    missed = evaluate({'last_ok_run': now - 86*60}, {'last_alive_at': now - 60}, now, stale_minutes=85)
+    assert healthy['stale'] is False
+    assert missed['action'] == 'ALERT'
