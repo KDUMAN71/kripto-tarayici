@@ -334,3 +334,10 @@ This file is a permanent part of the Definition of Done for all future architect
 ## 2026-10-16 — Hourly operational throttle
 - Scanner workflow runs the expensive scan only if the previous successful scan is at least 55 minutes old. Earlier workflow_dispatch requests skip dependency installation and scanner steps; backup hourly schedule remains. A failed scan is retried at the next external trigger, rather than waiting a full hour. This is an operational cadence change, not a signal-threshold/strategy change.
 - cron-job.org external 15-minute trigger is NOT modified by GitHub commits; owner should change it to hourly to reduce unnecessary workflow startups. Hourly data sampling may miss shorter-lived intraday entry windows; review with OOS before treating it as an equal-performing configuration.
+
+
+## 2026-10-18 — Watchdog cadence regression (draft; not deployed)
+- The scanner runs approximately hourly, but the watchdog still uses a 45-minute threshold in its workflow configuration. This can create false HEARTBEAT LOST alerts between normal scans.
+- The proposed 85-minute module default and three regression tests are staged in a draft PR. The workflow's explicit 45-minute setting overrides that default, so the proposed fix is INCOMPLETE and must not be merged as a completed repair.
+- Required before merge: align the workflow configuration to 85 minutes, verify the tests and effective runtime configuration, then confirm no false alert after an ordinary hourly scan.
+- No production trading policy, signal thresholds, stop or target geometry changed.
