@@ -61,3 +61,27 @@ def test_recovery_is_reported_once_before_alive():
 def test_epoch_is_formatted_for_turkey():
     assert _fmt_epoch(0) == "bilinmiyor"
     assert "TRT" in _fmt_epoch(1_788_860_128)
+
+
+def test_hourly_scanner_does_not_trigger_false_heartbeat_lost():
+    now = 100_000
+    d = evaluate({"last_ok_run": now - 60 * 60, "generated_at": now - 60 * 60},
+                 {"last_alive_at": now - 120}, now, alive_interval_minutes=1440)
+    assert d["stale"] is False
+    assert d["action"] == "NONE"
+
+
+def test_hourly_scanner_still_alerts_on_real_delay():
+    now = 100_000
+    d = evaluate({"last_ok_run": now - 86 * 60, "generated_at": now - 86 * 60},
+                 {}, now)
+    assert d["stale"] is True
+    assert d["action"] == "ALERT"
+
+
+def test_hourly_scanner_recovery_after_stale_alert():
+    now = 100_000
+    d = evaluate({"last_ok_run": now - 10 * 60, "generated_at": now - 10 * 60},
+                 {"alerted": True, "last_alert_at": now - 15 * 60}, now)
+    assert d["stale"] is False
+    assert d["action"] == "RECOVERED"
