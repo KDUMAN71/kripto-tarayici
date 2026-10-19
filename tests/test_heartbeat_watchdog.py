@@ -85,3 +85,13 @@ def test_hourly_scanner_recovery_after_stale_alert():
                  {"alerted": True, "last_alert_at": now - 15 * 60}, now)
     assert d["stale"] is False
     assert d["action"] == "RECOVERED"
+
+
+def test_watchdog_workflow_matches_hourly_scan_cadence():
+    """Prevent a default-only fix while Actions still overrides it to 45m."""
+    from pathlib import Path
+    workflow = Path(__file__).resolve().parents[1] / ".github/workflows/heartbeat_watchdog.yml"
+    content = workflow.read_text(encoding="utf-8")
+    assert "WATCHDOG_STALE_MINUTES: '85'" in content, (
+        "Workflow still overrides the 85m Python default; update the Actions env."
+    )
