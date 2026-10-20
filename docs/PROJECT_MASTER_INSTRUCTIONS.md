@@ -334,3 +334,7 @@ This file is a permanent part of the Definition of Done for all future architect
 ## 2026-10-16 — Hourly operational throttle
 - Scanner workflow runs the expensive scan only if the previous successful scan is at least 55 minutes old. Earlier workflow_dispatch requests skip dependency installation and scanner steps; backup hourly schedule remains. A failed scan is retried at the next external trigger, rather than waiting a full hour. This is an operational cadence change, not a signal-threshold/strategy change.
 - cron-job.org external 15-minute trigger is NOT modified by GitHub commits; owner should change it to hourly to reduce unnecessary workflow startups. Hourly data sampling may miss shorter-lived intraday entry windows; review with OOS before treating it as an equal-performing configuration.
+
+
+## 2026-10-20 — Watchdog Telegram noise fix
+- ACTIVE-only mode disables watchdog Telegram LOST/RECOVERED/ALIVE messages while preserving local watchdog checks and state. Hourly cadence uses a minimum 85-minute stale threshold even when an older 45-minute workflow environment value is supplied. No ACTIVE entry/exit rules changed. Confirm real workflow regression and any other independent Telegram senders before declaring full silence.
