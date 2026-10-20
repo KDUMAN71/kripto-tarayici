@@ -15,10 +15,11 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 from scanner.telegram import Telegram
+from scanner import config as C
 
 SUMMARY_PATH = Path(os.environ.get("WATCHDOG_SUMMARY_PATH", "state/summary.json"))
 STATE_PATH = Path(os.environ.get("WATCHDOG_STATE_PATH", ".watchdog-state/watchdog_state.json"))
-STALE_MINUTES = int(os.environ.get("WATCHDOG_STALE_MINUTES", "45"))
+STALE_MINUTES = max(85, int(os.environ.get("WATCHDOG_STALE_MINUTES", "85")))
 REMINDER_MINUTES = int(os.environ.get("WATCHDOG_REMINDER_MINUTES", "360"))
 ALIVE_INTERVAL_MINUTES = int(os.environ.get("WATCHDOG_ALIVE_INTERVAL_MINUTES", "1440"))
 TR_TZ = ZoneInfo("Europe/Istanbul")
@@ -37,7 +38,7 @@ def _fmt_epoch(ts: int) -> str:
     return datetime.fromtimestamp(ts, TR_TZ).strftime("%d.%m.%Y %H:%M TRT")
 
 
-def evaluate(summary: dict, state: dict, now: int, stale_minutes: int = 45,
+def evaluate(summary: dict, state: dict, now: int, stale_minutes: int = 85,
              reminder_minutes: int = 360, alive_interval_minutes: int = 1440) -> dict:
     """Pure decision function used by tests and the live runner."""
     last_ok = int(summary.get("last_ok_run") or 0)
@@ -113,7 +114,7 @@ def main() -> int:
     )
 
     send_ok = True
-    if decision["action"] in ("ALERT", "RECOVERED", "ALIVE"):
+    if not C.USER_SIGNAL_ACTIVE_ONLY and decision["action"] in ("ALERT", "RECOVERED", "ALIVE"):
         try:
             send_ok = bool(Telegram().send(_message(decision)))
         except Exception as exc:  # Operational layer must never lose state persistence.
