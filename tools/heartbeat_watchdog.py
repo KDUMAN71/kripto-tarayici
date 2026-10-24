@@ -113,7 +113,10 @@ def main() -> int:
         summary, wd_state, now, STALE_MINUTES, REMINDER_MINUTES, ALIVE_INTERVAL_MINUTES
     )
 
-    send_ok = True
+    # No send attempt is NOT a successful notification. In ACTIVE-only mode
+    # watchdog health is still persisted, but alert/recovery/alive timestamps
+    # must only advance after Telegram confirms an actual send.
+    send_ok = False
     if not C.USER_SIGNAL_ACTIVE_ONLY and decision["action"] in ("ALERT", "RECOVERED", "ALIVE"):
         try:
             send_ok = bool(Telegram().send(_message(decision)))
