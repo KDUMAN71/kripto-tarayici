@@ -190,15 +190,19 @@ def _run_growth(st, boosted, anns, ann_ok):
 def run():
     t0=time.time(); st=_load(); boosted=dexscreener.boosts(); anns,ann_ok=news_rss.binance_announcements(); st["health"]["news_source_degraded"]=not ann_ok
     early_top,early_scanned,early_eligible=scan_early(st,boosted)
-    alerts=[c for c in early_top if early.should_alert(st,c)]
-    if alerts: report.send(report.build_early_alert(alerts))
+    # Discovery-only candidates are not actionable ACTIVE trades. Do not mark
+    # suppressed spot observations as user-alerted or send Telegram messages.
+    if not C.USER_SIGNAL_ACTIVE_ONLY:
+        alerts=[c for c in early_top if early.should_alert(st,c)]
+        if alerts: report.send(report.build_early_alert(alerts))
     if os.environ.get("SPOT_EARLY_ONLY"):
         st["early_meta"]={"when":time.strftime("%d.%m %H:%M",time.gmtime(time.time()+10800)),"scanned":early_scanned,"eligible":early_eligible,"top":len(early_top),"duration_s":round(time.time()-t0)}
         _save(st); print(f"early radar tamam: {st['early_meta']}"); return
     top,cex,dex,passed=_run_growth(st,boosted,anns,ann_ok)
     meta={"when":time.strftime("%d.%m %H:%M",time.gmtime(time.time()+10800)),"n_cex":len(cex),"n_dex":len(dex),"n_pass":len(passed),"news_degraded":not ann_ok,"duration_s":None,
           "early_scanned":early_scanned,"early_eligible":early_eligible}
-    report.send(report.build(top,meta,st,early_top=early_top))
+    if not C.USER_SIGNAL_ACTIVE_ONLY:
+        report.send(report.build(top,meta,st,early_top=early_top))
     st["reports"].append({"ts":time.time(),"coins":[{"key":c["key"],"rank":i+1,"price":c.get("price"),"breadth":c["breadth"],"median_p":round(c["median_p"],3),"flags":c.get("flags"),"network":c.get("network"),"contract":c.get("token"),"venue":c.get("dex_id") or c.get("buy_venue")} for i,c in enumerate(top)],
                           "early":[{"key":c["key"],"stage":c.get("early_stage"),"score":c.get("early_score"),"mc":c.get("mc"),"first_mc":c.get("first_seen_mc")} for c in early_top]})
     meta["duration_s"]=round(time.time()-t0); st["meta"]=meta; _save(st)
