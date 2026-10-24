@@ -1,4 +1,8 @@
 """Spot Radar V2 — normal growth radar + early/seed discovery thresholds."""
+# User-facing policy: spot radar is discovery-only, not an ACTIVE execution gate.
+# Keep its scans, rankings and state internal; do not send Telegram reports.
+USER_SIGNAL_ACTIVE_ONLY = True
+
 # Evren
 CEX_PAGES = 3                # CoinGecko volume_desc sayfa (250/sayfa)
 CEX_MIN_MC = 50_000_000
