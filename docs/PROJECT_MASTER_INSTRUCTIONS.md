@@ -344,3 +344,8 @@ This file is a permanent part of the Definition of Done for all future architect
 - The watchdog now treats skipped Telegram delivery in ACTIVE-only mode as **not sent**; `alerted`, `last_alert_at`, `last_recovered_at`, and `last_alive_at` only change after a confirmed send. Local heartbeat status and `last_check_at` continue to persist. Regression tests cover suppressed ALERT/RECOVERED/ALIVE and real send success/failure. No trading or OOS policy changed.
 - Operational note: cron-job.org still dispatches scanner every 15 minutes (most are skipped by hourly gate). Changing the external trigger to hourly is outside GitHub code. Avoid claiming Actions startup savings until external cadence is verified.
 - OOS promotion remains BLOCKED: calibration_n=0, oos_n=2011 as of this update; challenger has not demonstrated an advantage. PR #44 stays unmerged pending evidence.
+
+
+## 2026-10-24 — Independent spot radar Telegram policy
+- The spot microcap EARLY/SEED and twice-daily growth radar were still calling Telegram independently of the futures ACTIVE-only policy. Neither spot discovery layer has a validated ACTIVE execution gate; all such spot reports are now internal-only. Scan/state/report persistence continues, and suppressed early observations are not recorded as sent alerts. The spot transport independently blocks delivery as a defense in depth. Tests cover hourly early-only and full growth runs plus the Telegram transport.
+- This is a notification policy fix, not a new spot strategy or live trade promotion. To deliver spot alerts in the future, implement and OOS-validate an actionable spot ACTIVE execution gate first.
