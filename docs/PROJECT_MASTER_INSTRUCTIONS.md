@@ -338,3 +338,9 @@ This file is a permanent part of the Definition of Done for all future architect
 
 ## 2026-10-20 — Watchdog Telegram noise fix
 - ACTIVE-only mode disables watchdog Telegram LOST/RECOVERED/ALIVE messages while preserving local watchdog checks and state. Hourly cadence uses a minimum 85-minute stale threshold even when an older 45-minute workflow environment value is supplied. No ACTIVE entry/exit rules changed. Confirm real workflow regression and any other independent Telegram senders before declaring full silence.
+
+
+## 2026-10-24 — Watchdog delivery accounting correction
+- The watchdog now treats skipped Telegram delivery in ACTIVE-only mode as **not sent**; `alerted`, `last_alert_at`, `last_recovered_at`, and `last_alive_at` only change after a confirmed send. Local heartbeat status and `last_check_at` continue to persist. Regression tests cover suppressed ALERT/RECOVERED/ALIVE and real send success/failure. No trading or OOS policy changed.
+- Operational note: cron-job.org still dispatches scanner every 15 minutes (most are skipped by hourly gate). Changing the external trigger to hourly is outside GitHub code. Avoid claiming Actions startup savings until external cadence is verified.
+- OOS promotion remains BLOCKED: calibration_n=0, oos_n=2011 as of this update; challenger has not demonstrated an advantage. PR #44 stays unmerged pending evidence.
