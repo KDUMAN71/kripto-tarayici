@@ -19,7 +19,7 @@ def test_spot_scans_and_persists_without_telegram_or_false_alert_ack(
     monkeypatch.setattr(main, "_save", lambda st: saved.append(st))
     monkeypatch.setattr(main.dexscreener, "boosts", lambda: set())
     monkeypatch.setattr(main.news_rss, "binance_announcements", lambda: ([], True))
-    monkeypatch.setattr(main, "scan_early", lambda st, boosted: ([{"early_stage": "EARLY_OPPORTUNITY"}], 1, 1))
+    monkeypatch.setattr(main, "scan_early", lambda st, boosted: ([{"key": "solana:test", "early_stage": "EARLY_OPPORTUNITY"}], 1, 1))
     monkeypatch.setattr(main, "_run_growth", lambda *args: ([], [], [], []))
 
     def forbidden(*args, **kwargs):
