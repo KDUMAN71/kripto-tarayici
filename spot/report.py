@@ -136,6 +136,11 @@ def _chunks(text,limit=3900):
     return out
 
 def send(text):
+    # Defense in depth: this independent spot radar has no validated ACTIVE
+    # execution state, so it must not send user-facing discovery reports.
+    if C.USER_SIGNAL_ACTIVE_ONLY:
+        print("spot Telegram suppressed: discovery-only; no ACTIVE trade")
+        return False
     if os.environ.get("TELEGRAM_DRY_RUN"):
         print(text); return True
     tok,chat=os.environ.get("TELEGRAM_BOT_TOKEN"),os.environ.get("TELEGRAM_CHAT_ID")
