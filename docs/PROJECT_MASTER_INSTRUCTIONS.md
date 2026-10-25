@@ -349,3 +349,10 @@ This file is a permanent part of the Definition of Done for all future architect
 ## 2026-10-24 — Independent spot radar Telegram policy
 - The spot microcap EARLY/SEED and twice-daily growth radar were still calling Telegram independently of the futures ACTIVE-only policy. Neither spot discovery layer has a validated ACTIVE execution gate; all such spot reports are now internal-only. Scan/state/report persistence continues, and suppressed early observations are not recorded as sent alerts. The spot transport independently blocks delivery as a defense in depth. Tests cover hourly early-only and full growth runs plus the Telegram transport.
 - This is a notification policy fix, not a new spot strategy or live trade promotion. To deliver spot alerts in the future, implement and OOS-validate an actionable spot ACTIVE execution gate first.
+
+
+## 2026-10-25 — Watchdog backup cadence alignment (operational only)
+- The user set cron-job.org `kripto-tarayici` dispatch to hourly and `Watchdog dispatch` to every four hours (Europe/Istanbul). The external service configuration cannot be changed by GitHub commits; screenshots confirm the intended settings, not a long-term execution guarantee.
+- The GitHub watchdog fallback had remained at `*/30 * * * *` (48 scheduled starts/day), independently of the external four-hour job. Set fallback to `23 3-23/4 * * *` UTC (six scheduled starts/day, about two hours offset from expected external runs) to preserve outage coverage without 30-minute GitHub Actions starts. External + fallback may yield up to about 12 watchdog starts/day; GitHub schedules can be delayed.
+- Scanner's independent hourly GitHub backup remains unchanged for availability; no ACTIVE policy, trading thresholds, OOS gate or Telegram policy changes.
+- At review, main promotion report remains `BLOCKED` with calibration_n=0, oos_n=2193; no live policy promotion is authorized. PR #44 remains unmerged pending OOS evidence.
