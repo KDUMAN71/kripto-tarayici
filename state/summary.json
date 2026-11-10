@@ -1,10 +1,10 @@
 {
- "generated_at": 1794326595,
+ "generated_at": 1794330224,
  "engine_version": "3.3",
- "last_ok_run": 1794326469,
+ "last_ok_run": 1794330067,
  "fail_count": 0,
  "known_symbols_count": 522,
- "open_signal_count": 20,
+ "open_signal_count": 21,
  "open_signals": [
   {
    "symbol": "ARBUSDT",
@@ -255,6 +255,31 @@
    "htf_resistance": 0.011424794,
    "created": 1794315783,
    "last_update": 1794315783
+  },
+  {
+   "symbol": "FILUSDT",
+   "status": "EARLY",
+   "side": "SHORT",
+   "price": 0.7427,
+   "trigger": 0.7604,
+   "sl": 0.7716347083163049,
+   "tp1": 0.7423,
+   "tp2": 0.7359,
+   "tp3": 0.7122,
+   "rr1": 1.6110787650562777,
+   "rr2": 2.1807419747999304,
+   "rr3": 4.290276048381902,
+   "risk_pct": 1.4774734766313662,
+   "score": 10,
+   "score_max": 13,
+   "setup_type": "breakout_retest",
+   "priority_setup": true,
+   "decision_bias": "SHORT",
+   "decision_strength": "guclu",
+   "htf_support": null,
+   "htf_resistance": 0.7490398666666668,
+   "created": 1794330171,
+   "last_update": 1794330171
   },
   {
    "symbol": "SUIUSDT",
@@ -508,15 +533,6 @@
   }
  ],
  "scan_log": [
-  {
-   "ts": 1793984599,
-   "ok": true,
-   "symbols": 522,
-   "liquid": 312,
-   "candidates": 170,
-   "open_signals": 25,
-   "duration_s": 138
-  },
   {
    "ts": 1793988190,
    "ok": true,
@@ -1371,93 +1387,18 @@
    "candidates": 170,
    "open_signals": 20,
    "duration_s": 127
+  },
+  {
+   "ts": 1794330223,
+   "ok": true,
+   "symbols": 522,
+   "liquid": 293,
+   "candidates": 170,
+   "open_signals": 21,
+   "duration_s": 157
   }
  ],
  "log_last_24h": [
-  {
-   "t": 1794301299,
-   "sym": "FILUSDT",
-   "event": "VETO",
-   "detail": "15d failed reclaim/hold (0/1 kapanis)"
-  },
-  {
-   "t": 1794301303,
-   "sym": "SUIUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (0.828802); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1794301307,
-   "sym": "BTCUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (74915.4); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1794301310,
-   "sym": "NEARUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (3.5978); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1794301317,
-   "sym": "HYPEUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (72.8997); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1794301322,
-   "sym": "ETHFIUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (0.640075); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1794301326,
-   "sym": "GRAMUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (1.10901); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1794301370,
-   "sym": "UNIUSDT",
-   "event": "VETO",
-   "detail": "structural geometry minimum risk/R:R kosullarini saglamiyor"
-  },
-  {
-   "t": 1794301378,
-   "sym": "INJUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (7.93771); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1794301382,
-   "sym": "PUMPUSDT",
-   "event": "EARLY",
-   "detail": "SHORT @ 0.003533"
-  },
-  {
-   "t": 1794304875,
-   "sym": "TRUMPUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (1.1401); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1794304878,
-   "sym": "LINKUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (10.4732); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1794304896,
-   "sym": "FILUSDT",
-   "event": "VETO",
-   "detail": "15d EMA20/MA7 yonu veya EMA20 egimi uyumsuz"
-  },
-  {
-   "t": 1794304900,
-   "sym": "SUIUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (0.828802); kirilim/hold olmadan SHORT yok"
-  },
   {
    "t": 1794304904,
    "sym": "BTCUSDT",
@@ -2093,6 +2034,90 @@
    "sym": "TIAUSDT",
    "event": "VETO",
    "detail": "iki yonlu karar motoru SHORT tarafini guclu buldu"
+  },
+  {
+   "t": 1794330075,
+   "sym": "APTUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (0.566501); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1794330087,
+   "sym": "ACTUSDT",
+   "event": "VETO",
+   "detail": "BTC ters yonde sert rejim kirilimi (BTC 4s: guclu dusus, 1s yapi: LH-LL, SERT asagi kirilim)"
+  },
+  {
+   "t": 1794330090,
+   "sym": "SUIUSDT",
+   "event": "VETO",
+   "detail": "iki yonlu karar motoru SHORT tarafini guclu buldu"
+  },
+  {
+   "t": 1794330101,
+   "sym": "GRAMUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (1.10234); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1794330107,
+   "sym": "DOTUSDT",
+   "event": "VETO",
+   "detail": "iki yonlu karar motoru SHORT tarafini guclu buldu"
+  },
+  {
+   "t": 1794330151,
+   "sym": "LINKUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (10.2845); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1794330155,
+   "sym": "INJUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (7.72983); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1794330165,
+   "sym": "TRUMPUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (1.1401); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1794330171,
+   "sym": "FILUSDT",
+   "event": "EARLY",
+   "detail": "SHORT @ 0.7427"
+  },
+  {
+   "t": 1794330175,
+   "sym": "LTCUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (50.027); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1794330189,
+   "sym": "XLMUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (0.142984); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1794330195,
+   "sym": "BRUSDT",
+   "event": "VETO",
+   "detail": "BTC ters yonde sert rejim kirilimi (BTC 4s: guclu dusus, 1s yapi: LH-LL, SERT asagi kirilim)"
+  },
+  {
+   "t": 1794330199,
+   "sym": "HBARUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (0.0654747); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1794330205,
+   "sym": "PENGUUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (0.00614296); kirilim/hold olmadan LONG yok"
   }
  ],
  "trades_stats": {
