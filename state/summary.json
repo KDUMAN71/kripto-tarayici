@@ -1,10 +1,10 @@
 {
- "generated_at": 1794834240,
+ "generated_at": 1794837822,
  "engine_version": "3.3",
- "last_ok_run": 1794834063,
+ "last_ok_run": 1794837663,
  "fail_count": 0,
  "known_symbols_count": 522,
- "open_signal_count": 46,
+ "open_signal_count": 47,
  "open_signals": [
   {
    "symbol": "UNIUSDT",
@@ -307,6 +307,31 @@
    "last_update": 1794794590
   },
   {
+   "symbol": "PUMPUSDT",
+   "status": "EARLY",
+   "side": "SHORT",
+   "price": 0.00282,
+   "trigger": 0.002861,
+   "sl": 0.0029207157893801645,
+   "tp1": 0.002763,
+   "tp2": 0.002724,
+   "tp3": null,
+   "rr1": 1.6411070006310915,
+   "rr2": 2.294200602923056,
+   "rr3": null,
+   "risk_pct": 2.087234861243085,
+   "score": 9,
+   "score_max": 13,
+   "setup_type": "double_top",
+   "priority_setup": true,
+   "decision_bias": "SHORT",
+   "decision_strength": "guclu",
+   "htf_support": null,
+   "htf_resistance": 0.003263059,
+   "created": 1794837799,
+   "last_update": 1794837799
+  },
+  {
    "symbol": "XMRUSDT",
    "status": "EARLY",
    "side": "SHORT",
@@ -332,29 +357,29 @@
    "last_update": 1794830586
   },
   {
-   "symbol": "ICNTUSDT",
-   "status": "WATCH",
+   "symbol": "TACUSDT",
+   "status": "EARLY",
    "side": "SHORT",
-   "price": 0.2262,
-   "trigger": 0.2288,
-   "sl": 0.23363700207314808,
-   "tp1": 0.2079,
-   "tp2": 0.1964,
-   "tp3": 0.1638,
-   "rr1": 4.320858185284507,
-   "rr2": 6.698363885321439,
-   "rr3": 13.438075695860906,
-   "risk_pct": 2.114074332669614,
-   "score": 9,
+   "price": 0.00145,
+   "trigger": 0.001478,
+   "sl": 0.001511277497877869,
+   "tp1": 0.001342,
+   "tp2": 0.00131,
+   "tp3": 0.001277,
+   "rr1": 4.086845726776994,
+   "rr2": 5.048456486018646,
+   "rr3": 6.040117581486595,
+   "risk_pct": 2.2515221838883015,
+   "score": 8,
    "score_max": 13,
-   "setup_type": "breakout_retest",
+   "setup_type": "liquidity_sweep",
    "priority_setup": true,
-   "decision_bias": "SHORT",
-   "decision_strength": "orta",
-   "htf_support": 0.2135764,
-   "htf_resistance": 0.25275498138097824,
-   "created": 1794704648,
-   "last_update": 1794794510
+   "decision_bias": "WAIT",
+   "decision_strength": "zayif/karisik",
+   "htf_support": 0.001406749418631894,
+   "htf_resistance": 0.0014745000000000001,
+   "created": 1794837804,
+   "last_update": 1794837804
   },
   {
    "symbol": "BTWUSDT",
@@ -1158,15 +1183,6 @@
   }
  ],
  "scan_log": [
-  {
-   "ts": 1794492207,
-   "ok": true,
-   "symbols": 522,
-   "liquid": 290,
-   "candidates": 170,
-   "open_signals": 37,
-   "duration_s": 146
-  },
   {
    "ts": 1794495800,
    "ok": true,
@@ -2021,75 +2037,18 @@
    "candidates": 170,
    "open_signals": 46,
    "duration_s": 176
+  },
+  {
+   "ts": 1794837821,
+   "ok": true,
+   "symbols": 522,
+   "liquid": 272,
+   "candidates": 170,
+   "open_signals": 47,
+   "duration_s": 159
   }
  ],
  "log_last_24h": [
-  {
-   "t": 1794801766,
-   "sym": "LINKUSDT",
-   "event": "VETO",
-   "detail": "iki yonlu karar motoru SHORT tarafini guclu buldu"
-  },
-  {
-   "t": 1794801778,
-   "sym": "ONEUSDT",
-   "event": "VETO",
-   "detail": "funding asiri kalabalik (-0.210%/8s)"
-  },
-  {
-   "t": 1794801782,
-   "sym": "TACUSDT",
-   "event": "EARLY",
-   "detail": "LONG @ 0.001377"
-  },
-  {
-   "t": 1794801785,
-   "sym": "QNTUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (153.631); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1794805267,
-   "sym": "AAVEUSDT",
-   "event": "VETO",
-   "detail": "iki yonlu karar motoru SHORT tarafini guclu buldu"
-  },
-  {
-   "t": 1794805276,
-   "sym": "GRAMUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF destek bolgesinde (1.05089); kirilim/hold olmadan SHORT yok"
-  },
-  {
-   "t": 1794805282,
-   "sym": "WLDUSDT",
-   "event": "VETO",
-   "detail": "iki yonlu karar motoru SHORT tarafini guclu buldu"
-  },
-  {
-   "t": 1794805283,
-   "sym": "PLUMEUSDT",
-   "event": "EXPIRED_SILENT",
-   "detail": "pretrade expired"
-  },
-  {
-   "t": 1794805287,
-   "sym": "TACUSDT",
-   "event": "CANCELLED",
-   "detail": "1h close 0.001328 invalidation beyond"
-  },
-  {
-   "t": 1794805304,
-   "sym": "THETAUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (0.133525); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1794805308,
-   "sym": "PENDLEUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (1.44502); kirilim/hold olmadan LONG yok"
-  },
   {
    "t": 1794805351,
    "sym": "UNIUSDT",
@@ -2743,6 +2702,72 @@
    "sym": "AEROUSDT",
    "event": "VETO",
    "detail": "iki yonlu karar motoru SHORT tarafini guclu buldu"
+  },
+  {
+   "t": 1794837669,
+   "sym": "TAOUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (185.616); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1794837688,
+   "sym": "XMRUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (511.405); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1794837689,
+   "sym": "ICNTUSDT",
+   "event": "EXPIRED_SILENT",
+   "detail": "pretrade expired"
+  },
+  {
+   "t": 1794837694,
+   "sym": "SLXUSDT",
+   "event": "VETO",
+   "detail": "iki yonlu karar motoru SHORT tarafini guclu buldu"
+  },
+  {
+   "t": 1794837732,
+   "sym": "ONDOUSDT",
+   "event": "VETO",
+   "detail": "15d EMA20/MA7 yonu veya EMA20 egimi uyumsuz"
+  },
+  {
+   "t": 1794837743,
+   "sym": "WLFIUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (0.0459611); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1794837747,
+   "sym": "PIEVERSEUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (1.91992); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1794837787,
+   "sym": "INITUSDT",
+   "event": "VETO",
+   "detail": "iki yonlu karar motoru SHORT tarafini guclu buldu"
+  },
+  {
+   "t": 1794837799,
+   "sym": "PUMPUSDT",
+   "event": "EARLY",
+   "detail": "SHORT @ 0.00282"
+  },
+  {
+   "t": 1794837804,
+   "sym": "TACUSDT",
+   "event": "EARLY",
+   "detail": "SHORT @ 0.00145"
+  },
+  {
+   "t": 1794837813,
+   "sym": "QNTUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (153.631); kirilim/hold olmadan SHORT yok"
   }
  ],
  "trades_stats": {
