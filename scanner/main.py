@@ -1,3 +1,4 @@
+from .portfolio_admission import can_activate
 """Kripto Tarayici V3.3 ana akisi — 15 dakikada bir.
 
 V3.3:
@@ -236,7 +237,7 @@ def run():
         if sig["status"] in ("EARLY", "WATCH"):
             res = evaluate_v3(sym, a15, a1, a4, REGIME, _build_ctx)
             if isinstance(res, tuple): ST.log_event(st, sym, "VETO", res[1]); AU.record(sym, "veto", str(res[1])); res = None
-            if res and res["status"] == "ACTIVE" and res["side"] == sig["side"]:
+            if res and res["status"] == "ACTIVE" and res["side"] == sig["side"] and can_activate(st["signals"]):
                 news = radars.news_check(sym); nn = news["note"] if news else "haber modülü kapalı"
                 if news and news["veto"]:
                     sig["status"], sig["last_update"] = "CANCELLED", ST.now()
@@ -308,6 +309,9 @@ def run():
             ST.log_event(st, sym, "NEWS_VETO", news["note"]); AU.record(sym, "news_veto", str(news["note"]))
             OUT.close(sym, "REJECTED", reason="news veto: " + str(news["note"])); continue
         sig["created"] = ST.now(); sig["last_update"] = ST.now()
+        if sig["status"] == "ACTIVE" and not can_activate(st["signals"]):
+            AU.record(sym, "portfolio_cap", "10 ACTIVE limit reached; candidate not activated")
+            continue
         if sig["status"] == "ACTIVE":
             sig["entry_ref"] = (sig["entry_lo"] + sig["entry_hi"]) / 2; sig["activated_at"] = ST.now(); sig["mfe_pct"] = 0; sig["mae_pct"] = 0
         ST.promote_pre_runner(st, sym, sig["status"])
