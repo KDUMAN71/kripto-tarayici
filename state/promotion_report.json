@@ -4,18 +4,18 @@
  "evidence_scope": "EPISODE_LEVEL_SCREENING",
  "requires_time_slice_replay_before_production": true,
  "challenger": "trajectory_balanced",
- "calibration_n": 1023,
- "oos_n": 5663,
+ "calibration_n": 1028,
+ "oos_n": 5665,
  "checks": {
-  "oos_recall_noninferior": false,
+  "oos_recall_noninferior": true,
   "oos_precision_noninferior": true,
   "oos_avg_mfe_noninferior": true,
   "calibration_recall_not_worse": false
  },
  "oos_delta": {
-  "runner_recall": -0.0015873015873016372,
-  "precision": -0.0015974440894568342,
-  "avg_mfe_selected": -0.06806240445982326
+  "runner_recall": 0.0,
+  "precision": 0.0,
+  "avg_mfe_selected": -0.05069836948335826
  },
  "current_oos": {
   "n": 2505,
@@ -30,12 +30,12 @@
   "n": 2505,
   "selected": 626,
   "runner_count": 630,
-  "runner_recall": 0.36666666666666664,
-  "precision": 0.36900958466453676,
-  "avg_mfe_selected": 11.356624996125895,
+  "runner_recall": 0.3682539682539683,
+  "precision": 0.3706070287539936,
+  "avg_mfe_selected": 11.37398903110236,
   "status": "EVALUATED"
  },
- "archive_episode_n": 6494,
+ "archive_episode_n": 6505,
  "mode": "REVIEW_GATE_ONLY",
  "production_mutation": false
 }
