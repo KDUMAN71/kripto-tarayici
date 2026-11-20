@@ -1,21 +1,21 @@
 {
- "status": "ELIGIBLE_FOR_REVIEW",
+ "status": "BLOCKED",
  "automatic_promotion": false,
  "evidence_scope": "EPISODE_LEVEL_SCREENING",
  "requires_time_slice_replay_before_production": true,
  "challenger": "trajectory_balanced",
- "calibration_n": 1495,
+ "calibration_n": 1505,
  "oos_n": 5667,
  "checks": {
   "oos_recall_noninferior": true,
   "oos_precision_noninferior": true,
   "oos_avg_mfe_noninferior": true,
-  "calibration_recall_not_worse": true
+  "calibration_recall_not_worse": false
  },
  "oos_delta": {
   "runner_recall": 0.0015673981191222097,
   "precision": 0.0015898251192368873,
-  "avg_mfe_selected": -0.0635721779052485
+  "avg_mfe_selected": -0.0473393753846576
  },
  "current_oos": {
   "n": 2516,
@@ -23,7 +23,7 @@
   "runner_count": 638,
   "runner_recall": 0.3667711598746082,
   "precision": 0.37201907790143085,
-  "avg_mfe_selected": 11.3666754265771,
+  "avg_mfe_selected": 11.357503457083322,
   "status": "EVALUATED"
  },
  "challenger_oos": {
@@ -32,10 +32,10 @@
   "runner_count": 638,
   "runner_recall": 0.3683385579937304,
   "precision": 0.37360890302066774,
-  "avg_mfe_selected": 11.303103248671851,
+  "avg_mfe_selected": 11.310164081698664,
   "status": "EVALUATED"
  },
- "archive_episode_n": 6975,
+ "archive_episode_n": 6986,
  "mode": "REVIEW_GATE_ONLY",
  "production_mutation": false
 }
