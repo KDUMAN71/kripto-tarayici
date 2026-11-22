@@ -1,41 +1,41 @@
 {
- "status": "BLOCKED",
+ "status": "ELIGIBLE_FOR_REVIEW",
  "automatic_promotion": false,
  "evidence_scope": "EPISODE_LEVEL_SCREENING",
  "requires_time_slice_replay_before_production": true,
  "challenger": "trajectory_balanced",
- "calibration_n": 1871,
- "oos_n": 5651,
+ "calibration_n": 1874,
+ "oos_n": 5658,
  "checks": {
   "oos_recall_noninferior": true,
   "oos_precision_noninferior": true,
   "oos_avg_mfe_noninferior": true,
-  "calibration_recall_not_worse": false
+  "calibration_recall_not_worse": true
  },
  "oos_delta": {
-  "runner_recall": 0.0028490028490028574,
-  "precision": 0.003149606299212626,
-  "avg_mfe_selected": -0.0010361249281523044
+  "runner_recall": 0.004279600570613384,
+  "precision": 0.004716981132075471,
+  "avg_mfe_selected": 0.01596833663372621
  },
  "current_oos": {
-  "n": 2541,
-  "selected": 635,
-  "runner_count": 702,
-  "runner_recall": 0.349002849002849,
-  "precision": 0.3858267716535433,
-  "avg_mfe_selected": 11.328098027610798,
+  "n": 2542,
+  "selected": 636,
+  "runner_count": 701,
+  "runner_recall": 0.34807417974322397,
+  "precision": 0.3836477987421384,
+  "avg_mfe_selected": 11.307849614751383,
   "status": "EVALUATED"
  },
  "challenger_oos": {
-  "n": 2541,
-  "selected": 635,
-  "runner_count": 702,
-  "runner_recall": 0.35185185185185186,
-  "precision": 0.3889763779527559,
-  "avg_mfe_selected": 11.327061902682646,
+  "n": 2542,
+  "selected": 636,
+  "runner_count": 701,
+  "runner_recall": 0.35235378031383735,
+  "precision": 0.38836477987421386,
+  "avg_mfe_selected": 11.32381795138511,
   "status": "EVALUATED"
  },
- "archive_episode_n": 7318,
+ "archive_episode_n": 7326,
  "mode": "REVIEW_GATE_ONLY",
  "production_mutation": false
 }
