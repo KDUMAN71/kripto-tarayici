@@ -1,11 +1,36 @@
 {
- "generated_at": 1795464186,
+ "generated_at": 1795467784,
  "engine_version": "3.3",
- "last_ok_run": 1795464069,
+ "last_ok_run": 1795467663,
  "fail_count": 0,
  "known_symbols_count": 522,
  "open_signal_count": 18,
  "open_signals": [
+  {
+   "symbol": "ZECUSDT",
+   "status": "EARLY",
+   "side": "SHORT",
+   "price": 795.17,
+   "trigger": 816.36,
+   "sl": 834.3791595129774,
+   "tp1": 787.46,
+   "tp2": 776.75,
+   "tp3": 760.64,
+   "rr1": 1.6038483914405814,
+   "rr2": 2.198215736503858,
+   "rr3": 3.092264095884751,
+   "risk_pct": 2.20725654282147,
+   "score": 9,
+   "score_max": 13,
+   "setup_type": "liquidity_sweep",
+   "priority_setup": true,
+   "decision_bias": "SHORT",
+   "decision_strength": "guclu",
+   "htf_support": null,
+   "htf_resistance": 795.9756342857142,
+   "created": 1795467740,
+   "last_update": 1795467740
+  },
   {
    "symbol": "AIGENSYNUSDT",
    "status": "EARLY",
@@ -55,31 +80,6 @@
    "htf_resistance": 0.042973314087117,
    "created": 1795446247,
    "last_update": 1795446247
-  },
-  {
-   "symbol": "HUMAUSDT",
-   "status": "EARLY",
-   "side": "SHORT",
-   "price": 0.008459,
-   "trigger": 0.008604,
-   "sl": 0.00882099995701454,
-   "tp1": 0.008251,
-   "tp2": 0.007962,
-   "tp3": 0.007367,
-   "rr1": 1.6267284328371967,
-   "rr2": 2.958525931675575,
-   "rr3": 5.700461958695772,
-   "risk_pct": 2.52208225260971,
-   "score": 9,
-   "score_max": 13,
-   "setup_type": "breakout_retest",
-   "priority_setup": true,
-   "decision_bias": "SHORT",
-   "decision_strength": "guclu",
-   "htf_support": 0.008281,
-   "htf_resistance": 0.00869177376530535,
-   "created": 1795334608,
-   "last_update": 1795334608
   },
   {
    "symbol": "BLESSUSDT",
@@ -458,15 +458,6 @@
   }
  ],
  "scan_log": [
-  {
-   "ts": 1795122191,
-   "ok": true,
-   "symbols": 522,
-   "liquid": 290,
-   "candidates": 170,
-   "open_signals": 31,
-   "duration_s": 127
-  },
   {
    "ts": 1795125811,
    "ok": true,
@@ -1321,87 +1312,18 @@
    "candidates": 170,
    "open_signals": 18,
    "duration_s": 117
+  },
+  {
+   "ts": 1795467783,
+   "ok": true,
+   "symbols": 522,
+   "liquid": 308,
+   "candidates": 170,
+   "open_signals": 18,
+   "duration_s": 121
   }
  ],
  "log_last_24h": [
-  {
-   "t": 1795442464,
-   "sym": "ZECUSDT",
-   "event": "CANCELLED",
-   "detail": "1h close 845.89 invalidation beyond"
-  },
-  {
-   "t": 1795442465,
-   "sym": "ONDOUSDT",
-   "event": "CANCELLED",
-   "detail": "1h close 0.3052 invalidation beyond"
-  },
-  {
-   "t": 1795442466,
-   "sym": "DOGEUSDT",
-   "event": "CANCELLED",
-   "detail": "1h close 0.05838 invalidation beyond"
-  },
-  {
-   "t": 1795442467,
-   "sym": "XRPUSDT",
-   "event": "CANCELLED",
-   "detail": "1h close 0.9879 invalidation beyond"
-  },
-  {
-   "t": 1795442468,
-   "sym": "ADAUSDT",
-   "event": "CANCELLED",
-   "detail": "1h close 0.1517 invalidation beyond"
-  },
-  {
-   "t": 1795442469,
-   "sym": "LINKUSDT",
-   "event": "CANCELLED",
-   "detail": "1h close 9.326 invalidation beyond"
-  },
-  {
-   "t": 1795442471,
-   "sym": "1000SHIBUSDT",
-   "event": "EXPIRED_SILENT",
-   "detail": "pretrade expired"
-  },
-  {
-   "t": 1795442472,
-   "sym": "TRUMPUSDT",
-   "event": "CANCELLED",
-   "detail": "1h close 0.933 invalidation beyond"
-  },
-  {
-   "t": 1795442477,
-   "sym": "NEARUSDT",
-   "event": "CANCELLED",
-   "detail": "1h close 3.146 invalidation beyond"
-  },
-  {
-   "t": 1795442480,
-   "sym": "DODOXUSDT",
-   "event": "VETO",
-   "detail": "iki yonlu karar motoru LONG tarafini guclu buldu"
-  },
-  {
-   "t": 1795442483,
-   "sym": "ETHFIUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (0.520327); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1795442488,
-   "sym": "OPUSDT",
-   "event": "VETO",
-   "detail": "guclu HTF direnc bolgesinde (0.074055); kirilim/hold olmadan LONG yok"
-  },
-  {
-   "t": 1795442488,
-   "sym": "OPUSDT",
-   "event": "CANCELLED",
-   "detail": "1h close 0.07365 invalidation beyond"
-  },
   {
    "t": 1795442490,
    "sym": "WLDUSDT",
@@ -2043,6 +1965,84 @@
    "sym": "AAVEUSDT",
    "event": "VETO",
    "detail": "guclu HTF destek bolgesinde (96.9818); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1795467670,
+   "sym": "HUMAUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (0.008202); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1795467670,
+   "sym": "HUMAUSDT",
+   "event": "EXPIRED_SILENT",
+   "detail": "pretrade expired"
+  },
+  {
+   "t": 1795467677,
+   "sym": "ETHFIUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (0.487699); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1795467682,
+   "sym": "PARTIUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (0.0393446); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1795467696,
+   "sym": "ACEUSDT",
+   "event": "VETO",
+   "detail": "iki yonlu karar motoru SHORT tarafini guclu buldu"
+  },
+  {
+   "t": 1795467729,
+   "sym": "BTCUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (61981.1); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1795467740,
+   "sym": "ZECUSDT",
+   "event": "EARLY",
+   "detail": "SHORT @ 795.17"
+  },
+  {
+   "t": 1795467744,
+   "sym": "XRPUSDT",
+   "event": "VETO",
+   "detail": "ilk yapisal engel 0.08R (<1.5R)"
+  },
+  {
+   "t": 1795467748,
+   "sym": "NEARUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (2.99114); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1795467752,
+   "sym": "DOGEUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (0.0576829); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1795467757,
+   "sym": "PIEVERSEUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF direnc bolgesinde (3.6382); kirilim/hold olmadan LONG yok"
+  },
+  {
+   "t": 1795467760,
+   "sym": "1000PEPEUSDT",
+   "event": "VETO",
+   "detail": "guclu HTF destek bolgesinde (0.0034457); kirilim/hold olmadan SHORT yok"
+  },
+  {
+   "t": 1795467767,
+   "sym": "UNIUSDT",
+   "event": "VETO",
+   "detail": "iki yonlu karar motoru SHORT tarafini guclu buldu"
   }
  ],
  "trades_stats": {
